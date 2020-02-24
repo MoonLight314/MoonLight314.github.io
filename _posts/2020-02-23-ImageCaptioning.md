@@ -138,4 +138,4 @@ print( descriptions['1000268201_693b08cb0e'] )
 * Image File 갯수는 8091개인데, Caption File에는 총 8092개가 있네요.
    
    
-![title](Images/dict.png)
+![title](assets/dict.png)
