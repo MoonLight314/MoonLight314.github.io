@@ -515,55 +515,37 @@ train_descriptions['1000268201_693b08cb0e']
 <br/>
 
 * Keras에서 제공해주는 수많은 Pre-Trained Model 중에서 우리는 Inception V3 Model을 사용하도록 하겠습니다.
-  - https://cloud.google.com/tpu/docs/inception-v3-advanced
+  - [https://cloud.google.com/tpu/docs/inception-v3-advanced](https://cloud.google.com/tpu/docs/inception-v3-advanced)
 * 아래 Code를 실행하면 최초 한번 학습된 Model의 Weight값을 받아옵니다.
 * 아래 Link에서 좀 더 자세한 내용을 확인 가능
-  - https://keras.io/applications/
+  - [https://keras.io/applications/](https://keras.io/applications/)
 
 
 ```python
 # Load the inception v3 model
 model = InceptionV3(weights='imagenet')
 ```
-
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:4138: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:174: The name tf.get_default_session is deprecated. Please use tf.compat.v1.get_default_session instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:181: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:186: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:190: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:199: The name tf.is_variable_initialized is deprecated. Please use tf.compat.v1.is_variable_initialized instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:206: The name tf.variables_initializer is deprecated. Please use tf.compat.v1.variables_initializer instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:1834: The name tf.nn.fused_batch_norm is deprecated. Please use tf.compat.v1.nn.fused_batch_norm instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:133: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:3976: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
-    
-    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:3980: The name tf.nn.avg_pool is deprecated. Please use tf.nn.avg_pool2d instead.
-    
-    
-
-   
-
-   
-
-   
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 * 이제 기존에 학습된 Inception V3 Model을 우리가 쓸 수 있도록 약간 수정하도록 하겠습니다.
 * Inception V3 Model의 마지막 Dense Layer(Classifier , Softmax Layer)만 빼버리고 사용하도록 하겠습니다.
 * Inception V3 Model은 ImageNet의 Dataset을 Training Set으로 학습된 Model이기 때문입니다.
 * 마지막 Dense Layer만 뺀 Model은 Image의 Feature들을 Extract하는 기능만 가지고 있습니다.
 * 우리는 Extract된 Feature들만 이용하여 Image Caption을 학습하는데 사용하도록 하겠습니다.
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 ![title](/assets/Inception_V3_01.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
