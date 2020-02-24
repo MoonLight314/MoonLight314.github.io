@@ -990,7 +990,7 @@ print('Description Length: %d' % max_length)
 <br/>
 
 * RNN에 입력될 Caption의 Word를 Numberical Value로 변환하기 위해서 앞에서 작성한 wordtoix를 이용하여  
-  아래와 같이 Word를 Index로 변환해 주어야 한다.
+  아래와 같이 Word를 Index로 변환해 주어야 합니다.
 
 ![title](/assets/Data_Gen_02.png)
 
@@ -998,3 +998,263 @@ print('Description Length: %d' % max_length)
 <br/>
 <br/>
 <br/>
+
+* 각 Target Word는 One-Hot Encoding으로 변경된 값을 적용합니다.
+* One-Hot Encoding 변경을 위해서, Keras에서 제공해 주는 to_categorical()을 사용합시다.
+<br/>
+<br/>
+<br/>
+<br/>
+
+![title](/assets/Data_Gen_03.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* Deep Learning의 Batch Process를 위해서는 각 Data의 Length가 모두 같은 길이어야 하기 때문에  
+  Partial Caption의 길이도 모두 같은 길이로 변환해 주어야 합니다.
+* Partial Caption의 길이는 앞에서 구해놓은 값(Max Length : 34)으로 모두 통일해 주어야 합니다.
+* 이를 위해서 Keras에서 제공해주는 pad_sequences()를 이용합시다.
+<br/>
+<br/>
+<br/>
+<br/>
+
+![title](/assets/Data_Gen_04.png)   
+
+<br/>
+<br/>
+<br/>
+<br/>   
+
+* 마지막으로 Partial Caption은 Pre-Trained Word Embedding Model인 GLOVE라는 Model을 이용하여  
+  한 번 더 변환한 Vector를 입력으로 사용하도록 하겠습니다.
+* GLOVE Model은 하나의 단어를 길이가 200인 Vector로 변환합니다.
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+![title](/assets/Data_Gen_05.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 최종적으로 위와 같은 형태와 크기의 Data가 준비되어야 합니다.
+* 간단하게 크기를 살펴보면 Image File 하나당 5개의 Caption이 있고,   
+  Caption 하나당 평균적으로 7개의 단어로 구성되어 있다고 한다면 Training Data Set의 전체 Feature의 수는  
+  ( 2048 + (34 x 200) ) x 6000 x 5 x 7 = ‭1858080000‬개의 Feature  
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 한 개의 Feature가 2byte라고 해도 대충 3.6GB가 필요합니다.
+* 이런 이유로 Deep Learning 학습시에 Generator가 많이 쓰입니다.
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+#### Generator   
+
+* Generator  
+  A function which returns an iterator. It looks like a normal function except that it contains yield statements  
+  for producing a series of values usable in a for-loop or that can be retrieved one at a time with the next() 
+  function. 
+  
+  Each yield temporarily suspends processing, remembering the location execution state  
+  (including local variables and pending try-statements). When the generator resumes,  
+  it picks-up where it left-off (in contrast to functions which start fresh on every invocation).
+
+* Generator는 Python에서 제공해 주는 기능중의 하나.
+* 일반적인 Function과 형태는 동일하나, Iterator를 Return해 준다는 것이 차이점
+* Generator Function은 return대신에 yield 문을 사용합니다.
+* 일반적인 함수는 사용이 종료되면 결과값을 호출부로 반환 후 함수 자체를 종료시킨 후 메모리 상에서 클리어 됩니다.
+* generator 함수가 실행 중 yield 를 만날 경우, 해당 함수는 그 상태로 정지 되며, 반환 값을 next()를  
+  호출한 쪽으로 전달 하게 된다. 이후 해당 함수는 일반적인 경우 처럼 종료되는 것이 아니라 그 상태로  
+  유지되게 된다. 즉, 함수에서 사용된 local 변수나 instruction pointer 등과 같은 함수 내부에서 사용된  
+  데이터들이 메모리에 그대로 유지되는 것입니다.
+
+* 위와 같은 Generator의 특징을 이용하여, Deep Learning의 Train시에 대용량의 Train Data를 특정 크기의 단위로  
+  잘라서 학습에 사용(Batch Process)하기 위해서 Generator를 사용하곤 합니다.
+
+* 아래의 Function은 지금까지 설명한 여러 Feature Engineering 기법들이 적용된 Generator Function 입니다.
+
+
+```python
+# data generator, intended to be used in a call to model.fit_generator()
+def data_generator(descriptions, photos, wordtoix, max_length, num_photos_per_batch):
+    X1, X2, y = list(), list(), list()
+    n = 0
+    
+    # loop for ever over images
+    while 1:
+        for key, desc_list in descriptions.items():
+            n+=1
+            # retrieve the photo feature
+            photo = photos[key+'.jpg']
+            for desc in desc_list:
+                # encode the sequence
+                seq = [wordtoix[word] for word in desc.split(' ') if word in wordtoix]
+                
+                # split one sequence into multiple X, y pairs
+                for i in range(1, len(seq)):
+                    # split into input and output pair
+                    in_seq, out_seq = seq[:i], seq[i]
+                    
+                    # pad input sequence
+                    in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
+                    
+                    # encode output sequence
+                    out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
+                    
+                    # store
+                    X1.append(photo)
+                    X2.append(in_seq)
+                    y.append(out_seq)
+                    
+            # yield the batch data
+            if n == num_photos_per_batch:
+                yield [[array(X1), array(X2)], array(y)]
+                X1, X2, y = list(), list(), list()
+                n=0
+```
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+#### GLOVE Model
+
+
+```python
+# Load Glove vectors
+#glove_dir = '../../storage/glove'
+glove_dir = ''
+
+embeddings_index = {} # empty dictionary
+f = open(os.path.join(glove_dir, 'glove.6B.200d.txt'), encoding="utf-8")
+
+for line in f:
+    values = line.split()
+    word = values[0]
+    coefs = np.asarray(values[1:], dtype='float32')
+    embeddings_index[word] = coefs
+f.close()
+print('Found %s word vectors.' % len(embeddings_index))
+```
+
+    Found 400000 word vectors.
+    
+
+* 총 40만개의 단어가 있고, 각 단어는 길이가 200인 Float Vector로 구성되어 있습니다.
+
+
+```python
+len( embeddings_index.keys() )
+```
+
+
+
+
+    400000
+
+
+
+
+```python
+print( len( embeddings_index['there'] ) )
+print( embeddings_index['there'] )
+```
+
+    200
+    [ 0.66193    0.16192   -0.090129  -0.59287    0.15391    0.45964
+     -0.92443    0.081231   0.30275    0.45481    0.43279    0.54403
+      0.087172   0.023256   0.23039    0.47905   -0.096603   0.58484
+      0.15579    0.10372    0.40035    2.9028     0.10439   -0.2711
+      0.16901   -0.43907   -0.14797   -0.33058    0.075262  -0.12359
+     -0.1335    -0.47064   -0.20803    0.056494   0.023153  -0.59647
+     -0.60186   -0.16583   -0.035943   0.38835    0.26658   -0.18612
+     -0.14767    0.28221   -0.12491    0.40833    0.59739   -0.10637
+      0.37463   -0.12592   -0.1511    -0.24287   -0.10597    1.0858
+      0.32687   -0.23127    0.15763   -0.33119   -0.17161   -0.010115
+      0.019711   0.23377   -0.070937   0.11325    0.5959    -0.38274
+     -0.36533    0.31587    0.16818    0.12979    0.34776   -0.50396
+     -0.36471   -0.052695   0.088028  -0.07151    0.17023   -0.11045
+     -0.12536   -0.11016    0.19764   -0.10016   -0.44589    0.60566
+     -0.10537   -0.22845   -0.28588   -0.35332    0.5583    -0.97876
+      0.6335    -0.18142    0.77114   -0.33749   -0.049697   0.21859
+      0.37727   -0.28821   -0.4062    -0.41819    0.51691    0.22893
+      0.24848    0.31547    0.24026    0.14239    0.087551   1.0828
+     -0.22786    0.15092   -0.022776  -0.33925    0.25267   -0.045602
+      0.13915   -0.16625   -0.1174    -0.42071   -0.083483  -0.36796
+      0.32522    0.55571    0.55867   -0.040181  -0.1844    -0.76857
+      0.062204   0.0057532  0.30964   -0.52323    0.068855   0.11705
+      0.12595    0.033983   0.0084073  0.29818   -0.037339  -0.13455
+     -0.10109    0.20751   -0.034931   0.24178    0.14436   -0.19081
+      1.5462     0.39855    0.25275   -0.28803    0.03398   -0.10733
+      0.12775    0.58408   -0.22431   -0.13953    0.44922   -0.4701
+     -0.25554   -0.080844  -0.015759  -0.25237   -0.28529   -0.33416
+      0.18502   -0.27979   -0.3849     0.30444   -0.34264    0.33734
+     -0.85254    0.59171   -0.40041    0.18137    0.14017    0.20243
+     -0.17677   -0.50882   -0.1046     0.016365   0.054061  -0.04178
+      1.2751    -0.13707   -0.32639    0.093104  -0.26178    0.031061
+     -0.017219   0.47738   -0.24044   -0.020076   0.06639    0.22603
+      0.083176  -0.18073   -0.047092  -0.25166   -0.011413  -0.18163
+     -0.35468   -0.077695 ]
+    
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* GLOVE Model에서 우리가 Train Data에서 뽑아낸 Word들만 따로 Vector를 구성합니다.
+* 이전에 조사한 Word의 갯수는 1652개이고, 각 Word는 200 Length의 Vector를 가지고 있으므로  
+  최종적으로 1652 x 200 크기의 행렬이 만들어질 것입니다.
+
+![title](/assets/Word_Embedding.png)
+
+* For more information about Word Embedding
+  - [Word Embedding](https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/)
+
+
+```python
+embedding_dim = 200
+
+# Get 200-dim dense vector for each of the 10000 words in out vocabulary
+embedding_matrix = np.zeros((vocab_size, embedding_dim))
+
+for word, i in wordtoix.items():
+
+    embedding_vector = embeddings_index.get(word)
+    
+    if embedding_vector is not None:
+        # Words not found in the embedding index will be all zeros
+        embedding_matrix[i] = embedding_vector
+```
+
+
+```python
+embedding_matrix.shape
+```
+
+
+
+
+    (1652, 200)
