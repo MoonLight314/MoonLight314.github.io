@@ -7,6 +7,12 @@ categories: project ImageCaption
 개인적으로 대량의 사진에 Caption을 달아야 할 일이 생겨서 이것저것 알아보던 중에 찾은 예제입니다.   
 원본은 [Image Captioning with Keras](https://towardsdatascience.com/image-captioning-with-keras-teaching-computers-to-describe-pictures-c88a46a311b8)이며
 제가 개인적인 Comment와 설명을 위한 그림을 추가하였습니다.
+  
+원 저자(Harshall Lamba)에게 허락을 구하고 올리는 것이니 태클 노노!
+
+<br/>
+<br/>
+<br/>
 
 이 예제에서는 Flickr 8k Image Data Set을 사용할 예정인데, Flickr 8k Data Set에는 총 8091개의 Image File이 있고 각 Image File당 5개의 Caption이 제공됩니다.   
 'Flickr8k.token.txt'에 각 Image의 Caption이 저장되어 있습니다.
@@ -1499,7 +1505,7 @@ print("Greedy:",greedySearch(image))
 ```
 
 
-![png](output_276_0.png)
+![title](/assets/test_inference.png)
 
 
     Greedy: young boy in blue swim trunks is running in the water
