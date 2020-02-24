@@ -18,11 +18,6 @@ $global-font-family           : $sans-serif !default;
 $header-font-family           : $sans-serif !default;
 $caption-font-family          : $serif !default;
 
-.page__lead {
-  font-family: $global-font-family;
-  font-size: $type-size-1;
-}
-
 /* type scale */
 $type-size-1                  : 2.441em !default;  // ~39.056px
 $type-size-2                  : 1.953em !default;  // ~31.248px
@@ -32,3 +27,9 @@ $type-size-5                  : 1em !default;      // ~16px
 $type-size-6                  : 0.75em !default;   // ~12px
 $type-size-7                  : 0.6875em !default; // ~11px
 $type-size-8                  : 0.625em !default;  // ~10px
+
+.page__lead {
+  font-family: $global-font-family;
+  font-size: $type-size-1;
+}
+
