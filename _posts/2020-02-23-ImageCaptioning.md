@@ -139,17 +139,17 @@ print( descriptions['1000268201_693b08cb0e'] )
    
 * 위와 같이 우리가 원하는대로 Dict. 형태의 자료구조가 만들어졌습니다.
 * Image File 갯수는 8091개인데, Caption File에는 총 8092개가 있네요.
-   
-   
-   
-   
-   
+  
+  
+  
+  
 ![title](/assets/dict.png)
-   
-   
-   
-   
-   
+  
+  
+  
+  
+  
+  
 * Caption의 Text에 특별한 전처리를 하겠습니다.
   - 추후에 처리를 편하게 하기 위해 모든 문자를 소문자로 변환
   - 불필요한 문자를 삭제
@@ -190,21 +190,17 @@ def clean_descriptions(descriptions):
 # clean descriptions
 clean_descriptions(descriptions)
 ```
-
-
+  
+  
 ```python
 print( descriptions['1000268201_693b08cb0e'] )
 ```
-
+  
+  
     ['child in pink dress is climbing up set of stairs in an entry way', 'girl going into wooden building', 'little girl climbing into wooden playhouse', 'little girl climbing the stairs to her playhouse', 'little girl in pink dress going into wooden cabin']
-    
-
-   
-
-   
-
-   
-
-   
-
-   
+  
+  
+  
+  
+  
+  
