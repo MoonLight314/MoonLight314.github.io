@@ -1258,3 +1258,248 @@ embedding_matrix.shape
 
 
     (1652, 200)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+### Building Model   
+
+* 우리가 입력으로 사용할 값들은 크게 2가지로써, 하나는 Inception V3에서 받을 2048개의 Feature들과 나머지 하나는 Caption 값이 됩니다.
+* Keras에서 제공하는 Sequential Model은 이런 형태의 입력을 받을 수 없습니다.
+* 다양한 입력을 받을 수 있는 복잡한 Model 구성을 위해서 Keras에서 제공하는 Funtional API 기능을 사용해서 Model을 구성하도록 하겠습니다.
+
+<br/>
+<br/>
+<br/>
+
+* Inception V3 Model의 출력을 입력으로 받는 Input Tensor입니다.
+
+
+```python
+inputs1 = Input(shape=(2048,))
+fe1 = Dropout(0.5)(inputs1)
+fe2 = Dense(256, activation='relu')(fe1)
+```
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* Caption 정보를 입력으로 받을 Input Tensor입니다.
+* LSTM에 관해서 조만간 다른 Posting으로 다루도록 하겠습니다.
+  - [Understanding-LSTM](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+
+
+```python
+inputs2 = Input(shape=(max_length,))
+se1 = Embedding(vocab_size, embedding_dim, mask_zero=True)(inputs2)
+se2 = Dropout(0.5)(se1)
+se3 = LSTM(256)(se2)
+
+decoder1 = add([fe2, se3])
+decoder2 = Dense(256, activation='relu')(decoder1)
+
+outputs = Dense(vocab_size, activation='softmax')(decoder2)
+
+model = Model(inputs=[inputs1, inputs2], outputs=outputs)
+```
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 최종적으로 사용될 Model은 아래와 같은 Architecture를 갖습니다.   
+
+
+```python
+model.summary()
+```
+
+    __________________________________________________________________________________________________
+    Layer (type)                    Output Shape         Param #     Connected to                     
+    ==================================================================================================
+    input_3 (InputLayer)            (None, 34)           0                                            
+    __________________________________________________________________________________________________
+    input_2 (InputLayer)            (None, 2048)         0                                            
+    __________________________________________________________________________________________________
+    embedding_1 (Embedding)         (None, 34, 200)      330400      input_3[0][0]                    
+    __________________________________________________________________________________________________
+    dropout_1 (Dropout)             (None, 2048)         0           input_2[0][0]                    
+    __________________________________________________________________________________________________
+    dropout_2 (Dropout)             (None, 34, 200)      0           embedding_1[0][0]                
+    __________________________________________________________________________________________________
+    dense_1 (Dense)                 (None, 256)          524544      dropout_1[0][0]                  
+    __________________________________________________________________________________________________
+    lstm_1 (LSTM)                   (None, 256)          467968      dropout_2[0][0]                  
+    __________________________________________________________________________________________________
+    add_1 (Add)                     (None, 256)          0           dense_1[0][0]                    
+                                                                     lstm_1[0][0]                     
+    __________________________________________________________________________________________________
+    dense_2 (Dense)                 (None, 256)          65792       add_1[0][0]                      
+    __________________________________________________________________________________________________
+    dense_3 (Dense)                 (None, 1652)         424564      dense_2[0][0]                    
+    ==================================================================================================
+    Total params: 1,813,268
+    Trainable params: 1,813,268
+    Non-trainable params: 0
+    __________________________________________________________________________________________________
+    
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* plot_model을 사용하면 Model을 구조를 이해하기 쉽게 그려줍니다. ( 개꿀 ! )
+```python
+from keras.utils import plot_model
+plot_model(model, 'model_structure_info.png', show_shapes=True)
+```
+
+![title](/assets/model_structure_info.png)
+
+<br/>
+<br/>
+<br/>
+
+* model.layers[2]는 Pre-Trained Word Embedding Layer이기 때문에 Back Propagation 시에 Weight가 Update  
+  되지 않도록 Freeze시킨다.
+
+
+```python
+model.layers[2].set_weights([embedding_matrix])
+model.layers[2].trainable = False
+```
+<br/>
+<br/>
+<br/>
+
+* Loss Function은 분류문제이기 때문에 Categorical Crossentropy로 하고, Optimizer는 Adam으로 했습니다.
+
+```python
+model.compile(loss='categorical_crossentropy', optimizer='adam')
+```
+<br/>
+<br/>
+<br/>
+
+* Epoch은 우선 10회로 정하고 시작하겠습니다.
+* Generator는 무한히 Data를 생성하므로 적당한 선에서 중지해야 합니다.  
+
+```python
+epochs = 10
+number_pics_per_bath = 3
+steps = len(train_descriptions)//number_pics_per_bath
+```
+<br/>
+<br/>
+<br/>
+
+* TQDMNotebookCallback은 Notebook으로 Train 상태를 볼 때 유용하더라구요.
+* 사용법은 fit 함수의 Callback에 등록해서 사용하시면 됩니다.
+
+```python
+from keras_tqdm import TQDMNotebookCallback
+
+for i in range(epochs):
+    generator = data_generator(train_descriptions, train_features, wordtoix, max_length, number_pics_per_bath)
+    model.fit_generator(generator, epochs=1, steps_per_epoch=steps, verbose=0, callbacks=[TQDMNotebookCallback()])
+    
+    print(i)
+    model.save('model_weights/model_' + str(i) + '.h5')
+```
+
+<br/>
+<br/>
+<br/>
+
+```python
+for i in range(epochs):
+    generator = data_generator(train_descriptions, train_features, wordtoix, max_length, number_pics_per_bath)
+    model.fit_generator(generator, epochs=1, steps_per_epoch=steps, verbose=0, callbacks=[TQDMNotebookCallback()])
+    
+    print(i)
+    model.save('./model_weights/model_' + str(i) + '.h5')
+```
+<br/>
+<br/>
+<br/>
+
+
+* Learning Rate를 조금 더 작게해서 한 번 더 Train하겠습니다.
+```python
+model.optimizer.lr = 0.0001
+epochs = 10
+number_pics_per_bath = 6
+steps = len(train_descriptions)//number_pics_per_bath
+```
+<br/>
+<br/>
+<br/>
+
+```python
+for i in range(epochs):
+    generator = data_generator(train_descriptions, train_features, wordtoix, max_length, number_pics_per_bath)
+    
+    model.fit_generator(generator, epochs=1, steps_per_epoch=steps, verbose=0, callbacks=[TQDMNotebookCallback()])
+    print(i)
+```
+<br/>
+<br/>
+<br/>
+
+* Train을 마친 Model을 나중을 위해서 저장하도록 하겠습니다.
+
+```python
+model.save_weights('./model_weights/model_30.h5')
+```
+
+<br/>
+<br/>
+<br/>
+
+### Inference
+* 앞에서 훈련한 Model을 이용해서 Caption을 생성해 보도록 하겠습니다.
+
+```python
+model.load_weights('./model_weights/model_30.h5')
+```
+
+```python
+def greedySearch(photo):
+    in_text = 'startseq'
+    for i in range(max_length):
+        sequence = [wordtoix[w] for w in in_text.split() if w in wordtoix]
+        sequence = pad_sequences([sequence], maxlen=max_length)
+        yhat = model.predict([photo,sequence], verbose=0)
+        yhat = np.argmax(yhat)
+        word = ixtoword[yhat]
+        in_text += ' ' + word
+        if word == 'endseq':
+            break
+    final = in_text.split()
+    final = final[1:-1]
+    final = ' '.join(final)
+    return final
+```
+
+
+```python
+z = 1
+pic = list(encoding_test.keys())[z]
+image = encoding_test[pic].reshape((1,2048))
+x=plt.imread(images+pic)
+plt.imshow(x)
+plt.show()
+print("Greedy:",greedySearch(image))
+```
+
+
+![png](output_276_0.png)
+
+
+    Greedy: young boy in blue swim trunks is running in the water
