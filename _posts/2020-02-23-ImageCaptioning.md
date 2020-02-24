@@ -15,7 +15,7 @@ categories: project ImageCaption
 우선 필요한 Package를 Load합니다.   
 주로 Keras를 사용할 예정이며, Image에서 Feature Extract를 위해 VGG16 Model을 사용할 예정입니다.   
 
-```
+```python
 import numpy as np
 from numpy import array
 import pandas as pd
@@ -79,5 +79,60 @@ print(doc[:866])
     1001773457_577c3a7d70.jpg#4	Two dogs on pavement moving toward each other .
     
     
-
+   
 * 위와 같은 형태로 한 Line에 Image File Name과 Caption의 Index , Caption 문자열의 순서로 저장되어 있습니다.
+   
+   
+* 이렇게 그냥 두고 사용하기엔 불편하니, 이후에 사용하기 쉽도록 Dict. 형태로 바꾸어 보겠습니다.
+* Dict.의 Key는 Image File Name , Value는 5개의 Caption이 담긴 List형태로 만들겠습니다.
+
+
+```python
+def load_descriptions(doc):
+
+    mapping = dict()
+
+    # process lines
+    for line in doc.split('\n'):
+    
+        # split line by white space
+        tokens = line.split()
+        
+        if len(line) < 2:
+            continue
+
+        # take the first token as the image id, the rest as the description
+        image_id, image_desc = tokens[0], tokens[1:]
+        
+        # extract filename from image id
+        image_id = image_id.split('.')[0]
+        
+        # convert description tokens back to string
+        image_desc = ' '.join(image_desc)
+        
+        # create the list if needed
+        if image_id not in mapping:
+            mapping[image_id] = list()
+        
+        # store description
+        mapping[image_id].append(image_desc)
+    
+    return mapping
+
+# parse descriptions
+descriptions = load_descriptions(doc)
+```
+
+
+```python
+print('Loaded: %d ' % len(descriptions))
+
+print( descriptions['1000268201_693b08cb0e'] )
+```
+
+    Loaded: 8092 
+    ['A child in a pink dress is climbing up a set of stairs in an entry way .', 'A girl going into a wooden building .', 'A little girl climbing into a wooden playhouse .', 'A little girl climbing the stairs to her playhouse .', 'A little girl in a pink dress going into a wooden cabin .']
+    
+
+* 위와 같이 우리가 원하는대로 Dict. 형태의 자료구조가 만들어졌습니다.
+* Image File 갯수는 8091개인데, Caption File에는 총 8092개가 있네요.
