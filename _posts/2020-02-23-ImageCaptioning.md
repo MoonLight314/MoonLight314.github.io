@@ -208,9 +208,193 @@ print( descriptions['1000268201_693b08cb0e'] )
   
   
     ['child in pink dress is climbing up set of stairs in an entry way', 'girl going into wooden building', 'little girl climbing into wooden playhouse', 'little girl climbing the stairs to her playhouse', 'little girl in pink dress going into wooden cabin']
-  
-  
-  
-  
-  
-  
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 미리 만들어둔 Image File & Caption의 Dict.에서 Caption에서 사용된 단어들을 분리하여 Set로 만듭니다.
+* Set은 중복을 허용하지 않는 Python의 자료구조입니다.
+* set.update()는 복수개의 값을 Set에 추가하고자 할 때 사용하는 함수입니다.
+
+
+```python
+# convert the loaded descriptions into a vocabulary of words
+def to_vocabulary(descriptions):
+    
+    # build a list of all description strings
+    all_desc = set()
+    
+    for key in descriptions.keys():
+        # key(Image File Name)당 5개의 Caption이 있으므로
+        # 각각의 Caption에서 공백을 기준으로 Split하여 
+        # set에 추가합니다.
+        [all_desc.update(d.split()) for d in descriptions[key]]
+        
+    return all_desc
+```
+
+
+```python
+# summarize vocabulary
+vocabulary = to_vocabulary(descriptions)
+print('Original Vocabulary Size: %d' % len(vocabulary))
+```
+
+    Original Vocabulary Size: 8763
+    
+
+   
+
+   
+
+   
+
+   
+
+* 깔끔하게 정리된 Caption을 저장해 둡니다.   
+
+
+```python
+# save descriptions to file, one per line
+def save_descriptions(descriptions, filename):
+    lines = list()
+    for key, desc_list in descriptions.items():
+        for desc in desc_list:
+            lines.append(key + ' ' + desc)
+    data = '\n'.join(lines)
+    file = open(filename, 'w')
+    file.write(data)
+    file.close()
+```
+
+
+```python
+save_descriptions(descriptions, 'descriptions.txt')
+```
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* Flicker 8K Data Set에는 친절하게도 Train에 사용할 6000개의 Image File Name List를 제공해 줍니다.
+* Flickr_8k.trainImages.txt을 열어서 File Name을 Set에 담아둡시다.
+
+
+```python
+# load a pre-defined list of photo identifiers
+def load_set(filename):
+    doc = load_doc(filename)
+    dataset = list()
+    
+    # process line by line
+    for line in doc.split('\n'):
+        
+        # skip empty lines
+        if len(line) < 1:
+            continue
+            
+        # get the image identifier
+        identifier = line.split('.')[0]
+        dataset.append(identifier)
+        
+    return set(dataset)
+```
+
+
+```python
+# load training dataset (6K)
+filename = '../Flickr8k_text/Flickr_8k.trainImages.txt'
+train = load_set(filename)
+print('Dataset: %d' % len(train))
+```
+
+    Dataset: 6000
+    
+
+   
+
+   
+
+   
+
+* Flicker 8K Dataset의 전체 File Name List를 뽑아놓습니다.   
+
+
+```python
+# Below path contains all the images
+images = '../Flickr8k_Dataset/'
+
+# Create a list of all image names in the directory
+img = glob.glob(images + '*.jpg')
+```
+
+
+```python
+print( len( img ) )
+img[:10]
+```
+
+    8091
+    ['../Flickr8k_Dataset\\1000268201_693b08cb0e.jpg',
+     '../Flickr8k_Dataset\\1001773457_577c3a7d70.jpg',
+     '../Flickr8k_Dataset\\1002674143_1b742ab4b8.jpg',
+     '../Flickr8k_Dataset\\1003163366_44323f5815.jpg',
+     '../Flickr8k_Dataset\\1007129816_e794419615.jpg',
+     '../Flickr8k_Dataset\\1007320043_627395c3d8.jpg',
+     '../Flickr8k_Dataset\\1009434119_febe49276a.jpg',
+     '../Flickr8k_Dataset\\1012212859_01547e3f17.jpg',
+     '../Flickr8k_Dataset\\1015118661_980735411b.jpg',
+     '../Flickr8k_Dataset\\1015584366_dfcec3c85a.jpg']
+
+
+
+   
+
+   
+
+   
+
+* 전체 8091개 중에 Train Image의 Full Path를 뽑습니다.   
+
+
+```python
+# Below file conatains the names of images to be used in train data
+train_images_file = '../Flickr8k_text/Flickr_8k.trainImages.txt'
+
+# Read the train image names in a set
+train_images = set(open(train_images_file, 'r').read().strip().split('\n'))
+
+# Create a list of all the training images with their full path names
+train_img = []
+
+for i in img: # img is list of full path names of all images
+    if i[len(images):] in train_images: # Check if the image belongs to training set
+        train_img.append(i) # Add it to the list of train images
+```
+
+
+```python
+print( len(train_img) )
+train_img[:10]
+```
+
+    6000
+    ['../Flickr8k_Dataset\\1000268201_693b08cb0e.jpg',
+     '../Flickr8k_Dataset\\1001773457_577c3a7d70.jpg',
+     '../Flickr8k_Dataset\\1002674143_1b742ab4b8.jpg',
+     '../Flickr8k_Dataset\\1003163366_44323f5815.jpg',
+     '../Flickr8k_Dataset\\1007129816_e794419615.jpg',
+     '../Flickr8k_Dataset\\1007320043_627395c3d8.jpg',
+     '../Flickr8k_Dataset\\1009434119_febe49276a.jpg',
+     '../Flickr8k_Dataset\\1012212859_01547e3f17.jpg',
+     '../Flickr8k_Dataset\\1015118661_980735411b.jpg',
+     '../Flickr8k_Dataset\\1015584366_dfcec3c85a.jpg']
