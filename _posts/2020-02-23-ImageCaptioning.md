@@ -133,9 +133,78 @@ print( descriptions['1000268201_693b08cb0e'] )
     Loaded: 8092 
     ['A child in a pink dress is climbing up a set of stairs in an entry way .', 'A girl going into a wooden building .', 'A little girl climbing into a wooden playhouse .', 'A little girl climbing the stairs to her playhouse .', 'A little girl in a pink dress going into a wooden cabin .']
     
-
+    
+    
+   
+   
 * 위와 같이 우리가 원하는대로 Dict. 형태의 자료구조가 만들어졌습니다.
 * Image File 갯수는 8091개인데, Caption File에는 총 8092개가 있네요.
    
    
+   
+   
+   
 ![title](/assets/dict.png)
+   
+   
+   
+   
+   
+* Caption의 Text에 특별한 전처리를 하겠습니다.
+  - 추후에 처리를 편하게 하기 위해 모든 문자를 소문자로 변환
+  - 불필요한 문자를 삭제
+  - 부정관사 , '&' , 숫자 삭제
+
+
+```python
+def clean_descriptions(descriptions):
+
+    # prepare translation table for removing punctuation
+    table = str.maketrans('', '', string.punctuation)
+    
+    for key, desc_list in descriptions.items():
+        for i in range(len(desc_list)):
+            desc = desc_list[i]
+            
+            # tokenize
+            desc = desc.split()
+            
+            # convert to lower case
+            desc = [word.lower() for word in desc]
+            
+            # remove punctuation from each token
+            desc = [w.translate(table) for w in desc]
+            
+            # remove hanging 's' and 'a'
+            desc = [word for word in desc if len(word)>1]
+            
+            # remove tokens with numbers in them
+            desc = [word for word in desc if word.isalpha()]
+            
+            # store as string
+            desc_list[i] =  ' '.join(desc)
+```
+
+
+```python
+# clean descriptions
+clean_descriptions(descriptions)
+```
+
+
+```python
+print( descriptions['1000268201_693b08cb0e'] )
+```
+
+    ['child in pink dress is climbing up set of stairs in an entry way', 'girl going into wooden building', 'little girl climbing into wooden playhouse', 'little girl climbing the stairs to her playhouse', 'little girl in pink dress going into wooden cabin']
+    
+
+   
+
+   
+
+   
+
+   
+
+   
