@@ -398,3 +398,172 @@ train_img[:10]
      '../Flickr8k_Dataset\\1012212859_01547e3f17.jpg',
      '../Flickr8k_Dataset\\1015118661_980735411b.jpg',
      '../Flickr8k_Dataset\\1015584366_dfcec3c85a.jpg']
+
+
+* Test에 사용할 Image File도 Flickr_8k.testImages.txt 내용을 참고해 Full Path List를 작성해 둡시다.
+
+
+```python
+# Below file conatains the names of images to be used in test data
+test_images_file = '../Flickr8k_text/Flickr_8k.testImages.txt'
+# Read the validation image names in a set# Read the test image names in a set
+test_images = set(open(test_images_file, 'r').read().strip().split('\n'))
+
+# Create a list of all the test images with their full path names
+test_img = []
+
+for i in img: # img is list of full path names of all images
+    if i[len(images):] in test_images: # Check if the image belongs to test set
+        test_img.append(i) # Add it to the list of test images
+```
+
+
+```python
+print( len(test_img) )
+test_img[:10]
+```
+
+    1000
+    ['../Flickr8k_Dataset\\1056338697_4f7d7ce270.jpg',
+     '../Flickr8k_Dataset\\106490881_5a2dd9b7bd.jpg',
+     '../Flickr8k_Dataset\\1082379191_ec1e53f996.jpg',
+     '../Flickr8k_Dataset\\1084040636_97d9633581.jpg',
+     '../Flickr8k_Dataset\\1096395242_fc69f0ae5a.jpg',
+     '../Flickr8k_Dataset\\1107246521_d16a476380.jpg',
+     '../Flickr8k_Dataset\\1119015538_e8e796281e.jpg',
+     '../Flickr8k_Dataset\\1122944218_8eb3607403.jpg',
+     '../Flickr8k_Dataset\\1131800850_89c7ffd477.jpg',
+     '../Flickr8k_Dataset\\1131932671_c8d17751b3.jpg']
+
+
+
+   
+
+   
+
+   
+
+* 나중에 Train할 때 사용하기 위해서, Train Image(6000개)의 Caption을 따로 뽑아서 저장합니다.
+
+
+```python
+# load clean descriptions into memory
+def load_clean_descriptions(filename, dataset):
+    # load document
+    doc = load_doc(filename)
+    
+    descriptions = dict()
+    
+    for line in doc.split('\n'):
+        
+        # split line by white space
+        tokens = line.split()
+        
+        # split id from description
+        image_id, image_desc = tokens[0], tokens[1:]
+        
+        # skip images not in the set
+        if image_id in dataset:
+            # create list
+            if image_id not in descriptions:
+                descriptions[image_id] = list()
+                
+            # wrap description in tokens
+            desc = 'startseq ' + ' '.join(image_desc) + ' endseq'
+            
+            # store
+            descriptions[image_id].append(desc)
+            
+    return descriptions
+```
+
+
+```python
+# descriptions
+train_descriptions = load_clean_descriptions('descriptions.txt', train)
+print('Descriptions: train=%d' % len(train_descriptions))
+```
+
+    Descriptions: train=6000
+    
+
+
+```python
+train_descriptions['1000268201_693b08cb0e']
+```
+
+
+
+
+    ['startseq child in pink dress is climbing up set of stairs in an entry way endseq',
+     'startseq girl going into wooden building endseq',
+     'startseq little girl climbing into wooden playhouse endseq',
+     'startseq little girl climbing the stairs to her playhouse endseq',
+     'startseq little girl in pink dress going into wooden cabin endseq']
+     
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* Keras에서 제공해주는 수많은 Pre-Trained Model 중에서 우리는 Inception V3 Model을 사용하도록 하겠습니다.
+  - https://cloud.google.com/tpu/docs/inception-v3-advanced
+* 아래 Code를 실행하면 최초 한번 학습된 Model의 Weight값을 받아옵니다.
+* 아래 Link에서 좀 더 자세한 내용을 확인 가능
+  - https://keras.io/applications/
+
+
+```python
+# Load the inception v3 model
+model = InceptionV3(weights='imagenet')
+```
+
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:4138: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:174: The name tf.get_default_session is deprecated. Please use tf.compat.v1.get_default_session instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:181: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:186: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:190: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:199: The name tf.is_variable_initialized is deprecated. Please use tf.compat.v1.is_variable_initialized instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:206: The name tf.variables_initializer is deprecated. Please use tf.compat.v1.variables_initializer instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:1834: The name tf.nn.fused_batch_norm is deprecated. Please use tf.compat.v1.nn.fused_batch_norm instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:133: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:3976: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+    
+    WARNING:tensorflow:From C:\Users\csyi\AppData\Local\Continuum\anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:3980: The name tf.nn.avg_pool is deprecated. Please use tf.nn.avg_pool2d instead.
+    
+    
+
+   
+
+   
+
+   
+
+* 이제 기존에 학습된 Inception V3 Model을 우리가 쓸 수 있도록 약간 수정하도록 하겠습니다.
+* Inception V3 Model의 마지막 Dense Layer(Classifier , Softmax Layer)만 빼버리고 사용하도록 하겠습니다.
+* Inception V3 Model은 ImageNet의 Dataset을 Training Set으로 학습된 Model이기 때문입니다.
+* 마지막 Dense Layer만 뺀 Model은 Image의 Feature들을 Extract하는 기능만 가지고 있습니다.
+* 우리는 Extract된 Feature들만 이용하여 Image Caption을 학습하는데 사용하도록 하겠습니다.
+
+![title](/assets/Inception_V3_01.png)
