@@ -3,20 +3,38 @@ title: "Image Captioning"
 date: 2017-10-20 08:26:28 -0400
 categories: project ImageCaption
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+* Flickr 8k Image Data Set을 사용할 예정인데, Flickr 8k Data Set에는 총 8091개의 Image File이 있고 각 Image File당 5개의 Caption이 제공된다.
+* 'Flickr8k.token.txt'에 각 Image의 Caption이 저장되어 있습니다.
 
-Jekyll also offers powerful support for code snippets:
+```
+import numpy as np
+from numpy import array
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+import string
+import os
+from PIL import Image
+import glob
+from pickle import dump, load
+from time import time
+from keras.preprocessing import sequence
+from keras.models import Sequential
+from keras.layers import LSTM, Embedding, TimeDistributed, Dense, RepeatVector,\
+                         Activation, Flatten, Reshape, concatenate, Dropout, BatchNormalization
+from keras.optimizers import Adam, RMSprop
+from keras.layers.wrappers import Bidirectional
+from keras.layers.merge import add
+from keras.applications.inception_v3 import InceptionV3
+from keras.preprocessing import image
+from keras.models import Model
+from keras import Input, layers
+from keras import optimizers
+from keras.applications.inception_v3 import preprocess_input
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
 
-​```python
-def print_hi(name):
-  print("hello", name)
-print_hi('Tom')
-​```
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+from tqdm import tqdm_notebook
+```
