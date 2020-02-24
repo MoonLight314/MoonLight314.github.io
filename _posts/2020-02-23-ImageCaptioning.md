@@ -136,5 +136,6 @@ print( descriptions['1000268201_693b08cb0e'] )
 
 * 위와 같이 우리가 원하는대로 Dict. 형태의 자료구조가 만들어졌습니다.
 * Image File 갯수는 8091개인데, Caption File에는 총 8092개가 있네요.
-
-![title](images/dict.png)
+   
+   
+![title](Images/dict.png)
