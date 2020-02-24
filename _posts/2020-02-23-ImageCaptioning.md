@@ -146,12 +146,20 @@ print( descriptions['1000268201_693b08cb0e'] )
 
 
 ![title](/assets/dict.png)
-  
-  
-  
-  
-  
-  
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 * Caption의 Text에 특별한 전처리를 하겠습니다.
   - 추후에 처리를 편하게 하기 위해 모든 문자를 소문자로 변환
   - 불필요한 문자를 삭제
