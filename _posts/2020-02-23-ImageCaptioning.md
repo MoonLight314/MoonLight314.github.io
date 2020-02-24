@@ -549,3 +549,452 @@ model = InceptionV3(weights='imagenet')
 <br/>
 <br/>
 <br/>
+
+
+* Keras의 함수형 API를 사용하여 새로운 Model을 만듭니다.
+
+
+
+```python
+# Create a new model, by removing the last layer (output layer) from the inception v3
+model_new = Model(model.input, model.layers[-2].output)
+```
+
+   
+
+* 기존 Model은 총 313개의 Layer가 있고, 마지막 Layer는 Softmax Layer이며, Classifier의 기능을 합니다.   
+
+
+```python
+print( type(model.layers) )
+print( len(model.layers) )
+print( model.layers[0] )
+print( model.layers[1] )
+
+print( model.layers[-2] )
+print( model.layers[-1] )
+```
+
+    <class 'list'>
+    313
+    <keras.engine.input_layer.InputLayer object at 0x00000237899DE788>
+    <keras.layers.convolutional.Conv2D object at 0x00000237899DE148>
+    <keras.layers.pooling.GlobalAveragePooling2D object at 0x000002380F475408>
+    <keras.layers.core.Dense object at 0x000002380F48DD08>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 수정된 Model은 Layer수가 한개 줄었으며, 마지막층은 Fully Connected Layer이며, Feature Extractor 역할을 합니다.
+
+
+```python
+print( len(model_new.layers) )
+print( model_new.layers[0] )
+print( model_new.layers[1] )
+
+print( model_new.layers[-2] )
+print( model_new.layers[-1] )
+```
+
+    312
+    <keras.engine.input_layer.InputLayer object at 0x00000237899DE788>
+    <keras.layers.convolutional.Conv2D object at 0x00000237899DE148>
+    <keras.layers.merge.Concatenate object at 0x000002380F468B08>
+    <keras.layers.pooling.GlobalAveragePooling2D object at 0x000002380F475408>
+
+<br/>
+<br/>
+<br/>
+
+* Training Set의 6000개의 Image File에 대해서 Inception V3 Model을 이용해 Feature를 추출해 냅니다.
+
+![title](/assets/encode.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+```python
+def preprocess(image_path):
+    
+    # Convert all the images to size 299x299 as expected by the inception v3 model
+    # load_img(path, grayscale = FALSE, target_size = NULL)
+    img = image.load_img(image_path, target_size=(299, 299))
+    
+    # Convert PIL image to numpy array of 3-dimensions
+    # img_to_array(img, data_format = NULL)
+    x = image.img_to_array(img) # (299, 299, 3)
+    
+    # Add one more dimension
+    x = np.expand_dims(x, axis=0)    # (1, 299, 299, 3)
+    
+    # preprocess the images using preprocess_input() from inception module
+    # preprocess_input()은 미리 학습된 Inception V3 Model에 맞게 Image Data를 변환시켜 줍니다.
+    # 실제 여기서 하는 일은 -1 ~ 1 사이의 값으로 변환시켜 줍니다.
+    x = preprocess_input(x)   # (1, 299, 299, 3)
+    
+    return x
+```
+
+
+```python
+# Function to encode a given image into a vector of size (2048, )
+def encode(img):
+    img = preprocess(img) # preprocess the image
+    
+    fea_vec = model_new.predict( img ) # Get the encoding vector for the image
+    fea_vec = np.reshape(fea_vec, fea_vec.shape[1]) # reshape from (1, 2048) to (2048, )
+    
+    return fea_vec
+```
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* img(train_img)는 Train에 사용할 Image들의 Full Path를 담고 있습니다.
+* img[len(images):]는 Full Path의 앞쪽 부분을 잘라내고, File Name만으로 Dict.의 Key로 사용하겠다는 의미입니다.
+* encoding_train Dict.()는 각 Train Image들을 앞에서 선언한 Inception V3의 마지막 Classifier부분을 제외한 Model에 넣어  
+Feature만 모아 놓은 것입니다.
+
+
+```python
+import pickle
+
+if os.path.isfile("encoded_train_images.pkl"):
+    train_features = load(open("encoded_train_images.pkl", "rb"))
+    print('Photos: train=%d' % len(train_features))
+
+else:
+    # Call the funtion to encode all the train images
+    # This will take a while on CPU - Execute this only once
+    start = time()
+    encoding_train = {}
+
+    for img in tqdm_notebook( train_img ):
+        # images : '../Flicker8k_Dataset/'
+        # img[len(images):] : Training Image에서 Full Path 앞부분을 잘라낸, Image File Name
+        encoding_train[img[len(images):]] = encode(img)
+
+    print("Time taken in seconds =", time()-start)   
+
+    # * Training Image들의 Feature Vector를 File로 저장해 놓읍시다.
+    with open("encoded_train_images.pkl", "wb") as encoded_pickle:
+        pickle.dump(encoding_train, encoded_pickle)
+```
+
+    Photos: train=6000
+    
+<br/>
+<br/>
+<br/>
+<br/>
+
+* Test에 사용할 Image들도 마찬가지로 Feature Vector를 만들어 놓읍시다.   
+
+
+```python
+if os.path.isfile("encoded_test_images.pkl"):
+    with open("encoded_test_images.pkl", "rb") as encoded_pickle:
+        encoding_test = load(encoded_pickle)
+    
+else:
+    # Call the funtion to encode all the test images - Execute this only once
+    start = time()
+    encoding_test = {}
+
+    for img in tqdm_notebook( test_img ):
+        encoding_test[img[len(images):]] = encode(img)
+
+    print("Time taken in seconds =", time()-start)
+    
+    # Save the bottleneck test features to disk
+    with open("encoded_test_images.pkl", "wb") as encoded_pickle:
+        pickle.dump(encoding_test, encoded_pickle)
+```
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+### 이제 Train Set의 Caption에서 사용된 개별 단어들의 목록을 만들어 보겠습니다.   
+
+   
+
+* 단어들을 수치화하고 Indexing을 하는 이유는 최종적으로 Supervised Learning을 하기 위해서는     
+  어떤 형태의 Data이든지 이를 수치화하여 하기 때문입니다.
+
+   
+
+* Train Data의 모든 Caption을 하나의 List로 만듭니다.
+* 6000개 x 각각 5개의 Caption = 30000
+
+
+```python
+# Create a list of all the training captions
+all_train_captions = []
+
+for key, val in train_descriptions.items():
+    for cap in val:
+        all_train_captions.append(cap)
+
+len(all_train_captions)
+```
+
+
+
+
+    30000
+
+
+
+
+```python
+all_train_captions[:10]
+```
+
+
+
+
+    ['startseq child in pink dress is climbing up set of stairs in an entry way endseq',
+     'startseq girl going into wooden building endseq',
+     'startseq little girl climbing into wooden playhouse endseq',
+     'startseq little girl climbing the stairs to her playhouse endseq',
+     'startseq little girl in pink dress going into wooden cabin endseq',
+     'startseq black dog and spotted dog are fighting endseq',
+     'startseq black dog and tricolored dog playing with each other on the road endseq',
+     'startseq black dog and white dog with brown spots are staring at each other in the street endseq',
+     'startseq two dogs of different breeds looking at each other on the road endseq',
+     'startseq two dogs on pavement moving toward each other endseq']
+     
+     
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 다음과 같이 Caption들의 전체 단어의 출현 빈도를 Count해서 List에 채웁니다.   
+* 10번 이하로 나온 단어는 버립니다.   
+
+
+```python
+# Consider only words which occur at least 10 times in the corpus
+word_count_threshold = 10
+word_counts = {}
+nsents = 0
+
+for sent in all_train_captions:    
+    nsents += 1
+    
+    for w in sent.split(' '):
+        word_counts[w] = word_counts.get(w, 0) + 1
+
+vocab = [w for w in word_counts if word_counts[w] >= word_count_threshold]
+print('preprocessed words %d -> %d' % (len(word_counts), len(vocab)))
+```
+
+    preprocessed words 7578 -> 1651
+    
+
+   
+
+
+```python
+vocab[:20]
+```
+
+
+
+
+    ['startseq',
+     'child',
+     'in',
+     'pink',
+     'dress',
+     'is',
+     'climbing',
+     'up',
+     'set',
+     'of',
+     'stairs',
+     'an',
+     'way',
+     'endseq',
+     'girl',
+     'going',
+     'into',
+     'wooden',
+     'building',
+     'little']
+
+
+
+   
+
+   
+
+* 이 단어들의 List를 좀 더 편하게 사용하기 위해서 단어와 그 단어에 해당하는 Index를 개별적으로 담고 있는 각각의 Dict.를
+정의합니다.
+
+
+```python
+ixtoword = {}
+wordtoix = {}
+
+ix = 1
+for w in vocab:
+    wordtoix[w] = ix
+    ixtoword[ix] = w
+    ix += 1
+```
+
+
+```python
+wordtoix['in']
+```
+
+
+
+
+    3
+
+
+
+
+```python
+ixtoword[3]
+```
+
+
+
+
+    'in'
+
+
+
+
+```python
+vocab_size = len(ixtoword) + 1 # one for appended 0's
+vocab_size
+```
+
+
+
+
+    1652
+
+
+
+   
+
+   
+
+* Caption 중에 가장 긴 단어를 가진 Caption의 단어 갯수는 34개네요
+* 이 값은 이후 LSTM에 들어갈 Word Data 전체 길이를 결정할 때 사용됩니다.
+
+
+```python
+# convert a dictionary of clean descriptions to a list of descriptions
+def to_lines(descriptions):
+    all_desc = list()
+    for key in descriptions.keys():
+        [all_desc.append(d) for d in descriptions[key]]
+    return all_desc
+
+# calculate the length of the description with the most words
+def max_length(descriptions):
+    lines = to_lines(descriptions)    
+    return max(len(d.split()) for d in lines)
+```
+
+
+```python
+# determine the maximum sequence length
+max_length = max_length(train_descriptions)
+
+print('Description Length: %d' % max_length)
+```
+
+    Description Length: 34
+    
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+### Feature Engineering ( Data Generator )
+
+   
+
+* ML or DL의 Training에 사용할 Data는 Integer or Float 형태의 Numberical Value이어야 합니다..
+* Training Image Set과 Caption을 어떤 방식으로 RNN에 넣을 수 있는 Numberical Value로 변환하는지 알아보겠습니다.
+<br/>
+<br/>
+<br/>
+
+* 다음과 같은 그림이 있다고 가정해보자. 이 Image과 이 Image의 Caption( the black cat sat on grass )을 RNN에 넣을 수 있는 형태로 바꿔보겠습니다.
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+![title](/assets/black_cat.jpeg) 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+* 우선 Image에 대한 Data와 Caption에 대한 정보를 분리해서 생각해봅시다.
+* Image에 대한 Feature는 앞서 Pre-Trained Model인 Inception V3 Model에서 Classifier를 제거한 Model을 이용해 Feature를 뽑을 수 있습니다.
+* New Inception V3 Model은 Image에 대해서 2048개의 Feature를 뽑아 줄 것입니다.
+
+* 우리가 Predict하려고 하는 값은, 임의의 Image에 대한 Caption입니다. 
+* 그래서, Training시에 Label은 Caption이 될 것입니다.
+
+* 그러나, 한 번의 Predict로 전체 Caption을 전부 알아내는 것이 아니라, Caption의 일부로 다음 Caption의 단어를 유추하는 방식을 사용할 것입니다.
+* 이와 같이 Sequence 형태의 Data를 다루기 위해서 우리는 RNN(Recurrent Neural Network)을 사용할 것이고,  
+  이에 따라 RNN Input에 적절한 형태의 Training Data 형태를 만들어야 합니다.
+  
+* 즉, 아래와 같은 형태의 Training Data Feature Format을 사용할 것입니다.
+<br/>
+<br/>
+<br/>
+<br/>
+
+![title](/assets/Data_Gen_01.png)   
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+* RNN에 입력될 Caption의 Word를 Numberical Value로 변환하기 위해서 앞에서 작성한 wordtoix를 이용하여  
+  아래와 같이 Word를 Index로 변환해 주어야 한다.
+
+![title](/assets/Data_Gen_02.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
