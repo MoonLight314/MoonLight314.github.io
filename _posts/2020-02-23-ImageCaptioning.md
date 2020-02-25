@@ -1405,7 +1405,7 @@ steps = len(train_descriptions)//number_pics_per_bath
 <br/>
 <br/>
 
-* TQDMNotebookCallback은 Notebook으로 Train 상태를 볼 때 유용하더라구요.
+* TQDMNotebookCallback은 Notebook으로 Train 진행 상황을 볼 때 유용하더라구요.
 * 사용법은 fit 함수의 Callback에 등록해서 사용하시면 됩니다.
 
 ```python
@@ -1469,7 +1469,13 @@ model.save_weights('./model_weights/model_30.h5')
 <br/>
 
 ### Inference
-* 앞에서 훈련한 Model을 이용해서 Caption을 생성해 보도록 하겠습니다.
+* 이제 Train을 마쳤습니다.
+* 실제로 Train을 마친 Model을 이용해서 우리가 원하는 Image의 Caption을 생성해 보도록 하겠습니다.
+<br/>
+<br/>
+* 우선 Image를 VGG16 Model에 넣어서 Feature를 뽑아냅니다.
+* 그 Feature들과 Caption의 시작을 알리는 'startseq'라는 문자열을 우리가 훈련한 Model에 넣으면 전체 Caption이 만들어지는 방식이니다.
+<br/>
 
 ```python
 model.load_weights('./model_weights/model_30.h5')
@@ -1509,3 +1515,7 @@ print("Greedy:",greedySearch(image))
 
 
     Greedy: young boy in blue swim trunks is running in the water
+
+<br/>
+<br/>
+* 꽤 그럴싸하게 Caption을 만들어 내네요.
