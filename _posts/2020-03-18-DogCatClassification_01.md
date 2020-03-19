@@ -39,7 +39,7 @@ InteractiveShell.ast_node_interactivity = "all"
 
   
 * CNN의 전반적인 설명과 다른 Pre-Trained Model에 대해서 알아보시려면 아래 Link의 Post를 참고하시기 바랍니다.
-  - https://moonlight314.github.io/study/cnn/CNN/
+  - [https://moonlight314.github.io/study/cnn/CNN/](https://moonlight314.github.io/study/cnn/CNN/)
   
 <br>
 <br>
