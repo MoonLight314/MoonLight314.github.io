@@ -56,10 +56,52 @@ categories: Kaggle COVID19
 * Text 형태의 학술 자료이기 때문에 자연어 처리 혹은 기타 AI 기술을 이용하여 다양한 작업을 할 수 있을 것이라고 기대됩니다.
 * 이 Datset은 주기적으로 Update되며, 최신 Dataset은 아래 Link에서 확인하시면 됩니다.
   - [https://pages.semanticscholar.org/coronavirus-research](https://pages.semanticscholar.org/coronavirus-research)
+  
+* 저는 3월 13일자 Dataset을 Download하였습니다. Directory 구조는 아래와 같았습니다.
+<br>
+<p align="center">
+  <img src="/assets/kaggle_COVID19/COVID_19_01.png">
+</p>
+<br>
 
-Task : https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge/tasks
+* 각 Folder는 아래와 같은 문서를 제공합니다.
+  - Commercial use subset (includes PMC content)
+  - Non-commercial use subset (includes PMC content)
+  - Custom license subset
+  - bioRxiv/medRxiv subset (pre-prints that are not peer reviewed)
 
+* 개별 문서는 JSON 형태의 File로 제공되며, Schema는 다음과 같습니다.
+  - [JSON Schema](https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-03-13/json_schema.txt)
 
+* CSV 형태로 Metadata가 제공되며, 개별 문서의 제목은 각 문서의 Hash값( SHA )값과 Match 됩니다.
+
+<br>
+<br>
+
+## Task List
+* 이 Dataset과 연결된 Task List는 아래 Link를 참고해 주시기 바랍니다.
+  - [Task List](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge/tasks)
+
+* 다양한 Task 들이 있네요.
+<br>
+<p align="center">
+  <img src="/assets/kaggle_COVID19/COVID_19_02.png">
+</p>
+<br>
+
+* Task들의 제목들을 보아하니, 공개된 Dataset에서 적절한 답변을 찾는 Model을 만드는 것이 이 Task들의 목표 같습니다.
+
+* 아무 Task 하나를 살표보겠습니다. 두번째 보이는 Task에 들어가 보겠습니다.
+<br>
+<p align="center">
+  <img src="/assets/kaggle_COVID19/COVID_19_03.png">
+</p>
+<br>
+
+* Dataset에서 코로나 19의 Risk Factor를 조사해 보라는 Task네요.
+
+* 제출된 Submission 중 하나를 살펴보도록 하겠습니다.
+https://www.kaggle.com/shiromiyuki/covid-19-risk-factors-using-tf-idf
 
 
 
