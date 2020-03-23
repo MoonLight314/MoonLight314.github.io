@@ -77,6 +77,10 @@ categories: Kaggle COVID19
 
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
 
 ## Task List
 * 이 Dataset과 연결된 Task List는 아래 Link를 참고해 주시기 바랍니다.
