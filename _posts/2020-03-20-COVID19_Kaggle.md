@@ -126,7 +126,7 @@ categories: Kaggle COVID19
 <br>
 <br>
 
-  ## COVID-19 Global Forecasting Challenge & COVID-19 California Forecasting Challenge
+## COVID-19 Global Forecasting Challenge & COVID-19 California Forecasting Challenge
   * 이 2개의 Competition은 유사한 Competition이며, 백악관의 OSTP(Science and Technology Policy)에서 코로나 19 문제를 해결하기 위해 Kaggle을 포함한 다양한 연구 그룹에 배포하였습니다.
   * 이 Competition의 주요 목적은 지역별로 사망자를 예측하는 것이라기 보다는 코로나 19의 **전파에 영향을 미치는 중요 요인이 무엇인지를 예측하는 것입니다.**
   * Data File을 받아서 어떤 Data가 포함되어 있는지 한 번 살펴보도록 하겠습니다.
@@ -143,6 +143,7 @@ categories: Kaggle COVID19
     - Date : 날짜
     - ConfirmedCases : 누적 확진자 수
     - Fatalities : 사망자
+<br>
   * 음... 이 정보들로만 주요 전파 인자를 파악할 수 있을까요 ? 
   * 제 생각에는 추가적인 정보가 필요할 것으로 보입니다.
   * 어떤 정보가 있을까요 ? 우선 나라 / 주 이름이 있으니깐 국가별 / 주별 특징을 추가할 수 있을 것 같습니다.
