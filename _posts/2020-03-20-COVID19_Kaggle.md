@@ -101,22 +101,51 @@ categories: Kaggle COVID19
 * Dataset에서 코로나 19의 Risk Factor를 조사해 보라는 Task네요.
 
 * 제출된 Submission 중 하나를 살펴보도록 하겠습니다.
-https://www.kaggle.com/shiromiyuki/covid-19-risk-factors-using-tf-idf
+  - [https://www.kaggle.com/shiromiyuki/covid-19-risk-factors-using-tf-idf](https://www.kaggle.com/shiromiyuki/covid-19-risk-factors-using-tf-idf)
+  <br>
+<p align="center">
+  <img src="/assets/kaggle_COVID19/COVID_19_04.png">
+</p>
+<br>
+<br>
+  - 위 Submission은 TF-IDF으로 찾고자 하는 Keyword와 관련된 단어를 검색해 내는 방법을 쓰는 것 같습니다.
+  - 제가 NLP 쪽은 거의 지식이 없는데, 이 Task 들의 Submission들을 보면서 공부하면 좋을 것 같다는 생각이 드네요.
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 # Competition
-COVID-19 Global Forecasting Challenge : https://www.kaggle.com/c/covid19-global-forecasting-week-1/overview
-
-COVID-19 California Forecasting Challenge : https://www.kaggle.com/c/covid19-local-us-ca-forecasting-week-1/overview
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+  * 현재 Kaggle에 코로나 19 관련 Competition은 2개가 있습니다.
+    - COVID-19 Global Forecasting Challenge : [https://www.kaggle.com/c/covid19-global-forecasting-week-1/overview](https://www.kaggle.com/c/covid19-global-forecasting-week-1/overview)
+    - COVID-19 California Forecasting Challenge : [https://www.kaggle.com/c/covid19-local-us-ca-forecasting-week-1/overview](https://www.kaggle.com/c/covid19-local-us-ca-forecasting-week-1/overview)
+    
 <br>
 <br>
 
+  ## COVID-19 Global Forecasting Challenge & COVID-19 California Forecasting Challenge
+  * 이 2개의 Competition은 유사한 Competition이며, 백악관의 OSTP(Science and Technology Policy)에서 코로나 19 문제를 해결하기 위해 Kaggle을 포함한 다양한 연구 그룹에 배포하였습니다.
+  * 이 Competition의 주요 목적은 지역별로 사망자를 예측하는 것이라기 보다는 코로나 19의 **전파에 영향을 미치는 중요 요인이 무엇인지를 예측하는 것입니다.**
+  * Data File을 받아서 어떤 Data가 포함되어 있는지 한 번 살펴보도록 하겠습니다.
+  <br>
+<p align="center">
+  <img src="/assets/kaggle_COVID19/COVID_19_05.png">
+</p>
+<br>  
+  * 위 Data는 남한 Data의 첫부분만 조금 출력한 것입니다. 각 Column의 의미는 다음과 같습니다.
+    - Id : 각 Data의 고유 ID
+    - Province/State : 주 이름
+    - Country/Region : 국가이름
+    - Lat/Long : 위도 / 경도
+    - Date : 날짜
+    - ConfirmedCases : 누적 확진자 수
+    - Fatalities : 사망자
+  * 음... 이 정보들로만 주요 전파 인자를 파악할 수 있을까요 ? 
+  * 제 생각에는 추가적인 정보가 필요할 것으로 보입니다.
+  * 어떤 정보가 있을까요 ? 우선 나라 / 주 이름이 있으니깐 국가별 / 주별 특징을 추가할 수 있을 것 같습니다.
+  * 예를 들면, GDP나 인구, 온도 , 습도, 인구 밀도 , 단위 면적당 병원 , 약국 수, 평균 연령 등등....
+  * 매우 다양한 Feature들을 추가할 수 있을 것 같네요. 
+  * 그런데, 저런 정보를 어떻게 하면 구할 수 있을지가 고민이네요. 혹시 아시는 분 댓글 부탁드립니다.
