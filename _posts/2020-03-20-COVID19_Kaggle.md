@@ -49,7 +49,7 @@ categories: Kaggle COVID19
   
 * 이번에는 코로나 19와 관련된 Kaggle Task를 알아보도록 하겠습니다.
 * 관련 Dataset은 아래의 Link에서 확인하실 수 있습니다.
-  - COVID-19 Open Research Dataset Challenge (CORD-19) : https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
+  - COVID-19 Open Research Dataset Challenge (CORD-19) : [https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
 
 * 이 Dataset은 백악관과 몇몇의 연구 그룹에서 배포한 것입니다.
 * 이 Dataset은 COVID-19, SARS-CoV-2 및 코로나 바이러스에 관한 44,000 개가 넘는 학술 자료를 제공하며, 그 중에 29,000 개는 전문으로 제공됩니다.
