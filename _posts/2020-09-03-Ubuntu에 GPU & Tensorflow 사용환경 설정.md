@@ -23,7 +23,7 @@ categories: DeepLearning
 
 ## 0. Prepare Ubuntu Installation
 
-먼저 설치할 Ubuntu 배포한의 Image File을 Download하도록 하겠습니다.
+먼저 설치할 Ubuntu 배포판의 Image File을 Download하도록 하겠습니다.
 
 [Ubuntu Image File Download](https://releases.ubuntu.com/?_ga=2.140264563.1504976568.1598255557-1939476017.1598255557)
 
