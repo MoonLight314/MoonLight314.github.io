@@ -84,6 +84,10 @@ categories: DeepLearning
    
 * Attention Value는 아래와 같은 순서로 찾습니다. 각 값들에 대해서 하나씩 알아보죠
 
+<br>
+<br>
+<br>
+
 Attention Value는 다음 4가지 순서(값)을 계산하면서 값을 구할 수 있습니다.
 
    **1) Attention Score**
