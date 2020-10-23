@@ -8,7 +8,7 @@ categories: DeepLearning
 <br>
 <br>
 
-* Gensim(https://radimrehur다.com/genism/about.html)은 2008년에 Czech Digital Mathematics Library가 다양한 자연어 처리 Python 스크립트를 모은 것으로부터 시작되어, 현재는 다양한 자연어 처리 기능을 제공하는 Library입니다.
+* Gensim( https://radimrehurek.com/gensim/about.html )은 2008년에 Czech Digital Mathematics Library가 다양한 자연어 처리 Python 스크립트를 모은 것으로부터 시작되어, 현재는 다양한 자연어 처리 기능을 제공하는 Library입니다.
 
 * 설치 방법은 이 Link를 참조하도록 하세요 : [https://pypi.org/project/gensim/](https://pypi.org/project/gensim/)
 
