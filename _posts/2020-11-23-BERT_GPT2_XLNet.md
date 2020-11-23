@@ -32,11 +32,11 @@ categories: DeepLearning
    
 * ULMFiT이 가능성을 보여주었고, 이후 ELMo, OpenAI GPT등이 놀라운 성능을 보여주면서 그 진가를 인정받았다. BERT의 경우 무려 11개의 NLP 태스크에서 state-of-the-art를 기록하면서 뉴욕 타임즈의 지면을 장식하기도 했습니다.
 
-* 관련 논문 : https://arxiv.org/pdf/1810.04805.pdf
+* 관련 논문 : [https://arxiv.org/pdf/1810.04805.pdf](https://arxiv.org/pdf/1810.04805.pdf)
 
 * Package 설명은 다음의 Link에서 확인하실 수 있습니다.
   
-  https://pypi.org/project/bert-extractive-summarizer/   
+  [https://pypi.org/project/bert-extractive-summarizer](https://pypi.org/project/bert-extractive-summarizer/)
   
   
 <br>
@@ -56,20 +56,20 @@ categories: DeepLearning
   - RNN 이나 LSTM을 사용하지 않는 매우 혁신적인 Model입니다.
         
   - 자세한 설명은 여기를 한 번 읽어보시기 바랍니다.
-    https://blog.pingpong.us/transformer-review/
+    [https://blog.pingpong.us/transformer-review/](https://blog.pingpong.us/transformer-review/)
         
-  - 논문 : https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+  - 논문 : [https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf](https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)
 
-* GPT2 Model : https://openai.com/blog/better-language-models/   
+* GPT2 Model : [https://openai.com/blog/better-language-models/](https://openai.com/blog/better-language-models/)
 
-  논문 : https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
+  논문 : [https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
   
-  Github : https://github.com/openai/gpt-2
+  Github : [https://github.com/openai/gpt-2](https://github.com/openai/gpt-2)
 
    
 
 * XLNet
-  - 설명 : https://blog.pingpong.us/xlnet-review/
+  - 설명 : [https://blog.pingpong.us/xlnet-review/](https://blog.pingpong.us/xlnet-review/)
   
   
 <br>
