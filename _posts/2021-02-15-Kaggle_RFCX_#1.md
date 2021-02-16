@@ -786,7 +786,7 @@ TRAIN.shape
 TRAIN.to_csv("MFCC_MEL_Spec_Mean_Train_csv" , index=False)
 ```
 
-* 이제 Train Data와 이에 해당하는 Label 모두 준비되었으니, LightLGB를 준비하도록 하겠습니다.   
+* 이제 Train Data와 이에 해당하는 Label 모두 준비되었으니, LightGBM를 준비하도록 하겠습니다.   
 
 
 <br>
@@ -1245,7 +1245,7 @@ submission.to_csv("submission_MEL_Spec_Mean.csv" , index=False)
 <br>
 <br>
 <p align="center">
-  <img src="/assets/RFCX_01/pic_03.ng">
+  <img src="/assets/RFCX_01/pic_03.png">
 </p>
 <br>
 <br>
