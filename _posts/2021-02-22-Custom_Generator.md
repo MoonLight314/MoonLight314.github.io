@@ -140,8 +140,7 @@ H = model.fit_generator(aug.flow(trainX, trainY, batch_size=BS),
 <br>
 
 * Datagenerator를 사용하는 경우에 Model Train의 순서는 다음과 같습니다.   
-
-
+<br>
     1) Keras Model이 Generator를 Call합니다. ( 위의 경우에는 aug.flow )
 
     2) Generator는 Batch Size만 Dataset을 만들어서 fit_generator에 넘겨줍니다.
