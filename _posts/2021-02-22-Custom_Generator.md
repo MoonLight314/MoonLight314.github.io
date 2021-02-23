@@ -54,9 +54,7 @@ model.fit( trainX, trainY, batch_size=32, epochs=50 )
 <br>
 <br>
 - 위 fit 함수가 의미하는 것은 trainX에 Train Data가, trainY에 그에 해당하는 Label 값들이 들어 있으며,
-
 trainX로부터 Train Data를 가져오고, 한 번에 가져오는 Train Data는 32회의 양만큼 가져옵니다.
-
 이 동작을 총 50회 반복합니다. 즉, trainX를 총 50회 반복해서 학습하는 것입니다.
 
 <br>
@@ -125,7 +123,7 @@ H = model.fit_generator(aug.flow(trainX, trainY, batch_size=BS),
 
 * ImageDataGenerator의 다양한 Augmentation Parameter는 아래 Link를 참조해 주세요.
 
-  https://keras.io/ko/preprocessing/image/
+  [https://keras.io/ko/preprocessing/image/](https://keras.io/ko/preprocessing/image/)
 
 <br>
 
@@ -138,10 +136,11 @@ H = model.fit_generator(aug.flow(trainX, trainY, batch_size=BS),
 * 이제 DataGenerator를 사용하면, 이제 더 이상 fit 함수는 사용할 수 없고, fit_generator를 사용해야 합니다.
 
   ( **주의 : TF 2.0 부터는 fit_generator가 없어지고 동일한 기능을 fit에서도 지원하다고 하네요.** )
+
 <br>
 
 * Datagenerator를 사용하는 경우에 Model Train의 순서는 다음과 같습니다.   
-<br>
+
 
     1) Keras Model이 Generator를 Call합니다. ( 위의 경우에는 aug.flow )
 
