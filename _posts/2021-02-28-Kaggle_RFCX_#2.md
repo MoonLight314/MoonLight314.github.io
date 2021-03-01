@@ -636,3 +636,466 @@ data.head()
 </div>
 
 
+<br>
+<br>
+<br>
+<br>
+
+* Generator를 생성하기 위해서 필요한 값들을 미리 뽑아놓겠습니다.   
+
+
+```python
+recording_id = data['recording_id'].to_list()
+labels = data['species_id'].to_list()
+t_min = data['t_min'].to_list()
+t_max = data['t_max'].to_list()
+list_IDs = [i for i in range(len(recording_id))]
+```
+
+<br>
+<br>
+<br>
+
+* Train Set과 Validation Set을 2:1 비율로 나누겠습니다.
+
+
+* Label의 균등한 배분을 위해 StratifiedKFold를 사용하도록 하겠습니다.
+
+
+* Data가 너무 적어서 걱정이네요...
+
+
+```python
+skf = StratifiedKFold(n_splits=3 , random_state=27 , shuffle=True)
+```
+
+
+```python
+for train_index, val_index in skf.split(list_IDs , labels):
+    print(len(train_index) , len(val_index))
+```
+
+    810 406
+    811 405
+    811 405
+    
+<br>
+<br>
+<br>
+
+* StratifiedKFold로 나눈 값들을 Train & Validation Generator에 넣을 값을 각각 분리합니다.
+
+
+```python
+recording_id_Train = [recording_id[k] for k in train_index]
+recording_id_Val = [recording_id[k] for k in val_index]
+
+Label_Train = [labels[k] for k in train_index]
+Label_Val = [labels[k] for k in val_index]
+
+t_min_Train = [t_min[k] for k in train_index]
+t_min_Val = [t_min[k] for k in val_index]
+
+t_max_Train = [t_max[k] for k in train_index]
+t_max_Val = [t_max[k] for k in val_index]
+
+list_IDs_Train = [k for k in range(len(train_index))]
+list_IDs_Val = [k for k in range(len(val_index))]
+```
+
+<br>
+<br>
+<br>
+
+Train과 Validation Generator의 차이는 Augmentation을 적용하느냐 마느냐의 차이뿐입니다.
+
+```python
+# Train Data Generatpr
+train_params = {'dim': (128,1876),
+          'batch_size': 32,
+          'n_classes': 24,
+          'n_channels': 1,
+          't_min': t_min_Train,
+          't_max': t_max_Train,
+          'recording_id' : recording_id_Train,
+          'train' : True,
+          'shuffle': True}
+
+train_generator = DataGenerator(list_IDs = list_IDs_Train, labels = Label_Train, **train_params)
+```
+<br>
+<br>
+<br>
+
+```python
+# Train Data Generatpr
+val_params = {'dim': (128,1876),
+          'batch_size': 32,
+          'n_classes': 24,
+          'n_channels': 1,
+          't_min': t_min_Val,
+          't_max': t_max_Val,
+          'recording_id' : recording_id_Val,
+          'train' : False,
+          'shuffle': True}
+
+val_generator = DataGenerator(list_IDs = list_IDs_Val, labels = Label_Val, **val_params)
+```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+### 3. Metric
+
+* 이번 Competition에는 흔히 많이 쓰이는 Metric이 아닌 **LWLRAP(Label Weighted Label Ranking Average Precision)** 이라는 Evaluation Metric을 사용합니다.
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/RFCX_02/pic_00.png">
+</p>
+<br>
+<br>
+
+* 이를 잘 설명해 놓은 글이 있어서 소개해 드리겠습니다.   
+
+https://www.kaggle.com/pkmahan/understanding-lwlrap
+
+* Scikit-Learn Site에도 관련된 설명을 찾을 수 있었습니다.   
+
+https://scikit-learn.org/stable/modules/model_evaluation.html#label-ranking-average-precision      
+
+<br>
+<br>   
+<br>
+<br>
+   
+
+* 저도 위의 글에서 Code를 가져와서 Montoring에 사용하도록 하겠습니다.   
+
+<br>
+<br>   
+<br>
+<br>
+
+```python
+def _one_sample_positive_class_precisions(example):
+    y_true, y_pred = example
+    y_true = tf.reshape(y_true, tf.shape(y_pred))
+    retrieved_classes = tf.argsort(y_pred, direction='DESCENDING')
+#     shape = tf.shape(retrieved_classes)
+    class_rankings = tf.argsort(retrieved_classes)
+    retrieved_class_true = tf.gather(y_true, retrieved_classes)
+    retrieved_cumulative_hits = tf.math.cumsum(tf.cast(retrieved_class_true, tf.float32))
+
+    idx = tf.where(y_true)[:, 0]
+    i = tf.boolean_mask(class_rankings, y_true)
+    r = tf.gather(retrieved_cumulative_hits, i)
+    c = 1 + tf.cast(i, tf.float32)
+    precisions = r / c
+
+    dense = tf.scatter_nd(idx[:, None], precisions, [y_pred.shape[0]])
+    return dense
+
+# @tf.function
+class LWLRAP(tf.keras.metrics.Metric):
+    def __init__(self, num_classes, name='lwlrap'):
+        super().__init__(name=name)
+
+        self._precisions = self.add_weight(
+            name='per_class_cumulative_precision',
+            shape=[num_classes],
+            initializer='zeros',
+        )
+
+        self._counts = self.add_weight(
+            name='per_class_cumulative_count',
+            shape=[num_classes],
+            initializer='zeros',
+        )
+
+    def update_state(self, y_true, y_pred, sample_weight=None):
+        precisions = tf.map_fn(
+            fn=_one_sample_positive_class_precisions,
+            elems=(y_true, y_pred),
+            dtype=(tf.float32),
+        )
+
+        increments = tf.cast(precisions > 0, tf.float32)
+        total_increments = tf.reduce_sum(increments, axis=0)
+        total_precisions = tf.reduce_sum(precisions, axis=0)
+
+        self._precisions.assign_add(total_precisions)
+        self._counts.assign_add(total_increments)        
+
+    def result(self):
+        per_class_lwlrap = self._precisions / tf.maximum(self._counts, 1.0)
+        per_class_weight = self._counts / tf.reduce_sum(self._counts)
+        overall_lwlrap = tf.reduce_sum(per_class_lwlrap * per_class_weight)
+        return overall_lwlrap
+
+    def reset_states(self):
+        self._precisions.assign(self._precisions * 0)
+        self._counts.assign(self._counts * 0)
+```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+### 4. Model   
+
+* 자, 이제 Train에 사용할 Model을 구성해 보도록 하겠습니다.   
+
+
+```python
+model = Sequential()
+```
+   
+<br>
+<br>
+<br>
+<br>
+   
+
+* 처음에 말씀드렸듯이, ResNet50을 사용하도록 하겠습니다.   
+
+* Tensorflow에서는 ResNet50을 제공해 주고 있는데, 아래 Link에서 자세한 내용을 확인할 수 있습니다.
+
+  [ResNet50 in Tensorflow](https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50)
+  
+  
+* ResNet의 종류는 규모(?)에 따라서 다양한데, 가장 만만한 ResNet50을 사용해 보도록 하겠습니다.
+
+
+* ResNet50은 기본적으로 ImageNet Dataset으로 Training되었습니다. 즉, Feature Extraction을 할 때 ImageNet과 유사한 Image에 대해서는 잘 할지 몰라도, 이번 Competition에서 사용하는 MEL Spec.와 같은 Image에는 맞지 않을 듯 합니다.
+
+
+* 그래서, 이번에는 Weight를 Load하지 않고, ResNet50의 Structure만 빌려오도록 하겠습니다.
+
+
+* 그리고, ResNet50의 Input Shape은 (224,224,3)이지만, MEL Spec.은 Shape이 다르기 때문에 Input Shape을 재정의하였습니다.
+
+<br>
+<br>
+<br>
+
+```python
+model.add( ResNet50(include_top = False, 
+                    input_shape=(256, 1876, 1),
+                    weights = None ))
+```
+
+<br>
+<br>
+<br>
+
+* Extracted Feature를 받아서 분류할 Simple MLP를 추가합니다.   
+
+
+```python
+model.add(GlobalAveragePooling2D()) 
+
+model.add(BatchNormalization())
+model.add(Dropout(0.3))
+model.add(Dense(1024, activation='relu' , kernel_initializer = tf.keras.initializers.he_normal()))
+
+model.add(BatchNormalization())
+model.add(Dropout(0.3))
+model.add(Dense(NUM_CLASS, activation = 'softmax' , kernel_initializer = tf.keras.initializers.he_normal()))
+```
+
+
+<br>
+<br>
+<br>
+
+* 최종적으로 다음과 같은 구조를 가지게 되었습니다.
+
+
+* ResNet50 전체의 Weight를 전부 Train시키기 때문에 Trainable params 수가 많네요.
+
+
+```python
+model.summary()
+```
+
+    Model: "sequential"
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    resnet50 (Functional)        (None, 8, 59, 2048)       23581440  
+    _________________________________________________________________
+    global_average_pooling2d (Gl (None, 2048)              0         
+    _________________________________________________________________
+    batch_normalization (BatchNo (None, 2048)              8192      
+    _________________________________________________________________
+    dropout (Dropout)            (None, 2048)              0         
+    _________________________________________________________________
+    dense (Dense)                (None, 1024)              2098176   
+    _________________________________________________________________
+    batch_normalization_1 (Batch (None, 1024)              4096      
+    _________________________________________________________________
+    dropout_1 (Dropout)          (None, 1024)              0         
+    _________________________________________________________________
+    dense_1 (Dense)              (None, 24)                24600     
+    =================================================================
+    Total params: 25,716,504
+    Trainable params: 25,657,240
+    Non-trainable params: 59,264
+    _________________________________________________________________
+    
+<br>
+<br>
+<br>
+
+* Optimizer는 Adam을 사용하도록 하겠습니다.
+
+
+* Evaluation Metric은 이전에 소개해드린 LWLRAP를 사용하도록 하겠습니다.
+
+
+```python
+sgd = optimizers.SGD(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = True)
+adam = optimizers.Adam(lr = 0.001)
+
+model.compile(optimizer = adam, 
+              loss = 'categorical_crossentropy', 
+              metrics = [LWLRAP(num_classes = NUM_CLASS)],
+             )
+```
+<br>
+<br>
+<br>
+
+* Callback은 Validation Set에서 LWLRAP값이 가장 높은 것을 저장하도록 하겠습니다.
+
+
+```python
+# set model callbacks to save best model
+filepath = "Saved-model-best.hdf5"
+
+my_callbacks = [ModelCheckpoint(filepath, 
+                                monitor='val_lwlrap', 
+                                verbose=1,
+                                save_best_only=True, 
+                                mode='max')]
+```
+
+<br>
+<br>
+<br>
+* 이제 대망의 Train시작입니다 !
+
+
+* Generator를 사용하지만, Kaggle Notebook Env.는 TF 2.xx를 사용하고 있기 때문에 그냥 .fit으로도 Train이 됩니다.
+
+
+* 일단 10번만 돌려보도록 하겠습니다.
+
+
+```python
+#history = model.fit_generator(
+history = model.fit(
+        train_generator,
+        epochs = 10,
+        validation_data=val_generator,
+        callbacks=my_callbacks,
+        verbose=1
+)
+```
+
+    Epoch 1/10
+    25/25 [==============================] - 858s 34s/step - loss: 3.8363 - lwlrap: 0.1664 - val_loss: 3.3410 - val_lwlrap: 0.1465
+    
+    Epoch 00001: val_lwlrap did not improve from 0.15455
+    Epoch 2/10
+    25/25 [==============================] - 848s 34s/step - loss: 3.8105 - lwlrap: 0.1541 - val_loss: 3.2576 - val_lwlrap: 0.1667
+    
+    Epoch 00002: val_lwlrap improved from 0.15455 to 0.16667, saving model to Saved-model-best.hdf5
+    Epoch 3/10
+    25/25 [==============================] - 863s 35s/step - loss: 3.7783 - lwlrap: 0.1677 - val_loss: 3.3092 - val_lwlrap: 0.1631
+    
+    Epoch 00003: val_lwlrap did not improve from 0.16667
+    Epoch 4/10
+    25/25 [==============================] - 872s 35s/step - loss: 3.8039 - lwlrap: 0.1689 - val_loss: 3.4925 - val_lwlrap: 0.1941
+    
+    Epoch 00004: val_lwlrap improved from 0.16667 to 0.19413, saving model to Saved-model-best.hdf5
+    Epoch 5/10
+    25/25 [==============================] - 869s 35s/step - loss: 3.7036 - lwlrap: 0.1813 - val_loss: 3.3664 - val_lwlrap: 0.1477
+    
+    Epoch 00005: val_lwlrap did not improve from 0.19413
+    Epoch 6/10
+    25/25 [==============================] - 862s 35s/step - loss: 3.6492 - lwlrap: 0.1848 - val_loss: 3.2578 - val_lwlrap: 0.1963
+    
+    Epoch 00006: val_lwlrap improved from 0.19413 to 0.19625, saving model to Saved-model-best.hdf5
+    Epoch 7/10
+    25/25 [==============================] - 855s 34s/step - loss: 3.7575 - lwlrap: 0.1706 - val_loss: 3.3313 - val_lwlrap: 0.1642
+    
+    Epoch 00007: val_lwlrap did not improve from 0.19625
+    Epoch 8/10
+    25/25 [==============================] - 878s 35s/step - loss: 3.6909 - lwlrap: 0.1683 - val_loss: 3.3364 - val_lwlrap: 0.1547
+    
+    Epoch 00008: val_lwlrap did not improve from 0.19625
+    Epoch 9/10
+    25/25 [==============================] - 867s 35s/step - loss: 3.6804 - lwlrap: 0.1811 - val_loss: 3.3591 - val_lwlrap: 0.1454
+    
+    Epoch 00009: val_lwlrap did not improve from 0.19625
+    Epoch 10/10
+    25/25 [==============================] - 877s 35s/step - loss: 3.6514 - lwlrap: 0.1711 - val_loss: 3.2316 - val_lwlrap: 0.1690
+    
+    Epoch 00010: val_lwlrap did not improve from 0.19625
+    
+
+<br>
+<br>
+<br>
+
+* 10회 정도만 돌려보았습니다만, 결과적으로 성공적이지는 않는것 같습니다.
+<br>
+
+* 우선, 다행스럽게도 Train Set에서의 LWLRAP값과 Validation Set에서의 LWLRAP 값이 모두 비슷하게 나오고 있는 것으로 보아, 가장 걱정했던 Overfitting은 발생하지 않는 것 같습니다.
+<br>
+
+* 아마도 Data Augmentation이나 몇몇 장치들이 영향을 준 것 같습니다.
+<br>
+
+* 하지만,결론적으로 이 Model은 사용하지 못할 것 같습니다.  
+<br>
+
+* 먼저 LWLRAP값이 Training을 진행해도 크게 개선되지 않고 있습니다. 그리고 LWLRAP 값 자체가 너무 낮습니다. ( LWLRAP 값은 1.00이 최고값입니다. )
+<br>
+
+* 사실, 이 Model은 17번째이며, 이전에 다양한 방법과 Feature들로 Test해 본 결과, 가장 큰 문제는 적은 양의 Dataset때문에 Overfitting이 가장 큰 문제였습니다.
+<br>
+
+* Overfitting은 Sound Augmentation으로 어느 정도 해결이 된 것 같으나, 낮은 LWLRAP값은 여전히 문제입니다.
+<br>
+
+* Algorithm이나 Model의 문제라기 보다는 Feature의 문제로 보이며, 이를 개선하기 위해서 좀 더 Study를 해 봐야 할 것 같습니다.
+<br>
+
+* ResNet의 Weight의 수가 많아서인지 Local에서의 Train은 Resource를 많이 잡아먹는 경향을 보였고, GPU에서도 Train 시간도 많이 걸렸습니다.
+
+  ( 이 Notebook도 Kaggle에서 제공하는 GPU에서 돌렸습니다. )
+<br>  
+  
+* 대용량 Dataset이 Kaggle에서도 많아지는 경향이어서 최근 Competition에서는 TFRecord Format도 같이 제공해주는 Competition이 많아지고 있습니다.
+<br>
+
+* 이는 다분히 Tensorflow & TPU 조합을 사용하라는 배려(혹은 압박)라고 생각합니다.
+<br>
+
+* 다음에 시간되면 TFRecord를 다루는 방법에 대해서도 한 번 알아보도록 하겠습니다.
+<br>
+
+* 이번 Post는 여기까지 하도록 하겠습니다.  도움이 되셨기를 바랍니다.
