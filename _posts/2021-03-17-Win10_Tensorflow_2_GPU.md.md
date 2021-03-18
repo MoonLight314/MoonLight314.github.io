@@ -346,7 +346,12 @@ tf.config.list_physical_devices('GPU')
 
 * 잘 되는것 같네요.
 
+<br>
+<br>   
+<br>
+<br>   
 
-```python
+## Appendix
 
-```
+* Tensorflow 2.3에서는 scipy 1.4.1이 잘 동작하더라구요.
+
