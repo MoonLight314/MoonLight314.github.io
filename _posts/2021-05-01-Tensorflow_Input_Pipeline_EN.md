@@ -62,7 +62,7 @@ categories: Deep Learning
 <br>
 <br>
 
-## 1. Dataset 살펴보기
+## 1. Exploring Dataset
 
 
 ```python
@@ -82,10 +82,10 @@ import os
 
    
 
-* Image File은 'image'라는 Folder에 저장되어 있으며, 각 Image File에 대한 Label은 miml_labels_1.csv File에 저장되어 있습니다.
+* Image files to be used for training are stored in a folder named 'image' and the label information for each image file is stored in 'miml_labels_1.csv' file.
 
 
-* 먼저 Label이 저장되어 있는 File부터 열어보겠습니다.
+* First, let's open and check the label information file.
 
 
 ```python
@@ -161,17 +161,17 @@ df.head()
 
 <br>
 
-* Filename과 해당 Image File에 묘사되어 있는 객체들에 해당되는 항목에 1이 표시되어 있는 형태로 되어 있네요.
+* '1' is marked in the CSV file at the item corresponding to the object described in the file name and the image file.
 
 <br>
 
-* 한 가지 더 눈여겨 봐야 할 것은, Image File 하나에 반드시 하나만 1이 표시되어 있지 않은 경우도 있다는 것입니다.
+* One thing that you should pay attention is that, in some cases, there might be multiple 1s for one image file.
 
 ```python
 LABELS=["desert", "mountains", "sea", "sunset", "trees"]
 ```
 
-* 한 장을 살펴보면 다음과 같습니다.
+* Let's check a file
 
 
 ```python
@@ -198,7 +198,7 @@ PIL.Image.open(str(filenames[0]))
 <br>
 <br>
 
-* Dataset만들 때 사용하기 위해서 Image File Path 전체를 담고 있는 List를 만들겠습니다.   
+* I make a string list that contains the full path of each image file to make Dataset easier.
 
 
 ```python
@@ -225,21 +225,22 @@ fnames[:5]
 <br>
 <br>
 
-# 2. Dataset 만들기   
+# 2. Making Dataset
 
-* Dataset을 만들기 위해서 다양한 방법이 있지만, 가장 흔하고 쉽게 사용할 수 있는 tf.data.Dataset.from_tensor_slices()을 사용하도록 하겠습니다.
+* There are several ways to make Dataset, in this post, I'd like to choose tf.data.Dataset.from_tensor_slices() that is the most common and easy to use.
 
     [tf.data.Dataset.from_tensor_slices()](https://www.tensorflow.org/api_docs/python/tf/data/Dataset#from_tensor_slices)
 
 
-* 일반적으로 from_tensor_slices()의 인자로 Train에 사용할 File List를 인자로 넣고, map()으로 전처리를 하는 방법을 많이 쓰고, 이 방법이 많은 유연성을 제공합니다.
+* In general, it's used a file list as a parameter of **from_tensor_slices()** and preprocessd by .map() function, which is used a lot.
+* It provides lots of flexibility.
 
    
 <br>
 <br>
 <br>
 
-* 우리가 가진 Imgae File의 전체 갯수는 2000개 이며, Path는 모두 fnames에 담겨져 있습니다.   
+* The total number of image file is 2000 and the list, fnames, has all the full path information of image files.
 
 
 ```python
@@ -253,16 +254,16 @@ print("Number of images in folders: ", ds_size)
 <br>
 <br>
 
-* fnames를 from_tensor_slices()의 Param으로 넘기겠습니다.
+* I pass 'fnames' to the parameter of from_tensor_slices()
 
 
-* 이제 Dataset이 하나 만들어졌습니다.
+* Now, we have a Dataset
 
-#### **여기서 from_tensor_slices()의 Parameter로 들어가는 fnames를 주목해 주시기 바랍니다.**
+#### **Note the fnames that go into the parameter of from_tensor_slices().**
 
-#### **Image File Name을 저장하고 있는 List입니다.**
+#### **This is a list that stores the full path of image file**
 
-#### **이후에 나올 .map() Function과 .map()에 적용할 Function들과도 밀접하게 연관되어 있기 때문입니다.**
+#### **This is because it is closely related to the .map() function to be used later and the functions to be applied to .map().**
 
 
 ```python
@@ -281,22 +282,21 @@ print("Number of selected samples for dataset: ", ds_size)
     Number of selected samples for dataset:  2000
     
 
-* filelist_ds의 전체 수는 2000개입니다. 
+* The total number of filelist_ds is 2000.
   
-  ( cardinality()는 Dataset의 전체 갯수를 Return합니다. )
+  ( cardinality() returns the total number of Dataset )
   
   
 <br>
 <br>
 <br>
 
-* 우리가 만든 Dataset이 제대로된 Data를 가지고 있는지 확인해 보겠습니다.
-
+* Let's check whether Dataset we've created has correct data or not.
    
 
    
 
-* Dataset에서 3개만 뽑아서 출력해 보겠습니다.   
+* Let's print out only 3 of them from the Dataset.
 
 
 ```python
@@ -335,7 +335,7 @@ for a in filelist_ds.take(3):
 <br>
 <br>
 
-# 3. Label 만들기   
+# 3. Making Label
 
 * Train Data로 이용할 Dataset을 만들었으니, 이제 그에 맞는 Label도 만들어 보겠습니다.   
 
