@@ -642,3 +642,311 @@ ds_test.prefetch(ds_size-ds_size*train_ratio)
     <PrefetchDataset shapes: (<unknown>, <unknown>), types: (tf.float32, tf.int64)>
     
     
+<br>
+<br>
+
+* 지금까지 작성한 map을 적용한 Dataset이 제대로 동작하는지 확인해 보도록 하겠습니다.
+
+
+* train dataset에서 하나 꺼내서 우리가 기대한 값을 Return하는지 확인해 보도록 하겠습니다.
+
+
+```python
+for image, label in ds_train.take(1):
+    print("Image shape: ", image.shape)
+    print("Label: ", label.numpy())
+```
+
+    Image shape:  (32, 32, 3)
+    Label:  [1 0 0 0 0]
+    
+
+* Train에 사용될 Image Shape과 Label도 모두 제대로 만들어지고 있습니다.
+
+   
+
+   
+
+   
+
+   
+
+   
+
+
+```python
+def covert_onehot_string_labels(label_string,label_onehot):
+    labels=[]
+    
+    for i, label in  enumerate(label_string):
+        if label_onehot[i]:
+            labels.append(label)
+            
+    if len(labels)==0:
+        labels.append("NONE")
+    
+    return labels
+```
+
+
+```python
+covert_onehot_string_labels(LABELS,[0,1,1,0,1])
+```
+
+
+
+
+    ['mountains', 'sea', 'trees']
+
+
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+
+```python
+def show_samples(dataset):
+    fig=plt.figure(figsize=(16, 16))
+    columns = 3
+    rows = 3
+    
+    print(columns*rows,"samples from the dataset")
+    
+    i=1
+    for a,b in dataset.take(columns*rows): 
+        fig.add_subplot(rows, columns, i)
+        plt.imshow(np.squeeze(a))
+        plt.title("image shape:"+ str(a.shape)+" ("+str(b.numpy()) +") "+ 
+                  str(covert_onehot_string_labels(LABELS,b.numpy())))
+        i=i+1
+        plt.show()
+```
+
+
+```python
+show_samples(ds_train)
+```
+
+    9 samples from the dataset
+    
+    
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_1.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_2.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_3.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_4.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_5.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_6.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_7.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_8.png">
+
+
+<p align="center">
+  <img src="/assets/Tensorflow_Pipeline/output_169_9.png">
+  
+<br>
+<br>
+
+```python
+print("Number of samples in train: ", ds_train.cardinality().numpy(),
+      " in test: ",ds_test.cardinality().numpy())
+```
+
+    Number of samples in train:  1600  in test:  400
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# 5. Configure for Performance Enhancement
+
+* 이제 성능향상을 위해서 batch / cache / prefetch를 적용합니다.
+
+
+* 이 부분이 Tensorflow Data Pipeline을 사용하는 이유가 되겠죠.
+
+
+* 공식 Documents에서도 확인 가능하니, 이곳을 참고해 보시는 것도 좋을 것 같습니다.
+
+  [Better performance with the tf.data API](https://www.tensorflow.org/guide/data_performance)
+
+
+* 각 항목을 하나씩 살펴보면,
+   - batch : Dataset에서 Batch Size만큼 하나의 Batch로 만들어 줍니다. 기존에 알던 Batch Size의 개념과 동일합니다.
+   - cache : Dataset에 해당되는 File들을 Local Storage나 Memory에 Caching해 둡니다. 이 동작을 적용하면 첫 Epoch을 제외하고 다음 Epoch부터 매우 빠른 성능을 볼 수 있습니다.
+   - prefetch : Prefetch를 적용하면 Train 동안 미리 다음 Operation을 준비하는 작업을 합니다.
+   
+   
+* cache 와 prefetch는 성능 향상에 매우 큰 영향을 미치므로 반드시 적용하도록 합시다.   
+
+
+```python
+BATCH_SIZE = 4
+```
+
+
+```python
+ds_train_batched = ds_train.batch(BATCH_SIZE).cache().prefetch(tf.data.experimental.AUTOTUNE)
+        
+ds_test_batched = ds_test.batch(BATCH_SIZE).cache().prefetch(tf.data.experimental.AUTOTUNE)
+```
+
+
+```python
+print("Number of batches in train: ", ds_train_batched.cardinality().numpy())
+print("Number of batches in test: ", ds_test_batched.cardinality().numpy())
+```
+
+    Number of batches in train:  400
+    Number of batches in test:  100
+    
+
+* 위 Code를 보시면, Train / Val. Dataset에 batch / cache / prefetch를 차례로 적용한 것을 알 수 있습니다.   
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+# 6. Setup Model
+
+* 이제 Train에 사용할 Dataset 준비는 마쳤습니다.
+
+
+* 간단하게 사용할 수 있는 VGG16을 이용하도록 하죠.
+
+
+* Model 정의 및 기타 구성은 일반적인 내용들이니 자세히 살펴보지 않겠습니다.
+
+
+```python
+base_model = tf.keras.applications.VGG16(
+    weights='imagenet',  # Load weights pre-trained on ImageNet.
+    input_shape=(32, 32, 3), # VGG16 expects min 32 x 32
+    include_top=False)  # Do not include the ImageNet classifier at the top.
+
+base_model.trainable = False
+```
+
+
+```python
+number_of_classes = 5
+```
+
+
+```python
+inputs = tf.keras.Input(shape=(32, 32, 3))
+
+x = base_model(inputs, training=False)
+x = tf.keras.layers.GlobalAveragePooling2D()(x)
+initializer = tf.keras.initializers.GlorotUniform(seed=42)
+
+activation =  tf.keras.activations.softmax #None  # tf.keras.activations.sigmoid or softmax
+
+outputs = tf.keras.layers.Dense(number_of_classes,
+                             kernel_initializer=initializer,
+                             activation=activation)(x) 
+model = tf.keras.Model(inputs, outputs)
+```
+
+
+```python
+model.compile(optimizer=tf.keras.optimizers.Adam(),
+              loss=tf.keras.losses.CategoricalCrossentropy(), # default from_logits=False
+              metrics=[tf.keras.metrics.CategoricalAccuracy()])
+```
+
+<br>
+<br>
+<br>
+
+* 이제 대망의 .fit() ~!!   
+
+
+```python
+model.fit(ds_train_batched,
+          validation_data = ds_test_batched,
+          epochs=10)
+```
+
+    Epoch 1/10
+    400/400 [==============================] - 467s 1s/step - loss: 1.2755 - categorical_accuracy: 0.6988 - val_loss: 2.0400 - val_categorical_accuracy: 0.3975
+    Epoch 2/10
+    400/400 [==============================] - 6s 14ms/step - loss: 1.1283 - categorical_accuracy: 0.7206 - val_loss: 1.9769 - val_categorical_accuracy: 0.3975
+    Epoch 3/10
+    400/400 [==============================] - 6s 14ms/step - loss: 1.0616 - categorical_accuracy: 0.7394 - val_loss: 1.9540 - val_categorical_accuracy: 0.4175
+    Epoch 4/10
+    400/400 [==============================] - 6s 14ms/step - loss: 1.0220 - categorical_accuracy: 0.7538 - val_loss: 1.9391 - val_categorical_accuracy: 0.4275
+    Epoch 5/10
+    400/400 [==============================] - 5s 14ms/step - loss: 0.9927 - categorical_accuracy: 0.7606 - val_loss: 1.9297 - val_categorical_accuracy: 0.4400
+    Epoch 6/10
+    400/400 [==============================] - 5s 14ms/step - loss: 0.9689 - categorical_accuracy: 0.7669 - val_loss: 1.9246 - val_categorical_accuracy: 0.4525
+    Epoch 7/10
+    400/400 [==============================] - 5s 14ms/step - loss: 0.9487 - categorical_accuracy: 0.7738 - val_loss: 1.9227 - val_categorical_accuracy: 0.4550
+    Epoch 8/10
+    400/400 [==============================] - 5s 14ms/step - loss: 0.9311 - categorical_accuracy: 0.7744 - val_loss: 1.9233 - val_categorical_accuracy: 0.4625
+    Epoch 9/10
+    400/400 [==============================] - 6s 14ms/step - loss: 0.9155 - categorical_accuracy: 0.7775 - val_loss: 1.9257 - val_categorical_accuracy: 0.4625
+    Epoch 10/10
+    400/400 [==============================] - 6s 14ms/step - loss: 0.9015 - categorical_accuracy: 0.7806 - val_loss: 1.9296 - val_categorical_accuracy: 0.4650
+    
+
+
+
+
+    <tensorflow.python.keras.callbacks.History at 0x20feaa60940>
+
+
+
+   
+
+* 자, Train이 끝났네요. 간단히 동작만 확인하기 위해서 10회만 돌렸습니다.
+
+
+* 첫번째 Epoch은 Train에 시간이 많이 걸리는 반면, 그 다음 Epoch부터는 굉장히 빠르게 진행되는 것을 확인할 수 있습니다.
+  
+  이게 다 cache / prefetch 덕분이죠.
+
+
+* Train Set의 Acc.가 낮고, Model의 Overfitting이 심하지만, 이번 Post에서는 중요한 내용은 아니므로 넘어가도록 하겠습니다.
+
+* 핵심은 Dataset에 다음 내용을 적용하는 것입니다 !
+
+### batch(BATCHSIZE).cache().prefetch(tf.data.experimental.AUTOTUNE)   
