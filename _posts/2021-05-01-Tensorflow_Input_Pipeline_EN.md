@@ -11,22 +11,22 @@ categories: Deep Learning
 <br>
 <br>
 
-* 주어진 Data로 부터 Train에 필요한 Data형태로 변환하기까지는 매우 지루하고 험난한 과정입니다.
+* It is a very tedious and arduous process from the given data to the data format required for the train.
 
 
-* Model에 입력 Foramt에 맞게 Shape을 변경하고, Data Augmentation도 고려해야 합니다.
+* We should set the shape according to the input format of the model and consider data augmentation as well.
 
 
-* 가장 중요한 것은 주어진 Data가 수십, 수백만개가 있다면 Performance 또한 중요한 고려 요소가 됩니다.
+* Most importantly, if there are tens or millions of data, performance is also an important consideration.
 
 
-* 이런 모든 고민을 해결해 주기 위해서 Tensorflow에서는 tf.data Module과 tf.data.Dataset Module을 준비놓았습니다.
+* To solve all these concerns, Tensorflow has prepared tf.data and tf.data.Dataset module.
 
 
-* 이번 Post에서는 Tensorflow를 이용하여 효율적인 Data Input Pipeline을 만드는 방법을 알아보고자 합니다.
+* In this post, I would like to explain how to create an efficient data input pipeline using Tensorflow.
 
 
-* tf.data.Dataset에서는 map / prefetch / cache / batch 이렇게 4가지 Fuction이 가장 중요하며, 이를 어떻게 사용하는지도 예제를 통해서 확인해 보도록 하겠습니다.
+* In tf.data.Dataset, the 4 fuctions, map / prefetch / cache / batch, are the most important and I will also check how to use them through an examples.
 <br>
 <br>
 <br>
@@ -38,22 +38,22 @@ categories: Deep Learning
 
 ## 0. Example Dataset Download   
 
-* Tensorflow Input Pipeline을 설명할 때 자주 사용되는 Dataset이 있더군요.
+* There is a dataset which is often used when explaining the Tensorflow Input Pipeline.
 
   [Image Data for Multi-Instance Multi-Label Learning](https://www.lamda.nju.edu.cn/data_MIMLimage.ashx?AspxAutoDetectCookieSupport=1)
 
 <br>
 
-* 저도 이 Dataset을 이용해 보도록 하겠습니다.
+* I will use using this dataset as well.
 
 <br>
 
-* Download는 여기에서 하시면 됩니다.
+* You can download the dataset below link.
 [Dataset Download](https://www.dropbox.com/s/0htmeoie69q650p/miml_dataset.zip)
 
 <br>
 
-* 압축을 풀면 Dataset 준비는 끝입니다.
+* After unzipping, the dataset is ready.
 
 <br>
 <br>
