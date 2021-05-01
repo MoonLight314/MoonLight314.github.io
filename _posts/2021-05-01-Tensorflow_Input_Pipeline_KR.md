@@ -484,3 +484,161 @@ for a in filelist_ds.take(5):
 <br>
 <br>
 
+# 4. Dataset Preprocessing
+
+
+
+* 궁극적으로 Train 시키기 위해서 Model에 넣을 때는 Tensor 형태로 변환이 되어야 합니다.
+
+
+* 우리가 할 작업은 Image Classification이고, 일련의 작업을 거쳐 우리가 정의한 Model이 필요로 하는 Shape에 맞게 변형이 되어야 합니다.
+
+
+* 이를 위해서 Image File을 읽어서 Model에 필요한 Shape을 만들고, 또한 그에 맞는 Label도 만들어 주는 함수를 정의하도록 하겠습니다.
+
+
+* **이 작업은 모든 Dataset에 대해서 적용할 것이고, Dataset에 map()의 Parameter로 사용될 것입니다.**
+
+
+* 여기서 사용할 Pre-Train Model은 VGG16이고, 이 Model은 입력을 32x32를 필요로 합니다.
+
+
+```python
+IMG_WIDTH, IMG_HEIGHT = 32 , 32
+```
+
+* 아래 함수는 Image File을 읽어서 Float Type Tensor형태로 바꾸어 줍니다.
+
+  ( 참 편리하네요. )
+
+
+```python
+def process_img(img):
+    
+    # Image File을 읽습니다.
+    img = tf.image.decode_jpeg(img, channels=3) 
+
+    # Image Data를 0~1 사이의 값으로 변환해줍니다.
+    img = tf.image.convert_image_dtype(img, tf.float32) 
+    
+    # 입력 Size에 맞게 Resize
+    return tf.image.resize(img, [IMG_WIDTH, IMG_HEIGHT]) 
+```
+
+<br>
+<br>
+<br>
+
+* 아래의 함수는 Image와 함께 Label 정보도 같이 생성하여 Return해 줍니다.   
+
+
+* 최종적으로 아래의 combine_images_labels() Function을 Dataset의 .map()에 적용할 것입니다.
+
+
+* 이 함수가 받는 Parameter와 Return Values를 잘 보시기 바랍니다.
+  - Tensorflow에서 왜 이렇게 복잡하게 만들어 놨는지는 모르겠으나, **.map()에 적용될 Function, 즉, combine_images_labels()의 Parameter로 넘어오는 file_path는 이전에 from_tensor_slices()의 Parameter로 넣은 값이 여기로 넘어옵니다.**
+    
+  - filelist_ds = tf.data.Dataset.from_tensor_slices( fnames ) 로 Dataset이 만들어졌고, fnames가 file_path로 넘어온다는 뜻입니다.
+    
+  - 그리고, Return Value, 여기서는 **img와 label인데, 결과적으로 이 두 값이 .fit()에서 Train & Target Value가 됩니다.**
+    
+  - 이런 복잡한 관계를 잘 설명해 줬으면 좋겠는데, 아쉽네요.
+  
+  
+* 결론적으로, Tensorflow Pipeline 작성에 가장 중요한 부분이 저는 이 부분이라고 생각합니다.
+
+
+* 주어진 Raw Data File(Image , Sound 등등)을 Train을 할 수 있는 Tensor형태로 Conversion하는 중요한 부분이며, 역량과 내공이 잘 드러날 수 있는 부분이라고 생각합니다.
+
+
+* 그리고, 이 Function을 작성하실 때 모든 Code를 Tensorflow Function을 이용한다면 훨씬 더 뛰어난 성능을 얻을 수 있습니다.
+
+
+* 아래 Code에도 Image File을 읽는 부분을 tf.io Module을 사용하고 있는 것을 볼 수 있습니다. 또한, process_img()도 살펴보시면 모두 tf를 사용하고 있는 것을 보실 수 있습니다. 다 이유가 있는 것입니다. 다만 get_label()에는 단 한 줄이 tf Module을 사용하고 있지 않습니다. 이런 경우에는 .map() Function 사용법이 약간 달라지는데 아래에서 확인해 보도록 하겠습니다.
+
+
+```python
+def combine_images_labels(file_path: tf.Tensor):
+
+    img = tf.io.read_file(file_path)
+
+    # 위에서 정의한 함수
+    img = process_img(img)
+
+    # Label을 만들어 주는 함수
+    label = get_label(file_path)
+    
+    return img, label
+```
+
+* Train & Val Set을 80:20으로 나눕니다.   
+
+
+```python
+train_ratio = 0.80
+ds_train=filelist_ds.take(ds_size*train_ratio)
+ds_test=filelist_ds.skip(ds_size*train_ratio)
+
+print("train size: ", ds_train.cardinality().numpy())
+print("test size: ", ds_test.cardinality().numpy())
+```
+
+    train size:  1600
+    test size:  400
+    
+<br>
+<br>
+
+* 아래 Code는 Dataset에 .map()을 적용하는 예제입니다.
+
+
+* tf.py_function은 Dataset에 적용할 Function을 정의하는 부분입니다. 앞에서 정의한 combine_images_labels을 적용하도록 하겠습니다.
+
+
+* 만약 combine_images_labels이 순수 Tensorflow Module의 Function만으로 구성되어 있다면 단순히 그 Function Name만 적어주면 됩니다.
+
+
+* 이 부분은 다음에 기회가 되면 다루도록 하겠습니다.
+
+
+* num_parallel_calls를 tf.data.experimental.AUTOTUNE로 설정합니다.  이 부분은 Tensorflow가 동적으로 Pipeline을 Background로 동적으로 할당하여 성능 향상하도록 해줍니다.
+
+
+* 반드시 prefetch를 해 주시기 바랍니다. 
+
+
+```python
+ds_train = ds_train.map(lambda x: 
+                        tf.py_function(func=combine_images_labels,
+                                       inp=[x], 
+                                       Tout=(tf.float32 , tf.int64)),
+                        num_parallel_calls=tf.data.experimental.AUTOTUNE,
+                        deterministic=False)
+
+ds_train.prefetch(ds_size-ds_size*train_ratio)
+```
+
+
+
+
+    <PrefetchDataset shapes: (<unknown>, <unknown>), types: (tf.float32, tf.int64)>
+
+
+
+
+```python
+ds_test = ds_test.map(lambda x: 
+                      tf.py_function(func=combine_images_labels,
+                                     inp=[x], Tout=(tf.float32,tf.int64)),
+                      num_parallel_calls=tf.data.experimental.AUTOTUNE,
+                      deterministic=False)
+
+ds_test.prefetch(ds_size-ds_size*train_ratio)
+```
+
+
+
+
+    <PrefetchDataset shapes: (<unknown>, <unknown>), types: (tf.float32, tf.int64)>
+    
+    
