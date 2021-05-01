@@ -337,11 +337,11 @@ for a in filelist_ds.take(3):
 
 # 3. Making Label
 
-* Train Data로 이용할 Dataset을 만들었으니, 이제 그에 맞는 Label도 만들어 보겠습니다.   
+* Now that we have created a dataset to be used for train, let's create a label according to it.
 
    
 
-* Label정보는 CSV에 있었죠?   
+* Label info. is in CSV file, right ?
 
 <br>
 
@@ -432,6 +432,7 @@ LABELS
 <br>
 
 * 아래 Function은 Image File Full Path를 받아서 해당하는 Label 정보만을 Tensor형태로 return해 줍니다.
+* The following function gets the image file full path and returns only the relevant label information in the form of Tensor.
 
 
 ```python
@@ -454,7 +455,7 @@ def get_label(file_path):
 <br>
 <br>
 
-* 만든 Function이 작동을 제대로 하는지 확인해 보겠습니다.   
+* Let's check the function works correctly.
 
 
 ```python
@@ -475,7 +476,7 @@ for a in filelist_ds.take(5):
     [0 0 1 0 0]
     
 
-* 네, 제대로 하네요. 저 값들을 Label로 사용하면 될 것 같습니다.
+* OK. Good. I'll use these values as label 
 
 
 <br>
@@ -489,10 +490,10 @@ for a in filelist_ds.take(5):
 
 
 
-* 궁극적으로 Train 시키기 위해서 Model에 넣을 때는 Tensor 형태로 변환이 되어야 합니다.
+* When data is put into the model for train, it must be converted into Tensor type.
 
 
-* 우리가 할 작업은 Image Classification이고, 일련의 작업을 거쳐 우리가 정의한 Model이 필요로 하는 Shape에 맞게 변형이 되어야 합니다.
+* The task we will do is image classification and through a series of processes, the data will need to be transformed to fit the shape required by model we have defined.
 
 
 * 이를 위해서 Image File을 읽어서 Model에 필요한 Shape을 만들고, 또한 그에 맞는 Label도 만들어 주는 함수를 정의하도록 하겠습니다.
