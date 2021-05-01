@@ -312,7 +312,7 @@ for a in filelist_ds.take(3):
 
 <p align="left">
   <img src="/assets/Tensorflow_Pipeline/output_81_1.png">
-
+</p>
 
     miml_dataset\images\10.jpg
     
@@ -320,14 +320,14 @@ for a in filelist_ds.take(3):
 
 <p align="left">
   <img src="/assets/Tensorflow_Pipeline/output_81_3.png">
-
+</p>
     miml_dataset\images\100.jpg
     
 
 
 <p align="left">
   <img src="/assets/Tensorflow_Pipeline/output_81_5.png">
-  
+</p>  
 <br>
 <br>
 <br>  
@@ -343,6 +343,7 @@ for a in filelist_ds.take(3):
 
 * Label정보는 CSV에 있었죠?   
 
+<br>
 
 ```python
 df.head()
@@ -741,39 +742,40 @@ show_samples(ds_train)
     
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_1.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_2.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_3.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_4.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_5.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_6.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_7.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_8.png">
-
+</p>
 
 <p align="center">
   <img src="/assets/Tensorflow_Pipeline/output_169_9.png">
-  
+</p>
+
 <br>
 <br>
 
