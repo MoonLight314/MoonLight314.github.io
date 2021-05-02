@@ -1,5 +1,5 @@
 ---
-title: "Tensorflow 2.3 Installation on Windows 10 ( GPU )"
+title: "Tensorflow 2.3 Installation on Windows 10 ( GPU )(EN)"
 date: 2021-03-17 08:26:28 -0400
 categories: Deep Learning
 ---
@@ -10,19 +10,20 @@ categories: Deep Learning
 <br>
 <br>
 
-* Tensorflow 2.x을 Anaconda에서 설치하려고 하니 뭔가 잘 되지 않았습니다.
-
-* Anaconda에서 Keras를 설치하면 Tensorflow 1.x와 GPU Support에 필요한 CUDA / cuDNN 등을 자동으로 설치해서 편리하게 사용했는데 많이 아쉽더군요.
+* When I tried to install Tensorflow 2.x with Anaconda, something didn't work well.
 
 
-* 아마 Package간 호환을 위한 Version Matching이 아직 잘 되지 않은 것 같습니다.
+* When Keras is installed in Anaconda, Tensorflow 1.x and CUDA / cuDNN, which are required for GPU Support, are automatically installed and used conveniently, but it was a lot of disappointment.
 
 
-* 그래서, 이번에 Windows 10에서 Anaconda환경에서 Tensorflow 2.x & GPU Support 환경을 손수, Manual하게 꾸며볼까 합니다.
+* It seems that version matching for compatibility between packages has not been done yet.
+
+
+* So, in this post, I am going to manually setup Tensorflow 2.x & GPU support environment in the Anaconda environment on Windows 10.
 
 
 
-* 이번 Post 내용은 아래의 영상을 참고하여 작성되었습니다.
+* The content of this post was created by referring to the video below.
 
   [Anaconda/window10 - Tensorflow 2.0 GPU 시원하게 설치해보자! (visual studio 2017/cuda10.0/cudnn)](https://www.youtube.com/watch?v=Mgpy97F2YUM)
   
@@ -35,11 +36,11 @@ categories: Deep Learning
 <br>
 <br>
 
-## 0. Package Version 확인   
+## 0. Package Version Check
 
-* 우선 자신이 사용하려는 Tensorflow와 Python Version 및 기타 Package Version을 확인해야 합니다.   
+* First, you need to check the Tensorflow and Python version and other package versions you want to use.
 
-* 아래 Tensorflow Site에서 확인 가능합니다. 아래 Link를 참고하세요.
+* You can check it on the Tensorflow Site below. Please refer to the link below.
 
    [https://www.tensorflow.org/install/source_windows?hl=ko](https://www.tensorflow.org/install/source_windows?hl=ko)
 
@@ -51,7 +52,7 @@ categories: Deep Learning
 <br>
 <br>
 
-* 저는 Tensorflow 2.3을 사용할 예정이기 때문에 그에 맞는 Python , Build Tool , cuDNN , CUDA Version을 확인합니다.   
+* I am going to use Tensorflow 2.3, so check the Python, Build Tool, cuDNN, and CUDA Version accordingly.
 
 <br>
 <br>
@@ -60,7 +61,7 @@ categories: Deep Learning
 <br>
 <br>
 
-## 1. Anaconda 설치
+## 1. Anaconda Install
 
 * 먼저 Anaconda를 설치하도록 합니다. 아래 Link에서 Download합니다.
 
@@ -76,7 +77,7 @@ categories: Deep Learning
 
    
 
-* 설치하려는 OS Version과 Python Version을 잘 확인합니다.   
+* Let's check the OS Version and Python version you want to install.
 
 * Download & 설치 진행합니다.
 
