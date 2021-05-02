@@ -932,16 +932,15 @@ model.fit(ds_train_batched,
 
    
 
-* 자, Train이 끝났네요. 간단히 동작만 확인하기 위해서 10회만 돌렸습니다.
+* Now, the train is over. To simply check the operation, I only rotated it 10 times.
 
 
-* 첫번째 Epoch은 Train에 시간이 많이 걸리는 반면, 그 다음 Epoch부터는 굉장히 빠르게 진행되는 것을 확인할 수 있습니다.
-  
-  이게 다 cache / prefetch 덕분이죠.
+* The first epoch takes a lot of time to train, while the next epoch is very fast. That's all thanks to cache / prefetch.
 
 
-* Train Set의 Acc.가 낮고, Model의 Overfitting이 심하지만, 이번 Post에서는 중요한 내용은 아니므로 넘어가도록 하겠습니다.
+* The acc. of the train set is low and the overfitting of the model is severe, but it is not important in this post, so I will skip it.
 
-* 핵심은 Dataset에 다음 내용을 적용하는 것입니다 !
+
+* The key is to apply the following to the Dataset!
 
 ### batch(BATCHSIZE).cache().prefetch(tf.data.experimental.AUTOTUNE)   
