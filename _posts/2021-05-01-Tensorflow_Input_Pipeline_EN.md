@@ -551,24 +551,22 @@ def process_img(img):
 * If you use Tensorflow Function for all codes when writing this function, you can get much better performance.
 
 
-* 아래 Code에도 Image File을 읽는 부분을 tf.io Module을 사용하고 있는 것을 볼 수 있습니다. 또한, process_img()도 살펴보시면 모두 tf를 사용하고 있는 것을 보실 수 있습니다. 다 이유가 있는 것입니다. 다만 get_label()에는 단 한 줄이 tf Module을 사용하고 있지 않습니다. 이런 경우에는 .map() Function 사용법이 약간 달라지는데 아래에서 확인해 보도록 하겠습니다.
-
+* In the code below, you can see that the tf.io Module is used for the part that reads the image file.
+Moreover, as looking at process_img(), you can see that they all use tf. There is a reason. However, only one line in get_label() does not use the tf module. In this case, the usage of the .map() function is slightly different and we will also check it.
 
 ```python
 def combine_images_labels(file_path: tf.Tensor):
 
     img = tf.io.read_file(file_path)
 
-    # 위에서 정의한 함수
     img = process_img(img)
 
-    # Label을 만들어 주는 함수
     label = get_label(file_path)
     
     return img, label
 ```
 
-* Train & Val Set을 80:20으로 나눕니다.   
+* Dataset is divided into train & val set by 80:20
 
 
 ```python
@@ -586,22 +584,22 @@ print("test size: ", ds_test.cardinality().numpy())
 <br>
 <br>
 
-* 아래 Code는 Dataset에 .map()을 적용하는 예제입니다.
+* Below code is an example to apply .map() function to Dataset.
 
 
-* tf.py_function은 Dataset에 적용할 Function을 정의하는 부분입니다. 앞에서 정의한 combine_images_labels을 적용하도록 하겠습니다.
+* tf.py_function is a part that defines a function to be applied to Dataset. Let's apply the combine_images_labels()
 
 
-* 만약 combine_images_labels이 순수 Tensorflow Module의 Function만으로 구성되어 있다면 단순히 그 Function Name만 적어주면 됩니다.
+* If combine_images_labels() consists of pure Tensorflow module functions only, you can simply write the function name.
 
 
-* 이 부분은 다음에 기회가 되면 다루도록 하겠습니다.
+* I'll cover this next time
 
 
-* num_parallel_calls를 tf.data.experimental.AUTOTUNE로 설정합니다.  이 부분은 Tensorflow가 동적으로 Pipeline을 Background로 동적으로 할당하여 성능 향상하도록 해줍니다.
+* Setting num_parallel_calls to tf.data.experimental.AUTOTUNE. This part allows Tensorflow to dynamically allocate the pipeline as the background to improve performance.
 
 
-* 반드시 prefetch를 해 주시기 바랍니다. 
+* Please be sure to apply prefetch().
 
 
 ```python
@@ -642,10 +640,10 @@ ds_test.prefetch(ds_size-ds_size*train_ratio)
 <br>
 <br>
 
-* 지금까지 작성한 map을 적용한 Dataset이 제대로 동작하는지 확인해 보도록 하겠습니다.
+* Let's check the Dataset applied .map() work correctly.
 
 
-* train dataset에서 하나 꺼내서 우리가 기대한 값을 Return하는지 확인해 보도록 하겠습니다.
+* Checking one train data from Dataset.
 
 
 ```python
@@ -658,8 +656,7 @@ for image, label in ds_train.take(1):
     Label:  [1 0 0 0 0]
     
 
-* Train에 사용될 Image Shape과 Label도 모두 제대로 만들어지고 있습니다.
-
+* Image shapes and labels to be used for training are all made correctly.
    
 
    
@@ -791,24 +788,24 @@ print("Number of samples in train: ", ds_train.cardinality().numpy(),
 
 # 5. Configure for Performance Enhancement
 
-* 이제 성능향상을 위해서 batch / cache / prefetch를 적용합니다.
+* Now, it's time to apply batch / cache / prefetch to boost up the performance
 
 
-* 이 부분이 Tensorflow Data Pipeline을 사용하는 이유가 되겠죠.
+* This is probably the reason to use Tensorflow Data Pipeline.
 
 
-* 공식 Documents에서도 확인 가능하니, 이곳을 참고해 보시는 것도 좋을 것 같습니다.
+* It is also available in official documents, so it would be nice to refer to it here.
 
   [Better performance with the tf.data API](https://www.tensorflow.org/guide/data_performance)
 
 
-* 각 항목을 하나씩 살펴보면,
-   - batch : Dataset에서 Batch Size만큼 하나의 Batch로 만들어 줍니다. 기존에 알던 Batch Size의 개념과 동일합니다.
-   - cache : Dataset에 해당되는 File들을 Local Storage나 Memory에 Caching해 둡니다. 이 동작을 적용하면 첫 Epoch을 제외하고 다음 Epoch부터 매우 빠른 성능을 볼 수 있습니다.
-   - prefetch : Prefetch를 적용하면 Train 동안 미리 다음 Operation을 준비하는 작업을 합니다.
+* Reviewing at each item one by one,
+   - batch : Making one batch as much as the batch size from the dataset. It is the same as the conventional batch size concept.
+   - cache : The files corresponding to the dataset are cached in local storage or memory. Applying this behavior, you can see very fast performance from the next Epoch except for the first Epoch.
+   - prefetch : When prefetch is applied, it prepares for the next operation in advance during the train.
    
    
-* cache 와 prefetch는 성능 향상에 매우 큰 영향을 미치므로 반드시 적용하도록 합시다.   
+* Cache and prefetch have a very huge impact on performance improvement, so be sure to apply them.
 
 
 ```python
@@ -832,7 +829,7 @@ print("Number of batches in test: ", ds_test_batched.cardinality().numpy())
     Number of batches in test:  100
     
 
-* 위 Code를 보시면, Train / Val. Dataset에 batch / cache / prefetch를 차례로 적용한 것을 알 수 있습니다.   
+* As looking at the code above, you can see that batch / cache / prefetch were applied in order to both of Train / Val dataset.
 
 
 <br>
@@ -845,13 +842,13 @@ print("Number of batches in test: ", ds_test_batched.cardinality().numpy())
 
 # 6. Setup Model
 
-* 이제 Train에 사용할 Dataset 준비는 마쳤습니다.
+* Now, we're prepared dataset for training.
 
 
-* 간단하게 사용할 수 있는 VGG16을 이용하도록 하죠.
+* Let's use VGG16, which is simple to use.
 
 
-* Model 정의 및 기타 구성은 일반적인 내용들이니 자세히 살펴보지 않겠습니다.
+* Model definition and other configurations are general information, so we will not look at them in detail.
 
 
 ```python
@@ -895,7 +892,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(),
 <br>
 <br>
 
-* 이제 대망의 .fit() ~!!   
+* Everything is ready.
 
 
 ```python
