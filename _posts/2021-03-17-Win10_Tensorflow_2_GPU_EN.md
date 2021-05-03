@@ -79,7 +79,7 @@ categories: Deep Learning
 
 * Let's check the OS Version and Python version you want to install.
 
-* Download & 설치 진행합니다.
+* Download & install.
 
 <br>
 <br>
@@ -90,7 +90,7 @@ categories: Deep Learning
 
 ## 2. CUDA Toolkit & cuDNN Download
 
-* 이어서 CUDA Toolkit & cnDNN을 Download합니다.
+* Next, download CUDA Toolkit & cnDNN.
 
   [CUDA Toolkit 10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal)
   
@@ -101,7 +101,7 @@ categories: Deep Learning
 <br>
 <br>
 
-* cuDNN은 계정이 필요하니 하나 만듭니다.
+* cuDNN needs an account, so I'd
 
 <br>
 <br>
