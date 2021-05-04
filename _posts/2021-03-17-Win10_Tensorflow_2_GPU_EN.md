@@ -63,7 +63,7 @@ categories: Deep Learning
 
 ## 1. Anaconda Install
 
-* 먼저 Anaconda를 설치하도록 합니다. 아래 Link에서 Download합니다.
+* First, let's install Anaconda. Download from the link below.
 
   [https://www.anaconda.com/products/individual](https://www.anaconda.com/products/individual)
 
@@ -101,7 +101,7 @@ categories: Deep Learning
 <br>
 <br>
 
-* cuDNN needs an account, so I'd
+* cuDNN needs an account, so I'd like to recommend you to make one.
 
 <br>
 <br>
@@ -165,7 +165,7 @@ categories: Deep Learning
 
    
 
-[Visual Studio 2019용 Build Tools](https://visualstudio.microsoft.com/ko/downloads/)
+[Visual Studio 2019 Build Tools](https://visualstudio.microsoft.com/ko/downloads/)
 
 <br>
 <br>
