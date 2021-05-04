@@ -131,7 +131,7 @@ categories: Deep Learning
 
 ## 3. Anaconda Update
 
-* Anaconda에 기본적으로 설치된 Package를 최신으로 Update합니다.   
+* The packages installed by default in Anaconda needs to be updated to the latest.
 
 ### **conda update conda**
 
@@ -143,9 +143,9 @@ categories: Deep Learning
 
    
 
-* 이제, 가상환경을 하나 만듭니다. 이름은 원하는대로 지으면 됩니다.
+* Now, create a virtual environment. Name it whatever you want.
   
-  ( 저는 TF.2.3.0-GPU 라고 짓겠습니다. )
+   (I will name it 'TF.2.3.0-GPU'.)
 
 ### **conda create --name TF.2.3.0-GPU**
 
@@ -155,13 +155,13 @@ categories: Deep Learning
 <br>
 <br>
 
-## 4. Visual Studio Build Tool & Redistributable Download & 설치
+## 4. Visual Studio Build Tool & Redistributable Download & Install
 
-* 이번에는 Visual Studio Build Tool & Redistributable을 설치해 보도록 하겠습니다.
+* At this step, I will install Visual Studio Build Tool & Redistributable.
 
-* TF 2.3에는 Visual Studio 2019용 Build Tools & Visual Studio 2019용 Microsoft Visual C++ 재배포 가능 패키지가 필요합니다.   
+* TF 2.3 requires Build Tools for Visual Studio 2019 & Microsoft Visual C++ Redistributable for Visual Studio 2019.
 
-* 아래 Link에서 Download할 수 있습니다.  
+* You can download it by below link.
 
    
 
@@ -177,7 +177,7 @@ categories: Deep Learning
 <br>
 <br>
 
-[Visual Studio 2019용 Microsoft Visual C++ 재배포 가능 패키지](https://visualstudio.microsoft.com/ko/downloads/])      
+[Visual Studio 2019용 Microsoft Visual C++ Redistributable](https://visualstudio.microsoft.com/ko/downloads/])      
 
 <br>
 <br>
@@ -188,22 +188,22 @@ categories: Deep Learning
 <br>
 <br>
 
-* **Download받은 Visual Studio Build Tool & Redistributable를 차례로 설치합니다.**
+* **Install the downloaded Visual Studio Build Tool & Redistributable in order.**
 
 <br>
 <br>
 <br>
 <br>
 
-## 5. CUDA & cuDNN 설치
+## 5. CUDA & cuDNN Install
 
-* 이제 아까 Download받은 CUDA Toolkit을 설치합니다.
+* Install CUDA Toolkit downloaded before.
 
 
 
-* 시키는 대로 쭉쭉 진행하면 됩니다.
+* You just have to go straight as directed.
 
-* **cuDNN은 특별히 설치하는 방법이 있는 것이 아니라, 압축을 푼 후에 3개의 Folder에 있는 File을 CUDA Toolkit이 설치된 위치에 동일 Folder Name에 Copy하면 됩니다.**
+* **There is no special way to install cuDNN, but after extracting it, you can copy the files in three folders to the same folder name in the location where CUDA Toolkit is installed.**
 
 <br>
 <br>
@@ -212,18 +212,18 @@ categories: Deep Learning
 <br>
 <br>
 
-## 6. Tensorflow 설치
+## 6. Tensorflow Install
 
-* 이제 거의 다 되었습니다. 
+* Almost done.
 
-* 아까 만든 TF 2.3 가상환경을 Activate 시킵니다.
+* Activate the TF 2.3 virtual environment created.
 
 ### **conda activate TF.2.3.0-GPU**
 
 <br>
 <br>   
 
-* ipython kernel 설치합니다.   
+* Install ipython kernel.
 
 ### **conda install ipykernel jupyter**   
 
@@ -232,24 +232,23 @@ categories: Deep Learning
 <br>
 <br>   
 
-* 이제 Tensorflow만 설치하면 되는데, Tensorflow와 Python Version이 맞지 않으면 Tensorflow가 설치되지 않습니다.
+* Now you only need to install Tensorflow. At this porint, if Tensorflow and Python version do not match, Tensorflow will not be installed.
 
-
-* 이럴 경우에는 Python Version을 맞춰줘야 합니다.
+* In this case, you need to match Python version to Tensorflow.
 
 ### **conda install python=x.x.x**
 
 <br>
 <br>   
 
-* Tensorflow를 설치합니다.   
+* Install Tensorflow.
 
 ### **pip install tensorflow==2.3**
 
 <br>
 <br>   
 
-* 한참 걸린 후에 완료가 되면, 재부팅 한 번 해줍니다.   
+* It takes a while and when it is finished, reboot.
 
 <br>
 <br>
@@ -258,11 +257,11 @@ categories: Deep Learning
 <br>
 <br>
 
-## 7. 확인
+## 7. Verification
 
    
 
-* 아래 Code를 실행해 봅니다.   
+* Run below code.
 
 
 ```python
@@ -345,7 +344,7 @@ tf.config.list_physical_devices('GPU')
 
 
 
-* 잘 되는것 같네요.
+* It seems to work well.
 
 <br>
 <br>   
@@ -354,5 +353,4 @@ tf.config.list_physical_devices('GPU')
 
 ## Appendix
 
-* Tensorflow 2.3에서는 scipy 1.4.1이 잘 동작하더라구요.
-
+* In Tensorflow 2.3, scipy 1.4.1 worked well.
