@@ -11,67 +11,67 @@ categories: Deep Learning
 <br>
 <br>
 
-* TFRecord File Format은 Tensorflow의 자체적인 Binary File Format입니다.
+* TFRecord file format is Tensorflow's own binary file format.
 
 
-* 대규모 Dataset으로 작업을 할 경우 Binary File로 작업을 한다면 Data Input Pipeline의 효율을 높일 수 있으며, 결과적으로 전체적인 Model의 Training 시간도 향상될 수 있습니다.
+* In case of working with a large dataset, working with a binary file can increase the efficiency of the data input pipeline and as a result, the training time of the overall model can be improved.
 
 
-* Binary Data는 Storage에 공간도 덜 차지할 뿐 아니라, Read / Write시에도 더 효율적입니다. 더욱이, Storage가 Motor를 사용하는 장치라면 더욱 그렇습니다.
+* Binary data not only takes up less space in the storage, but is more efficient when reading / writing. Moreover, even more so if storage is a device that uses motors.
 
 
-* 단순히 TFReocrd File Format이 Binary여서 성능 향상을 이룬다는 것이 아니라, TFRecord가 Tensorflow에 최적화 되어 있기 때문에 Tensorflow가 제공하는 다양한 Library와 같이 사용될 경우에 그 성능은 최고가 됩니다.
+* It does not mean that performance is simply improved because TFReocrd file format is binary but because TFRecord is optimized for Tensorflow, its performance is the best when it is used with various libraries provided by Tensorflow.
 
 
-* TFRecord File Format에 대한 공식 문서는 아래 Link를 참고해 주시기 바랍니다.
+* Please, refer to the below link about official TFRecord file format
 
   [TFRecord and tf.train.Example](https://www.tensorflow.org/tutorials/load_data/tfrecord?hl=en)
   
   
 
-* 제가 TFReocrd를 사용하기 위해서 여러 자료를 확인해 본 결과, 이 File Format을 생성하거나 사용하기가 쉽지 않다는 것입니다.
+* After studying various materials to use TFReocrd, it is not easy to create or use this file format.
 
 
-* 그래서 이번 Post에서는 TFRecord File Format을 직접 만들어보도록 해 보겠습니다.
+* So, in this post, I will try to create the TFRecord file format myself.
 
 <br>
 <br>
 <br>
 <br>
 
-## 0. Dataset 선택
+## 0. Dataset Selection
 
-* 이번 Post의 목적은 기존에 존재하던 Dataset을 TFRecord Format으로 변환하는 것입니다.
+* The purpose of this post is to convert the existing dataset into TFRecord format.
 
 
-* 이를 위해 다음의 'Dog & Cat' Image File Dataset을 준비했습니다. 아래 Link에서 Download할 수 있습니다.
+* I've selected 'Dog & Cat' image file dataset for this post. Please, refer to the below link for download
 
   [Dog & Cat Dataset Download](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
   
   
-* 이 Dataset을 선택한 이유는 적절한 Data의 수(Dog & Cat 각각 12500장씩)가 있고, CNN을 이용하여 Classification하기에 적절하다고 생각했기 때문입니다.
+* The reason why I selected this dataset is that this dataset has appropriate number of data (12500 each of Dog & Cat) and I thought it was appropriate for classification using CNN.
 
 
-* Download 받아서 압축을 풀면, 'PetImages'라는 Folder가 보이고 그 안에는 Dog / Cat이라는 개별 Folder가 있고 그 안에 각각 12500장씩 Image File이 있습니다.
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-## 1. Dataset 살펴보기   
-
-* 먼저 Dataset을 살짝 살펴보기로 하죠   
+* After downloading and unzip, you will see a folder called'PetImages' and there is a separate folder called Dog / Cat in it and there are 12500 image files each in it.
 
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-* 필요한 Module을 Load합니다.   
+## 1. Look into Dataset 
+
+* Let's take a look at the Dataset.
+
+<br>
+<br>
+<br>
+
+* Load necessary modules
 
 
 ```python
@@ -81,10 +81,10 @@ from matplotlib.pyplot import imshow
 from PIL import Image
 ```
 
-* Dog와 Cat의 File List들을 Full Path로 저장해 놓습니다.
+* Store full path of all file list of Dog & Cat
 
 
-* 이후 작업에 필요한 작업이니 미리 해 두도록 합시다.
+* This is necessary for the subsequent work, so let's do it in advance.
 
 
 ```python
@@ -103,7 +103,7 @@ DogFileList = [c.replace("\\","/") for c in DogFileList]
 <br>
 
 
-* 어떤 그림들이 있는지 볼까요?   
+* Let's take a look what kind of pictures they have.
 
 
 ```python
@@ -140,7 +140,7 @@ imshow(pil_im)
 <br>
 <br>
 
-* 좋습니다. 이런 Image File들이 12500장씩 있는 것 같네요.    
+* OK, good. It seems that there are 12500 images of these image files each.
 
 
 <br>
@@ -152,25 +152,25 @@ imshow(pil_im)
 
 ## 2. Preprocess   
 
-* 변환에 앞서 미리 해야할 일이 있습니다.
+* Some processing is required before conversion.
 
 
-* TFRecord File Format으로 변환하기 위해서 TF module로 Image File을 Load하는 Step이 있는데, 이 과정에서 몇몇 File들을 TF Module이 읽지 못하는 문제가 발생합니다.
+* In order to convert to TFRecord file format, there is a step of loading an image file with TF module. In this process, I've found that TF module cannot read some files.
 
 
-* 정확한 원인은 모르나, 무언가 Image File의 문제로 TF Module이 읽지 못하는 것으로 보이며, 미리 이런 File들을 걸러내도록 하겠습니다.
+* I'm not sure what the exact cause is, some image files have problem. So, I'll filter those files in advance.
 
 
-* 방법은 전체 Image File들을 하나씩 읽어보며 실제 Error가 발생하는지 확인하는 단순하지만 확실한 방법을 사용하도록 하겠습니다.
+* As for the method, I will use a simple but reliable method of reading all image files one by one and checking if an actual error occurs.
 
 <br>
 <br>
 <br>
 
-* 아래 Function은 Imgae File을 읽어서 Model에 입력할 수 있는 Format으로 변환하는 함수입니다.   
+* The following function is to read one image file and convert it into the format that model.
 
 
-* 이 Function을 이용해 Image File을 Test해 보도록 하겠습니다.
+* I'll verify all image files by this function.
 
 
 ```python
@@ -188,8 +188,7 @@ def load_image(image_path):
 
 ### 2.1 Filtering Image File
 
-* 아래 Function으로 걸러내도록 하겠습니다.   
-
+* I'll filter them by the below function.
    
 
 
@@ -247,7 +246,7 @@ print("Num of Dog File : ",len(DogFileList))
 
    
 
-* Error가 있는 Image File 들을 제거하고 나니, Image File 수가 약간 줄어들었네요.
+* We can see that the total numbers of image files are a little bit decreased after filtering.
 
 
 <br>
@@ -259,10 +258,10 @@ print("Num of Dog File : ",len(DogFileList))
 
 ## 3. Writing TFRecord Format File   
 
-* 이제 본격적으로 시작해 보도록 하겠습니다.
+* Now, let's start in earnest.
 
 
-* 우선 앞에서 만들어 놓은 각각의 Full Path List를 이용해서 Dataset을 각각 만듭니다.
+* First, I'd like to make datasets with full path lists made previous step.
 
 
 ```python
@@ -274,21 +273,21 @@ dog_dataset = tf.data.Dataset.from_tensor_slices( DogFileList )
 <br>
 <br>
 
-* 우리가 이번에 TFRecord File로 저장하려고 하는 내용은 EfficientNet으로 추출된 Image들의 Feature들입니다.
+* The contents I'm trying to save as TFRecord file are the features of images extracted by EfficientNet.
 
 
-* 그래서 앞의 load_image() Function에서 efficientnet의 preprocess() Function을 사용했습니다.
+* So, I've used preprocess() function of EfficientNet in load_image() Function.
 
 
-* **알아두시면 좋은 것은 TFRecord나 Tensorflow Pipeline을 구성할 때 가능하면 모든 Function은 Tensorflow에서 제공하는 Function을 사용하면 성능면에서 훨씬 뛰어난 결과를 얻을 수 있습니다.**
+* **I'd like to recommend to use modules or functions provided by Tensorflow in configuring TFReocrd or data input pipeline and this makes you get much better results in performance.**
 
-  ( 살펴보시면 load_image() Function에서도 모든 Code를 TF Module로만 작성하였습니다. )
+  ( If you look at load_image() function, you can easily notice that all the codes in function were written only in TF module. )
   
 <br>
 <br>
 <br>
 
-* Cat Dataset / Dog Dataset 2개를 만듭니다.
+* Making 2 datasets ( Cat & Dog )
 
 ```python
 cat_dataset = cat_dataset.map(
@@ -308,23 +307,23 @@ print(cat_dataset , dog_dataset)
     <ParallelMapDataset shapes: ((224, 224, 3), ()), types: (tf.float32, tf.string)> <ParallelMapDataset shapes: ((224, 224, 3), ()), types: (tf.float32, tf.string)>
     
 
-* Dataset에 Map Function(load_image)를 적용하면, Return Data의 Shape과 Type을 주목해 주시기 바랍니다.
+* When applying map function(load_image) to dataset, please, pay attention to the shape and type of return data.
 
 
-* (224,224,3)은 EfficientNet의 Input Shape이며, Data Type은 Float입니다.
+* The shape,(224,224,3), is the input shape of EfficientNet and the data type is float.
 
 
-* Label 생성에 사용할 목적으로 Full Path도 같이 Return하고 있으며, String형태입니다.
+* It also returns full path information to make a label and its type is string.
 
 
 <br>
 <br>
 <br>
 
-* Feature를 Extract할 CNN Model을 만듭니다.
+* Now, let's make a CNN model to extract features from image files.
 
 
-* EfficientNetB0를 이용해서 Feature Extraction을 하도록 하겠습니다.
+* I'll apply EfficientNetB0 model to extract features
 
 <br>
 <br>
@@ -351,7 +350,7 @@ print(dog_dataset.cardinality().numpy())
     12397
     
 
-* 각 Dataset의 전체 Image File의 개수는 위와 같습니다.   
+* Please, refer to the total number of each datasets as above
 
 <br>
 <br>
@@ -360,7 +359,7 @@ print(dog_dataset.cardinality().numpy())
 <br>
 <br>
 
-* 아래 Function이 TFRecord File로 저장하는 부분을 구현한 내용이며 이번 Post의 핵심입니다.
+* The following function is the implementation of writing TFRecord file format and it's the **essential part** of this post.
 <br>
 <br>
 
