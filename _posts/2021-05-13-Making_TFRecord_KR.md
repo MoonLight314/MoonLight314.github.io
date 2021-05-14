@@ -356,4 +356,142 @@ print(dog_dataset.cardinality().numpy())
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 
+* 아래 Function이 TFRecord File로 저장하는 부분을 구현한 내용이며 이번 Post의 핵심입니다.
+<br>
+<br>
+
+* 제가 TFRecord File로 저장하려는 내용은 2가지입니다.
+  - EfficientNet으로 추출한 **Image의 Feature. Shape은 (7,7,1280) 입니다.**
+  - 해당 Image에 대한 **Label** 입니다. **Cat은 0, Dog는 1**로 하도록 하겠습니다.
+<br>
+<br> 
+  
+* **feature = image_features_extract_model(img)**
+  - EfficientNet으로부터 Feature를 추출합니다. 
+  - Shape은 (7,7,1280) 입니다.
+<br>
+<br>
+
+* **feature = feature.numpy().flatten()**
+  - 제가 TFRecord에 관련해서 Test해 본 결과, **TFRecord는 2차원 이상의 Array는 저장하지 못하더라구요.**
+  - 위와 같이 (7,7,1280)을 Flatten할 필요가 있습니다.
+<br>
+<br>  
+  
+* **writer = tf.io.TFRecordWriter( tf_path )**
+  - TFRecordWriter를 하나 정의합니다.
+  - Parameter는 TFRecord File의 Full Path입니다.
+<br>
+<br> 
+
+* tf.train.Example을 이용해서 TFRecord File에 저장될 내용의 Format을 정의합니다.
+<br>
+<br>
+
+* tf.train.Features()로 Contents를 정의합니다.
+<br>
+<br>
+
+* feature라는 Dict.으로 정의하는데, Dict.의 **Key는 Item의 Name, Value는 해당 Item의 Data Type과 값을 가지고 있는 변수를 지정합니다.**
+  - 이번 예제에서는 2가지 값만 정의했지만, 필요에 따라서는 더 많이 추가하시면 됩니다.
+  - 'Feature': tf.train.Feature(float_list=tf.train.FloatList(value = feature))
+     * Key는 'Feature'이고, Image의 Feature를 저장할 부분입니다.
+     * value는 앞에서 구한 feature를 넣습니다.
+     
+  - 'Label': tf.train.Feature(int64_list=tf.train.Int64List(value = label))
+     * Key는 'Label'이고, Image가 Cat인지 Dog인지를 저장합니다.
+
+
+* Value의 Data Type에 따라서 어떤 tf.train.XXX를 사용할지는 아래를 참고해 주시기 바랍니다.
+  - **tf.train.BytesList**
+    * string
+    * byte
+
+  - **tf.train.FloatList**
+    * float (float32)
+    * double (float64)
+    
+  - **tf.train.Int64List**
+    * bool
+    * enum
+    * int32
+    * uint32
+    * int64
+    * uint64
+<br>
+<br>
+    
+* writer.write(example.SerializeToString())    
+  - 준비가 다 되었으면, 실제 TFRecord File로 기록합니다.
+
+
+```python
+for img, path in tqdm(cat_dataset):
+    
+    feature = image_features_extract_model(img)
+    
+    tf_path = path.numpy().decode("utf-8")
+    tf_path = tf_path.replace("Cat" , "Cat/TFRecord")
+    tf_path = tf_path.replace("jpg" , "tfrecord")
+    
+    feature = feature.numpy().flatten()    #TensorShape([1, 7, 7, 1280])
+    
+    writer = tf.io.TFRecordWriter( tf_path )
+    label = [0] # Cat
+
+    example = tf.train.Example(features=tf.train.Features(
+                                feature={'Feature': tf.train.Feature(float_list=tf.train.FloatList(value = feature)),
+                                         'Label': tf.train.Feature(int64_list=tf.train.Int64List(value = label))
+                                        }
+                                )
+                              )
+
+    writer.write(example.SerializeToString())
+
+```
+
+<br>
+<br>
+
+* Dog도 Cat과 동일하게 작성합니다.   
+
+
+```python
+for img, path in tqdm(dog_dataset):
+    
+    feature = image_features_extract_model(img)
+    
+    tf_path = path.numpy().decode("utf-8")
+    tf_path = tf_path.replace("Dog" , "Dog/TFRecord")
+    tf_path = tf_path.replace("jpg" , "tfrecord")
+    
+    feature = feature.numpy().flatten()    #TensorShape([1, 7, 7, 1280])
+    
+    writer = tf.io.TFRecordWriter( tf_path )
+    label = [1] # Dog
+
+    example = tf.train.Example(features=tf.train.Features(
+                                feature={'Feature': tf.train.Feature(float_list=tf.train.FloatList(value = feature)),
+                                         'Label': tf.train.Feature(int64_list=tf.train.Int64List(value = label))
+                                        }
+                                )
+                              )
+
+    writer.write(example.SerializeToString())
+
+```
+
+
+<br>
+<br>
+<br>
+<br>
+
+* 한참 시간이 지나면 Cat / Dog Folder 내에 TFReocrd라는 Folder가 생기고, 그 안에 Image File Name과 동일하지만 확장자만 .tfrecord인 TFReocrd File들이 생겼을 것입니다.
+
+
+* 다음 Post에서는 이렇게 만든 TFReocrd File들을 이용하여 Image Classification을 해보도록 하겠습니다.
