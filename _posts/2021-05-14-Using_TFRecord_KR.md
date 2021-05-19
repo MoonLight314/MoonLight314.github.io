@@ -6,7 +6,9 @@ categories: Deep Learning
 
 ### Using TFReocrd File
 
-
+<br>
+<br>
+<br>
 
 * 이전 Post에서 TFRecord File Format을 만드는 방법에 대해서 알아보았습니다.
 
@@ -16,17 +18,12 @@ categories: Deep Learning
 
 * TFRecord는 Tensorflow와 함께 사용할 때 최고의 성능을 보여줍니다. 그래서, 가능하면 모든 Code들은 Tensorflow에서 제공하는 Function들을 사용해서 작성해 보도록 하겠습니다.
 
-   
-
-   
-
-   
-
-   
-
-   
-
-   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ## 0. Prepare   
 
@@ -39,9 +36,9 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 ```
 
-   
-
-   
+<br>
+<br>
+<br>  
 
 * Batch Size와 Prefetch할 Size를 미리 정의합니다.   
 
