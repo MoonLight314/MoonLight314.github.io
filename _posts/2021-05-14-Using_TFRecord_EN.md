@@ -249,9 +249,8 @@ Val_Feature_File_List
 <br>
 
 * **def map_fn(serialized_example):**
-  - Parameter로 넘어오는 serialized_example는 TFRecord File의 Full Path입니다.
-  - 
-  - 아래쪽에 TFRecordDataset을 이용해서 Dataset을 만들때 Parameter로 사용하는 값이 serialized_example로 넘어오는 것입니다.
+  - The parameter('serialized_example') passed over is the full path of TFRecord file.
+  - The 'serialized_example' is passed to 'map_fn' when datasets are made by TFRecordDataset below.
 
 <br>    
 
@@ -260,9 +259,10 @@ Val_Feature_File_List
         'Label': tf.io.FixedLenFeature([1], tf.int64)
     **}**
     
-   - 우리가 읽을 TFRecord File의 구조를 정의하는 부분입니다.
-   - 'Feature'라는 Data는 Float형, 길이가 62720이며, 'Label'이라는 Data는 Type이 Int형, 길이가 1이라는 뜻입니다.
-   - 가만히 생각해 보면, 우리가 다른 사람이 작성한 TFRecord File을 읽어야 하는 경우에는 이러한 구조를 모르면 Decoding할 수가 없습니다.
+   - This part defines the structure of TFRecord files we will read.
+   - The data type of 'Feature' is float and the length is 62720, The data type of 'Label' is Int and the length is 1.
+   - 가만히 생각해 보면, 다른 사람이 작성한 TFRecord File을 읽어야 하는 경우에는 이러한 구조를 모르면 Decoding할 수가 없습니다.
+   - 
    - 즉, **TFRecord Format으로 Dataset을 배포할 때는 반드시 이런 구조 정보를 함께 알려주어야 하는 것입니다.**
 
 <br>  
