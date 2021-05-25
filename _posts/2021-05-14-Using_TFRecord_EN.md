@@ -261,25 +261,23 @@ Val_Feature_File_List
     
    - This part defines the structure of TFRecord files we will read.
    - The data type of 'Feature' is float and the length is 62720, The data type of 'Label' is Int and the length is 1.
-   - 가만히 생각해 보면, 다른 사람이 작성한 TFRecord File을 읽어야 하는 경우에는 이러한 구조를 모르면 Decoding할 수가 없습니다.
-   - 
-   - 즉, **TFRecord Format으로 Dataset을 배포할 때는 반드시 이런 구조 정보를 함께 알려주어야 하는 것입니다.**
+   - From above fact, we can easily notice with a little thought that we must know the structure of TFRecord files we use.
+   - That's is to say, **when we distribute TFRecord files that we generated, we also have to let them know the structure of the TFRecord files.**
 
 <br>  
 
 * **example = tf.io.parse_single_example(serialized_example, feature)**
-  - 실제 File을 읽어서 위에서 정의한 구조대로 Decoding하는 부분입니다.
+  - It reads the existing TFRecord files from disc and decodes them
   
 <br>
   
 * **example['Feature'] = tf.reshape( example['Feature'] , (7,7,1280) )**
-  - 우리가 TFRecord File을 저장할 때, Shape을 Flatten했기 때문에, 원래 모양대로 원상 복구합니다.
+  - As we flattened the data when we made TFRecord files, we have to restore(reshape) the original shape.
 
 <br>    
   
 * **tf.squeeze( tf.one_hot(example['Label'] , depth=2) )**
-  - Label은 Cat인 경우 0, Dog인 경우에 1입니다.
-  - One Hot 형식으로 변경하는 부분입니다.
+  - It generates lable info. Cat is 0 and Dog is 1 to One-Hot format.
 
 <br>
 <br>  
@@ -305,7 +303,7 @@ def map_fn(serialized_example):
 
 ### 2.2. Define Dataset
 
-* 우리는 TFRecord File List가 있기 때문에, Dataset 생성에 tf.data.TFRecordDataset을 사용하도록 하겠습니다.
+* We use tf.data.TFRecordDataset function for making Dataset because we already have TFRecord file list
 
 
 ```python
@@ -339,7 +337,7 @@ Val_Dataset
 <br>
 <br>     
 
-* Dataset도 만들었고, Dataset에 적용할 Map Function도 만들었으니 이제 shuffle / batch / prefetch를 적용합니다.   
+* We finished making Dataset & funtions to apply Dataset, now we'll apply shuffle / batch / prefetch.
 
 
 ```python
@@ -364,7 +362,7 @@ Val_Dataset = Val_Dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 <br>  
    
 
-* 제대로 읽는지 하나만 살펴볼까요?   
+* Let's check it works correctly.
 
 
 ```python
@@ -512,10 +510,7 @@ batch[1].numpy()
 <br>
 <br>  
 
-* take(1)만 해도, Batch Size만큼 읽는다는 것을 알 수 있습니다.
-
-
-* 내용을 보니 제대로 읽어오는 것 같습니다.
+* We now know that it reads as batch size even **.take(1)** and from the contents, it works correctly.
 
 <br>
 <br>
@@ -527,10 +522,9 @@ batch[1].numpy()
 ## 3. Model Define   
 
 
-* Data도 준비되었으니, EfficientNet에서 추출한 Feature를 분류할 Simple Dense Net을 하나 정의하겠습니다.
+* We are going to make a simple dense net to classify the features from EfficientNet.
 
-
-* Input Shape 신경 써주고, 적당하게 만들어 줍니다.
+* Pay attention to the input shape and make one suitable.
 
 
 ```python
@@ -590,7 +584,7 @@ model.summary()
 <br>
 <br>  
 
-* Optimizer 선택해서 설정하고, Compile한 후에 Train시작하겠습니다.   
+* Choosing optimizer, configure it. Compile & Start training
 
 
 ```python
@@ -629,10 +623,8 @@ hist = model.fit(Train_Dataset,
 <br>
 <br>  
 
-* 첫번째 Epoch에서 Train / Val. Set 모두에서 이미 높은 Accuracy를 보이네요.
-
-
-* 제대로 동작하는 것 같네요.
+* It already shows high accuracy both of Train/Val set on the first epoch.
+* It works properly.
 
 <br>
 <br>
@@ -668,7 +660,6 @@ plt.show()
 ## 4. Summary
 
 
-* 이번 Post에서는 TFReocrd File Format을 읽어서 실제 Train에 적용시키는 방법까지 알아보았습니다.
+* We've learned how to read TFReocrd file format and apply to model in this post.
 
-
-* 중요한 것은 TFReocrd File을 사용하기 위해서는 해당 Dataset을 만들때 사용한 구조( Feature )를 반드시 알고 있어야 한다는 것입니다.
+* I think it's important to know the structure of TFRecord file before reading & applying to train models.
