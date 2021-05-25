@@ -1,5 +1,5 @@
 ---
-title: "Using TFReocrd File"
+title: "Using TFReocrd File(EN)"
 date: 2021-05-14 08:26:28 -0400
 categories: Deep Learning
 ---
