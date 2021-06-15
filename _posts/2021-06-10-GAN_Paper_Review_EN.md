@@ -63,26 +63,24 @@ categories: Deep Learning
 
 ### 1.2. Probability Distribution
 
-* 수학을 굉장히 싫어하지만, Paper의 내용이 모두 수식으로만 되어 있기 때문에 기본적인 지식을 가지고 Paper를 봐야할 것 같습니다.   
+* I really hate math., but we need to know the basic background of math.(Especially, probability) because the paper is full of math.
 
 <br>
 <br>
 
-* 먼저 확률 분포(Probability Distribution)라는 개념을 알아봅시다.
+* First, let's dive into 'Probability Distribution'
 
 <br>
 <br>
 
-* Probability Distribution란 확률 변수가 특정한 값을 가질 확률을 나타내는 함수를 의미합니다.
+* Probability Distribution is a function that represents the probability that a random variable has a certain value.
   
-  주사위를 던졌을 때 나올 수 있는 수를 확률변수 X라고 하면, 
-  
-  P(X=1)은 1/6이며, P(X=1~6)까지 모두 같은 값(1/6)을 가집니다.
+  If a random variable X is the number of possible outcomes when a dice is rolled, P(X=1) is 1/6, and all P(X=1~6) have the same value (1/6).  
 
 <br>
 <br>
 
-* 확률 분포는 크게 2가지 종류, 이산확률분포(Discrete Probability Distribution), 연속확률분포(Continuous Probability Distribution)가 있습니다.
+* There are 2 kind of random distributions, Discrete Probability Distribution & Continuous Probability Distribution.
 
 <br>
 <br>
@@ -92,11 +90,12 @@ categories: Deep Learning
 
 #### 1.2.1. Discrete Probability Distribution
 
-* 이산확률분포란 확률 변수 X의 개수를 셀 수 있는 경우를 말합니다.
+* Discrete probability distribution is a case in which the number of random variables X can be counted.
 
 <br>
 
-* 앞에서 예를 든 주사위가 이산확률분포에 속합니다.
+* The dice example at the previous example belongs to the discrete probability distribution.
+
 <br>
 <br>
 
@@ -111,19 +110,19 @@ categories: Deep Learning
 
 #### 1.2.2. Continuous Probability Distribution
 
-* 연속확률분포는 확률 변수 X의 수를 정확하게 셀 수 없는 경우의 확률 분포입니다.
+* Continuous Probability Distribution is a probability distribution when the number of random variables X cannot be accurately counted.
 
 <br>
 
-* 확률 변수 X의 수를 정확하게 셀 수 없기 때문에 이 경우에는 확률 밀도 함수를 이용하여 확률 분포를 표현합니다.
+* Since the number of random variables X cannot be counted accurately, in this case, the probability distribution is expressed using the probability density function.
 
 <br>
 
-* 이런 경우의 예는 키 혹은 달리기 성적 등과 같은 것이 있을 수 있습니다.
+* Examples of this might be things like height or running performance.
 
 <br>
 
-* 정규 분포도 연속 확률 분포라고 할 수 있습니다.
+* Normal distribution can also be called continuous probability distribution.
 
 <p align="left">
   <img src="/assets/GAN/pic_02.png">
@@ -133,11 +132,11 @@ categories: Deep Learning
 <br>
 <br>
 
-* 실제로 현실에서는 많은 데이터의 분포를 정규분포로 근사화 할 수 있으며, 이러한 사실은 실제 Data 표현 및 활용에 매우 유용합니다.   
+* In reality, the distribution of many data can be approximated as a normal distribution, and this fact is very useful for expressing and utilizing actual data.
 
 <br>
 
-* 현실세계의 정규분포의 예로 IQ를 들 수 있습니다.
+* One of the example of a normal distribution in the real world is IQ.
 
 <br>
 
@@ -152,30 +151,30 @@ categories: Deep Learning
 
 #### 1.2.3. Probability Distribution of Image
 
-* Image에 대한 확률 분포라는 말이 다소 의아하게 생각될 수도 있습니다.
+* The term 'Probability Distribution for an Image' may seem a bit cryptic.
 
 <br>
 
-* 생각해 보면, Image도 다차원 특징 공간의 한 점으로 표현될 수 있습니다. ( 고차원 Vector or Matrix )
+* If you think about it, an image can also be expressed as a point in a multidimensional feature space. ( High-dimensional Vector or Matrix )
 
 <br>
 
-* 즉, Image Data를 확률 분포로 표현하여 이 확률 분포를 근사하는 Model을 GAN을 이용하면 학습할 수 있습니다.
+* In other words, a model that approximates this probability distribution by expressing the image data as a probability distribution can be learned using GAN.
 
 <br>
 
-* 'Image Data에 무슨 확률 분포가 있다는 말이지?'
-  * 사람의 얼굴에는 **통계적인 평균치**가 있습니다.
-  * 예를 들면, 눈,코,입 등의 상대적인 위치 등과 같은 값들이 있을 수 있겠죠.
-  * 이런 수치들을 확률 분포로 표현할 수 있다는 의미입니다.
+* 'What probability distribution is there in image data?'
+  * Human faces have **statistical averages**.
+  * For example, there could be values such as the relative positions of the eyes, nose, mouth, etc.
+  * This means that these numbers can be expressed as probability distributions.
 
 <br>
   
-* Image에서 다양한 특징들은 각각이 확률 변수가 될 수 있고, 이는 분포를 의미합니다.
+* In Image, various features can each be a random variable, which means a distribution.
 
 <br>
 
-* 예를 들면 아래의 예시는 다변수 확률 분포(Multivariate Probability Distribution)를 나타냅니다.
+* For example, below one represents 'Multivariate Probability Distribution'.
 
 <p align="left">
   <img src="/assets/GAN/pic_04.png">
@@ -188,18 +187,18 @@ categories: Deep Learning
 <br>
 <br>
 
-## 2. 생성 모델(Generative Model)
+## 2. Generative Model
 
 <br>
 <br>   
 
 ### 2.1.  Generative Model vs Discriminative Model
 
-* GAN 이전의 Machine Learning or Deep Learning Model들은 Data에서 Pattern을 학습하여 새로운 Data에 대해서 학습 결과를 바탕으로 Model이 특정 값을 출력하고, 이 값을 바탕으로 분류(discriminate)를 할 수 있도록 합니다.
+* Machine learning or deep learning models before GAN learn patterns from data, the model outputs a specific value based on the learning result for new data and discriminates it based on value from model output.
 
 <br>
 
-* 즉, Discriminative Model은 **특정한 Decision Boundary**를 학습하는 것입니다.
+* In other words, a discriminative model is to learn a **specific decision boundary**.
 
 <br>
 
