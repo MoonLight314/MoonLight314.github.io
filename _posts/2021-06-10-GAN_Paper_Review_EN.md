@@ -1,5 +1,5 @@
 ---
-title: "GAN"
+title: "GAN (EN)"
 date: 2021-06-10 08:26:28 -0400
 categories: Deep Learning
 ---
