@@ -79,7 +79,7 @@ categories: Deep Learning
 <br>
 
 * **Generator가 단순히 Sample Data를 Memorize해서 보여주는 것이 아니라는 것을 증명**
-  - Model의 구조가 Sample Data 대비 를 충분히 크고, Train을  충분히 많이 진행한다면 Model이 Sample Data를 모두 외워버릴 수도 있습니다.
+  - Model의 구조가 Sample Data 대비해서 충분히 크고, Train을  충분히 많이 진행한다면 Model이 Sample Data를 모두 외워버릴 수도 있습니다.
   - 이것은 Generating이라고 보기 힘들다.
   - 얼핏 Overfitting과 일맥상통하는 것 같기도 하고...
 
