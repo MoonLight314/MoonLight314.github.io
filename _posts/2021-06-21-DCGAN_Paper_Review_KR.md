@@ -181,3 +181,207 @@ categories: Deep Learning
 </p>
 
 <br>
+<br>
+<br>
+
+* Transposed Convolution에 대한 자세한 내용은 아래 Link의 글을 한 번 읽어보시기 바랍니다.
+  
+  [CS231n의 Transposed Convolution은 Deconvolution에 가까운 Transposed Convolution이다](https://realblack0.github.io/2020/05/11/transpose-convolution.html#Transposed-Convolution)
+
+<br>
+
+* Transposed Convolution은 Tensorflow에서 **Conv2DTranspose()**라는 함수로 구현되어 있습니다.
+
+<br>
+
+* 다양한 Convolution 방식들에 대한 설명은 아래 Link를 참조하시면 많은 정보를 얻을 수 있습니다.   
+
+  [An Introduction to different Types of Convolutions in Deep Learning](https://towardsdatascience.com/types-of-convolutions-in-deep-learning-717013397f4d)
+  
+<br>
+<br>
+<br>
+
+#### 3.2.2. Apply Batch Normalization
+
+<br>
+
+* Batch Normalization은 2015년에 발표된 Paper, [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)에서 소개된 개념이며, 성능이 좋아서 요즘 대부분의 Neural Network에 적용되고 있습니다.
+
+<br>
+
+* Paper Link( [http://proceedings.mlr.press/v37/ioffe15.pdf](http://proceedings.mlr.press/v37/ioffe15.pdf) )
+
+<br>
+
+* Batch Normalization의 목적은 Gradient Vanishing / Gradient Exploding을 방지하기 위함입니다.
+
+<br>
+
+* Batch Normalization가 나오기 이전에도 Activation Function을 ReLU를 사용한다던지, Weight Initialization을 할 때, He or Xavier initialization을 사용하곤 했습니다.
+
+<br>
+
+* Batch Normalization은 이런 간접적인 방식과는 다르게 Training 과정에 직접적으로 관여하면서 Gradient Vanishing / Gradient Exploding을 억제합니다.
+
+<br>
+
+* 자세한 설명은 아래 Link를 참조해 주시기 바랍니다. 
+
+  [A Gentle Introduction to Batch Normalization for Deep Neural Networks](https://machinelearningmastery.com/batch-normalization-for-training-of-deep-neural-networks/)
+  
+<br>
+<br>
+<br>
+
+#### 3.2.3. Others
+
+<br>
+
+* 나머지 변경 내용들에 대해서 추가적인 설명은 생략하겠습니다.
+
+<br>
+
+* 내용을 보시면 특별하게 설명이 필요한 사항은 없을 것 같습니다.
+
+<br>
+
+* 다시 한 번 말씀드리지만, 왜 Fully Connected를 없애고, strided convolutions과 fractional-strided convolutions를 사용했으며, 특정 위치에만 Batch Normalization을 사용하고 Activation Function을 위치에 따라 다르게 사용했는지에 대한 이론적 배경은 전혀 없고, 단순히 **노가다를 통해 결과를 관찰**하여서 알아낸 결과들입니다.   
+
+<br>
+<br>
+<br>
+
+#### 3.2.4. Overall Architecture
+
+<br>
+
+* 위에서 언급한 내용을 적용한 Generator의 전체적인 Architecture는 다음과 같습니다.   
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_03.png">
+</p>
+   
+<br>
+
+* 최초에 z에서 64x64의 Image가 되어가는 과정에서 fractional-strided convolutions가 적용되었으며, Fully Connected Layer나 Pooling Layer가 사용되지 않았습니다.   
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## 4. Result
+
+<br>
+
+### 4.1. Image Generation
+
+<br>
+
+* 아래의 Bedroom Image들은 모두 1 Epoch Training 후에 DCGAN으로 생성된 Image라고 합니다.   
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_04.png">
+</p>
+
+<br>
+<br>
+<br>
+
+* 아래의 Bedroom Image들은 5 Epoch Training 후에 DCGAN으로 생성된 Image라고 합니다.   
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_05.png">
+</p>
+   
+<br>
+
+* 딱 봐도 Quality가 훌륭합니다.
+
+<br>
+
+* Paper에서 말하기를 이론적으로는 Generator가 Sample Data를 Memorize 할 수 있지만, 낮은 Learning Rate와 Mini Batch를 적용함으로써 실험적으로 그것이 불가능하다고 말하고 있습니다.   
+
+<br>
+<br>
+<br>
+
+### 4.2. WALKING IN THE LATENT SPACE
+
+<br>
+
+* Paper에서 DCGAN의 목표중의 하나가 z의 작은 변화에도 Smooth하게(Walking) 결과가 변화하도록 하는 것이다라고 했습니다.   
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_06.png">
+</p>
+   
+<br>
+
+* 위의 사진은 왼쪽의 원본 Image에서 오른쪽의 Generated Image로 점점 변화하는 것을 나타낸 것입니다.
+
+<br>
+
+* 벽이 있던 곳이 어느새 창문이 생기고, 전등이 있던 곳이 창문이 생기기도 합니다.   
+
+<br>
+<br>
+<br>
+
+### 4.3. Black Box 극복
+
+<br>
+
+* DCGAN의 Discriminator의 Feature를 시각화해서 Model이 어떻게 동작하는지를 좀 더 명확하게 알 수 있게 되었습니다.
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_07.png">
+</p>
+
+<br>
+<br>
+<br>
+
+### 4.4. VECTOR ARITHMETIC ON IMAGE
+
+<br>
+
+* Paper에서는 DCGAN을 하면서 NLP에서 사용된 Word2Vec의 특성을 Image에서도 사용할 수 있었다고 합니다.
+
+<br>
+
+* 예를 들어, Word2Vec에서 vector(”King”) - vector(”Man”) + vector(”Woman”) = Queen 이 되는 것처럼, Image에서도 이와 유사한 VECTOR ARITHMETIC 연산을 할 수 있었다고 하네요.   
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_08.png">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="/assets/DCGAN_Paper_Review/pic_09.png">
+</p>
+
+<br>
+<br>
+
+* 이번 Post에서는 DCGAN Paper Review를 해 보았습니다.
+
+<br>
+
+* 다음에는 DCGAN의 실제 Code를 살펴보도록 하겠습니다.
