@@ -15,7 +15,7 @@ categories: Deep Learning
 
 ## 0. Introduction
 
-* Goodfellow, Ian이 2014년에 GAN을 소개한 이후에 아래 그림과 같이, 매우 다양한 GAN 응용이 나왔습니다.
+* Goodfellow, Ian이 2014년에 GAN을 소개한 이후에 아래 그림과 같이, 매우 다양한 GAN 응용이 나왔습니다. 
 
   ( GAN의 다양한 종류. 출처 : https://ysbsb.github.io/gan/2020/06/17/GAN-newbie-guide.html )
 
