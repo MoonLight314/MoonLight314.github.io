@@ -62,8 +62,8 @@ categories: Deep Learning
 
 <br>
 
-  - **GAN Model 성능을 정량적으로 평가하기가 어렵다.**
-    * 기존 Sample로부터 얼마나 잘 생성되었는지 정량적으로 판단하기가 애매하고, 사람이 평가하기도 힘듭니다.
+  - **It is difficult to quantitatively evaluate GAN model performance.**
+    * It is difficult to quantitatively determine how well model is trained from the sample, and it is also difficult for humans to evaluate it.
 
 <br>
 <br>
@@ -76,10 +76,10 @@ categories: Deep Learning
 
 <br>
 
-* **Generator가 단순히 Sample Data를 Memorize해서 보여주는 것이 아니라는 것을 증명**
-  - Model의 구조가 Sample Data 대비해서 충분히 크고, Train을  충분히 많이 진행한다면 Model이 Sample Data를 모두 외워버릴 수도 있습니다.
-  - 이것은 Generating이라고 보기 힘들다.
-  - 얼핏 Overfitting과 일맥상통하는 것 같기도 하고...
+* **Proof that the generator does not simply memorize and display sample data**
+  - If the structure of the model is large enough compared to the sample data, and the training is carried out sufficiently, the model may memorize all the sample data.
+  - It is hard to accept as Generating.
+  - At first glance, it seems to have something to do with Overfitting...
 
 <br>
 
