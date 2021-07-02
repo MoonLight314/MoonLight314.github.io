@@ -49,7 +49,6 @@ categories: Deep Learning
 <br>
 
 * This paper pointed out some limitations of existing GAN.
-
 <br>
 
   - **GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs.**
