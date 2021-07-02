@@ -154,11 +154,11 @@ categories: Deep Learning
 
 <br>
 
-* strided convolutions과 fractional-strided convolutions은 Convolution 방식 중의 하나지만, 기존 CNN에 적용되었던 Convolution은 Kernel을 거치면서 Size가 점점 줄어드는데 비해서 strided convolutions과 fractional-strided convolutions은 특정 연산을 거치면서 Size가 증가하는 차이가 있습니다.
+* Strided convolutions and fractional-strided convolutions are one of the convolution methods, but the size of the convolution applied to the existing CNN gradually decreases as it goes through the kernel. There is a difference that the size of strided convolutions and fractional-strded convolutions increase the kernel size through a specific operation.
 
 <br>
 
-* 아래는 strided convolutions을 설명한 것이며, 한 마디로 strided convolutions은 stride 만큼 이동하는 Convolution입니다.
+* The following describes strided convolutions. Strided convolution is a convolution that move by stride.
 
 <br>
 
@@ -170,7 +170,8 @@ categories: Deep Learning
 <br>
 <br>
 
-* fractional-strided convolutions은 Transposed Convolution이라고 하는데(Deconvolution이라고 하는 곳도 있는데 이는 정확한 개념이 아닙니다. Transposed Convolution과 Deconvolution의 차이는 여기를 참조. ), DCGAN의 Generator에서 사용하는 방식은 정확하게 말하면, **Transposed Convolution**입니다.
+* Fractional-strded convolutions are called transposed convolutions (sometimes called deconvolution, but this is not an exact concept).
+* Strictly speaking, the method used by DCGAN's generator is **Transposed Convolution**.
 
 <br>
 
@@ -182,17 +183,17 @@ categories: Deep Learning
 <br>
 <br>
 
-* Transposed Convolution에 대한 자세한 내용은 아래 Link의 글을 한 번 읽어보시기 바랍니다.
+* For more information on Transposed Convolution, please refer to the article at the link below.
   
   [CS231n의 Transposed Convolution은 Deconvolution에 가까운 Transposed Convolution이다](https://realblack0.github.io/2020/05/11/transpose-convolution.html#Transposed-Convolution)
 
 <br>
 
-* Transposed Convolution은 Tensorflow에서 **Conv2DTranspose()**라는 함수로 구현되어 있습니다.
+* Transposed Convolution is implemented in Tensorflow as a function called **Conv2DTranspose()**.
 
 <br>
 
-* 다양한 Convolution 방식들에 대한 설명은 아래 Link를 참조하시면 많은 정보를 얻을 수 있습니다.   
+* For a description of the various convolution methods, please, refer to the link below for more information.
 
   [An Introduction to different Types of Convolutions in Deep Learning](https://towardsdatascience.com/types-of-convolutions-in-deep-learning-717013397f4d)
   
@@ -204,7 +205,7 @@ categories: Deep Learning
 
 <br>
 
-* Batch Normalization은 2015년에 발표된 Paper, [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)에서 소개된 개념이며, 성능이 좋아서 요즘 대부분의 Neural Network에 적용되고 있습니다.
+* Batch Normalization is a concept introduced in paper, [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift] (https://arxiv.org/abs/1502.03167) published in 2015 and it is widely applied neural network.
 
 <br>
 
@@ -212,19 +213,19 @@ categories: Deep Learning
 
 <br>
 
-* Batch Normalization의 목적은 Gradient Vanishing / Gradient Exploding을 방지하기 위함입니다.
+* The purpose of Batch Normalization is to prevent Gradient Vanishing / Gradient Exploding.
 
 <br>
 
-* Batch Normalization가 나오기 이전에도 Activation Function을 ReLU를 사용한다던지, Weight Initialization을 할 때, He or Xavier initialization을 사용하곤 했습니다.
+* Even before Batch Normalization, ReLU was used for the activation function or He or Xavier initialization was used for weight initialization.
 
 <br>
 
-* Batch Normalization은 이런 간접적인 방식과는 다르게 Training 과정에 직접적으로 관여하면서 Gradient Vanishing / Gradient Exploding을 억제합니다.
+* Unlike those indirect methods, Batch Normalization suppresses Gradient Vanishing / Gradient Exploding while directly participating in the training process.
 
 <br>
 
-* 자세한 설명은 아래 Link를 참조해 주시기 바랍니다. 
+* Please refer to the link below for detailed explanation.
 
   [A Gentle Introduction to Batch Normalization for Deep Neural Networks](https://machinelearningmastery.com/batch-normalization-for-training-of-deep-neural-networks/)
   
