@@ -84,7 +84,7 @@ categories: Deep Learning
 <br>
 
 * **WALKING IN THE LATENT SPACE**
-  - Latent Space의 z의 작은 변화에도 Generation 결과가 자연스럽게 이루어져야 한다. ( 이를 Paper에서는 WALKING IN THE LATENT SPACE 라고 표현했습니다. )
+  - The result of generation should occur naturally even with small changes in z of latent space. ( This is called as 'WALKING IN THE LATENT SPACE' in paper)
 
 <br>
 <br>
@@ -100,14 +100,14 @@ categories: Deep Learning
 
 <br>
 
-* GAN에서 제시한 구조에서 DCGAN으로 넘어오면서 전체적인 구조는 그대로 유지되지만 몇몇 세부적인 사항들이 바뀌었습니다.
+* Moving from the structure proposed by GAN to DCGAN, the overall structure remains the same, but some details have changed.
 
 <br>
 
-* 저자들이 이런 구조를 확립한 방법을 Paper에서 아래와 같이 말하고 있습니다.
+* Here's how the authors established the structures in the paper:
     - after extensive model exploration we identified a family of architectures that resulted in stable training across a range of datasets and allowed for training higher resolution and deeper generative models.
-      * Paper에서는 있어 보이게 거창하게 말하고 있지만, 한 마디로 생노가다로 최상의 Model 구조를 알아냈다는 의미입니다.
-      * 근성만은 인정해줘야 할 것 같네요.
+      * In paper, it is said in a grandiose way but it means that the best model structure was found with so many trials and errors.
+
 
 <br>
 <br>
@@ -117,31 +117,31 @@ categories: Deep Learning
 
 <br>
 
-* DCGAN에서 제안한 기존 GAN의 성능을 향상 시킬 수 있는 방법들은 다음과 같습니다.
+* The methods to improve the performance of the existing GAN proposed by DCGAN are as follows.
 
 <br>
 
-  **1. G / D에서 Pooling Layer대신 D에는 strided convolutions, G에는 fractional-strided convolutions 사용**
+  **1. Instead of pooling layers in G/D, strided convolutions are used for D and fractional-strided convolutions are used for G.**
 
 <br>
 
-  **2. Batch Normalization 사용**
+  **2. Using Batch Normalization**
 
 <br>
 
-  **3. FC(Fully Connected) Hidden Layer를 모두 삭제**
+  **3. Not using FC(Fully Connected) Hidden Layer**
 
 <br>
 
-  **4. G에서 마지막 Layer를 제외하고 Activation Function을 RELU사용. 마지막 Layer는 tanh 사용**
+  **4. Except for the last layer in G, the activation function is RELU. The last layer uses tanh**
 
 <br>
 
-  **5. D에서는 모든 Layer의 Activation Function을 LeakyRELU 사용**
+  **5. In D, LeakyRELU is used for activation functions of all layers.**
   
 <br>
 
-* 수정 내용들에 대해서 하나씩 살펴보도록 하겠습니다.  
+* Let's take a look at the modifications one by one.
 
 <br>
 <br>
@@ -150,7 +150,7 @@ categories: Deep Learning
 
 <br>
 
-* 우선, Pooling Layer대신 사용한 **strided convolutions**과 **fractional-strided convolutions**에 대해서 알아보겠습니다.
+* First, let's look at **strded convolutions** and **fractional-strded convolutions** used instead of the Pooling Layer.
 
 <br>
 
