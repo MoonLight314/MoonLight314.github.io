@@ -50,6 +50,7 @@ categories: Deep Learning
 
 * This paper pointed out some limitations of existing GAN.
 <br>
+<br>
 
   - **GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs.**
     * It is not easy to train because the structure of GAN itself is unstable.
