@@ -237,15 +237,11 @@ categories: Deep Learning
 
 <br>
 
-* 나머지 변경 내용들에 대해서 추가적인 설명은 생략하겠습니다.
+* Additional explanations for the remaining changes will be omitted.
 
 <br>
 
-* 내용을 보시면 특별하게 설명이 필요한 사항은 없을 것 같습니다.
-
-<br>
-
-* 다시 한 번 말씀드리지만, 왜 Fully Connected를 없애고, strided convolutions과 fractional-strided convolutions를 사용했으며, 특정 위치에만 Batch Normalization을 사용하고 Activation Function을 위치에 따라 다르게 사용했는지에 대한 이론적 배경은 전혀 없고, 단순히 **노가다를 통해 결과를 관찰**하여서 알아낸 결과들입니다.   
+* As you can see, there is no need to explain in detail.
 
 <br>
 <br>
@@ -255,7 +251,7 @@ categories: Deep Learning
 
 <br>
 
-* 위에서 언급한 내용을 적용한 Generator의 전체적인 Architecture는 다음과 같습니다.   
+* The overall architecture of generator to which the above-mentioned contents are applied is as follows.
 
 <br>
 
@@ -265,7 +261,7 @@ categories: Deep Learning
    
 <br>
 
-* 최초에 z에서 64x64의 Image가 되어가는 과정에서 fractional-strided convolutions가 적용되었으며, Fully Connected Layer나 Pooling Layer가 사용되지 않았습니다.   
+* Fractional-strided convolutions were applied in the process of going from z to 64x64 images and no fully connected layers or pooling layers were used.
 
 <br>
 <br>
@@ -282,7 +278,7 @@ categories: Deep Learning
 
 <br>
 
-* 아래의 Bedroom Image들은 모두 1 Epoch Training 후에 DCGAN으로 생성된 Image라고 합니다.   
+* All of the bedroom images below are images created with DCGAN after 1 epoch training.
 
 <br>
 
@@ -294,7 +290,7 @@ categories: Deep Learning
 <br>
 <br>
 
-* 아래의 Bedroom Image들은 5 Epoch Training 후에 DCGAN으로 생성된 Image라고 합니다.   
+* The bedroom images below are images created with DCGAN after 5 epoch training.
 
 <br>
 
@@ -304,11 +300,11 @@ categories: Deep Learning
    
 <br>
 
-* 딱 봐도 Quality가 훌륭합니다.
+* The quality is great.
 
 <br>
 
-* Paper에서 말하기를 이론적으로는 Generator가 Sample Data를 Memorize 할 수 있지만, 낮은 Learning Rate와 Mini Batch를 적용함으로써 실험적으로 그것이 불가능하다고 말하고 있습니다.   
+* According to the paper, the generator can theoretically memorize sample data but experimentally it is impossible by applying a low learning rate and mini-batch.
 
 <br>
 <br>
@@ -318,7 +314,7 @@ categories: Deep Learning
 
 <br>
 
-* Paper에서 DCGAN의 목표중의 하나가 z의 작은 변화에도 Smooth하게(Walking) 결과가 변화하도록 하는 것이다라고 했습니다.   
+* In the paper, one of the goals of DCGAN is to make the result change smoothly (walking) even with small changes in z.
 
 <br>
 
@@ -328,21 +324,21 @@ categories: Deep Learning
    
 <br>
 
-* 위의 사진은 왼쪽의 원본 Image에서 오른쪽의 Generated Image로 점점 변화하는 것을 나타낸 것입니다.
+* The picture above shows the change from the original image on the left to the generated image on the right.
 
 <br>
 
-* 벽이 있던 곳이 어느새 창문이 생기고, 전등이 있던 곳이 창문이 생기기도 합니다.   
+* Where there used to be a wall, a window suddenly appears, and where there used to be a light, a window appears.
 
 <br>
 <br>
 <br>
 
-### 4.3. Black Box 극복
+### 4.3. Overcoming 'Black Box'
 
 <br>
 
-* DCGAN의 Discriminator의 Feature를 시각화해서 Model이 어떻게 동작하는지를 좀 더 명확하게 알 수 있게 되었습니다.
+* By visualizing the features of DCGAN's discriminator, we can see more clearly how the model works.
 
 <br>
 
@@ -358,11 +354,11 @@ categories: Deep Learning
 
 <br>
 
-* Paper에서는 DCGAN을 하면서 NLP에서 사용된 Word2Vec의 특성을 Image에서도 사용할 수 있었다고 합니다.
+* In paper, it is said that while DCGAN was performed, the characteristics of Word2Vec used in NLP could be used in image as well.
 
 <br>
 
-* 예를 들어, Word2Vec에서 vector(”King”) - vector(”Man”) + vector(”Woman”) = Queen 이 되는 것처럼, Image에서도 이와 유사한 VECTOR ARITHMETIC 연산을 할 수 있었다고 하네요.   
+* For example, like vector(”King”) - vector(”Man”) + vector(”Woman”) = Queen in Word2Vec, it is said that similar VECTOR ARITHMETIC operation was possible with image.
 
 <br>
 
@@ -379,8 +375,8 @@ categories: Deep Learning
 <br>
 <br>
 
-* 이번 Post에서는 DCGAN Paper Review를 해 보았습니다.
+* In this post, I've reviewed DCGAN paper.
 
 <br>
 
-* 다음에는 DCGAN의 실제 Code를 살펴보도록 하겠습니다.
+* Next, let's look at the actual code of DCGAN.
