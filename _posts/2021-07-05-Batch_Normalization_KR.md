@@ -87,8 +87,6 @@ categories: Deep Learning
 
 * Paper의 Link는 여기를 참조해 주시기 바랍니다.
 
-<br>
-
   [https://arxiv.org/pdf/1502.03167.pdf](https://arxiv.org/pdf/1502.03167.pdf)   
 
 <br>
@@ -146,7 +144,7 @@ categories: Deep Learning
 
 <br>
 
-* 이전 Layer의 출력 Neuron의 수 만큼 γ, β 2개의 Parameter를 추가하여, 이전 Layer의 출력값을 다음 Layer에 넘기기 전에 적절하게 Control하는 것이 Batch Normalization의 핵심입니다.
+* **이전 Layer의 출력 Neuron의 수 만큼 γ, β 2개의 Parameter를 추가하여, 이전 Layer의 출력값을 다음 Layer에 넘기기 전에 적절하게 Control하는 것이 Batch Normalization의 핵심입니다.**
 
 <br>
 
@@ -298,7 +296,7 @@ categories: Deep Learning
 
 <br>
 
-* Batch Normalization 적용시에 다른 Network과 다른 점이라면, Train시의 Network과 Inference시의 Network이 다르다는 점입니다.
+* Batch Normalization 적용시에 다른 Network과 다른 점이라면, **Train시의 Network과 Inference시의 Network이 다르다는 점입니다.**
 
 <br>
 
@@ -376,7 +374,7 @@ categories: Deep Learning
 
 <br>
 
-* Batch Normalization이 발표된 이후에는 Batch Normalization의 성능 향상 요인이 ICS가 감소되기 때문이라고 알고 있었으나, 후속 연구에서 Batch Normalization의 효과가 ICS 감소와는 상관 없다는 주장이 제기됩니다.
+* Batch Normalization이 발표된 이후에는 Batch Normalization의 성능 향상 요인이 ICS가 감소되기 때문이라고 알고 있었으나, **후속 연구에서 Batch Normalization의 효과가 ICS 감소와는 상관 없다는 주장이 제기됩니다.**
 
 <br>
 
@@ -409,7 +407,7 @@ categories: Deep Learning
 
 <br>
 
-* Batch Normalization는 Optimization Landscape를 부드럽게(Smoothing)하는 효과가 있습니다.
+* **Batch Normalization는 Optimization Landscape를 부드럽게(Smoothing)하는 효과가 있습니다.**
 
 <br>
 
@@ -435,7 +433,7 @@ categories: Deep Learning
    
 <br>
 
-* 이런 Smoothing 효과가 있는 것은 Batch Normalization 뿐만 아니라, Residual Connection도 가지고 있다고 알려져 있습니다.
+* 이런 Smoothing 효과가 있는 것은 **Batch Normalization 뿐만 아니라, Residual Connection도** 가지고 있다고 알려져 있습니다.
 
 <br>
 
