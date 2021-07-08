@@ -108,15 +108,15 @@ Known Batch Normalization benefits are :
 
 <br>
 
-- **Network의 Hyper Parameter에 대한 민감도가 감소합니다.**
+- **The sensitivity of the network to hyper parameter is reduced.**
   
-  성능이 잘 나오지 않을 때 열심히 Hyper Parameter Tuning을 했는데, 이제 그것에 대한 부담을 크게 줄일 수 있습니다.
+  Generally, we tune hyper parameter  when the performance wasn't good. It can greatly reduce the burden on it.
 
 <br>
 
-- **일반화(Regularization) 효과가 있습니다.**
+- **There is a regularization effect.**
   
-  Inference 시에 성능이 더 좋아집니다.
+  Better performance during inference.
 
 <br>
 <br>
@@ -127,7 +127,7 @@ Known Batch Normalization benefits are :
 
 <br>
 
-* Batch Normalization Layer은 아래 그림과 같이 Hidden Layer 중간에 넣어주면 됩니다.   
+* Add Batch Normalization layer in the middle of the hidden layer as shown in the figure below.
 
 <br>
 
@@ -140,15 +140,15 @@ Known Batch Normalization benefits are :
 <br>
  
 
-* 조금 더 구체적으로, Activation Function 앞에 넣어주는 것이 실험적으로 결과가 더 좋다고 합니다.
+* More specifically, it is said that putting it in front of the activation function gives better results experimentally.
 
 <br>
 
-* **이전 Layer의 출력 Neuron의 수 만큼 γ, β 2개의 Parameter를 추가하여, 이전 Layer의 출력값을 다음 Layer에 넘기기 전에 적절하게 Control하는 것이 Batch Normalization의 핵심입니다.**
+* **The key to batch normalization is to properly control the output value of the previous layer before passing it on to the next layer by adding two parameters γ and β as many as the number of output neurons in the previous layer.**
 
 <br>
 
-* 2개 Parameter를 계산하는 비용만 추가하면 Network의 성능이 비약적으로 상승하기 때문에 사용하지 않을 이유가 없습니다.   
+* There is no reason not to apply batch normalization because the performance of the network increases dramatically by adding only the cost of calculating two parameters.
 
 <br>
 <br>
@@ -161,29 +161,29 @@ Known Batch Normalization benefits are :
 
 <br>
 
-### 2.1. Normalization(정규화)
+### 2.1. Normalization
 
 <br>
 
-* 각 Feature들이 비슷한 범위의 값을 가지도록 하는 Normalization 기법은 많은 분야에서 사용되고 있으며, 이는 Training Speed를 향상시킵니다.
+* The normalization technique that makes each feature have a similar range of values is used in many fields, and it improves the training speed.
 
 <br>
 
-* Normalization을 하면 Training Speed가 빨라지는 이유는 각 Feature 별로 Variance가 다르면 큰 Learning Rate를 사용하기 어렵기 때문에 Training Speed를 빠르게 할 수 없다.   
+* The reason why the training speed increases when applying normalization is that it is difficult to use a large learning rate if the variation for each feature is different, so the training speed cannot be increased quickly.
 
 <br>
 <br>
 <br>
 
-### 2.2. Standardization(표준화)   
+### 2.2. Standardization
 
 <br>
 
-* Normalization(정규화)와 비슷한 방식이 Standardization(표준화)가 있습니다.
+* A method similar to normalization is standardization.
 
 <br>
 
-* Feature들의 분포를 평균 0, 분산 1로 만드는 방법입니다.   
+* This is a method to make the distribution of features a mean of 0 and a variance of 1.
 
 <br>
 <br>
@@ -194,15 +194,15 @@ Known Batch Normalization benefits are :
 
 <br>
 
-* 최초 Input Layer에 Normalized 된 Feature를 넣는 것은 간단합니다.  전처리 과정에서 Normalization해서 입력하면 됩니다.
+* It is simple to put a normalized feature in the first input layer. It can be normailzed while pre-processing and input into network.
 
 <br>
 
-* 하지만, Hidden Layer의 입력분포가 매번 달라지고 정규화 되지 않는다면 Train이 잘 되지 않습니다.
+* However, if the input data distribution of the hidden layer is different every time and it is not normalized, the network would not be trained well.
 
 <br>
 
-* 그렇다면, 각 Hidden Layer마다 Normalized Feature Input은 어떻게 하면 될까요?  가장 간단하고 무식하게 각 Hidden Layer에 넘기기 전에 Normalization하면 됩니다.   
+* Then, how would it be if the input data is normalized each hidden layer ? The simplest and most ignorant way is to normalize it before passing it on to each hidden layer.
 
 <br>
 <br>
@@ -212,7 +212,7 @@ Known Batch Normalization benefits are :
 
 <br>
 
-* 아래 수식은 Paper에 나와있는 Batch Normalization의 Input값과 Output 값들의 계산 방법입니다.   
+* The formula below is the calculation method of the input and output values of batch normalization shown in the paper.
 
 <br>
 
@@ -223,33 +223,33 @@ Known Batch Normalization benefits are :
 <br>
 <br>
 
-* **1** : 우선 Batch Normalization에 Input으로 들어오는 값들에 대해서 알아보겠습니다.
+* **1** : First, let's look at the values that are input to batch normalization.
    
-   mini-batch가 들어오는 데, x1 ~ xm  만큼 Input으로 들어오는데, 여기서 m은 Batch Size라고 생각하면 됩니다. 좀 더 구체적으로 이전 Layer의 Activation 출력값이 되겠지요.
+   In mini-batch, it comes in as input as x1 ~ xm. Here, you can think of m as the batch size. More specifically, it will be the activation output value of the previous layer.
 
 <br>
 
-* **2** : 이 γ, β 2개의 값이 우리가 실제로 학습해야할 값들입니다. 이 값들로 다음 Layer에 들어갈 값들을 Control하는 것입니다. 입력값 각각 마다 2개의 γ, β를 가지게 됩니다.
+* **2** : These two values of γ and β are the values we actually need to train. With these values, you control the values that will go into the next layer. Two γ and β for each input value.
 
 <br>
 
-* **3** : mini-batch의 평균값을 구하는 과정입니다.
+* **3** : Calculating the average value of mini-batch.
 
 <br>
 
-* **4** : mini-batch의 분산값을 구하는 과정입니다.
+* **4** : Calculating the variance of mini-batch.
 
 <br>
 
-* **5** : Normalize 과정입니다.
+* **5** : Normalizing.
 
 <br>
 
-* **6** : 0으로 나뉘는 것을 방지하기 위해서 아주 작은 값을 더해줍니다.
+* **6** : Adding a very small value to prevent division by zero.
 
 <br>
 
-* **7** : 최종적으로 Batch Normalization을 거친 출력값입니다.
+* **7** : Finally, it is the output value that has been applied to batch normalization.
 
 <br>
 <br>
