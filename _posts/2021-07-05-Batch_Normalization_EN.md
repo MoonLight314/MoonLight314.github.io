@@ -254,7 +254,7 @@ Known Batch Normalization benefits are :
 <br>
 <br>
 
-* γ,(Scale 역할) ,  β(Bias 역할)는 Neural Network 성능이 향상되는 방향(Loss가 작아지는 방향)으로  학습이 진행되는 과정을 거칩니다.   
+* γ,(Scale) and β(Bias) will be changed through the process of learning in the direction in which the neural network performance improves (the direction in which loss decreases).
 
 <br>
 <br>
@@ -265,15 +265,15 @@ Known Batch Normalization benefits are :
 
 <br>
 
-* Batch Normalization으로 얻을 수 있는 효과는 논란의 여지가 없습니다.
+* The benefits achieved with Batch Normalization are undisputed.
 
 <br>
 
-* 앞서 말했듯이, Train Speed가 빠르며 Hyper Parameter Tuning으로부터 자유로와 집니다.
+* As mentioned earlier, the train speed is fast and frees you from hyper parameter tuning.
 
 <br>
 
-* 아래의 다양한 조건에서의 Train 결과를 보면, Batch Normalization을 사용한 경우가 확실히 Train Speed가 빠르며, 큰 Learning Rate를 사용해도 빠르게 수렴하는 것을 알 수 있습니다.   
+* As checking the train results under various conditions, you can see that the train speed is definitely fast when batch normalization is applied and converges quickly even with a large learning rate.
 
 <br>   
 <br>
