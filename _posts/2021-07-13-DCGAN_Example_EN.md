@@ -1,5 +1,5 @@
 ---
-title: "DCGAN Example"
+title: "DCGAN Example (EN)"
 date: 2021-07-13 08:26:28 -0400
 categories: Deep Learning
 ---
