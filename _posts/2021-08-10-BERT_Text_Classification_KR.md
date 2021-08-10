@@ -527,7 +527,7 @@ bert_preprocess_model = hub.KerasLayer(tfhub_handle_preprocess)
 
 <br>
 
-* **'this is such an amazing movie!'**라는 간단한 문장으로 Test해 보죠
+* **this is such an amazing movie!** 라는 간단한 문장으로 Test해 보죠
 
 <br>
 
