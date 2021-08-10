@@ -1,5 +1,5 @@
 ---
-title: "BERT Text Classification"
+title: "BERT Text Classification (EN)"
 date: 2021-08-10 08:26:28 -0400
 categories: Deep Learning
 ---
