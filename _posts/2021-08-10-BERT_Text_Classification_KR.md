@@ -11,3 +11,20 @@ categories: Deep Learning
 <br>
 <br>
 <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p align="left">
+  <img src="/assets/DCGAN_Example/output_51_1.png">
+</p>
