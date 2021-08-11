@@ -291,17 +291,17 @@ print (decision)
 
 <br>
 
-* G & D의 Loss Function을 정의하겠습니다.   
+* Let's make a loss function for G & D.
 
 <br>
 <br>
 
 ```python
-# 이 메서드는 크로스 엔트로피 손실함수 (cross entropy loss)를 계산하기 위해 헬퍼 (helper) 함수를 반환합니다.
+# This method returns a helper function to calculate Cross Entropy Loss (cross entropy loss).
 cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 ```
 
-* [BinaryCrossentropy](https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy)는 2개의 Parameter를 받으며, 첫번째는 실제 Label, 두번째는 Prediction 값을 받습니다.
+* BinaryCrossEntry gets two parameters, the first is the actual label, the second is the second is a prediction value.
 
 <br>   
 <br>
@@ -311,11 +311,11 @@ cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 
 <br>
 
-* 이 Method는 Discriminator가 Fake Image와 Real Image를 얼마나 잘 판별하는지 수치화합니다.
+* This method numerates how well the Discriminator determines the fake image and real image.
 
 <br>
 
-* Real Image에 대한 Discriminator의 예측과 1로 이루어진 행렬을 비교하고, Fake Image에 대한 Discriminator의 예측과 0으로 이루어진 행렬을 비교합니다.
+* Compare discriminator for real image and compare matrix made up of 1, and compare matrices that are predicted and 0 of discriminator for fake image.
 
 <br>
 
@@ -335,15 +335,15 @@ def discriminator_loss(real_output, fake_output):
 
 <br>
 
-* Generator의 Loss Function은 Discriminator를 얼마나 잘 속였는지를 수치화를 합니다.
+* The loss function of generator numerates how well generator deceives discriminator.
 
 <br>
 
-* 직관적으로 Generator가 잘 Train되고 있다면, Discriminator는 Fake Image를 Real Image(또는 1)로 분류를 할 것입니다. 
+* If the generator is well trained, discriminator will classify fake image as real image (or 1).
 
 <br>
 
-* 여기서 우리는 생성된 이미지에 대한 Discriminator의 결정을 1로 이루어진 행렬과 비교를 할 것입니다.
+* Here it will compare the decriminator's decision on the generated image and compared with the matrix made up of one.
 
 <br>
 
@@ -356,7 +356,7 @@ def generator_loss(fake_output):
 <br>
 <br>
 
-* Generator와 Discriminator는 따로 훈련되기 때문에, Optimizer를 따로 정의합니다.
+* Because generator and discriminator are trained separately, we define optimizer separately.
 
 <br>
 
@@ -393,11 +393,11 @@ checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
 
 <br>
 
-* Train Loop를 정의하도록 하겠습니다.
+* Defining train loop.
 
 <br>
 
-* Train 시에 사용할 몇몇 상수를 정의합니다.
+* Defineing some contant values.
 
 <br>
 <br>
