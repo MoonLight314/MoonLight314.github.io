@@ -407,8 +407,6 @@ EPOCHS = 50
 noise_dim = 100
 num_examples_to_generate = 16
 
-# 이 시드를 시간이 지나도 재활용하겠습니다. 
-# (GIF 애니메이션에서 진전 내용을 시각화하는데 쉽기 때문입니다.) 
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 ```
 
@@ -420,35 +418,35 @@ seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 <br>
 
-* @tf.fuctnion은 해당 Function을 Compile해서 Tensorflow 1.x Style로 사용할 수 있게 해줍니다.
+* @ tf.fuctNion allows you to compile a function and make it as Tensorflow 1.x Style.
 
 <br>
 
-* Tensorflow 1.x에서는 먼저 Train이나 Inference에 사용할 Network을 먼저 정의를 하였습니다. 그 후에, 이 Network을 Train시킬때는 Session을 열어서 Input Data를 넣어서 Train을 하거나, Inference를 하는 방식을 사용했습니다.
+* In Tensorflow 1.x, you first defined the network to use for train or inference. Thereafter, when using network, we opened a session to receive the input data to train, or use the network to do inference.
 
 <br>
 
-* 이렇게 하면 어떤 계산을 하려면 항상 Session을 열어야 해서 굉장히 불편했습니다.
+* It means that we always have to open a session to do some operation.
 
 <br>
 
-* Tensorflow 2.x로 넘어오면서 가장 큰 변화중의 하나가, 이런 Session 개념없이 즉시 어떤 계산을 수행할 수 있는 Eager Execution 기능이 Default로 적용되었습니다.
+* One of the biggest changes as moving from Tensorflow 1.x to Tensorflow 2.x, the eager execution feature that can perform any calculations without a session concepts has been applied as default.
 
 <br>
 
-* 이제 대부분 Tensorflow 2.x를 사용하는데, 왜 아직 1.x 때의 방식을 쓸 수 있는 저런 Annotation을 남겨두었을까 하는 의문이 드는데, 그 이유는 속도 때문입니다.
+* We may have a question that most of them use Tensorflow 2.x, why it is left the annotation that can be used to write a method of 1.x yet, the reason is because of the speed.
 
 <br>
 
-* Tensorflow 2.x에서도 @tf.fuctnion을 붙이면, 마치 Tensorflow 1.x처럼 Network의 생성과 실행이 분리된 것처럼 Function을 만들어 줍니다.
+* On Tensorflow 2.x, if you attach @ tf.fuctnion, you create a function as if you are creating and executing network as if Tensorflow 1.x.
 
 <br>
 
-* 이렇게 하면 상황에 따라서 약간의 속도의 이점을 얻을 수 있습니다만, Debugging이 어려워질 수 있습니다.
+* This allows you to benefit slightly depending on the situation, but debugging can be difficult.
 
 <br>
 
-* 모든 기능이 확실하다고 생각될 때 @tf.fuctnion를 붙이는 것이 좋습니다.
+* It is recommended that you attach @ tf.fuctnion when you think all the functions are confirmed.
 
 <br>
 <br>
@@ -458,23 +456,23 @@ seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 <br>
 
-* 보통 Tensorflow & Keras를 사용하면, 이미 만들어진 다양한 Network과 Function들을 이용해 쉽게 Model을 구현하고 Test해 볼 수 있습니다.
+* Usually Tensorflow & Keras allows you to easily implement a model and test using various networks and functions that are already implemented.
 
 <br>
 
-* Data준비하고 Loss Function 정의, Optimizer 정의 후에, .compile() / .fit()만 호출해 주면 Framework이 알아서 Forward Propagation / Back Propagation에서 편미분해서 Weight Update등을 알아서 다 해줍니다.
+* If you are prepared for data and definition of the loss function, optimizer definition, call .compile () / .fit (), the framework would do the forward propagation / back propagation, and weigh update.
 
 <br>
 
-* 하지만 특정 경우에는 Tensorflow / Keras에서 아직 지원하지 않는 Model을 사용하고자 하거나, Train을 좀 더 세밀하게 제어하고 싶을 때가 있습니다. 
+* However, in certain cases, you may want to use model that is not yet supported by Tensorflow / Keras, or you want to control the train a little more closely.
 
 <br>
 
-* 이런 경우에 Tensorflow의 Custom Training 기능을 사용할 수 있습니다
+* In this case, you can use the custom training feature in Tensorflow
 
 <br>
 
-* 이 DCGAN Example에서도 Custom Train Loop을 사용하고 있습니다.
+* This DCGAN example also uses custom train loop.
 
 <br>
 <br>
@@ -484,15 +482,15 @@ seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 <br>
 
-* 우리가 Keras / Tensorflow를 사용해서 만든 Network은 Automatic Differentiation을 자동으로 계산해서 Backprpagation을 해주기 때문에 매우 편리합니다.
+* Network made using Keras / Tensorflow is very convenient because automatic differentiation will automatically calculate and do backprpgation.
 
 <br>
 
-* 하지만, 이번 Example에서 처럼 Custom Train Loop를 사용하는 경우에는 Differentiation을 직접 해 주어야 합니다.
+* However, if you are using custom train loop as in this example, you must directly differentiation by yourself.
 
 <br>
 
-* 전부 다 손수하는 것은 아니지만, Forward Propagation할 때 Gradient를 저장해 두면, Back Propagation할 때 훨씬 더 빠르게 Differentiation을 구할 수 있습니다.
+* Not all of them, but if you store the gradient when forwarding, you can save the differentiation much faster when you save the gradient.
 
 <br>
 
