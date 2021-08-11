@@ -17,11 +17,11 @@ categories: Deep Learning
 
 <br>
 
-* 이번 Post에서는 DCGAN Code를 보면서 예제를 다뤄보도록 하겠습니다.   
+* In this post, I will take an example of DCGAN with code.
 
 <br>
 
-* GAN & DCGAN에 대한 구체적인 정보는 아래 Link에 좋은 자료가 있으니 한 번 보시기 바랍니다.
+* For more information about GaN & DCGAN, please, refer to the below link, good material.
 
   [GAN](https://moonlight314.github.io/deep/learning/GAN_Paper_Review_KR/)
 
@@ -29,13 +29,13 @@ categories: Deep Learning
 
 <br>
 
-* 이 Example은 Tensorflow Tutorial Site에서 가져왔습니다.
+* This example has been imported from below Tensorflow Tutorial Site.
 
    [https://www.tensorflow.org/tutorials/generative/dcgan](https://www.tensorflow.org/tutorials/generative/dcgan)
 
 <br>
 
-* 우리는 이 Example에서 MNIST Dataset의 확률 분포를 학습한 후에, 학습이 끝난 Model이 MNIST Data와 유사한 Data를 Generation 하는 것을 볼 수 있을 것입니다.   
+* In this example, we will see that the trained model generates data similar to MNIST data after learning the probability distribution of MNIST dataset.
 
 <br>
 <br>
@@ -47,11 +47,11 @@ categories: Deep Learning
 
 <br>
 
-* 필요한 Package를 Load합니다.   
+* Load packages
 
 <br>
 
-* imageio는 결과를 GIF Format으로 만들기 위한 것입니다.   
+* imageio is necessary when making GIF animation.
 
 <br>   
 <br>
@@ -85,11 +85,11 @@ import tensorflow as tf
 
 <br>   
 
-* 앞서 말했듯이, Generator와 Discriminator는 MNIST Dataset을 학습할 것입니다.
+* As mentioned earlier, Generator and Discriminator will train MNIST dataSet.
 
 <br>
 
-* 학습이 끝난 후, Generator는 MNIST 손글씨와 유사한 글자를 생성할 것입니다.
+* After training, Generator will generate a letter similar to MNIST handwriting.
 
 <br>
 
@@ -108,7 +108,7 @@ train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('fl
 
 <br>   
 
-* 이미지를 [-1, 1]로 정규화합니다.   
+* Normalizing images to [-1, 1]
 
 <br>
 
@@ -124,7 +124,7 @@ BATCH_SIZE = 256
 
 <br>
 
-* 데이터 배치를 만들고 섞습니다.   
+* Making dataset batch and shuffle.
 
 <br>
 
@@ -142,7 +142,7 @@ train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(BUFFER_
 
 <br>
 
-* DCGAN Paper에서 언급되었던 방법들을 사용하여 Generator와 Discriminator를 구현합니다.
+* Implementing Generator & Discriminator by the way used in DCGAN paper.
 
 <br>
 <br>
@@ -151,15 +151,15 @@ train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(BUFFER_
 
 <br>
 
-* Generator는 Input으로 Random값을 받아서 점점 MNIST Data를 Generation하도록 Train합니다.
+* The generator accepts the noise(random) value as input to train to generate MNIST data.
 
 <br>
 
-* Paper에도 나오듯이, Upsample을 위해서 Tensorflow의 [tf.keras.layers.Conv2DTranspose](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose)를 이용합니다.
+* As you can see, it uses Tensorflow conv2dtranspose[TF.KERAS.LAYERS.CONV2DTRANSPOSE] (https://www.tensorflow.org/api_docs/python/tf/keras/layers/conv2dtranspose) for upsampling.
 
 <br>
 
-* 그리고, Batch Normalization / ReLU / Tanh 을 사용하여 Generator를 만듭니다.
+* Then, making Generator using Batch Normalization / ReLU / Tanh.
 
 <br>
 <br>
@@ -172,7 +172,7 @@ def make_generator_model():
     model.add(layers.LeakyReLU())
 
     model.add(layers.Reshape((7, 7, 256)))
-    assert model.output_shape == (None, 7, 7, 256) # 주목: 배치사이즈로 None이 주어집니다.
+    assert model.output_shape == (None, 7, 7, 256) # Notice : Batch size as None
 
     model.add(layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False))
     assert model.output_shape == (None, 7, 7, 128)
@@ -213,11 +213,11 @@ plt.imshow(generated_image[0, :, :, 0], cmap='gray')
 
 <br>
 
-* 위의 Image는 Generator가 아무 Train을 하지 않은 상태에서 그냥 한 번 출력을 해 본 것입니다.
+* The above image is that the generator has just tried to print without any train.
 
 <br>
 
-* 그야말로, Noise입니다.  Generator가 차츰 Train을 거치면서 점점 MNIST처럼 변하겠죠?
+* It is just noise. Generator will gradually generates MNIST-like data while going through train ?
 
 <br>
 
