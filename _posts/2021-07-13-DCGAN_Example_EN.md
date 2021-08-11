@@ -494,13 +494,13 @@ seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 <br>
 
-* 이와 같이 Forward Propagation할 때 필요한 값들을 저장해 주는 역할을 tf.GradientTape()가 해줍니다.
+* TF.GradientTape () is the role that stores the values that are required when forwarding the forward procagation.
 
 <br>
 <br>
 <br>
 
-* 위에서 언급한 Annotation을 염두해 두고, 아래 Train Step Function을 보도록 하겠습니다.   
+* Keep the annotation mentioned above and let's look at the train step function below.
 
 <br>
 
@@ -527,17 +527,17 @@ def train_step(images):
 
 <br>
 
-* Forward Propagation 중에 Tape에 변수를 저장한 후에, 나중에 Backpropagation에 앞서 저장한 변수를 사용하는 것을 볼 수 있습니다.
+* After saving variables in tape during forward propagation, you can later know using variables that you saved prior to backPropagation.
 
 <br>
 <br>
 <br>
 
-* 다음이 실제 Train Function입니다.
+* This is the actual train function.
 
 <br>
 
-* Epoch Control도 Custom Train Loop다 보니, 알아서 해야 합니다.
+* Since it's a custom train loop, epoch control should be done by yourself.
 
 <br>
 
@@ -550,20 +550,16 @@ def train(dataset, epochs):
         for image_batch in dataset:
             train_step(image_batch)
 
-        # GIF를 위한 이미지를 바로 생성합니다.
         display.clear_output(wait=True)
         generate_and_save_images(generator,
                                  epoch + 1,
                                  seed)
 
-        # 15 에포크가 지날 때마다 모델을 저장합니다.
         if (epoch + 1) % 15 == 0:
             checkpoint.save(file_prefix = checkpoint_prefix)
 
-        # print (' 에포크 {} 에서 걸린 시간은 {} 초 입니다'.format(epoch +1, time.time()-start))
         print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
 
-    # 마지막 에포크가 끝난 후 생성합니다.
     display.clear_output(wait=True)
     
     generate_and_save_images(generator,
@@ -574,8 +570,6 @@ def train(dataset, epochs):
 
 ```python
 def generate_and_save_images(model, epoch, test_input):
-    # `training`이 False로 맞춰진 것을 주목하세요.
-    # 이렇게 하면 (배치정규화를 포함하여) 모든 층들이 추론 모드로 실행됩니다. 
     predictions = model(test_input, training=False)
 
     fig = plt.figure(figsize=(4,4))
@@ -597,19 +591,19 @@ def generate_and_save_images(model, epoch, test_input):
 
 <br>
 
-* 위에서 정의한 train() method는 Generator와 Discriminator를 동시에 Train 시킵니다.
+* The train() method defined above trains Generator and Discriminator at the same time.
 
 <br>
 
-* DCGAN을 포함해, GAN은 Train시키기가 매우 까다로울 수 있습니다. 
+* GANs, including DCGANs, can be very difficult to train.
 
 <br>
 
-* Generator와 Discriminator가 서로 균형을 맞추며 Train시키기가 어렵기 때문입니다.
+* Because it is difficult to train the generator and discriminator at the same time in a balanced way
 
 <br>
 
-* 초반에는 예상하듯이, 생성된 Image는 도데체 뭔지 도저히 알 수 없지만, Epoch이 진행될수록 점점 숫자처럼 보입니다.
+* As expected, the generated image is not quite clear at the beginning, but as the epoch progresses, it looks more and more like a number.
 
 <br>
 <br>
