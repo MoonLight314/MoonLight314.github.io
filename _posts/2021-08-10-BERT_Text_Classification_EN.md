@@ -3,7 +3,7 @@ title: "BERT Text Classification (EN)"
 date: 2021-08-10 08:26:28 -0400
 categories: Deep Learning
 ---
-### BERT Text Classification
+# BERT Text Classification
 
 <br>
 <br>
@@ -12,15 +12,15 @@ categories: Deep Learning
 <br>
 <br>
 
-* 이번 Post에서는 BERT Model을 이용하여, Text 분류 작업을 해보도록 하겠습니다.   
+* In this post, we will use the BERT model to classify text.
 
 <br>
 
-* 영화 감상평이 긍정적인지 부정적인지 분류해 놓은 Data Set을 이용할 예정입니다.
+* We plan to use a data set that classifies whether movie reviews are positive or negative.
 
 <br>
 
-* 실제로 사용할 Data Set은 [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/) 입니다.
+* The data set to actually use is [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/).
 
 <br>
 <br>
@@ -32,23 +32,23 @@ categories: Deep Learning
 
 <br>
 
-* BERT 및 기타 Transformer Encoder Architecture는 Natural Language Process의 다양한 분야에서 좋은 성능을 보여주고 있습니다.
+* BERT and other transformer encoder architectures are making good performance in various fields of Natural Language Process.
 
 <br>
 
-* BERT or Transformer Encoder는 Natural Language Process의 다양한 분야에 사용할 수 있는 Vector Space를 계산해 줍니다.
+* BERT or transformer encoder calculates vector space that can be used in various fields of Natural Language Process.
 
 <br>
 
-* BERT(Bidirectional Encoder Representations from Transformers)는 이름에서 유추할 수 있듯이, Transformer Encoder를 사용하여 전체 Text의 각 Toekn의 앞/뒤 Token을 고려하여 Token을 처리하는 구조를 가지고 있습니다.
+* BERT (Bidirectional Encoder Representations from Transformers), as inferred from the name, has a structure that uses the transformer encoder to process tokens by considering the tokens before and after each token of the entire text.
 
 <br>
 
-* BERT는 large text corpus에서 Train한 후에, 특정 Task에 적합하도록 Fine Tuning을 합니다.
+* After training in a large text corpus, BERT performs fine tuning to apply to a specific task.
 
 <br>
 
-* BERT의 Paper는 아래 Link를 참고하시면 됩니다.
+* You can refer to the link below for BERT's paper.
 
    [BERT(Bidirectional Encoder Representations from Transformers)](https://arxiv.org/abs/1810.04805)
 
@@ -63,7 +63,7 @@ categories: Deep Learning
 
 <br>
 
-* Tensorflow를 사용할 예정이며, GPU가 제대로 동작하는지도 한 번 확인해 보았습니다.   
+* I'm going to use Tensorflow, and check that the GPU is working properly.
 
 <br>
 
@@ -113,15 +113,15 @@ tf.config.list_physical_devices('GPU')
 
 <br>
 
-* 이번 Post에서 사용할 IMDB Dataset에 대해서 알아보겠습니다.
+* Let's take a look at IMDB Dataset to be used in this post.
 
 <br>
 
-* IMDB Dataset에 대해서는 들어보신 분이 많을 것입니다. 영화 Review Site에서 영화에 대한 긍정/부정 의견을 모아서 만든 Dataset입니다.
+* Many of you may have heard of the IMDB dataset. This is a dataset created by collecting positive/negative opinions about movies from the movie review site.
 
 <br>
 
-* 아래 Code로 Download할 수 있습니다.
+* You can download by the below code.
 
 <br>
 <br>
@@ -145,11 +145,11 @@ shutil.rmtree(remove_dir)
 <br>
 <br>
 
-* Dataset을 받으면 자동으로 Unzip을 해줍니다.
+* The code automatically unzip after downloading.
 
 <br>
 
-* 'aclImdb'라는 Folder가 생기고 그 아래에 다음과 같은 구조로 Folder가 구성되어 있습니다.
+* A folder named 'aclImdb' is created, and the folder is composed of the following structure below it.
 
 <br>
 
@@ -159,36 +159,36 @@ shutil.rmtree(remove_dir)
 
 <br>
 
-* 친절하게도 Train / Test Data가 분리되어 있네요.
+* Kindly note that Train / Test Data is separated.
 
 <br>
 
-* Folder 구조가 Train / Test으로 이미 나누어져 있고, 게다가 긍정/부정도 Folder로 나누어져 있습니다.
+* The folder structure is already divided into Train / Test, and positive/negative is also divided into folders.
 
 <br>
 
-* 이런 상황에서 사용하기 좋은 함수가 text_dataset_from_directory()입니다.
+* A good function to use in this situation is **text_dataset_from_directory().**
 
 <br>
 
-* text_dataset_from_directory()에 대한 자세한 사항은 아래 Link에서 확인하도록 합니다.
+* For details about **text_dataset_from_directory()**, check the link below.
   https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text_dataset_from_directory
 
 <br>
 
-* Test Data은 이미 있으니, Train Data를 이용하여 Validation Data를 만들도록 합니다.
+* Since test data already exists, so make validation data from train data.
 
 <br>
 <br>
 
-* Dataset을 만들어 봅시다.   
+* Let's make dataset.
 
 <br>
 
 ```python
 AUTOTUNE = tf.data.AUTOTUNE
 
-# Batch Size는 개별 상황에 맞게 적절하게 바꿔주세요
+# Please change the batch size appropriately according to individual circumstances.
 #batch_size = 32
 batch_size = 4
 
@@ -199,11 +199,11 @@ seed = 42
 <br>
 <br>
 
-* 먼저 Train Folder에 있는 Data로 Train Dataset / Validation Dataset 나눕니다.
+* First, divide train dataset / validation dataset by data in train folder.
 
 <br>
 
-* 'validation_split' 과 'subset'을 이용해서 나눌 수 있는데, 'subset'은  "training" or "validation"을 가질 수 있고, 'validation_split'이 설정된 경우에 기능을 합니다.
+* It can be divided using 'validation_split' and 'subset'. 'subset' can have "training" or "validation", and works only when 'validation_split' is set.
 
 <br>
 
