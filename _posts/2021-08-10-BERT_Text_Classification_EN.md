@@ -626,11 +626,11 @@ print(f'Sequence Outputs Values:{bert_results["sequence_output"][0, :12]}')
     
 <br>
 
-* BERT가 출력하는 값을 보시면, Pooled Outputs과 Sequence Outputs이 있습니다.
+* As looking at the output values by BERT, there are 'Pooled Outputs' and 'Sequence Outputs'.
 
 <br>
 
-* 우리가 사용할 값은 'Pooled Outputs'이며, 이 값을 이용해 Classify하도록 하겠습니다.
+* The value we will use is 'Pooled Outputs', and we will use this value to classify.
 
 <br>
 <br>
@@ -642,7 +642,7 @@ print(f'Sequence Outputs Values:{bert_results["sequence_output"][0, :12]}')
 
 <br>
 
-* 이제 필요한 모든 준비를 마쳤으니, 실제 Model을 만들어 보겠습니다.   
+* Now that we have all the necessary preparations, let's create the classification model.
 
 <br>   
 <br>
@@ -668,53 +668,53 @@ def build_classifier_model():
 
 <br>
 
-* **text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')**
-  - 영화 Review Text를 받는 Input Layer입니다.
+* **text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')**  
+  - This is the input layer that receives the raw movie review text.
   
 <br>
   
 * **preprocessing_layer = hub.KerasLayer(tfhub_handle_preprocess, name='preprocessing')**
-  - 우리가 선택한 BERT Model에 해당하는 Preprocessor를 Download해서 Layer 형태로 만듭니다.
+  - Download the preprocessor corresponding to BERT model we selected and make it in the form of a layer.
 
 <br>
 
 * **encoder_inputs = preprocessing_layer(text_input)**
-  - Preprocessor를 거친 Text를 BERT Input형태로 만듭니다.
+  - Text that has passed through the preprocessor is converted as BERT inputs.
 
 <br>
 
 * **encoder = hub.KerasLayer(tfhub_handle_encoder, trainable=True, name='BERT_encoder')**
-  - BERT Layer입니다.
+  - It's BERT layer
 
 <br>
 
 * **outputs = encoder(encoder_inputs)**
-  - Output은 BERT Layer에 encoder_inputs을 넣은 결과값입니다.
+  - Output is the result of putting encoder_inputs into BERT layer.
 
 <br>
 
 * **net = outputs['pooled_output']**
-  - 이제 BERT의 출력값에서 실제가 우리가 사용할 값은 'pooled_output' 값입니다.
+  - From the outputs of BERT, the actual value we will use is the 'pooled_output'.
   
 <br>
 
 * **net = tf.keras.layers.Dropout(0.1)(net)**
 * **net = tf.keras.layers.Dense(1, activation=None, name='classifier')(net)**
-  - 특별한 Dense Layer없이 바로 출력을 뽑아내네요. 
-  - Binary Classification이기 때문에 출력은 한개입니다.
+  - The output is extracted directly without any dense Layer.
+  - Since it is a binary classification, there is only one output.
 
 <br>
 <br>
 
-* 만든 Model이 제대로 값이 출력하는지 한 번 볼까요?
+* Let's check if the created model outputs values properly.
 
 <br>
 
-* 이전에 Test 문장을 입력으로 넣어보겠습니다.  물론, 이 Model은 Train이 되어 있지 않기 때문에 출력값은 아무런 의미가 없습니다.
+* Let's put the test sentence as input. Of course, since this model is not trained yet, the output value has no meaning.
 
 <br>
 
-* 단지, 동작이 되는지만 보는것입니다.
+* Just to check if it works.
 
 <br>
 
@@ -728,7 +728,7 @@ print(tf.sigmoid(bert_raw_result))
 
 <br>
 
-* 값 하나가 출력되네요. 저 값은 확률값이겠죠?   
+* Only one value is output. That value may be a probability value, right?
 
 <br>
 <br>
@@ -737,7 +737,7 @@ print(tf.sigmoid(bert_raw_result))
 
 <br>
 
-* Evaluation은 Binary Classification에 맞게 선택합니다.   
+* Evaluation metric is selected according to binary classification.
 
 <br>
 
@@ -752,7 +752,7 @@ metrics = tf.metrics.BinaryAccuracy()
 
 <br>
 
-* Optimizer는 Adam을 사용하도록 하겠습니다.   
+* We'll use Adam as Optimizer.
 
 <br>
 
@@ -789,11 +789,11 @@ classifier_model.compile(optimizer=optimizer,
 
 <br>
 
-* 모든 준비를 마쳤으니, Train을 시작해 보겠습니다.
+* Now that we're all set, let's start the Train.
 
 <br>
 
-* 저는 GTX 960에서 Train했는데, 1 Epoch에 11분 정도 걸렸습니다.
+* I trained on a GTX 960, 1 epoch took about 11 minutes.
 
 <br>
 
@@ -820,11 +820,11 @@ history = classifier_model.fit(x=train_ds,
 <br>
 <br>  
 
-* Train Data에서 Accuracy는 계속 올라가지만, 2번째 Epoch에서 Validation Accuracy는 떨어지네요.
+* Accuracy continues to rise in train data, but validation accuracy falls from the second epoch.
 
 <br>
 
-* Overfitting입니다.
+* It's overfitting.
 
 <br>
 <br>
@@ -880,7 +880,7 @@ plt.legend(loc='lower right')
 
 <br>
 
-* Test Data로 평가를 한 번 해보죠.
+* Let's evaluate the model with test data.
 
 <br>
 
@@ -897,16 +897,16 @@ print(f'Accuracy: {accuracy}')
     
 <br>
 
-* Val. Accuracy와 비슷한 결과가 나오네요.   
+* It will show the similar result as val. accuracy.
 
 <br>
 <br>
 
-* Model을 저장하고 다시 불러와서 Test하는 방법입니다.
+* This is how to save the model and reload it.
 
 <br>
 
-* .save()를 사용하시면 됩니다.
+* You can call .save()
 
 <br>
 
@@ -919,7 +919,7 @@ classifier_model.save(saved_model_path, include_optimizer=False)
 <br>
 <br>
 
-* 다시 불러올때는 tf.saved_model.load()를 사용하시면 됩니다.   
+* When you want to load a saved model, you can use tf.saved_model.load().
 
 <br>
 
@@ -929,7 +929,7 @@ reloaded_model = tf.saved_model.load(saved_model_path)
 <br>
 <br>
 
-* 원래 모델이랑 Load한 모델이랑 결과가 똑같죠?   
+* The results of the original model and the loaded model are the same, right?
 
 <br>
 
@@ -976,10 +976,10 @@ print_my_examples(examples, original_results)
 <br>
 <br>
 
-* 이번 Post에서는 간단하게 BERT를 사용하는 방법에 대해서 알아보았습니다.
+* In this post, we learned how to use BERT simply.
 
 <br>
 
-* 다음에는 BERT를 이용한 다른 Example을 알아보도록 하겠습니다.
+* Next, let's look at another example using BERT.
 
 <br>
