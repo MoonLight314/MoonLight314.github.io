@@ -172,7 +172,7 @@ shutil.rmtree(remove_dir)
 <br>
 
 * For details about **text_dataset_from_directory()**, check the link below.
-  https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text_dataset_from_directory
+  (https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text_dataset_from_directory)
 
 <br>
 
@@ -330,8 +330,7 @@ for text_batch, label_batch in train_ds.take(1):
 <br>
 
 * You can check the types in the link below.
-
-  https://tfhub.dev/google/collections/bert/1
+  (https://tfhub.dev/google/collections/bert/1)
 
 <br>
 <br>
