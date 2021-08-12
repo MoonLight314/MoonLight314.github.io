@@ -207,7 +207,7 @@ seed = 42
 
 <br>
 
-* 먼저 Train Dataset을 만듭니다.
+* First, let's make train dataset.
 
 <br>
 
@@ -229,7 +229,7 @@ train_ds = raw_train_ds.cache().prefetch(buffer_size=AUTOTUNE)
 <br>
 <br>
 
-* 그리고, Validation Dataset을 만듭니다.   
+* And then, making validation dataset.
 
 <br>
 
@@ -250,7 +250,7 @@ val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 <br>
 <br>
 
-* 마지막으로, Test Dataset을 만듭니다.   
+* Lastly, making test dataset.
 
 <br>
 
@@ -290,7 +290,7 @@ class_names
 <br>
 <br>
 
-* Data가 잘 만들어 졌는지 한 번 살펴보겠습니다.
+* Let's take a look at whether the data is well created.
 
 <br>
 
@@ -313,7 +313,7 @@ for text_batch, label_batch in train_ds.take(1):
 
 <br>
 
-* 위와 같이 시청자가 작성한 Review와 함께 그 Review가 긍정적인지 부정적인지 나타내는 Label이 있습니다.   
+* As above, along with the review written by the viewer, there is a label indicating whether the review is positive or negative.
 
 <br>
 <br>
@@ -325,31 +325,31 @@ for text_batch, label_batch in train_ds.take(1):
 
 <br>
 
-* BERT는 목적에 맞게 다양한 규모의 Model이 준비되어 있습니다.
+* BERT has various scale models for different purposes.
 
 <br>
 
-* 아래 Link에서 종류를 확인할 수 있습니다.
+* You can check the types in the link below.
 
   https://tfhub.dev/google/collections/bert/1
 
 <br>
 <br>
   
-* 또한, 각 Model에 Input Shape에 맞게 Text를 Preprocessing해 주는 Function도 함께 준비되어 있습니다.  
+* In addition, a function that preprocesses text according to the input shape for each model is also prepared.
 
 <br>
 <br>
 
-* 시작은 Small BERT Model로 해 보겠습니다.
+* Let's begin with Small BERT model.
 
 <br>
 
-* 적당한 크기의 small_bert/bert_en_uncased_L-4_H-512_A-8로 정해보도록 하죠
+* Let's set it to small_bert/bert_en_uncased_L-4_H-512_A-8 of a suitable size.
 
 <br>
 
-* 아래 Code는 우리가 정한 Model에 대한 위치와 해당 Preprocessor를 Mapping해 줍니다.
+* The code below maps the location of the model we set and the corresponding preprocessor.
 
 <br>
 <br>
@@ -508,7 +508,7 @@ print(f'Preprocess model auto-selected: {tfhub_handle_preprocess}')
 <br>
 <br>
 
-* Preprocessor를 Layer 형태로 변환해서 나중에 사용할 수 있도록 준비합니다.
+* Convert the preprocessor into a layer form and prepare it for later use.
 
 <br>
 
@@ -519,15 +519,15 @@ bert_preprocess_model = hub.KerasLayer(tfhub_handle_preprocess)
 <br>
 <br>   
 
-* 간단하게 Test해 보겠습니다.
+* Let's do a simple test.
 
 <br>
 
-* 아무 문장이나 Preprocessing을 거쳐서 BERT에 넣어서 출력이 제대로 되는지 확인해 보겠습니다.
+* Let's check if the output is correct by putting any text into BERT through preprocessing.
 
 <br>
 
-* **this is such an amazing movie!** 라는 간단한 문장으로 Test해 보죠
+* The test text is ' **this is such an amazing movie!** '
 
 <br>
 
@@ -550,37 +550,37 @@ print(f'Type Ids   : {text_preprocessed["input_type_ids"][0, :12]}')
     
 <br>
 
-* BERT Model은 Input으로 3개의 값이 필요합니다.
+* BERT model requires 3 values as input
 
 <br>
 
-* BERT Model Paper를 보시면, **'Token embeddings' , 'Sentence Embeddings', 'Transformer positional embeddings'** 이라는 용어가 나옵니다.
+* If you review at BERT paper, the terms 'Token embeddings' , 'Sentence Embeddings' and 'Transformer positional embeddings'** appear.
 
 <br>
 
-* 'Token embeddings'은 각 Token(단어)의 Vocabulary Embedding ID입니다.
+* 'Token embeddings' is the vocabulary embedding ID of each token (word).
 
 <br>
 
-* 'Sentence Embeddings'은 하나의 문장에서 같은 값을 가집니다. 위의 예제에서는 한 문장만 입력이 되었으므로, 1이 나오고 나머지는 모두 0이 되어 있는 것을 확인할 수 있습니다. 만약 여러개의 문장이라면 다른 숫자가 나오겠죠.
+* 'Sentence Embeddings' has the same value in one sentence. In the example above, since only one sentence was input, you can see that 1 is output and all others are 0. If there are multiple sentences, different numbers will appear.
 
 <br>
 
-* 위의 각 항목에 해당하는 값들이 **'input_word_ids' , 'input_mask' , 'input_type_ids'** 가 됩니다.
-
-<br>
-<br>
-
-* 같은 이름으로 하면 좋을텐데, 왜 이름을 다르게 붙였는지...
+* The values corresponding to each of the above items become **'input_word_ids' , 'input_mask' , and 'input_type_ids'** .
 
 <br>
 <br>
 
-* Preprocessor를 거친 값들은 비로소 BERT에 입력으로 사용할 수 있습니다.
+* It would be nice to have the same name, but why did they give it a different name...
+
+<br>
+<br>
+
+* Values that have passed through the preprocessor can only be used as input values to BERT.
 
 <br>
 
-* BERT Model도 Download해서 Layer로 변환합니다.
+* Download the BERT Model and convert it to a layer.
 
 <br>
 
@@ -591,7 +591,7 @@ bert_model = hub.KerasLayer(tfhub_handle_encoder)
 <br>
 <br>
 
-* 좀 전에 Preprocessing된 Text를 BERT Model에 넣어서 결과를 보도록 하겠습니다.
+* Let's put the preprocessed text into BERT model and let's check the result.
 
 <br>
 
