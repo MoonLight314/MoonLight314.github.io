@@ -631,11 +631,11 @@ train(train_dataset, EPOCHS)
 
 <br>
 
-* Train 과정을 좀 더 시각적으로 잘 볼 수 있도록, Animation GIF로 만들어 보겠습니다.
+* In order to see the train process more visually, let's make it into an animation GIF.
 
 <br>
 
-* 마지막 Checkpoint로 Model을 Load하겠습니다.   
+* Let's load the model from our last checkpoint.
 
 <br>
 
@@ -651,7 +651,6 @@ checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 <br>
 
 ```python
-# 에포크 숫자를 사용하여 하나의 이미지를 보여줍니다.
 def display_image(epoch_no):
     return PIL.Image.open('image_at_epoch_{:04d}.png'.format(epoch_no))
 ```
@@ -702,8 +701,8 @@ if IPython.version_info > (6,2,0,''):
 
 <br>   
 
-* Folder에 보시면 'dcgan.gif' 파일이 생성되어 있는 것을 확인할 수 있습니다.
+* As you look in the folder, you can see that the 'dcgan.gif' file is created.
 
 <br>
 
-* 이 파일을 보시면, Train 과정이 어떻게 진행되었는지 알 수 있습니다.
+* Looking at this file, you can see how the train process went.
