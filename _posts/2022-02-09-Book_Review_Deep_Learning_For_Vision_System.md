@@ -5,3 +5,12 @@ categories: Deep Learning
 ---
 # 비전 시스템을 위한 딥러닝(Deep Learning For Vision System)
 
+<br>
+<br>
+<br>
+<br>
+
+## 0. Transfer Learning
+
+<br>
+
