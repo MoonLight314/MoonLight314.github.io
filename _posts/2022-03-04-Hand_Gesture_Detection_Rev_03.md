@@ -14,7 +14,7 @@ categories: Deep Learning
 
 <br>
 
-* 지난 번 Conv3D를 이용한 Post(https://moonlight314.github.io/deep/learning/Hand_Gesture_Detection_Rev_02/)에서 다룬 방식은 학습이 제대로 이루어 지지 않았습니다.
+* 지난 번 Conv3D를 이용한 Post( [https://moonlight314.github.io/deep/learning/Hand_Gesture_Detection_Rev_02/](https://moonlight314.github.io/deep/learning/Hand_Gesture_Detection_Rev_02/) )에서 다룬 방식은 학습이 제대로 이루어 지지 않았습니다.
 
 <br>
 
