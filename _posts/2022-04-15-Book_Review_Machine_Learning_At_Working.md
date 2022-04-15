@@ -11,5 +11,5 @@ categories: Deep Learning
 <br>
 
 <p align="center">
-  <img src="/assets/Book_Review_Assets/Book_Review_Machine_Learning_At_Working.png.png">
+  <img src="/assets/Book_Review_Assets/Book_Review_Machine_Learning_At_Working.png">
 </p>
