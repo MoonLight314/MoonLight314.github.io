@@ -563,8 +563,8 @@ meta_data.to_csv("meta_data.csv",index=False)
 
 * Preprocessing 작업에서 만들어진 Image File List를 가지고 Train을 하도록 하겠습니다.   
 
-   
-
+<br>
+<br>
 
 ```python
 import pandas as pd
@@ -580,35 +580,33 @@ from tensorflow.keras.layers import GlobalAveragePooling2D , BatchNormalization 
 from tensorflow.keras.callbacks import TensorBoard , ModelCheckpoint , LearningRateScheduler
 ```
 
-   
-
-   
+<br>
 
 * Batch Size와 Dropout Rate 설정합니다.   
 
+<br>
 
 ```python
 BATCH_SIZE = 32
 DROP_OUT_RATE = 0.2
 ```
-
-   
+<br>
 
 * Preprocessing에서 얻은 Meta Data File을 Open합니다.   
 
+<br>
 
 ```python
 dataset_info = pd.read_csv("meta_data.csv")
 ```
 
-   
-
-   
+<br>
 
 * Image에 대한 정보와 Label에 대한 정보를 분리합니다.
 
 * Mask 착용여부가 Label이 되고, 이를 Label Encoder로 One-Hot으로 변환합니다.
 
+<br>
 
 ```python
 data_file_path = dataset_info[['file_path' , 'xmin' , 'ymin' , 'xmax' , 'ymax']]
@@ -623,14 +621,13 @@ mask = tf.keras.utils.to_categorical(le_mask , num_classes=2)
 ```
 
     ['with_mask' 'without_mask']
-    
 
-   
-
-   
+<br>
+<br>
 
 * Train & Val. Dataset을 3:1로 나눕니다.
 
+<br>
 
 ```python
 file_path_train, file_path_val, y_train, y_val = train_test_split(data_file_path, mask, 
@@ -642,14 +639,13 @@ print( len(file_path_train) , len(y_train) , len(file_path_val) , len(y_val) )
 ```
 
     5109 5109 1703 1703
-    
 
-   
-
-   
+<br>
+<br>
 
 * Tensorflow Dataset의 Map Function에서 사용하기 위해서 얼굴 좌표 값들과 File Path를 List로 바꾸어 놓습니다.
 
+<br>
 
 ```python
 train_left = file_path_train['xmin'].tolist()
@@ -665,13 +661,12 @@ val_bottom = file_path_val['ymax'].tolist()
 file_path_val = file_path_val['file_path'].tolist()
 ```
 
-   
-
-   
+<br>
 
 * Dataset Map Function입니다.
 * Image File Path를 받아서, 얼굴부분만을 잘라낸 후 Label값과 함께 돌려줍니다.
 
+<br>
 
 ```python
 def load_image( image_path , left , right , top , bottom , label ):
@@ -686,13 +681,13 @@ def load_image( image_path , left , right , top , bottom , label ):
     return img , label
 ```
 
-   
-
-   
+<br>
+<br>
 
 * Dataset을 준비합니다.   
 * from_tensor_slices의 Parameter에 얼굴 좌표 값과 File Path를 넣어줍니다.
 
+<br>
 
 ```python
 train_dataset = tf.data.Dataset.from_tensor_slices( (file_path_train , 
@@ -726,12 +721,12 @@ val_dataset = val_dataset.shuffle(buffer_size=len(file_path_val))\
                             .prefetch(tf.data.experimental.AUTOTUNE)    #
 ```
 
-   
-
-   
+<br>
+<br>
 
 * ResNet50으로 Feature Extraction해서 Dense로 분류하도록 하겠습니다.   
 
+<br>
 
 ```python
 ResNet50 = tf.keras.applications.resnet.ResNet50(
@@ -756,9 +751,7 @@ model.add( BatchNormalization() )
 model.add( Dense(2, activation='softmax') )
 ```
 
-   
-
-   
+<br>
 
 * Learning Rate Scheduler 정의합니다.   
 
@@ -773,11 +766,8 @@ def lr_exp_decay(epoch, lr):
 lr_scheduler = LearningRateScheduler(lr_exp_decay, verbose=1)
 ```
 
-   
-
-   
-
-   
+<br>
+<br>
 
 * Tensorboard와 Checkpoint 관련 값들을 정의합니다.   
 
@@ -793,9 +783,8 @@ cp = ModelCheckpoint(filepath=CHECKPOINT_PATH,
                      verbose = 1)
 ```
 
-   
-
-   
+<br>  
+<br>
 
 * Model Compile   
 
@@ -809,9 +798,8 @@ model.compile(
 )
 ```
 
-   
-
-   
+<br>
+<br>
 
 * Train 시작   
 
@@ -1001,10 +989,8 @@ hist = model.fit(train_dataset,
     
     Epoch 00020: val_accuracy did not improve from 0.96875
     
-
-   
-
-   
+<br>
+<br>
 
 * Train / Val. 모두 좋은 정확도를 보여줍니다.   
 
@@ -1028,33 +1014,33 @@ plt.legend(['Train', 'Val'], loc='upper left')
 plt.show()
 ```
 
+<p align="center">
+  <img src="/assets/Mask_Detection/output_57_0.png">
+</p>
 
-    
-![png](output_57_0.png)
-    
+<p align="center">
+  <img src="/assets/Mask_Detection/output_57_1.png">
 
-
-
-    
-![png](output_57_1.png)
-    
-
-
-
+<br>
+<br>
+  
 ```python
 
 ```
 
+<br>
+<br>
+<br>
 
 ## 3. Inference
 
+<br>
+  
 * 이제 실제로 Cam을 통해서 Train한 Model이 잘 동작하는지 확인해 보도록 하겠습니다.
 * 전체적인 방법은 Cam을 통해 들어온 영상을 Preprocess와 동일한 방법으로 전처리를 한 후 Model에 넣은 후에 결과를 출력하도록 하겠습니다.
 
-   
-
-   
-
+<br>
+<br>
 
 ```python
 import cv2
@@ -1063,13 +1049,11 @@ import tensorflow as tf
 from keras.models import load_model, save_model
 import tensorflow_addons as tfa
 ```
-
-   
-
-   
+<br>
 
 * Preprocess때와 동일하게 Image를 처리하기 위해서 Face Detector 및 상수 값들도 동일하게 사용하도록 하겠습니다.   
 
+<br>
 
 ```python
 MODEL_FILE = "opencv_face_detector_uint8.pb"
@@ -1079,21 +1063,16 @@ CONFIDENCE_FACE = 0.9
 RESULT = ['with_mask' , 'without_mask']
 MARGIN_RATIO = 0.2
 ```
+<br>
 
-   
-
-   
-
-* Face Detector를 Load합니다.   
+* Face Detector를 Load합니다.
 
 
 ```python
 net = cv2.dnn.readNetFromTensorflow( MODEL_FILE , CONFIG_FILE )
 ```
-
-   
-
-   
+<br>
+<br>
 
 * Train시킨 Model도 같이 Load합니다.   
 
@@ -1106,22 +1085,18 @@ model = load_model("CheckPoints_Mask_Detection")
 
     Loading Saved Model...
     
-
-   
-
-   
-
+<br>
+  
 * Cam을 연결합니다.   
 
+<br>
 
 ```python
 cap = cv2.VideoCapture(0)
 ```
-
-   
-
-   
-
+<br>
+<br>
+  
 * 아래 부분은 Cam에서 영상을 받아서 Preprocess를 거치고 Model에 입력시키는 과정입니다.
 
     - **ret, frame = cap.read()**
@@ -1149,7 +1124,9 @@ cap = cv2.VideoCapture(0)
         cv2.putText(frame, Result, (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)**
         * Model은 Mask 착용 여부를 확률로 보여주고, 이를 출력합니다.
 
-
+<br>
+<br>
+  
 ```python
 while cv2.waitKey(1) < 0:
     ret, frame = cap.read()
@@ -1218,298 +1195,8 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-    Low CONFIDENCE_FACE 0.14280182
-    Low CONFIDENCE_FACE 0.14190249
-    Low CONFIDENCE_FACE 0.14129429
-    Low CONFIDENCE_FACE 0.14157966
-    Low CONFIDENCE_FACE 0.14236318
-    Low CONFIDENCE_FACE 0.14125907
-    Low CONFIDENCE_FACE 0.14199193
-    Low CONFIDENCE_FACE 0.14291707
-    Low CONFIDENCE_FACE 0.14235935
-    Low CONFIDENCE_FACE 0.1426097
-    Low CONFIDENCE_FACE 0.1422901
-    Low CONFIDENCE_FACE 0.14139618
-    Low CONFIDENCE_FACE 0.14376278
-    Low CONFIDENCE_FACE 0.14121968
-    Low CONFIDENCE_FACE 0.14125559
-    Low CONFIDENCE_FACE 0.14131822
-    Low CONFIDENCE_FACE 0.14094456
-    Low CONFIDENCE_FACE 0.1419249
-    Low CONFIDENCE_FACE 0.14246558
-    Low CONFIDENCE_FACE 0.14134978
-    Low CONFIDENCE_FACE 0.14168736
-    Low CONFIDENCE_FACE 0.1426712
-    Low CONFIDENCE_FACE 0.14161922
-    Low CONFIDENCE_FACE 0.14150882
-    Low CONFIDENCE_FACE 0.1416071
-    Low CONFIDENCE_FACE 0.14292993
-    Low CONFIDENCE_FACE 0.14311025
-    Low CONFIDENCE_FACE 0.1416132
-    Low CONFIDENCE_FACE 0.14244516
-    Low CONFIDENCE_FACE 0.14291073
-    Low CONFIDENCE_FACE 0.14168912
-    Low CONFIDENCE_FACE 0.14061464
-    Low CONFIDENCE_FACE 0.14211135
-    Low CONFIDENCE_FACE 0.14124404
-    Low CONFIDENCE_FACE 0.14369263
-    Low CONFIDENCE_FACE 0.14264362
-    Low CONFIDENCE_FACE 0.14219181
-    Low CONFIDENCE_FACE 0.14030434
-    Low CONFIDENCE_FACE 0.14164947
-    Low CONFIDENCE_FACE 0.14277592
-    Low CONFIDENCE_FACE 0.14042556
-    Low CONFIDENCE_FACE 0.14322361
-    Low CONFIDENCE_FACE 0.14176065
-    Low CONFIDENCE_FACE 0.1415934
-    Low CONFIDENCE_FACE 0.14275184
-    Low CONFIDENCE_FACE 0.14311273
-    Low CONFIDENCE_FACE 0.13989192
-    Low CONFIDENCE_FACE 0.1421124
-    Low CONFIDENCE_FACE 0.14220457
-    Low CONFIDENCE_FACE 0.16676228
-    Low CONFIDENCE_FACE 0.18839803
-    Low CONFIDENCE_FACE 0.20425373
-    Low CONFIDENCE_FACE 0.1331807
-    Low CONFIDENCE_FACE 0.14578325
-    Low CONFIDENCE_FACE 0.13376047
-    Low CONFIDENCE_FACE 0.14872557
-    Low CONFIDENCE_FACE 0.14934115
-    Low CONFIDENCE_FACE 0.14369012
-    Low CONFIDENCE_FACE 0.15123594
-    Low CONFIDENCE_FACE 0.14166956
-    Low CONFIDENCE_FACE 0.16028358
-    Low CONFIDENCE_FACE 0.13631478
-    Low CONFIDENCE_FACE 0.13824911
-    Low CONFIDENCE_FACE 0.14172396
-    Low CONFIDENCE_FACE 0.13429609
-    Low CONFIDENCE_FACE 0.15828066
-    Low CONFIDENCE_FACE 0.13166375
-    Low CONFIDENCE_FACE 0.13314725
-    Low CONFIDENCE_FACE 0.13404554
-    Low CONFIDENCE_FACE 0.1386514
-    Low CONFIDENCE_FACE 0.13173284
-    Low CONFIDENCE_FACE 0.14980948
-    Low CONFIDENCE_FACE 0.13372232
-    Low CONFIDENCE_FACE 0.13214064
-    Low CONFIDENCE_FACE 0.13299797
-    Low CONFIDENCE_FACE 0.25814673
-    Low CONFIDENCE_FACE 0.8366865
-    Low CONFIDENCE_FACE 0.29836679
-    Low CONFIDENCE_FACE 0.8953248
-    Low CONFIDENCE_FACE 0.46881586
-    Low CONFIDENCE_FACE 0.20059115
-    [[9.9993217e-01 6.7791581e-05]]
-    [[0.97642094 0.02357905]]
-    [[0.97244287 0.02755718]]
-    [[0.95950097 0.04049898]]
-    [[0.9701627  0.02983732]]
-    [[0.9849089  0.01509111]]
-    [[0.9650323  0.03496766]]
-    [[0.981807   0.01819297]]
-    [[0.9684551  0.03154493]]
-    [[0.9641147  0.03588523]]
-    [[0.97459507 0.0254049 ]]
-    [[0.9652043 0.0347957]]
-    [[0.951519   0.04848098]]
-    [[0.93519586 0.06480411]]
-    [[0.71979195 0.280208  ]]
-    [[0.48106903 0.518931  ]]
-    [[9.9997830e-01 2.1710004e-05]]
-    [[9.9990952e-01 9.0474125e-05]]
-    [[9.999651e-01 3.491917e-05]]
-    [[9.9959773e-01 4.0229305e-04]]
-    [[9.9996686e-01 3.3123539e-05]]
-    Low CONFIDENCE_FACE 0.85675186
-    [[9.9997509e-01 2.4915475e-05]]
-    Low CONFIDENCE_FACE 0.89705086
-    Low CONFIDENCE_FACE 0.870888
-    Low CONFIDENCE_FACE 0.8838204
-    Low CONFIDENCE_FACE 0.85938364
-    Low CONFIDENCE_FACE 0.8860084
-    Low CONFIDENCE_FACE 0.8741514
-    [[9.999924e-01 7.634048e-06]]
-    Low CONFIDENCE_FACE 0.89449614
-    [[9.9998808e-01 1.1954343e-05]]
-    [[9.9997783e-01 2.2142174e-05]]
-    [[9.9998975e-01 1.0274648e-05]]
-    [[9.9995363e-01 4.6324312e-05]]
-    [[9.9997783e-01 2.2206334e-05]]
-    [[9.9998951e-01 1.0482572e-05]]
-    [[9.9998522e-01 1.4789501e-05]]
-    [[9.99985456e-01 1.45968215e-05]]
-    [[9.9998617e-01 1.3816749e-05]]
-    [[9.9998260e-01 1.7353308e-05]]
-    [[9.9998224e-01 1.7764520e-05]]
-    [[9.9997985e-01 2.0191392e-05]]
-    [[9.9996161e-01 3.8407805e-05]]
-    [[9.9997580e-01 2.4178973e-05]]
-    [[9.9997973e-01 2.0281166e-05]]
-    [[9.9997890e-01 2.1129503e-05]]
-    [[9.9992263e-01 7.7365279e-05]]
-    [[0.9637711  0.03622883]]
-    [[0.9655266  0.03447345]]
-    [[9.9993944e-01 6.0604056e-05]]
-    [[0.96469784 0.03530216]]
-    [[0.94482714 0.05517283]]
-    [[0.95429456 0.0457054 ]]
-    [[0.92537516 0.07462488]]
-    [[0.93357944 0.06642057]]
-    [[0.9385832  0.06141676]]
-    [[0.95551264 0.04448732]]
-    [[0.9586996  0.04130036]]
-    [[0.95378137 0.04621871]]
-    [[0.95848423 0.04151572]]
-    [[0.9536278  0.04637217]]
-    [[0.94894177 0.05105823]]
-    [[0.9266214  0.07337865]]
-    [[0.9311236  0.06887641]]
-    [[0.94804454 0.0519555 ]]
-    [[0.94941777 0.0505823 ]]
-    [[0.9477013  0.05229879]]
-    [[0.9547586  0.04524139]]
-    [[0.9096597  0.09034026]]
-    [[0.9556387  0.04436132]]
-    [[0.9098226  0.09017736]]
-    [[0.92900515 0.07099482]]
-    [[0.9429705 0.0570295]]
-    [[0.9618354  0.03816456]]
-    [[0.92768115 0.07231887]]
-    [[0.8891724  0.11082761]]
-    [[0.8202518  0.17974819]]
-    [[0.52193487 0.4780651 ]]
-    [[0.3279555  0.67204446]]
-    Low CONFIDENCE_FACE 0.8651485
-    Low CONFIDENCE_FACE 0.83407444
-    [[0.81551695 0.18448305]]
-    Low CONFIDENCE_FACE 0.8126039
-    [[0.7756342  0.22436582]]
-    [[0.34447944 0.65552056]]
-    [[0.75415146 0.24584846]]
-    Low CONFIDENCE_FACE 0.8500269
-    [[9.9964690e-01 3.5303563e-04]]
-    [[0.7604608  0.23953916]]
-    [[0.69646204 0.303538  ]]
-    [[0.5782617  0.42173833]]
-    [[0.58556163 0.41443837]]
-    [[0.7136046  0.28639534]]
-    [[0.87438816 0.12561187]]
-    [[0.9114661 0.0885339]]
-    [[0.8629262  0.13707383]]
-    [[9.9983549e-01 1.6453935e-04]]
-    Low CONFIDENCE_FACE 0.83622754
-    Low CONFIDENCE_FACE 0.88209677
-    [[9.9923575e-01 7.6426507e-04]]
-    [[9.993181e-01 6.818777e-04]]
-    [[9.991239e-01 8.761056e-04]]
-    [[0.99802434 0.00197565]]
-    [[0.9910081  0.00899191]]
-    [[0.9909567  0.00904333]]
-    [[0.99706036 0.00293958]]
-    [[0.9972025  0.00279751]]
-    [[9.9911195e-01 8.8802067e-04]]
-    [[0.99583614 0.00416382]]
-    [[0.9959722  0.00402781]]
-    [[0.9932728  0.00672721]]
-    [[0.9988059  0.00119418]]
-    [[9.992441e-01 7.559025e-04]]
-    [[0.9989706 0.0010294]]
-    [[0.9984615  0.00153849]]
-    [[0.99813133 0.00186871]]
-    [[0.9982287  0.00177132]]
-    [[0.9987878  0.00121221]]
-    [[9.991424e-01 8.575591e-04]]
-    [[9.990503e-01 9.496481e-04]]
-    [[0.9981408  0.00185919]]
-    [[0.9989102  0.00108987]]
-    [[0.9975593  0.00244064]]
-    [[0.9983102  0.00168985]]
-    [[0.99849606 0.00150394]]
-    [[0.99870455 0.00129548]]
-    Low CONFIDENCE_FACE 0.87674844
-    [[0.9955504  0.00444957]]
-    [[0.9960835  0.00391643]]
-    [[9.9906796e-01 9.3202438e-04]]
-    [[9.990427e-01 9.573167e-04]]
-    [[9.9937695e-01 6.2313327e-04]]
-    [[0.99828726 0.00171267]]
-    [[0.9969086  0.00309145]]
-    [[0.9960204 0.0039796]]
-    [[0.99531317 0.00468677]]
-    [[0.994833   0.00516701]]
-    [[0.9947961  0.00520388]]
-    [[0.9950028  0.00499722]]
-    [[0.9950466  0.00495335]]
-    [[0.9956655  0.00433454]]
-    [[0.9964791  0.00352093]]
-    [[0.99441296 0.00558706]]
-    [[0.99508876 0.00491125]]
-    [[0.99522567 0.00477433]]
-    [[0.99509096 0.00490905]]
-    [[0.9960588  0.00394118]]
-    [[0.996384 0.003616]]
-    [[0.9966024  0.00339754]]
-    [[0.9960865  0.00391348]]
-    [[0.9949626  0.00503743]]
-    [[0.9953353  0.00466469]]
-    [[0.9945775  0.00542253]]
-    [[0.99503136 0.00496866]]
-    [[0.9952669  0.00473306]]
-    [[0.9950599  0.00494007]]
-    [[0.9954541  0.00454585]]
-    [[0.99513865 0.00486137]]
-    [[0.99376595 0.00623399]]
-    [[0.9967334  0.00326664]]
-    [[9.994925e-01 5.074363e-04]]
-    [[9.9964786e-01 3.5218519e-04]]
-    [[0.9984408  0.00155921]]
-    [[9.9907815e-01 9.2184462e-04]]
-    [[9.9929154e-01 7.0843182e-04]]
-    [[9.9960560e-01 3.9442405e-04]]
-    [[9.9962986e-01 3.7008020e-04]]
-    [[9.9971372e-01 2.8631036e-04]]
-    [[9.9938262e-01 6.1740016e-04]]
-    [[9.992083e-01 7.918085e-04]]
-    [[0.9986766  0.00132342]]
-    [[0.9988011  0.00119887]]
-    [[9.9912983e-01 8.7020197e-04]]
-    [[0.9907658  0.00923418]]
-    [[0.9918937  0.00810622]]
-    [[0.99087244 0.00912753]]
-    [[0.99896586 0.00103418]]
-    [[9.9903309e-01 9.6694176e-04]]
-    [[9.9936086e-01 6.3915941e-04]]
-    [[9.9927753e-01 7.2245754e-04]]
-    [[9.994584e-01 5.416377e-04]]
-    [[9.994764e-01 5.236629e-04]]
-    [[9.9952936e-01 4.7063525e-04]]
-    [[9.994978e-01 5.022142e-04]]
-    [[0.99890566 0.00109432]]
-    [[0.9800745 0.0199255]]
-    [[0.9923211  0.00767899]]
-    [[9.9965799e-01 3.4198095e-04]]
-    [[9.9990845e-01 9.1537542e-05]]
-    [[0.9961449  0.00385514]]
-    [[9.996001e-01 3.999521e-04]]
-    [[9.9945253e-01 5.4750987e-04]]
-    [[9.993393e-01 6.607443e-04]]
-    [[9.9935776e-01 6.4220640e-04]]
-    [[9.9942720e-01 5.7283696e-04]]
-    [[9.9941206e-01 5.8798864e-04]]
-    [[9.9945039e-01 5.4964155e-04]]
-    [[9.9957615e-01 4.2382695e-04]]
-    [[9.9973577e-01 2.6416857e-04]]
-    [[9.9963856e-01 3.6148631e-04]]
-    [[9.9969363e-01 3.0643673e-04]]
-    [[9.9966884e-01 3.3120887e-04]]
-    [[9.994319e-01 5.680865e-04]]
-    [[9.9971265e-01 2.8731447e-04]]
-    [[9.9967754e-01 3.2242358e-04]]
-    [[0.99823403 0.00176589]]
-    [[9.9935240e-01 6.4758735e-04]]
-    [[9.9925286e-01 7.4711611e-04]]
-    [[9.9938285e-01 6.1706477e-04]]
-    [[9.9953747e-01 4.6250279e-04]]
+<br>
+  
     [[9.9958712e-01 4.1284965e-04]]
     [[9.9957865e-01 4.2130650e-04]]
     [[9.997712e-01 2.287866e-04]]
@@ -1518,85 +1205,10 @@ cv2.destroyAllWindows()
     Low CONFIDENCE_FACE 0.47966802
     Low CONFIDENCE_FACE 0.58707684
     Low CONFIDENCE_FACE 0.42296803
-    Low CONFIDENCE_FACE 0.82349485
-    Low CONFIDENCE_FACE 0.39022785
-    Low CONFIDENCE_FACE 0.5082578
-    Low CONFIDENCE_FACE 0.6949264
-    Low CONFIDENCE_FACE 0.2952118
-    Low CONFIDENCE_FACE 0.2036937
-    Low CONFIDENCE_FACE 0.13645898
-    Low CONFIDENCE_FACE 0.17386356
-    Low CONFIDENCE_FACE 0.13128085
-    Low CONFIDENCE_FACE 0.13417368
-    Low CONFIDENCE_FACE 0.15209262
-    Low CONFIDENCE_FACE 0.28783774
-    Low CONFIDENCE_FACE 0.6745256
-    Low CONFIDENCE_FACE 0.26470515
-    Low CONFIDENCE_FACE 0.18312697
-    Low CONFIDENCE_FACE 0.13624254
-    Low CONFIDENCE_FACE 0.17796788
-    Low CONFIDENCE_FACE 0.13069569
-    Low CONFIDENCE_FACE 0.1310402
-    Low CONFIDENCE_FACE 0.13121031
-    Low CONFIDENCE_FACE 0.13176244
-    Low CONFIDENCE_FACE 0.13099621
-    Low CONFIDENCE_FACE 0.13002826
-    Low CONFIDENCE_FACE 0.12933245
-    Low CONFIDENCE_FACE 0.13300392
-    Low CONFIDENCE_FACE 0.1340986
-    Low CONFIDENCE_FACE 0.13679013
-    Low CONFIDENCE_FACE 0.1414786
-    Low CONFIDENCE_FACE 0.13057747
-    Low CONFIDENCE_FACE 0.15477897
-    Low CONFIDENCE_FACE 0.2815235
-    Low CONFIDENCE_FACE 0.5749421
-    Low CONFIDENCE_FACE 0.1811666
-    Low CONFIDENCE_FACE 0.13516128
-    Low CONFIDENCE_FACE 0.16512947
-    Low CONFIDENCE_FACE 0.21880317
-    Low CONFIDENCE_FACE 0.1296066
-    Low CONFIDENCE_FACE 0.1365106
-    Low CONFIDENCE_FACE 0.5438485
-    Low CONFIDENCE_FACE 0.2512913
-    Low CONFIDENCE_FACE 0.1317276
-    Low CONFIDENCE_FACE 0.13022307
-    Low CONFIDENCE_FACE 0.12880105
-    Low CONFIDENCE_FACE 0.12946387
-    Low CONFIDENCE_FACE 0.3986798
-    Low CONFIDENCE_FACE 0.17132008
-    Low CONFIDENCE_FACE 0.14465316
-    Low CONFIDENCE_FACE 0.13065624
-    Low CONFIDENCE_FACE 0.23391043
-    Low CONFIDENCE_FACE 0.18783936
-    
 
-
-    ---------------------------------------------------------------------------
-
-    KeyboardInterrupt                         Traceback (most recent call last)
-
-    ~\AppData\Local\Temp/ipykernel_4940/1490869148.py in <module>
-          6 
-          7     net.setInput(blob)
-    ----> 8     detections = net.forward()
-          9 
-         10     detection = detections[0, 0]
-    
-
-    KeyboardInterrupt: 
-
-
-![title](test.png)
-
-
-```python
-
-```
-
-
-
-
-
+<br>
+<br>
+  
 <p align="center">
-  <img src="/assets/Hand_Gesture_Detection_Rev_00/.png">
+  <img src="/assets/Mask_Detection/Result.png">
 </p>
