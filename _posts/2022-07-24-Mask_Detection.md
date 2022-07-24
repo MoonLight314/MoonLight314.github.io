@@ -1095,25 +1095,37 @@ cap = cv2.VideoCapture(0)
 
     - **ret, frame = cap.read()**
         * Cam에서 Image를 한 장 받아옵니다.      
-      
+    
+    <br>  
+    
     - **i = np.argmax(detection[:,2])**
         * Face Detector가 Detect한 얼굴부분에 대한 정보 Index를 얻습니다.        
-        
+    
+    <br>    
+    
     - **if detection[i,2] < CONFIDENCE_FACE:**
         * Face Detector가 Detect한 얼굴부분의 신뢰도가 특정 값(0.9)이상인 경우에만 얼굴로 판단합니다.
-        
+    
+    <br>
+    
     - **left = left - int((right - left) * MARGIN_RATIO)
         top = top - int((bottom - top) * MARGIN_RATIO)
         right = right + int((right - left) * MARGIN_RATIO)
         bottom = bottom + int((bottom - top) * MARGIN_RATIO)**
         * Preprocess때와 마찬가지로 Margin을 두고 얼굴 부분을 Crop합니다.
-        
+    
+    <br>
+    
     - **cropped = np.array(cropped).reshape(-1,224,224,3)**
         * 얼굴부분을 Model에 넣기 위해 Numpy Array로 변환하고 Reshape합니다.
-        
+    
+    <br>
+    
     - **pred = model.predict( cropped )**
         * Model에 Input시켜서 결과를 받습니다.
-        
+    
+    <br>
+    
     - **Result = "Result : {0}".format(RESULT[int(np.argmax(np.reshape( pred , (1,-1) )))])
         cv2.putText(frame, Result, (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)**
         * Model은 Mask 착용 여부를 확률로 보여주고, 이를 출력합니다.
