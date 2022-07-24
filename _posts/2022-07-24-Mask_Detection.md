@@ -1020,6 +1020,7 @@ plt.show()
 
 <p align="center">
   <img src="/assets/Mask_Detection/output_57_1.png">
+</p>
 
 <br>
 <br>
