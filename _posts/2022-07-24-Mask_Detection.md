@@ -5,7 +5,26 @@ categories: Deep Learning
 ---
 # Mask Detection
 
+<br>
+<br>
+<br>
+
+## 0. Introduction
+
+<br>
+<br>
+
+### 0.0. Motivation
+
+<br>
+
 * COVID-19 상황속에서 Deep Learning을 이용하여 RGB Cam.으로 실시간으로 Mask 착용 여부를 확인할 수 있는 Model을 만들어 보겠습니다.
+
+<br>      
+
+### 0.1. Face Detector
+
+* Dataset에서 사람 얼굴 부분만을 추출하기 위해서 Face Detector를 사용하여야 합니다.
 
 * 우선 사람의 얼굴부분만을 빠르게 Detecting할 수 있는 Model을 찾아보았고, 최종적으로 Tensorflow와 호환이 잘되는 OpenCV DNN Face Detector를 사용하기로 했습니다.
 
@@ -18,15 +37,21 @@ categories: Deep Learning
   - 속도도 빠르고 성능도 좋아서 Face Detection에 이 Module을 사용하도록 하겠습니다.
   - 자세한 사용 방법은 이후 Code로 살펴보겠습니다.
 
-      
+<br>
+<br>
 
-* Train에 사용할 Dataset은 아래 2가지를 사용하도록 하겠습니다.      
+### 0.2. Dataset
 
-* Dataset
+<br>
+
+* Train에 사용할 Dataset은 아래 2가지를 사용하도록 하겠습니다.
+
  - https://github.com/chandrikadeb7/Face-Mask-Detection/tree/master/dataset 
  
  - https://www.kaggle.com/datasets/andrewmvd/face-mask-detection
      - License(CC0: Public Domain)(https://creativecommons.org/publicdomain/zero/1.0/)
+
+<br>
 
 * 순서
   
@@ -34,18 +59,33 @@ categories: Deep Learning
   
   2) 최종적으로 ResNet으로 분류를 하기 위한 Dataset으로 Preprocessing을 하는 것이 목적이므로 각 Dataset마다 다른 Preprocessing 방법을 적용하도록 하겠습니다.
 
-      
+<br>
+<br>
+<br>
 
-## 0. Preprocess      
+## 1. Preprocess      
 
-* 첫번째 Dataset
- - 이 Dataset은 총 4095장의 Image가 있고, Mask쓴 사람의 Image가 2165장, 쓰지 않는 사람의 Image가 1930장으로 구성되어 있다.
- - Image에는 얼굴만 나오는 사진도 있지만, 사람 몸 전체가 나오는 경우도 있기 때문에 앞서 소개한 OpenCV DNN Face Detector를 이용하여 얼굴부분에 대한 정보만 추출하여 Train에 사용하도록 하겠습니다.
- - Label은 Folder Name으로 알 수 있습니다.
- - 최종적으로 File Path / Mask 착용 여부 / 얼굴부분의 좌표 정보를 추출하여 Pandas Dataframe으로 저장하는 것을 목표로 하겠습니다.
+<br>
+<br>
 
-      
+### 1.0. 순서
+  
+  * 2개의 Dataset은 공통적으로 모두 Mask를 쓴 사람들의 사진과 쓰지 않은 사람들의 사진을 가지고 있지만, Mask 착용 여부 / 사람 얼굴 위치등의 정보를 나타내는 방법은 조금 다릅니다.
+  
+  
+  * 최종적으로 ResNet으로 분류를 하기 위한 Dataset으로 Preprocessing을 하는 것이 목적이므로 각 Dataset마다 다른 Preprocessing 방법을 적용하도록 하겠습니다.      
 
+<br>
+<br>
+
+### 1.1. 첫번째 Dataset
+  * 이 Dataset은 총 4095장의 Image가 있고, Mask쓴 사람의 Image가 2165장, 쓰지 않는 사람의 Image가 1930장으로 구성되어 있다.
+  * Image에는 얼굴만 나오는 사진도 있지만, 사람 몸 전체가 나오는 경우도 있기 때문에 앞서 소개한 OpenCV DNN Face Detector를 이용하여 얼굴부분에 대한 정보만 추출하여 Train에 사용하도록 하겠습니다.
+  * Label은 Folder Name으로 알 수 있습니다.
+  * 최종적으로 File Path / Mask 착용 여부 / 얼굴부분의 좌표 정보를 추출하여 Pandas Dataframe으로 저장하는 것을 목표로 하겠습니다.
+
+<br>
+<br>
 
 ```python
 import numpy as np
@@ -58,16 +98,21 @@ import tensorflow as tf
 import xml.etree.ElementTree as et
 ```
 
-      
-
-      
+<br>
 
 * OpenCV DNN Face Detector 관련 상수를 정의합니다.
-* 'CONFIDENCE_FACE = 0.9'
+
+<br>
+
+* **'CONFIDENCE_FACE = 0.9'**
   - Face Detector가 제공해주는 값으로 추출한 얼굴 부분이 어느 정도 신뢰도가 있는지 나타내주는 값입니다.
-* 'MARGIN_RATIO = 0.2'
+
+<br>
+
+* **'MARGIN_RATIO = 0.2'**
   - Face Detector는 딱 얼굴 부분만 추출하기 때문에 상하좌우 조금 더 여유를 주기 위한 값입니다.
 
+<br>
 
 ```python
 MODEL_FILE = "opencv_face_detector_uint8.pb"
@@ -77,12 +122,11 @@ CONFIDENCE_FACE = 0.9
 MARGIN_RATIO = 0.2
 ```
 
-      
-
-      
+<br>
 
 * 먼저 Folder내에 있는 Image File들의 Full Path List를 만듭니다.      
 
+<br>
 
 ```python
 def save_file_fist():
@@ -98,24 +142,24 @@ def save_file_fist():
     return data_file_path
 ```
 
-      
+<br>
 
 * 이후에 이 File List를 가지고 추가 작업을 하기 때문에 이 작업은 가장 먼저 수행되어야 합니다.      
 
+<br>
 
 ```python
 data_file_path = save_file_fist()
 ```
 
     3it [00:00, 142.83it/s]
-    
 
-      
-
-      
+<br>
+<br>
 
 * OpenCV Face Dectector로 각 Image에서 얼굴 부분에 대한 좌표값을 추출하는 부분입니다.      
 
+<br>
 
 ```python
 def get_face_coor_info(file_path):
@@ -204,12 +248,8 @@ def get_face_coor_info(file_path):
     return result
 ```
 
-      
-
-      
-
-      
-
+<br>
+<br>
 
 ```python
 meta_data_01 = get_face_coor_info( data_file_path )
@@ -250,24 +290,34 @@ meta_data_01 = get_face_coor_info( data_file_path )
 
     3197
     No. of Low Confidence :  875
-    
 
-    
-    
+<br>
+<br>
 
 * 간혹 File Name에 특수 문자가 있는 경우 Open하지 못하는 경우도 있어서 875장은 사용하지 못했습니다.
 
+<br>
+
 * 최종적으로 첫번째 Dataset에서는 총 3197장의 유효한 Data를 얻었습니다.
 
-      
+<br>
+<br>
 
-      
+### 1.2. 두번째 Dataset
 
-* 두번째 Dataset
- - 이 Dataset은 총 853장의 Image가 있습니다.
- - 이 Dataset은 Image File이름과 동일한 XML File을 제공해 주고 있으며, 각 XML File에는 Image File Name / 얼굴부분의 좌표 정보 / Mask 착용여부에 대한 정보가 모두 들어 있습니다.
- - 즉, XML File Decoding만 잘 해주면 모든 정보를 얻을 수 있습니다.
+<br>
 
+   * 이 Dataset은 총 853장의 Image가 있습니다.
+
+<br>   
+
+   * 이 Dataset은 Image File이름과 동일한 XML File을 제공해 주고 있으며, 각 XML File에는 Image File Name / 얼굴부분의 좌표 정보 / Mask 착용여부에 대한 정보가 모두 들어 있습니다.
+
+<br>
+
+   * 즉, XML File Decoding만 잘 해주면 모든 정보를 얻을 수 있습니다.
+
+<br>
 
 ```python
 def preprocessing_Face_Mask_Detection_Dataset_Kaggle():
@@ -350,10 +400,8 @@ def preprocessing_Face_Mask_Detection_Dataset_Kaggle():
     return meta_data
 ```
 
-      
-
-      
-
+<br>
+<br>
 
 ```python
 meta_data_02 = preprocessing_Face_Mask_Detection_Dataset_Kaggle()
@@ -362,8 +410,8 @@ meta_data_02 = preprocessing_Face_Mask_Detection_Dataset_Kaggle()
     1it [00:00, 199.98it/s]
     100%|███████████████████████████████████████████████████████████████████████████████| 853/853 [00:05<00:00, 148.33it/s]
     
-
-      
+<br>
+<br>
 
 * 이제 2개의 Dataset에서 Train에 필요한 모든 정보를 얻었기 때문에 하나로 합칩니다.      
 
@@ -372,11 +420,8 @@ meta_data_02 = preprocessing_Face_Mask_Detection_Dataset_Kaggle()
 meta_data = pd.concat([meta_data_01 , meta_data_02])
 ```
 
-      
-
-      
-
-      
+<br>
+<br>
 
 * 마지막으로 실제로 Train시에 사용할 ResNet에 입력시에 문제가 없는지 확인하도록 하겠습니다.
 * 실제 Train을 하다보면 Image를 열지 못하거나 다양한 이유로 Train이 중단되어버리는 경우가 종종 발생하였습니다.
@@ -443,604 +488,6 @@ meta_data = verify_image_file(meta_data)
     target_width must be > 0.
     target_width must be > 0.
     
-
-    706it [00:09, 127.04it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1338it [00:12, 297.58it/s]
-
-    target_width must be > 0.
-    
-
-    1415it [00:14, 81.39it/s] 
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1483it [00:15, 124.41it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1556it [00:15, 183.23it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1634it [00:15, 241.48it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1781it [00:17, 76.46it/s] 
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1822it [00:17, 102.10it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_height must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1892it [00:18, 154.64it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    1977it [00:18, 231.88it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2075it [00:18, 313.40it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2160it [00:20, 89.39it/s] 
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2208it [00:20, 120.69it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2301it [00:20, 193.36it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2381it [00:20, 247.72it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2470it [00:21, 316.10it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2549it [00:23, 83.07it/s] 
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2622it [00:23, 130.51it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2655it [00:23, 139.32it/s]
-
-    Unknown image file format. One of JPEG, PNG, GIF, BMP required. [Op:DecodeImage]
-    target_width must be > 0.
-    target_width must be > 0.
-    Unknown image file format. One of JPEG, PNG, GIF, BMP required. [Op:DecodeImage]
-    target_width must be > 0.
-    target_width must be > 0.
-    Unknown image file format. One of JPEG, PNG, GIF, BMP required. [Op:DecodeImage]
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2684it [00:23, 134.52it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2714it [00:23, 154.79it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2772it [00:25, 59.73it/s] 
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2793it [00:26, 66.51it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2811it [00:26, 60.26it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2825it [00:26, 63.17it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2850it [00:28, 28.19it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2861it [00:28, 33.27it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2886it [00:29, 49.77it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2911it [00:29, 64.68it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2922it [00:29, 70.04it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    
-
-    2949it [00:31, 25.76it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2974it [00:31, 40.83it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    2987it [00:31, 48.04it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3015it [00:31, 72.76it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3045it [00:32, 95.66it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3073it [00:34, 27.88it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_height must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3087it [00:34, 36.46it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3115it [00:34, 57.45it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3195it [00:34, 155.43it/s]
-
-    target_width must be > 0.
-    target_width must be > 0.
-    
-
-    3302it [00:37, 58.68it/s] 
-
     width must be >= target + offset.
     
 
@@ -1094,42 +541,29 @@ meta_data = verify_image_file(meta_data)
     7269it [02:47, 43.38it/s]
 
     6812
-    
 
-    
-    
-
-      
-
-      
-
-      
-
-      
+<br>
+<br>
 
 * 2번째 Dataset에는 Mask 착요여부를 나타내는 값 중에, '제대로 마스크를 쓰지 않음(mask_weared_incorrect)' 값이 있습니다.
 * 우선은 이 값을 Mask를 착용했음으로 변경하도록 하겠습니다.
 * 최종적으로 얻은 값들을 저장하고, 이 값을 Train시에 사용하도록 하겠습니다.
 
+<br>
 
 ```python
 meta_data = meta_data.replace({'mask':'mask_weared_incorrect'},'with_mask')
 meta_data.to_csv("meta_data.csv",index=False)
 ```
+<br>
+<br>
+<br>
 
-
-
-
-
-# Train   
+## 2. Train
 
 * Preprocessing 작업에서 만들어진 Image File List를 가지고 Train을 하도록 하겠습니다.   
 
    
-
-   
-
-* 필요한 Package들을 Load합니다.   
 
 
 ```python
@@ -1596,13 +1030,13 @@ plt.show()
 
 
     
-![png](output_59_0.png)
+![png](output_57_0.png)
     
 
 
 
     
-![png](output_59_1.png)
+![png](output_57_1.png)
     
 
 
@@ -1612,8 +1046,7 @@ plt.show()
 ```
 
 
-
-## Inference   
+## 3. Inference
 
 * 이제 실제로 Cam을 통해서 Train한 Model이 잘 동작하는지 확인해 보도록 하겠습니다.
 * 전체적인 방법은 Cam을 통해 들어온 영상을 Preprocess와 동일한 방법으로 전처리를 한 후 Model에 넣은 후에 결과를 출력하도록 하겠습니다.
@@ -2159,7 +1592,6 @@ cv2.destroyAllWindows()
 ```python
 
 ```
-
 
 
 
