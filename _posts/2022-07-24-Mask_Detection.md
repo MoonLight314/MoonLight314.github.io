@@ -1023,13 +1023,6 @@ plt.show()
 
 <br>
 <br>
-  
-```python
-
-```
-
-<br>
-<br>
 <br>
 
 ## 3. Inference
