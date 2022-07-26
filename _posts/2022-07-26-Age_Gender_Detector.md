@@ -1838,8 +1838,6 @@ cap = cv2.VideoCapture(0)
   **if score > CONFIDENCE_FACE:**
      - Face Detector가 Detector한 결과가 일정 신뢰도 이상인 경우에만 처리합니다.
 
-<br>
-
   **left = int(detection[3] * cols)  
     top = int(detection[4] * rows)    
     right = int(detection[5] * cols)    
@@ -1850,8 +1848,6 @@ cap = cv2.VideoCapture(0)
     cropped = cv2.resize( cropped , dsize=(224,224) )   
     cropped = np.array(cropped).reshape(-1,224,224,3)**    
       - 얼굴 부분만 잘라내서 Model Input에 넣을 수 있도록 Reshape합니다.
-
-<br>
 
    **pred = model.predict( cropped )               
     gender_result = pred[0]  
@@ -1913,5 +1909,5 @@ cv2.destroyAllWindows()
 <br>
 
 <p align="center">
-  <img src="/assets/Age_Gender_Detector/result.png">
+  <img src="/assets/Age_Gender_Detector/Result.png">
 </p>
