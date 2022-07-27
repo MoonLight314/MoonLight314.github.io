@@ -53,7 +53,7 @@ categories: Deep Learning
   - 자세한 사용 방법은 이후 Code로 살펴보겠습니다.   
 
 <p align="center">
-  <img src="/assets/Age_Gender_Detector/pic_0.png">
+  <img src="/assets/Age_Gender_Detector/pic_00.png">
 </p>
 
 <br>
