@@ -24,6 +24,13 @@ categories: Deep Learning
 <br>   
 <br>   
 
+<p align="center">
+  <img src="/assets/Age_Gender_Detector/Title.png">
+</p>
+
+<br>
+<br>
+
 ### 0.1. Face Detector
   - K-Face Dataset에서 사람 얼굴 부분만을 추출하기 위해서 Face Detector를 사용하여야 합니다.
   
