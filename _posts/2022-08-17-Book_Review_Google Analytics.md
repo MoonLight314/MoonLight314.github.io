@@ -11,7 +11,7 @@ categories: Deep Learning
 <br>
 
 <p align="center">
-  <img src="/assets/Book_Review_Assets/Business_Data_Science.png">
+  <img src="/assets/Book_Review_Assets/Google_Analytics.png">
 </p>
 
 ## 0. 소개 ##
