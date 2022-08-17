@@ -18,17 +18,16 @@ categories: Deep Learning
 
 <br>
 
-Digital Marketing 영역에서 고객의 데이터를 분석해서 다양한 인사이트를 뽑아내고 이를 Business 전략에 반영하는 데이터 분석 능력은 마케터 뿐만 아니라 데이터 사이언티스트가 
+Digital Marketing 영역에서 고객의 Data를 분석해서 다양한 Insight를 뽑아내고 이를 Business 전략에 반영하는 Data 분석 능력은 Marketer 뿐만 아니라 Data Scientist가 
 갖추어여할 필수 역량이 된지 오래입니다.
 
 <br>
 
-다양한 고객의 데이터 중에서 가장 기본이 되는 고객 데이터가 웹로그 분석인데, 많은 기업에서 고객 웹 로그 분석을 중요하게 생각하는 이유가 웹사이트가 디지털 마케팅 활동의 거점 역할을 한다는 점과
-쉬운 설치만으로 방대한 양의 고객 데이터 수집이 가능하다는 이유입니다.
+다양한 고객의 Data 중에서 가장 기본이 되는 고객 Data가 Web Log 분석인데, 많은 기업에서 고객 Web Log 분석을 중요하게 생각하는 이유가 Website가 Digital Marketing 활동의 거점 역할을 한다는 점과 쉬운 설치만으로 방대한 양의 고객 Data 수집이 가능하다는 이유입니다.
 
 <br>
 
-많은 기업들이 웹로그 분석을 실시하고 있다고 생각되며, 일부 업체에서는 유료 서비스를 이용하기도 하겠지만, 이 책에서 소개제하고 있는 Google Analytics를 사용하고 있다고 여겨집니다.
+많은 기업들이 Web Log 분석을 실시하고 있다고 생각되며, 일부 업체에서는 유료 서비스를 이용하기도 하겠지만, 이 책에서 소개하고 있는 Google Analytics를 사용하고 있다고 여겨집니다.
 
 <br>
 
@@ -36,11 +35,11 @@ Digital Marketing 영역에서 고객의 데이터를 분석해서 다양한 인
 
 <br>
 
-구글 애널리틱스는 웹사이트 방문자의 데이터를 수집해서 분석함으로써 온라인 비즈니스의 성과를 측정하고 개선하는 데 사용하는 웹로그분석 도구입니다.
+Google Analytics는 Web Site 방문자의 Data를 수집해서 분석함으로써 Online Business의 성과를 측정하고 개선하는 데 사용하는 Web Log 분석 도구입니다.
 
-구글은 2005년 3월 웹분석 전문 업체인 어친 소프트웨어(Urchin Software)를 인수한 후 그해 11월 구글 애널리틱스 서비스를 출시했습니다. 무료 서비스임에도 매우 강력한 기능을 제공함으로써 지금은 전세계적으로 가장 널리 사용되는 웹분석 툴이 되었습니다.
+Google은 2005년 3월 Web 분석 전문 업체인 어친 소프트웨어(Urchin Software)를 인수한 후 그해 11월 Google Analytics Service를 출시했습니다. 무료 서비스임에도 매우 강력한 기능을 제공함으로써 지금은 전세계적으로 가장 널리 사용되는 Web 분석 툴이 되었습니다.
 
-Google Analytics는 다른 웹 로그 분석 서비스에 비해서 다음과 같은 장점을 가지고 있습니다.
+Google Analytics는 다른 Web Log 분석 Service에 비해서 다음과 같은 장점을 가지고 있습니다.
 
 <br>
 
@@ -51,20 +50,20 @@ Google Analytics는 다른 웹 로그 분석 서비스에 비해서 다음과 �
 
 **2) 강력한 기능**
    - Google Analytics는 무료임에도 유료 서비스 못지않은 다양한 디지털 분석 기능을 제공합니다.
-     * 다양한 standard reports template 제공
-     * standard reports template뿐만 아니라, Custome Report Template 작성 기능도 제공. 작성하고자 하는 항목을 선택하여 Report를 작성할 수 있습니다.
-     * 세그먼트 분석 기능을 이용하여 심층적인 데이터 분석이 가능합니다.
-     * Google에서 제공하는 클라우드 인프라와 연동하여 빠른 데이터 처리가 가능합니다.
+     * 다양한 Standard Reports Template 제공
+     * Standard Reports Template뿐만 아니라, Custome Report Template 작성 기능도 제공하며, 작성하고자 하는 항목을 선택하여 Report를 작성할 수 있습니다.
+     * Segment 분석 기능을 이용하여 심층적인 Data 분석이 가능합니다.
+     * Google에서 제공하는 Cloud Infra와 연동하여 빠른 Data 처리가 가능합니다.
 
 <br>
 
 **3) 우수한 UI**
-   - 간결하고 직관적인 UI를 사용하고 있어서 사용하기 쉽고, 표 뿐만 아니라 다양한 그래프, 차트 등 많은 시각화 방식을 제공해 주어 데이터 이해를 쉽게 해줍니다.
+   - 간결하고 직관적인 UI를 사용하고 있어서 사용하기 쉽고, 표 뿐만 아니라 다양한 그래프, 차트 등 많은 시각화 방식을 제공해 주어 Data 이해를 쉽게 해줍니다.
 
 <br>
 
 **4) 확장성 / 통합성**
-   - Google에서 제공하는 디지털 광고 솔루션인 구글 애드워즈, 태그 관리자, 데이터 스튜디오, 옵티마이즈 등 디지털 분석시 함께 활용하면 좋은 다른 구글 도구들과 쉽게 연동이 가능합니다.
+   - Google에서 제공하는 디지털 광고 솔루션인 Google AdWords, Google Tag Manager, Google Data Studio, Google Optimize 등 디지털 분석시 함께 활용하면 좋은 다른 구글 도구들과 쉽게 연동이 가능합니다.
 
 <br>
 
@@ -89,7 +88,7 @@ Google Analytics는 다른 웹 로그 분석 서비스에 비해서 다음과 �
 
 **Chapter 00 시작하기 전에**
 <br>
-Google Analytics를 시작하기 전에 데이터 분석이란 무엇이며, Google Analytics은 무엇이며 누구에게 필요한 것인지 간단히 알아봅니다.
+Google Analytics를 시작하기 전에 Data 분석이란 무엇이며, Google Analytics은 무엇이며 누구에게 필요한 것인지 간단히 알아봅니다.
 
 <br>
 
@@ -113,7 +112,7 @@ Google Analytics 실습을 하기 전에 Google Analytics를 사용하기 위한
 
 **Chapter 04 데이터 더 상세하게 파악하기**
 <br>
-Google Analytics가 생성한 보고서에서 비교군 / 잠재고객 / 세그먼트에 대해서 알아봅니다.
+Google Analytics가 생성한 보고서에서 비교군 / 잠재고객 / Segment에 대해서 알아봅니다.
 
 <br>
 
@@ -191,7 +190,7 @@ Ch. 08~11까지의 내용을 정리하고, 잠재고객을 만드는 방법을 �
 
 **Chapter 17 사용자 행동 순서 분석 따라 배우기**
 <br>
-시용자가 어떤 순서로 사이트에서 활동하는지에 대한 로그를 수집하고 분석하는 방법에 대해서 알아봅니다.
+시용자가 어떤 순서로 사이트에서 활동하는지에 대한 Log를 수집하고 분석하는 방법에 대해서 알아봅니다.
 
 <br>
 
@@ -203,13 +202,13 @@ Ch. 08~11까지의 내용을 정리하고, 잠재고객을 만드는 방법을 �
 
 **Chapter 19 앱 데이터 분석하기**
 <br>
-'앱' 데이터 분석 예시를 살펴보고, '앱'에서 발생하는 몇 가지 중요한 Event를 배우고 활용해 보도록 하겠습니다.
+'App.' 데이터 분석 예시를 살펴보고, 'App.'에서 발생하는 몇 가지 중요한 Event를 배우고 활용해 보도록 하겠습니다.
 
 <br>
 
 **Chapter 20 파이어베이스로 사용 참여 유도하기**
 <br>
-파이어베이스는 구글에서 제공하는 앱 개발 도구로써, 파이어베이스 애널리틱스, 파이어베이스 클라우드 메시징 등을 활용하는 방법에 대해서 알아봅니다.
+Firebase는 Google에서 제공하는 앱 개발 도구로써, Firebase Analytics, Firebase Cloud Messaging 등을 활용하는 방법에 대해서 알아봅니다.
 
 <br>
 <br>
