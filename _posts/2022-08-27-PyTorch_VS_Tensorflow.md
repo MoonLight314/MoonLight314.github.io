@@ -452,264 +452,452 @@ Text에 대한 번역 및 요약과 같은 작업을 수행할 수 있도록 [Fa
 
 ### 4.1.5. TorchAudio
 
-아마도 Text를 처리하기 전에 ASR(https://www.assemblyai.com/blog/kaldi-speech-recognition-for-beginners-a-simple-tutorial/)을 사용하여 Audio File에서 Text를 추출해야 합니다. 
+아마도 Text를 처리하기 전에 [ASR](https://www.assemblyai.com/blog/kaldi-speech-recognition-for-beginners-a-simple-tutorial/)을 사용하여 Audio File에서 Text를 추출해야 합니다. 
 
-이 경우 TorchAudio(https://pytorch.org/audio/stable/index.html) - PyTorch의 공식 Audio Library를 확인하십시오. 
+이 경우 [TorchAudio](https://pytorch.org/audio/stable/index.html) - PyTorch의 공식 Audio Library를 확인하십시오. 
 
-TorchAudio에는 DeepSpeech 및 Wav2Vec과 같은 인기 있는 Audio Model(https://pytorch.org/audio/stable/models.html)이 포함되어 있으며 ASR 및 기타 작업을 위한 연습(https://pytorch.org/audio/stable/tutorials/speech_recognition_pipeline_tutorial.html) 및 Pipeline(https://pytorch.org/audio/stable/pipelines.html#)을 제공합니다. 
+TorchAudio에는 DeepSpeech 및 Wav2Vec과 같은 인기 있는 [Audio Model](https://pytorch.org/audio/stable/models.html)이 포함되어 있으며 ASR 및 기타 작업을 위한 [연습](https://pytorch.org/audio/stable/tutorials/speech_recognition_pipeline_tutorial.html) 및 [Pipeline](https://pytorch.org/audio/stable/pipelines.html#)을 제공합니다. 
 
-여기에서 TorchAudio의 GitHub Repository(https://github.com/pytorch/audio)를 확인할 수 있습니다.
+여기에서 [TorchAudio의 GitHub Repository](https://github.com/pytorch/audio)를 확인할 수 있습니다.
 
+<br>
 
-4.1.6. SpeechBrain
-TorchAudio가 원하는 것이 아니라면 PyTorch용 Open Source 음성 Toolkit인 SpeechBrain(https://speechbrain.github.io/)을 확인하는 것이 좋습니다. 
-SpeechBrain은 ASR, 화자 인식, 확인 및 분할(https://www.assemblyai.com/blog/introducing-assemblyai-auto-chapters-summarize-audio-and-video-files/) 등을 지원합니다! 
-Model을 구축하지 않고 대신 자동 챕터, 감정 분석, 엔티티 감지 등과 같은 기능을 갖춘 Plug & Play 도구를 원하는 경우 AssemblyAI의 자체 Speech-to-Text API(https://www.assemblyai.com/blog/the-top-free-speech-to-text-apis-and-open-source-engines/)를 확인하십시오.
+### 4.1.6. SpeechBrain
 
+TorchAudio가 원하는 것이 아니라면 PyTorch용 Open Source 음성 Toolkit인 [SpeechBrain](https://speechbrain.github.io/)을 확인하는 것이 좋습니다. 
 
-4.1.7. ESPnet
-ESPnet(https://github.com/espnet/espnet)은 Kaldi의 Data 처리 스타일과 함께 PyTorch를 사용하는 종단 간 음성 처리용 Toolkit입니다. 
+[SpeechBrain](https://www.assemblyai.com/blog/introducing-assemblyai-auto-chapters-summarize-audio-and-video-files/)은 ASR, 화자 인식, 확인 및 분할 등을 지원합니다! 
+
+Model을 구축하지 않고 대신 자동 챕터, 감정 분석, 엔티티 감지 등과 같은 기능을 갖춘 Plug & Play 도구를 원하는 경우 AssemblyAI의 자체 [Speech-to-Text API](https://www.assemblyai.com/blog/the-top-free-speech-to-text-apis-and-open-source-engines/)를 확인하십시오.
+
+<br>
+
+### 4.1.7. ESPnet
+
+[ESPnet](https://github.com/espnet/espnet)은 Kaldi의 Data 처리 스타일과 함께 PyTorch를 사용하는 종단 간 음성 처리용 Toolkit입니다. 
+
 ESPnet을 사용하면 종단 간 음성 인식, 번역, 분할 등을 구현할 수 있습니다!
 
+<br>
 
-4.1.8. AllenNLP
-더 많은 NLP 도구를 찾고 있다면 PyTorch를 기반으로 구축되고 Allen Institute for AI(https://allenai.org/)가 지원하는 Open Source NLP 연구 Library인 AllenNLP(https://github.com/allenai/allennlp)를 확인하는 것이 좋습니다.
+### 4.1.8. AllenNLP
 
+더 많은 NLP 도구를 찾고 있다면 PyTorch를 기반으로 구축되고 Allen Institute for AI(https://allenai.org/)가 지원하는 Open Source NLP 연구 Library인 [AllenNLP](https://github.com/allenai/allennlp)를 확인하는 것이 좋습니다.
 
-4.1.9. Ecosystem Tools
-Computer Vision 또는 Natural Language Processing에 맞게 조정된 Library와 같이 유용할 수 있는 다른 Library에 대해서는 PyTorch의 도구(https://pytorch.org/ecosystem/) Page를 확인하십시오. 
-여기에는 최신 모범 사례를 사용하여 신경망을 생성하기 위한 인기 있는 Library인 fast.ai(https://docs.fast.ai/)가 포함됩니다.
+<br>
 
+### 4.1.9. Ecosystem Tools
 
-4.1.10. TorchElastic
-TorchElastic(https://pytorch.org/elastic/latest/)은 2020년에 출시되었으며 AWS와 Facebook의 협업 결과입니다. 
+Computer Vision 또는 Natural Language Processing에 맞게 조정된 Library와 같이 유용할 수 있는 다른 Library에 대해서는 [PyTorch의 도구](https://pytorch.org/ecosystem/) Page를 확인하십시오. 
+
+여기에는 최신 모범 사례를 사용하여 신경망을 생성하기 위한 인기 있는 Library인 [fast.ai](https://docs.fast.ai/)가 포함됩니다.
+
+<br>
+
+### 4.1.10. TorchElastic
+
+[TorchElastic](https://pytorch.org/elastic/latest/)은 2020년에 출시되었으며 AWS와 Facebook의 협업 결과입니다. 
+
 Train에 영향을 미치지 않고 동적으로 변경할 수 있는 Computing Node Cluster에서 Model을 Train할 수 있도록 작업자 Process를 관리하고 재시작 동작을 조정하는 분산 Train용 도구입니다. 
+
 따라서 TorchElastic은 Server 유지 관리 이벤트 또는 Network 문제와 같은 문제로 인한 치명적인 오류를 방지하여 Train 진행 상황을 잃지 않도록 합니다. 
+
 TorchElastic은 Kubernetes와의 통합 기능을 제공하며 PyTorch 1.9+에 통합되었습니다.
 
+<br>
 
-4.1.11. TorchX
-TorchX(https://pytorch.org/torchx/latest/)는 Machine Learning Application의 빠른 구축 및 배포를 위한 SDK입니다. 
+### 4.1.11. TorchX
+
+[TorchX](https://pytorch.org/torchx/latest/)는 Machine Learning Application의 빠른 구축 및 배포를 위한 SDK입니다. 
+
 TorchX에는 지원되는 Scheduler에서 분산 PyTorch Application을 시작하기 위한 Training Session Manager API가 포함되어 있습니다. 
+
 TorchElastic에서 Local로 관리하는 작업을 기본적으로 지원하면서 분산 작업을 시작하는 역할을 합니다.
 
-4.1.12. Lightning
-PyTorch Lightning(https://www.pytorchlightning.ai/)은 PyTorch의 Keras라고도 합니다. 
+<br>
+
+### 4.1.12. Lightning
+
+[PyTorch Lightning](https://www.pytorchlightning.ai/)은 PyTorch의 Keras라고도 합니다. 
+
 이 비교가 약간 오해의 소지가 있지만 Lightning은 PyTorch의 Model Engineering 및 교육 Process를 단순화하는 데 유용한 도구이며 2019년 초기 Release 이후 상당히 성숙했습니다. 
+
 Lightning은 객체 지향 방식으로 Model링 Process에 접근하여 재사용 가능하고 Project 전체에서 활용할 수 있는 공유 가능한 구성 요소입니다. 
-Lightning에 대한 자세한 내용과 해당 Workflow를 Vanilla PyTorch와 비교하는 방법에 대한 자세한 내용은 이 자습서(https://www.assemblyai.com/blog/pytorch-lightning-for-dummies/)를 참조하세요.
 
+Lightning에 대한 자세한 내용과 해당 Workflow를 Vanilla PyTorch와 비교하는 방법에 대한 자세한 내용은 이 [자습서](https://www.assemblyai.com/blog/pytorch-lightning-for-dummies/)를 참조하세요.
 
+<br>
+<br>
 
+## 4.2. TensorFlow
 
-4.2. TensorFlow
+<br>
 
+### 4.2.1. Hub
 
+[TensorFlow Hub](https://www.tensorflow.org/hub)는 Fine-Tuning할 준비가 된 Train된 Machine Learning Model의 Repository이므로 몇 줄의 Code로 BERT와 같은 Model을 사용할 수 있습니다. 
 
-4.2.1. Hub
-TensorFlow Hub(https://www.tensorflow.org/hub)는 Fine-Tuning할 준비가 된 Train된 Machine Learning Model의 Repository이므로 몇 줄의 Code로 BERT와 같은 Model을 사용할 수 있습니다. 
 Hub에는 다양한 사용 사례를 위한 TensorFlow, TensorFlow Lite 및 TensorFlow.js Model이 포함되어 있으며 이미지, Video, Audio 및 Text 문제 Domain에 사용할 수 있는 Model이 있습니다. 
-여기(https://www.tensorflow.org/hub/tutorials)에서 Tutorial을 시작하거나 여기에서 Model 목록(https://tfhub.dev/s?subtype=module,placeholder)을 확인하세요.
 
+[여기](https://www.tensorflow.org/hub/tutorials)에서 Tutorial을 시작하거나 여기에서 [Model 목록](https://tfhub.dev/s?subtype=module,placeholder)을 확인하세요.
 
-4.2.2. Model Garden
-바로 사용할 수 있는 Pre-Trained Model이 Application에서 작동하지 않을 경우 TensorFlow의 Model Garden(https://github.com/tensorflow/models)은 SOTA Model의 Source Code를 사용할 수 있도록 하는 Repository입니다. 
+<br>
+
+### 4.2.2. Model Garden
+
+바로 사용할 수 있는 Pre-Trained Model이 Application에서 작동하지 않을 경우 TensorFlow의 [Model Garden](https://github.com/tensorflow/models)은 SOTA Model의 Source Code를 사용할 수 있도록 하는 Repository입니다. 
+
 Model이 작동하는 방식을 이해하기 위해 내부적으로 들어가거나 자신의 필요에 맞게 수정하려는 경우 유용합니다. 
+
 이는 Transfer Learning 및 Fine-Tuning을 넘어 직렬화된 Pre-Trained Model로는 불가능한 일입니다.
 
 Model Garden에는 Google에서 유지 관리하는 공식 Model과 연구원이 유지 관리하는 연구 Model 및 커뮤니티에서 유지 관리하는 선별된 커뮤니티 Model에 대한 디렉토리가 포함되어 있습니다. 
+
 TensorFlow의 장기 목표는 Hub의 Model Garden에서 Pre-Trained Model 버전을 제공하고 Hub의 Pre-Trained Model이 Model Garden에서 사용 가능한 Source Code를 갖도록 하는 것입니다.
 
-4.2.3. Extended (TFX)
-TensorFlow Extended(https://www.tensorflow.org/tfx)는 Model 배포를 위한 TensorFlow의 종단 간 Platform입니다. 
+<br>
+
+### 4.2.3. Extended (TFX)
+
+[TensorFlow Extended](https://www.tensorflow.org/tfx)는 Model 배포를 위한 TensorFlow의 종단 간 Platform입니다. 
+
 Data를 로드, 검증, 분석 및 변환할 수 있습니다. Model Train 및 Evaluate, Serving 또는 Lite를 사용하여 Model을 배포합니다. 
-TFX는 Jupyter 또는 Colab과 함께 사용할 수 있으며 Orchestration을 위해 Apache Airflow/Beam(https://beam.apache.org/) 또는 Kubernetes를 사용할 수 있습니다. 
+
+TFX는 Jupyter 또는 Colab과 함께 사용할 수 있으며 Orchestration을 위해 [Apache Airflow/Beam](https://beam.apache.org/) 또는 Kubernetes를 사용할 수 있습니다. 
+
 TFX는 Google Cloud와 긴밀하게 통합되어 있으며 Vertex AI Pipelines와 함께 사용할 수 있습니다.
 
+<br>
 
-4.2.4. Vertex AI
-Vertex AI(https://cloud.google.com/vertex-ai)는 Google Cloud의 통합 Machine Learning Platform입니다. 
+### 4.2.4. Vertex AI
+
+[Vertex AI](https://cloud.google.com/vertex-ai)는 Google Cloud의 통합 Machine Learning Platform입니다. 
+
 올해 출시되었으며 GCP, AI Platform 및 AutoML의 서비스를 하나의 Platform으로 통합하려고 합니다. 
+
 Vertex AI는 Serverless 방식으로 Workflow를 Orchestration하여 Machine Learning System을 자동화, Monitoring 및 관리하는 데 도움이 될 수 있습니다. 
+
 Vertex AI는 또한 Workflow의 아티팩트를 저장할 수 있으므로 종속성과 Model의 Train Data, Hyperparameter 및 Source Code를 추적할 수 있습니다.
 
-4.2.5. MediaPipe
-MediaPipe(https://mediapipe.dev/)는 얼굴 감지, 다중 손 추적, 객체 감지 등에 사용할 수 있는 다중 모드, 교차 Platform 적용 Machine Learning Pipeline을 구축하기 위한 Framework입니다. 
-이 Project는 Open Source(https://github.com/google/mediapipe)이며 Python, C++ 및 JavaScript를 비롯한 여러 언어로 된 Binding이 있습니다. 
-MediaPipe 및 즉시 사용 가능한 Solution 시작에 대한 자세한 정보는 여기(https://google.github.io/mediapipe/)에서 찾을 수 있습니다.
+<br>
 
-4.2.6. Coral
+### 4.2.5. MediaPipe
+
+[MediaPipe](https://mediapipe.dev/)는 얼굴 감지, 다중 손 추적, 객체 감지 등에 사용할 수 있는 다중 모드, 교차 Platform 적용 Machine Learning Pipeline을 구축하기 위한 Framework입니다. 
+
+이 Project는 [Open Source](https://github.com/google/mediapipe)이며 Python, C++ 및 JavaScript를 비롯한 여러 언어로 된 Binding이 있습니다. 
+
+MediaPipe 및 즉시 사용 가능한 Solution 시작에 대한 자세한 정보는 [여기](https://google.github.io/mediapipe/)에서 찾을 수 있습니다.
+
+<br>
+
+### 4.2.6. Coral
+
 Cloud 기반 AI에 의존하는 다양한 SaaS 회사가 있지만 많은 산업 분야에서 Local AI에 대한 수요가 증가하고 있습니다. 
-Google Coral(https://coral.ai/)은 이러한 요구 사항을 해결하기 위해 만들어졌으며 Local AI로 제품을 구축하기 위한 완벽한 Toolkit입니다. 
+
+[Google Coral](https://coral.ai/)은 이러한 요구 사항을 해결하기 위해 만들어졌으며 Local AI로 제품을 구축하기 위한 완벽한 Toolkit입니다. 
+
 Coral은 2020년에 출시되었으며 개인 정보 보호 및 효율성을 포함하여 배포 Section의 TFLite 부분에 언급된 Onboard AI 구현의 어려움을 해결합니다.
 
+
 Coral은 프로토타이핑, 생산 및 감지를 위한 일련의 HW 제품을 제공하며, 그 중 일부는 AI Application을 위해 특별히 제작된 본질적으로 더 강력한 Raspberry Pi입니다. 
-그들의 제품은 저전력 장치에서 고성능 Inference을 위해 Edge TPU(https://coral.ai/docs/edgetpu/faq/#what-is-the-edge-tpus-processing-speed)를 활용합니다. 
+
+그들의 제품은 저전력 장치에서 고성능 Inference을 위해 [Edge TPU](https://coral.ai/docs/edgetpu/faq/#what-is-the-edge-tpus-processing-speed)를 활용합니다. 
+
 Coral은 또한 이미지 분할, 포즈 추정, 음성 인식 등을 위해 미리 Compile된 Model을 제공하여 자체 Local AI System을 만들려는 개발자에게 스캐폴딩을 제공합니다. 
+
 Model을 만드는 필수 단계는 아래 순서도에서 볼 수 있습니다.
 
-<04.png>
+<br>
 
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/04.png">
+</p>
 
-4.2.7. TensorFlow.js
-TensorFlow.js(https://www.tensorflow.org/js)는 Node.js를 사용하여 Browser와 Server 측 모두에서 Model을 교육하고 배포할 수 있는 Machine Learning용 JavaScript Library입니다.    
-그들은 Python Model을 가져오는 방법에 대한 예제와 정보가 포함된 문서(https://www.tensorflow.org/js/tutorials), 즉시 사용할 수 있는 Pre-Trained Model(https://www.tensorflow.org/js/models), 관련 Code가 있는 라이브 데모(https://www.tensorflow.org/js/demos)를 제공합니다.
+<br>
 
+### 4.2.7. TensorFlow.js
 
+[TensorFlow.js](https://www.tensorflow.org/js)는 Node.js를 사용하여 Browser와 Server 측 모두에서 Model을 교육하고 배포할 수 있는 Machine Learning용 JavaScript Library입니다.    
 
-4.2.8. Cloud
-TensorFlow Cloud(https://www.tensorflow.org/cloud)는 Local 환경을 Google Cloud에 연결할 수 있는 Library입니다. 
+그들은 Python Model을 가져오는 방법에 대한 예제와 정보가 포함된 [문서](https://www.tensorflow.org/js/tutorials), 즉시 사용할 수 있는 [Pre-Trained Model](https://www.tensorflow.org/js/models), 관련 Code가 있는 [라이브 데모](https://www.tensorflow.org/js/demos)를 제공합니다.
+
+<br>
+
+### 4.2.8. Cloud
+
+[TensorFlow Cloud](https://www.tensorflow.org/cloud)는 Local 환경을 Google Cloud에 연결할 수 있는 Library입니다. 
+
 제공된 API는 Cloud Console을 사용할 필요 없이 Local Machine의 Model Build 및 Debugging에서 GCP의 분산 학습 및 Hyperparameter 조정에 이르는 격차를 해소하도록 설계되었습니다.
 
-4.2.9. Colab
-Google Colab(https://colab.research.google.com/?utm_source=scs-index)은 Jupyter와 매우 유사한 Cloud 기반 Notebook 환경입니다. 
+<br>
+
+### 4.2.9. Colab
+
+[Google Colab](https://colab.research.google.com/?utm_source=scs-index)은 Jupyter와 매우 유사한 Cloud 기반 Notebook 환경입니다. 
+
 GPU 또는 TPU Train을 위해 Colab을 Google Cloud에 쉽게 연결할 수 있습니다. 
+
 PyTorch는 Colab에서도 사용할 수 있습니다.
 
+<br>
 
-4.2.10. Playground
-Playground(https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.79936&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)는 신경망의 기초를 이해하기 위한 작지만 세련된 교육 도구입니다. 
+### 4.2.10. Playground
+
+[Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.79936&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)는 신경망의 기초를 이해하기 위한 작지만 세련된 교육 도구입니다. 
+
 깔끔한 UI 내에서 시각화된 단순한 조밀한 Network를 제공합니다. Network의 Layer 수와 크기를 변경하여 기능을 학습하는 방법을 실시간으로 확인할 수 있습니다. 
-또한 Learning Rate 및 정규화 강도와 같은 Hyperparameter 변경이 다양한 Data Set의 학습 Process에 어떤 영향을 미치는지 확인할 수 있습니다. 
-Playground를 사용하면 학습 과정을 실시간으로 재생하여 교육 과정에서 입력이 어떻게 변환되는지 매우 시각적으로 볼 수 있습니다. 
-Playground에는 Network의 기본 사항을 이해할 수 있도록 구축된 작은 Open Source 신경망 Library(https://github.com/tensorflow/playground/blob/master/src/nn.ts)도 함께 제공됩니다.
 
-4.2.11. Datasets
-Google Research의 Datasets(https://research.google/tools/datasets/)는 Google이 주기적으로 DataSet를 출시하는 DataSet Resource입니다. 
-Google은 또한 더 광범위한 DataSet Database에 Access할 수 있는 DataSet 검색(https://datasetsearch.research.google.com/)을 제공합니다. 
+또한 Learning Rate 및 정규화 강도와 같은 Hyperparameter 변경이 다양한 Data Set의 학습 Process에 어떤 영향을 미치는지 확인할 수 있습니다. 
+
+Playground를 사용하면 학습 과정을 실시간으로 재생하여 교육 과정에서 입력이 어떻게 변환되는지 매우 시각적으로 볼 수 있습니다. 
+
+Playground에는 Network의 기본 사항을 이해할 수 있도록 구축된 작은 [Open Source 신경망 Library](https://github.com/tensorflow/playground/blob/master/src/nn.ts)도 함께 제공됩니다.
+
+<br>
+
+### 4.2.11. Datasets
+
+[Google Research의 Datasets](https://research.google/tools/datasets/)는 Google이 주기적으로 DataSet를 출시하는 DataSet Resource입니다. 
+
+Google은 또한 더 광범위한 DataSet Database에 Access할 수 있는 [DataSet 검색](https://datasetsearch.research.google.com/)을 제공합니다. 
+
 물론 PyTorch 사용자도 이러한 Data Set를 활용할 수 있습니다.
 
+<br>
+<br>
 
-4.3. Ecosystems - Final Words
+## 4.3. Ecosystems - Final Words
+
 이 Round는 세 가지 중 가장 가깝지만 궁극적으로 TensorFlow는 우수한 Ecosystem를 가지고 있습니다. 
+
 Google은 엔드 투 엔드 Deep Learning Workflow의 각 관련 영역에서 사용 가능한 제품이 있는지 확인하는 데 많은 투자를 했지만 이러한 제품이 얼마나 잘 다듬어진지는 이 환경에 따라 다릅니다. 
+
 그럼에도 불구하고 TFX와 함께 Google Cloud와의 긴밀한 통합으로 종단 간 개발 Process가 효율적이고 조직화되었으며 Google Coral 기기로 Model을 쉽게 이식할 수 있으며 일부 산업에서는 TensorFlow가 압도적인 승리를 거두었습니다.
 
 PyTorch 대 TensorFlow 논쟁의 3라운드는 TensorFlow의 승리입니다.
 
+<br>
+<br>
+<br>
 
 
-5. PyTorch 또는 TensorFlow를 사용해야 하나요?
+# 5. PyTorch 또는 TensorFlow를 사용해야 하나요?
+
 예상대로 PyTorch 대 TensorFlow 논쟁에는 정답이 없습니다. 
+
 특정 사용 사례와 관련하여 한 Framework가 다른 Framework보다 우수하다고 말하는 것이 합리적입니다. 
+
 어떤 Framework가 가장 적합한지 결정하는 데 도움이 되도록 권장 사항을 아래의 순서도에 정리했으며 각 차트는 서로 다른 관심 영역에 맞게 조정되었습니다.
 
+<br>
 
-5.1. What if I’m in Industry?
+## 5.1. What if I’m in Industry?
 
-<05.png>
+<br>
+
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/05.png">
+</p>
+
+<br>
 
 산업 환경에서 Deep Learning Engineering을 수행하는 경우 TensorFlow를 사용하고 있을 가능성이 높으며 계속 사용해야 합니다. 
+
 TensorFlow의 강력한 배포 Framework와 종단 간 TensorFlow Extended Platform은 Model을 생산해야 하는 사람들에게 매우 중요합니다. 
+
 Model Monitoring 및 아티팩트 추적과 함께 gRPC Server에 쉽게 배포하는 것은 업계에서 사용하기 위한 중요한 도구입니다. 
+
 TorchServe의 최근 Release에서는 PyTorch에서만 사용할 수 있는 SOTA Model에 Access해야 하는 경우와 같이 합당한 이유가 있는 경우 PyTorch 사용을 고려할 수 있습니다. 
+
 이 경우 ONNX를 사용하여 TensorFlow의 배포 Workflow 내에서 변환된 PyTorch Model을 배포하는 것을 고려하십시오.
 
+
 Mobile Application을 Build하는 경우 Audio 또는 Video 입력이 필요한 경우가 아니면 TensorFlow를 사용해야 하는 경우를 제외하고 PyTorch Live의 최근 Release를 고려하여 PyTorch 사용을 고려할 수 있습니다. 
+
 AI를 활용하는 Embedded System 또는 IoT 장치를 구축하는 경우 TFLite + Coral Pipeline을 감안할 때 여전히 TensorFlow를 사용해야 합니다.
 
-결론: 하나의 Framework를 선택해야 한다면 TensorFlow를 선택하십시오.
+**결론: 하나의 Framework를 선택해야 한다면 TensorFlow를 선택하십시오.**
 
+<br>
 
-5.2. What if I’m a Researcher?
+## 5.2. What if I’m a Researcher?
 
-<06.png>
+<br>
+
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/06.png">
+</p>
+
+<br>
 
 연구원이라면 거의 확실하게 PyTorch를 사용하고 있으며 현재로서는 계속 사용하고 있을 것입니다. 
+
 PyTorch는 사실상의 연구 Framework이므로 대부분의 SOTA Model은 PyTorch 전용입니다.
 
+
 이 규칙에는 몇 가지 주목할만한 예외가 있으며, 가장 주목할만한 것은 Reinforcement Learning에 있는 사람들이 TensorFlow 사용을 고려해야 한다는 것입니다. 
-TensorFlow에는 Reinforcement Learning을 위한 기본 에이전트(https://www.tensorflow.org/agents/overview) Library가 있으며 DeepMind의 Acme(https://github.com/deepmind/acme) Framework는 TensorFlow에서 구현됩니다. 
-OpenAI의 Gym(http://www.gymlibrary.ml/)은 TensorFlow 또는 PyTorch와 함께 사용할 수 있지만 OpenAI의 Baselines(https://github.com/openai/baselines) Model 저장소는 TensorFlow에서 구현됩니다. 
-연구에 TensorFlow를 사용할 계획이라면 DeepMind의 Sonnet(https://github.com/deepmind/sonnet)에서 더 높은 수준의 추상화도 확인해야 합니다.
+
+TensorFlow에는 Reinforcement Learning을 위한 [기본 에이전트](https://www.tensorflow.org/agents/overview) Library가 있으며 DeepMind의 [Acme](https://github.com/deepmind/acme) Framework는 TensorFlow에서 구현됩니다. 
+
+[OpenAI의 Gym](http://www.gymlibrary.ml/)은 TensorFlow 또는 PyTorch와 함께 사용할 수 있지만 OpenAI의 [Baselines](https://github.com/openai/baselines) Model 저장소는 TensorFlow에서 구현됩니다. 
+
+연구에 TensorFlow를 사용할 계획이라면 DeepMind의 [Sonnet](https://github.com/deepmind/sonnet)에서 더 높은 수준의 추상화도 확인해야 합니다.
 
 TensorFlow를 사용하고 싶지 않다면 TPU 교육을 하고 있다면 Google의 JAX 탐색을 고려해야 합니다. 
+
 신경망 Framework 자체는 아니지만 자동 분화 기능이 있는 G/TPU용 NumPy 구현에 더 가깝습니다. 
-"Sonnet for JAX"라고 부르는 DeepMind의 Haiku(https://github.com/deepmind/dm-haiku)는 JAX를 고려하고 있다면 살펴볼 가치가 있는 JAX를 기반으로 구축된 신경망 Library입니다. 
-또는 Google의 Flax(https://github.com/google/flax)를 확인할 수 있습니다. 
+
+"Sonnet for JAX"라고 부르는 DeepMind의 [Haiku](https://github.com/deepmind/dm-haiku)는 JAX를 고려하고 있다면 살펴볼 가치가 있는 JAX를 기반으로 구축된 신경망 Library입니다. 
+
+또는 Google의 [Flax](https://github.com/google/flax)를 확인할 수 있습니다. 
+
 TPU Train을 하지 않는다면 지금은 PyTorch를 사용하는 것이 가장 좋습니다.
 
+
 어떤 Framework를 선택하든 2022년 JAX를 주시해야 합니다. 
+
 특히 커뮤니티가 성장하고 더 많은 출판물에서 이를 활용하기 시작함에 따라 더욱 그렇습니다.
 
-결론: 하나의 Framework를 선택해야 하는 경우 PyTorch를 선택하십시오.
+**결론: 하나의 Framework를 선택해야 하는 경우 PyTorch를 선택하십시오.**
 
+<br>
+<br>
 
+## 5.3. What if I’m a Professor?
 
-5.3. What if I’m a Professor?
+<br>
 
-<07.png>
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/07.png">
+</p>
+
+<br>
 
 교수라면 Deep Learning 과정에 사용할 Framework는 교육 과정의 목표에 따라 달라집니다. 
+
 코스의 초점이 Deep Learning 이론뿐만 아니라 전체 Deep Learning Process에서 역량을 발휘하여 기초를 다질 수 있는 Deep Learning Engineer를 양성하는 것이라면 TensorFlow를 사용해야 합니다. 
+
 이 경우 종단 간 실습 Project와 함께 TensorFlow Ecosystem 및 도구에 대한 노출은 매우 유익하고 가치가 있습니다.
 
+
 코스의 초점이 Deep Learning 이론과 Deep Learning Model의 기본 이해에 있다면 PyTorch를 사용해야 합니다. 
+
 이는 특히 고급 학부 과정이나 Deep Learning 연구를 수행할 수 있도록 학생들을 준비시키는 초기 대학원 수준 과정을 가르치는 경우에 해당됩니다.
 
+
 이상적으로는 학생들이 각 Framework에 노출되어야 하며 한 학기라는 시간적 제약에도 불구하고 Framework 간의 차이점을 이해하는 데 시간을 할애하는 것이 가치가 있을 것입니다. 
+
 코스가 서로 다른 주제에 전념하는 많은 클래스가 있는 더 큰 Machine Learning 프로그램의 일부인 경우 두 가지 모두에 노출하려고 하는 것보다 코스 자료에 가장 적합한 Framework를 고수하는 것이 더 나을 수 있습니다.
 
+<br>
 
+## 5.4. What if I’m Looking for a Career Change?
 
+<br>
 
-5.4. What if I’m Looking for a Career Change?
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/08.png">
+</p>
 
-<08.png>
+<br>
 
 경력을 바꾸고 싶다면 PyTorch나 TensorFlow가 좋은 선택입니다. 
+
 이 경우에 할 수 있는 가장 중요한 것은 즉시 가치를 가져올 수 있다는 것을 입증하는 것이므로 Project Portfolio를 보유하는 것이 중요합니다. 
+
 창의적인 사용 사례에 Deep Learning을 적용하거나 Project를 끝까지 수행하여 업계 준비가 되어 있음을 보여줌으로써 평범한 것을 넘어 당신을 매우 유리한 위치에 놓을 것입니다.
 
+
 따라서 보다 쉽게 작업할 수 있는 Framework를 사용하십시오. 보다 직관적인 Framework를 사용하면 Portfolio를 효율적으로 구축할 수 있습니다. 
+
 이는 특정 Framework의 API에 익숙해지는 것보다 훨씬 더 중요합니다. 
+
 즉, 완전히 Framework에 구애받지 않는 경우 선호되는 산업 Framework인 TensorFlow를 사용하십시오. 
+
 아래 그래프의 각 Framework에 대해 다양한 직업 WebSite의 채용 공고 수를 집계했으며 TensorFlow가 PyTorch를 크게 압도했습니다.
 
-<09.png>
+<br>
 
-결론: OpenAI 또는 TensorFlow에서 일하는 목표가 절망적으로 직관적이지 않은 경우와 같이 PyTorch를 사용해야 하는 특별한 이유가 있다면 자유롭게 사용하십시오. 
-하지만 TensorFlow에 집중하는 것이 좋습니다.
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/09.png">
+</p>
 
+<br>
 
+**결론: OpenAI 또는 TensorFlow에서 일하는 목표가 절망적으로 직관적이지 않은 경우와 같이 PyTorch를 사용해야 하는 특별한 이유가 있다면 자유롭게 사용하십시오. 
+하지만 TensorFlow에 집중하는 것이 좋습니다.**
 
-5.5. What if I’m a Hobbyist?
+<br>
 
-<10.png>
+## 5.5. What if I’m a Hobbyist?
+
+<br>
+
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/10.png">
+</p>
+
+<br>
 
 Deep Learning에 관심이 있는 취미 생활자라면 사용하는 Framework는 목표에 따라 다릅니다.
+
 더 큰 Project의 일부로 Deep Learning Model을 구현하는 경우 특히 IoT/Embedded 장치에 배포하는 경우 TensorFlow를 사용하고 싶을 것입니다. 
+
 PyTorch Live가 출시되면 Mobile Application에 PyTorch를 사용할 수 있지만 현재로서는 TensorFlow + TFLite가 여전히 선호되는 방법론입니다.
 
+
 목표가 Deep Learning 자체를 배우는 것이라면 이 경우에 가장 적합한 Framework는 배경에 따라 다릅니다. 
+
 일반적으로 PyTorch는 아마도 여기서 더 나은 옵션일 것입니다. 
+
 특히 Python 작업에 익숙하다면 더욱 그렇습니다. 
+
 Deep Learning에 대해 이제 막 배우기 시작한 완전 초보자라면 다음 Section을 참조하세요.
 
+<br>
 
+## 5.6. What if I’m a Total Beginner?
 
-5.6. What if I’m a Total Beginner?
+<br>
 
-<11.png>
+<p align="center">
+  <img src="/assets/PyTorch_vs_Tensorflow/11.png">
+</p>
+
+<br>
 
 Deep Learning에 관심이 있고 막 시작하려는 완전 초보자라면 Keras를 사용하는 것이 좋습니다. 
+
 높은 수준의 구성 요소를 사용하면 Deep Learning의 기본 사항을 쉽게 이해할 수 있습니다. 
+
 Deep Learning의 기본 사항을 더 철저히 이해할 준비가 되면 다음과 같은 몇 가지 옵션이 있습니다.
 
+
 새 Framework를 설치하고 싶지 않고 귀하의 역량이 새 API로 얼마나 잘 변환될지 걱정된다면 Keras에서 TensorFlow로 "Dropdown"을 시도할 수 있습니다. 
+
 배경에 따라 TensorFlow가 혼란스러울 수 있습니다. 이 경우 PyTorch로 이동해 보십시오.
 
+
 기본적으로 Python처럼 느껴지는 Framework를 원한다면 PyTorch로 이동하는 것이 가장 좋은 방법일 수 있습니다. 
+
 이 경우 새 Framework를 설치하고 잠재적으로 사용자 지정 스크립트를 다시 작성해야 합니다. 
+
 또한 PyTorch가 다소 번거롭다면 PyTorch Lightning을 사용하여 Code를 구획화하고 일부 상용구를 제거할 수 있습니다.
+
 
 완전한 초보자라면 TensorFlow와 PyTorch 모두에서 YouTube 자습서를 보고 어떤 Framework가 더 직관적으로 느껴지는지 결정하는 것이 좋습니다.
 
 
-마지막으로
+**마지막으로**
+
 보시다시피 PyTorch 대 TensorFlow 논쟁은 지형이 끊임없이 변화하는 미묘한 차이가 있으며 오래된 정보로 인해 이러한 상황을 이해하기가 훨씬 더 어렵습니다. 
+
 2022년에는 PyTorch와 TensorFlow 모두 매우 성숙한 Framework이며 핵심 Deep Learning 기능이 크게 겹칩니다. 
+
 오늘날에는 Model Availability, 배포 시간 및 관련 Ecosystem과 같은 각 Framework의 실질적인 고려 사항이 기술적인 차이점을 대체합니다.
 
+
 두 Framework 모두 좋은 문서, 많은 학습 Resource 및 활성 커뮤니티를 가지고 있기 때문에 두 Framework를 선택하는 데 실수가 없습니다. 
+
 PyTorch는 연구 커뮤니티에서 폭발적으로 채택된 후 사실상의 연구 Framework가 되었고 TensorFlow는 Legacy 산업 Framework로 남아 있지만 두 Domain 모두에서 각각에 대한 사용 사례가 확실히 있습니다.
