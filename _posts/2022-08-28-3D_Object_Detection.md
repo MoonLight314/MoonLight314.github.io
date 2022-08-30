@@ -263,170 +263,247 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
 
 <br>
 
-3.3.2.2 3D Discrete Convolution Methods
+#### 3.3.2.2 3D Discrete Convolution Methods
 
-- 이 방법은 neighboring points의 Weight가 center point에 대한 오프셋과 관련된 일반 그리드에서 convolutional kernels을 정의합니다.
+<br>
 
-- GeoConv
-- PointCNN
-- InterpConv
-- RIConv
-- A-CNN
-- SFCNN
+  - 이 방법은 neighboring points의 Weight가 center point에 대한 오프셋과 관련된 일반 그리드에서 convolutional kernels을 정의합니다.
+    * GeoConv
+    * PointCNN
+    * InterpConv
+    * RIConv
+    * A-CNN
+    * SFCNN
 
-3.3.3 Graph-based Methods
+<br>
 
-- Graph Based Network은 Point Cloud의 각 점을 Graph의 Vertex로 생각하고 방향이 있는 Graph를 생성한다.
-- Feature Learning은 그 이후에 spatial or spectral domains에서 실행한다.
+### 3.3.3 Graph-based Methods
 
-<06.png>
+<br>
 
-3.3.3.1 Graph-based Methods in Spatial Domain
+  - Graph Based Network은 Point Cloud의 각 점을 Graph의 Vertex로 생각하고 방향이 있는 Graph를 생성한다.
+  - Feature Learning은 그 이후에 spatial or spectral domains에서 실행한다.
 
-- 공간 Domain에서 convolution & pooling 정의
-- 인접 점들에 MLP를 적용하여 새로운 coarsened graph를 만들고 여기서 Feature를 뽑는다.
-- 각 Vertex의 Feature는 보통 좌표 / Laser 강도 / 색상등으로 정의되고, Edge의 Feature는 각 점들의 연결의 기하학적 특징으로 할당된다.
-    
-    
-    - EdgeConditioned Convolution (ECC)
-    - VoxelGrid
-    - DGCNN
-    - EdgeConv
-    - LDGCNN
-    - FoldingNet
-    - Dynamic Points Agglomeration Module (DPAM)
-    - KCNet
-    - G3D
-    - ClusterNet
-    - Grid-GCN
+<br>
 
-**3.3.3.2 Graph-based Methods in Spectral Domain**
+<p align="center">
+  <img src="/assets/3D_Object_Detection/06.png">
+</p>
 
-- Conv.를 Graph의 신호를 Laplacian matrix 고유 벡터와 곱하는 것으로 정의하는 spectral filtering로 정의하여 구현
-    
-    
-    - RGCNN
-    - AGCN
-    - HGNN
-    - LocalSpecGCN
-    - PointGCN
-    - 3DTI-Net
+<br>
 
-**3.3.4 Hierarchical Data Structure-based Methods**
+#### 3.3.3.1 Graph-based Methods in Spatial Domain
 
-- 이 방법은 다양한 hierarchical data structures (e.g., octree and kd-tree)를 기초로 해서 구성된다.
-- 이 방법은 각 점들의 Feature를 Tree의 Leaf Node에서 Root Node로 따라 올라가면서 학습하게 된다.
-    
-    
-    - OctNet
-    - Kd-Net
-    - 3DContextNet
-    - SO-Net
-    - SOM
+<br>
 
-**3.3.5 Other Methods**
+  - 공간 Domain에서 convolution & pooling 정의
+  - 인접 점들에 MLP를 적용하여 새로운 coarsened graph를 만들고 여기서 Feature를 뽑는다.
+  - 각 Vertex의 Feature는 보통 좌표 / Laser 강도 / 색상등으로 정의되고, Edge의 Feature는 각 점들의 연결의 기하학적 특징으로 할당된다.
 
-- RBFNet
-- 3DPointCapsNet
-- PointDAN
-- ShapeContextNet
-- RCNet
-- RCNet-E
-- Point2Sequences
-- PVNet
-- PVRNet
+<br>
 
-**3.5 Summary**
+    * EdgeConditioned Convolution (ECC)
+    * VoxelGrid
+    * DGCNN
+    * EdgeConv
+    * LDGCNN
+    * FoldingNet
+    * Dynamic Points Agglomeration Module (DPAM)
+    * KCNet
+    * G3D
+    * ClusterNet
+    * Grid-GCN
 
-- Pointwise MLP networks는 다른 종류의 Network의 Basic Building Block으로 자주 사용된다.
-- standard deep learning architecture로써, convolution-based networks는 불규칙한 3D Point Clould에서 우수한 성능을 보여준다.
-- 불규칙한 Data에서 discrete and continuous convolution networks 에 좀 더 많은 관심을 기울일 필요가 있다.
-- 불규칙한 data를 다루는 내재된 훌륭한 성능 덕분에 graph-based networks은 최근 많은 관심을 받고 있다.
-- 하지만 spectral domain에서 다양한 Graph 구조로 확장시키는 것은 여전히 어려운 일이다.
+<br>
 
-<07.png>
+#### 3.3.3.2 Graph-based Methods in Spectral Domain
 
+<br>
 
+  - Conv.를 Graph의 신호를 Laplacian matrix 고유 벡터와 곱하는 것으로 정의하는 spectral filtering로 정의하여 구현
 
+    * RGCNN
+    * AGCN
+    * HGNN
+    * LocalSpecGCN
+    * PointGCN
+    * 3DTI-Net
 
-**4. 3D OBJECT DETECTION AND TRACKING**
+<br>
 
-**4.1 3D Object Detection**
+### 3.3.4 Hierarchical Data Structure-based Methods
 
-- 일반적인 3D object detector는 Point Cloud의 장면을 입력으로 받아서 각 Object의 oriented 3D bounding를 만들어 냅니다.
-- 2D Image의 object detection과 유사하게, 3D object detection 방법은 크게 region proposal based and single shot methods의 2가지로 나눌 수 있다.
+<br>
 
+  - 이 방법은 다양한 hierarchical data structures (e.g., octree and kd-tree)를 기초로 해서 구성된다.
+  - 이 방법은 각 점들의 Feature를 Tree의 Leaf Node에서 Root Node로 따라 올라가면서 학습하게 된다.
+    * OctNet
+    * Kd-Net
+    * 3DContextNet
+    * SO-Net
+    * SOM
 
-<08.png>
-<09.png>
+<br>
 
+### 3.3.5 Other Methods
 
-**4.1.1 Region Proposal-based Methods**
+<br>
 
-- 이 방법은 우선 몇개의 Object를 포함하는 Region(Proposals이라고도 불린다)을 제안하고 각 Proposal에서 Feature를 추출하여 분류합니다.
-- 각 방법이 제안하는 Proposal 생성 방법에 따르면, 이 방법도 크게 3가지로 나눌 수 있습니다.
+  - RBFNet
+  - 3DPointCapsNet
+  - PointDAN
+  - ShapeContextNet
+  - RCNet
+  - RCNet-E
+  - Point2Sequences
+  - PVNet
+  - PVRNet
 
-**4.1.1.1 Multi-view based Methods**
+<br>
 
-- 이 방법은 다양한 소스의 Data로 부터 Feature를 얻는다.
-- Computational Cost가 높다
+## 3.5 Summary
 
-<10.png>
+<br>
 
-- 실사용에서 사용하기에는 너무 느리기 때문에 성능 향상을 위한 방안 발전
-    - Multi Modality로부터 얻은 Data를 효율적으로 연결하기 위한 방법
-    - Robust한 Data를 뽑기 위한 방안
+  - Pointwise MLP networks는 다른 종류의 Network의 Basic Building Block으로 자주 사용된다.
+  - standard deep learning architecture로써, convolution-based networks는 불규칙한 3D Point Clould에서 우수한 성능을 보여준다.
+  - 불규칙한 Data에서 discrete and continuous convolution networks 에 좀 더 많은 관심을 기울일 필요가 있다.
+  - 불규칙한 data를 다루는 내재된 훌륭한 성능 덕분에 graph-based networks은 최근 많은 관심을 받고 있다.
+  - 하지만 spectral domain에서 다양한 Graph 구조로 확장시키는 것은 여전히 어려운 일이다.
 
-- MV3D
-- AVOD
-- ContFuse
-- MMF
-- SCANet
-- RT3D
+<br>
 
+<p align="center">
+  <img src="/assets/3D_Object_Detection/07.png">
+</p>
 
-**4.1.1.2 Segmentation-based Methods**
+<br>
+<br>
+<br>
+<br>
 
-- 이 방법은 먼저 기존의 semantic segmentation techniques을 이용하여 대부분의 background points를 제거한 후, 나머지 Point들로부터 large amount of high-quality proposals을 생성하는 방법이다.
-- multi-view methods와 비교하면, 이 방법은 higher object recall rates를 달성할 수 있고, 복잡한 장면에 좀 더 적합하다.
+# 4. 3D OBJECT DETECTION AND TRACKING
 
-<11.png>
+<br>
 
-- IPOD
-- PointRCNN
-- PointRGCN
-- PointPainting
-- STD
+## 4.1 3D Object Detection
 
-**4.1.1.3 Frustum-based Methods**
+<br>
 
-- 이 방법은 기존의 2D object detectors를 이용하여 2D regions candidate 을 먼저 찾아내고, 그 후에 각각의 2D regions candidate에서 3D frustum proposal 을 찾아내는 방법이다.
-- 이 방법이 3D objects의 위치를 효과적으로 찾는다 해도, 2D image detectors의 성능 한계에 영향을 받습니다.
+  - 일반적인 3D object detector는 Point Cloud의 장면을 입력으로 받아서 각 Object의 oriented 3D bounding를 만들어 냅니다.
+  - 2D Image의 object detection과 유사하게, 3D object detection 방법은 크게 region proposal based and single shot methods의 2가지로 나눌 수 있다.
 
-- F-PointNets
-- SIFRNet
-- PointFusion
-- RoarNet
-- F-ConvNet
-- Patch Refinement
+<br>
 
-**4.1.1.4 Other Methods**
+<p align="center">
+  <img src="/assets/3D_Object_Detection/08.png">
+  <img src="/assets/3D_Object_Detection/09.png">
+</p>
 
-- 3D IoU loss
-- Fast Point R-CNN
-- PV-RCNN
-- VoteNet
-- Feng et al.
-- ImVoteNet
-- Part-A^2
+<br>
 
-**4.1.2 Single Shot Methods**
+### 4.1.1 Region Proposal-based Methods
 
-- 이 방법은 single-stage network을 이용해서 바로 class probabilities를 예측하고 3D bounding boxes를 찾아냅니다.
-- 이 방법은 region proposal generation을 할 필요도 없고 post-processing도 필요하지 않아서, 결과적으로 빠른 속도를 보여줍니다.
-- Input Data의 Type에 따라서 BEV-based, discretizationbased , point-based methods로 나눌 수 있습니다.
+<br>
 
-**4.1.2.1 BEV-based Methods ( BEV : Bird’s Eye View )**
+  - 이 방법은 우선 몇개의 Object를 포함하는 Region(Proposals이라고도 불린다)을 제안하고 각 Proposal에서 Feature를 추출하여 분류합니다.
+  - 각 방법이 제안하는 Proposal 생성 방법에 따르면, 이 방법도 크게 3가지로 나눌 수 있습니다.
+
+<br>
+
+#### 4.1.1.1 Multi-view based Methods
+
+<br>
+
+  - 이 방법은 다양한 소스의 Data로 부터 Feature를 얻는다.
+  - Computational Cost가 높다
+
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/10.png">
+</p>
+
+<br>
+
+  - 실사용에서 사용하기에는 너무 느리기 때문에 성능 향상을 위한 방안 발전
+    * Multi Modality로부터 얻은 Data를 효율적으로 연결하기 위한 방법
+    * Robust한 Data를 뽑기 위한 방안
+
+  - MV3D
+  - AVOD
+  - ContFuse
+  - MMF
+  - SCANet
+  - RT3D
+
+<br>
+
+#### 4.1.1.2 Segmentation-based Methods
+
+<br>
+
+  - 이 방법은 먼저 기존의 semantic segmentation techniques을 이용하여 대부분의 background points를 제거한 후, 나머지 Point들로부터 large amount of high-quality proposals을 생성하는 방법이다.
+  - multi-view methods와 비교하면, 이 방법은 higher object recall rates를 달성할 수 있고, 복잡한 장면에 좀 더 적합하다.
+
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/11.png">
+</p>
+
+<br>
+
+  - IPOD
+  - PointRCNN
+  - PointRGCN
+  - PointPainting
+  - STD
+
+<br>
+
+#### 4.1.1.3 Frustum-based Methods
+
+<br>
+
+  - 이 방법은 기존의 2D object detectors를 이용하여 2D regions candidate 을 먼저 찾아내고, 그 후에 각각의 2D regions candidate에서 3D frustum proposal 을 찾아내는 방법이다.
+  - 이 방법이 3D objects의 위치를 효과적으로 찾는다 해도, 2D image detectors의 성능 한계에 영향을 받습니다.
+    * F-PointNets
+    * SIFRNet
+    * PointFusion
+    * RoarNet
+    * F-ConvNet
+    * Patch Refinement
+
+<br>
+
+#### 4.1.1.4 Other Methods
+
+<br>
+
+  - 3D IoU loss
+  - Fast Point R-CNN
+  - PV-RCNN
+  - VoteNet
+  - Feng et al.
+  - ImVoteNet
+  - Part-A^2
+
+<br>
+
+### 4.1.2 Single Shot Methods
+
+<br>
+
+  - 이 방법은 single-stage network을 이용해서 바로 class probabilities를 예측하고 3D bounding boxes를 찾아냅니다.
+  - 이 방법은 region proposal generation을 할 필요도 없고 post-processing도 필요하지 않아서, 결과적으로 빠른 속도를 보여줍니다.
+  - Input Data의 Type에 따라서 BEV-based, discretizationbased , point-based methods로 나눌 수 있습니다.
+
+<br>
+
+#### 4.1.2.1 BEV-based Methods ( BEV : Bird’s Eye View )
+
+<br>
 
 이 방법은 입력으로 BEV Data Representation을 받는다.
 
