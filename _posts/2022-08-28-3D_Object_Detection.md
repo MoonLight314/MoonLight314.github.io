@@ -586,6 +586,14 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
 
   - Point Cloud에서 3D Scene Flow Estimation은 주어진 Point Cloud X,Y에서 X에 속한 xi에서 그에 해당하는 Y의 xi’로의 이동을 나타낸다.
 
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/14.png">
+</p>
+
+<br>
+
     * FlowNet3D
     * Hierarchical Permutohedral Lattice FlowNet (HPLFlowNet)
     * PointRNN , PointGRU , PointLSTM
@@ -635,8 +643,20 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
 
 <br>
 
+<p align="center">
+  <img src="/assets/3D_Object_Detection/15.png">
+</p>
+
+<br>
+
   - 그런 다음에 intermediate segmentation 결과는 Raw point cloud에 다시 투영(Project)됩니다.
   - 반면에, point-based 방법은 irregular point clouds로 바로 동작합니다.
+
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/16.png">
+</p>
 
 <br>
 
@@ -716,6 +736,12 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
 
 <br>
 
+<p align="center">
+  <img src="/assets/3D_Object_Detection/17.png">
+</p>
+
+<br>
+
 #### 5.1.4.1 Pointwise MLP Methods
 
 <br>
@@ -784,6 +810,12 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
 
 <br>
 
+<p align="center">
+  <img src="/assets/3D_Object_Detection/18.png">
+</p>
+
+<br>
+
 ## 5.2 Instance Segmentation
 
 <br>
@@ -791,6 +823,12 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
   - semantic segmentation에 비교해서 instance segmentation는 Point에 대한 보다 정확하고 세분화된 추론이 필요하기 때문에 더 어렵습니다.
   - 특히, instance segmentation은 각 Point들의 의미론적 구분도 해야할 뿐만 아니라 같은 의미를 가진 Point들을 분리도 해야 합니다.
   - instance segmentation은 크게 proposal-based methods and proposal-free methods로 나눌 수 있다.
+
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/19.png">
+</p>
 
 <br>
 
