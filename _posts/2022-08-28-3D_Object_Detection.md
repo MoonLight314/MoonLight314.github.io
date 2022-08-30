@@ -148,85 +148,120 @@ Regularly updated project page : https://github.com/The-Learning-And-Vision-Atel
     * point-based methods
       - directly work on raw point clouds without any voxelization or projection
       - do not introduce explicit information loss and become increasingly popular.
+
+<br>
         
-        
-3.1 Multi-view based Methods**
+## 3.1 Multi-view based Methods**
 
-- 이 방법은 먼저 3D Shape을 multiple views로 Project시킨 후에 다양한 Feature를 조합하여 정확한 Shape classification을 수행한다.
-- 다양한 Feature들을 어떻게 조합하여 Shape을 Classification하는지가 이 방법의 중요한 Key이다.
-    
-    
-    - MVCNN
-    - MHBN
+<br>
 
-3.2 Volumetric-based Methods
+  - 이 방법은 먼저 3D Shape을 multiple views로 Project시킨 후에 다양한 Feature를 조합하여 정확한 Shape classification을 수행한다.
+  - 다양한 Feature들을 어떻게 조합하여 Shape을 Classification하는지가 이 방법의 중요한 Key이다.
 
-- 이 방법은 shape classification하기 위해서 point cloud를 3D grids로 voxelization 시킨 후에 3D Convolution Neural Network (CNN)을 적용한다.
+    * MVCNN
+    * MHBN
 
-- **Voxelization**
+<br>
+
+## 3.2 Volumetric-based Methods
+
+<br>
+
+  - 이 방법은 shape classification하기 위해서 point cloud를 3D grids로 voxelization 시킨 후에 3D Convolution Neural Network (CNN)을 적용한다.
+
+  - **Voxelization**
     
     ⇒ Pixel의 3D 형태가 Voxel이므로, Voxel은 그래픽을 구성하는 정육면체 모양의 요소라고 생각하면 된다.  Pixel과 마찬가지로 모든 Voxel의 모양과 크기는 동일하고. 색상값을 가지며 3D 이미지를 구성하게 된다.
-    
-<03.png>(< Voxel & Polygon >)
 
-- VoxNet
-- ShapeNets
-- OctNet
-- Octree-based CNN
-- PointGrid
+<br>
 
+<p align="center">
+  <img src="/assets/3D_Object_Detection/03.png">
+</p>
 
+<br>
 
-3.3 Point-based Methods
+    * VoxNet
+    * ShapeNets
+    * OctNet
+    * Octree-based CNN
+    * PointGrid
 
-- 각 Point의 Feature 학습에 사용된 Network architecture에 따라서 다음과 같은 방식이 있다.
-    - pointwise MLP
-    - convolution-based
-    - graph-based
-    - hierarchical data structure-based
-    - Others
-    
-    
-3.3.1 Pointwise MLP Methods
+<br>
 
-- 이러한 방법은 여러 공유 MLP(Multi-Layer Perceptron)를 사용하여 각 점을 독립적으로 모델링한 다음 아래 그림과 같이 symmetric aggregation function을 사용하여 global feature을 모은다.
+## 3.3 Point-based Methods
 
-<04.png>
+<br>
 
-- PointNet
-- Deep sets
-- PointNet++
-- Mo-Net
-- Point Attention Transformers (PATs)
-- PointWeb
-- Structural Relational Network (SRN)
-- SRINet
-- PointASNL
+  - 각 Point의 Feature 학습에 사용된 Network architecture에 따라서 다음과 같은 방식이 있다.
+    * pointwise MLP
+    * convolution-based
+    * graph-based
+    * hierarchical data structure-based
+    * Others
 
+<br>
 
-3.3.2 Convolution-based Methods
+### 3.3.1 Pointwise MLP Methods
 
-- Image에 적용하는 2D Kernel과 비교해서 Point Cloud에 적용하는 3D CNN Kernel은 Point Cloud의 irregularity 한 특성 때문에 Design하기 어렵다.
-- convolutional kernel의 종류에 따라, 3D convolution 방법은 아래 그림과 같이 continuous convolution methods와 discrete convolution methods로 나뉜다.
+<br>
 
-<05.png>
+  - 이러한 방법은 여러 공유 MLP(Multi-Layer Perceptron)를 사용하여 각 점을 독립적으로 모델링한 다음 아래 그림과 같이 symmetric aggregation function을 사용하여 global feature을 모은다.
 
+<br>
 
-3.3.2.1 3D Continuous Convolution Methods
+<p align="center">
+  <img src="/assets/3D_Object_Detection/04.png">
+</p>
 
-- 이 방법은 continuous space에서 convolutional kernels을 정의합니다. 여기서 neighboring points의 Weight는 center point에 대한 공간 분포와 관련됩니다.
-    - RS-CNN
-    - DensePoint
-    - Kernel Point Convolution (KPConv)
-    - ConvPoint
-    - PointConv
-    - MCCNN
-    - SpiderCNN
-    - PCNN
-    - 3D Spherical CNN
-    - Tensor field networks
-    - SPHNet
-    - Flex-Convolution
+<br>
+
+    * PointNet
+    * Deep sets
+    * PointNet++
+    * Mo-Net
+    * Point Attention Transformers (PATs)
+    * PointWeb
+    * Structural Relational Network (SRN)
+    * SRINet
+    * PointASNL
+
+<br>
+
+### 3.3.2 Convolution-based Methods
+
+<br>
+
+  - Image에 적용하는 2D Kernel과 비교해서 Point Cloud에 적용하는 3D CNN Kernel은 Point Cloud의 irregularity 한 특성 때문에 Design하기 어렵다.
+  - convolutional kernel의 종류에 따라, 3D convolution 방법은 아래 그림과 같이 continuous convolution methods와 discrete convolution methods로 나뉜다.
+
+<br>
+
+<p align="center">
+  <img src="/assets/3D_Object_Detection/05.png">
+</p>
+
+<br>
+
+#### 3.3.2.1 3D Continuous Convolution Methods
+
+<br>
+
+  - 이 방법은 continuous space에서 convolutional kernels을 정의합니다. 여기서 neighboring points의 Weight는 center point에 대한 공간 분포와 관련됩니다.
+    * RS-CNN
+    * DensePoint
+    * Kernel Point Convolution (KPConv)
+    * ConvPoint
+    * PointConv
+    * MCCNN
+    * SpiderCNN
+    * PCNN
+    * 3D Spherical CNN
+    * Tensor field networks
+    * SPHNet
+    * Flex-Convolution
+
+<br>
 
 3.3.2.2 3D Discrete Convolution Methods
 
