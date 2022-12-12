@@ -39,9 +39,9 @@ video understanding에서 가장 중요한 작업 중 하나는 인간의 행동
 
 <br>
 
-
-# 
-
+<br>
+## 여기까지
+<br>
 
 지난 10년 동안 고품질의 대규모 동작 인식 데이터 세트의 등장으로 비디오 동작 인식에 대한 연구 관심이 높아졌습니다.
 Over the last decade, there has been growing research interest in video action recognition with the emergence of high-quality large-scale action recognition datasets. 
