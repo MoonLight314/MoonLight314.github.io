@@ -32,214 +32,294 @@ video understanding에서 가장 중요한 작업 중 하나는 인간의 행동
 ( In Figure 1, we visualize several video frames with the associated action labels, which are typical human daily activities such as shaking hands and riding a bike. )
 
 <br>
-
+<br>
 <p align="center">
   <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_01.png">
 </p>
-
 <br>
-
-<br>
-## 여기까지
 <br>
 
 지난 10년 동안 고품질의 대규모 동작 인식 데이터 세트의 등장으로 비디오 동작 인식에 대한 연구 관심이 높아졌습니다.
-Over the last decade, there has been growing research interest in video action recognition with the emergence of high-quality large-scale action recognition datasets. 
+<br>
+( Over the last decade, there has been growing research interest in video action recognition with the emergence of high-quality large-scale action recognition datasets. )
 
 인기 있는 동작 인식 데이터 세트의 통계를 그림 2에 요약했습니다.
-We summarize the statistics of popular action recognition datasets in Figure 2. 
+<br>
+( We summarize the statistics of popular action recognition datasets in Figure 2. )
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_02.png">
+</p>
+<br>
+<br>
 
 예를 들어 HMDB51[109]의 51개 클래스에 대한 7K 비디오에서 YouTube8M[1]의 3,862개 클래스에 대한 8M 비디오로 비디오 및 클래스의 수 모두 빠르게 증가하는 것을 볼 수 있습니다. 또한 새로운 데이터세트가 공개되는 비율이 증가하고 있습니다. 2016년부터 2020년까지 13개의 데이터세트가 공개된 것에 비해 2011년부터 2015년까지 3개의 데이터세트가 공개되었습니다.
-We see that both the number of videos and classes increase rapidly, e.g, from 7K videos over 51 classes in HMDB51 [109] to 8M videos over 3, 862 classes in YouTube8M [1]. Also, the rate at which new datasets are released is increasing: 3 datasets were released from 2011 to 2015 compared to 13 released from 2016 to 2020.
+<br>
+( We see that both the number of videos and classes increase rapidly, e.g, from 7K videos over 51 classes in HMDB51 [109] to 8M videos over 3, 862 classes in YouTube8M [1]. Also, the rate at which new datasets are released is increasing: 3 datasets were released from 2011 to 2015 compared to 13 released from 2016 to 2020.)
 
 대규모 데이터 세트의 가용성과 딥 러닝의 급속한 발전 덕분에 비디오 동작을 인식하는 딥 러닝 기반 모델도 빠르게 성장하고 있습니다.
-Thanks to both the availability of large-scale datasets and the rapid progress in deep learning, there is also a rapid growth in deep learning based models to recognize video actions. 
+<br>
+( Thanks to both the availability of large-scale datasets and the rapid progress in deep learning, there is also a rapid growth in deep learning based models to recognize video actions. )
 
 그림 3에서 우리는 최근 대표 작업의 연대순 개요를 제시합니다.
-In Figure 3, we present a chronological overview of recent representative work. 
+<br>
+( In Figure 3, we present a chronological overview of recent representative work. )
 
-DeepVideo[99]는 컨볼루션 신경망을 비디오에 적용하려는 초기 시도 중 하나입니다.
-DeepVideo [99] is one of the earliest attempts to apply convolutional neural networks to videos. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_03.png">
+</p>
+<br>
+<br>
+
+DeepVideo[99]는 convolutional neural networks를 비디오에 적용하려는 초기 시도 중 하나입니다.
+<br>
+( DeepVideo [99] is one of the earliest attempts to apply convolutional neural networks to videos. )
 
 우리는 세가지 트렌드를 확인하였다.
-We observed three trends here. 
+<br>
+( We observed three trends here. )
 
 Two-Stream Networks[187]에 대한 중요한 논문에서 시작된 첫 번째 추세는 optical flow stream에서 convolutional neural network을 훈련하여 비디오의 시간 정보를 학습하는 두 번째 경로를 추가하는 것입니다.
-The first trend started by the seminal paper on Two-Stream Networks [187], adds a second path to learn the temporal information in a video by training a convolutional neural network on the optical flow stream. 
+<br>
+( The first trend started by the seminal paper on Two-Stream Networks [187], adds a second path to learn the temporal information in a video by training a convolutional neural network on the optical flow stream. )
 
 그것의 큰 성공은 TDD[214], LRCN[37], Fusion[50], TSN[218] 등과 같은 많은 후속 논문에 영감을 주었습니다.
-Its great success inspired a large number of follow-up papers, such as TDD [214], LRCN [37], Fusion [50], TSN [218], etc. 
+<br>
+( Its great success inspired a large number of follow-up papers, such as TDD [214], LRCN [37], Fusion [50], TSN [218], etc. )
 
-두 번째 경향은 I3D[14], R3D[74], S3D[239], Non-local[219], SlowFast[45] 등과 같은 비디오 시간 정보를 모델링하기 위해 3D 컨벌루션 커널을 사용하는 것입니다.
-The second trend was the use of 3D convolutional kernels to model video temporal information, such as I3D [14], R3D [74], S3D [239], Non-local [219], SlowFast [45], etc. 
+두 번째 경향은 I3D[14], R3D[74], S3D[239], Non-local[219], SlowFast[45] 등과 같은 비디오 시간 정보를 모델링하기 위해 3D convolutional kernels을 사용하는 것입니다.
+<br>
+( The second trend was the use of 3D convolutional kernels to model video temporal information, such as I3D [14], R3D [74], S3D [239], Non-local [219], SlowFast [45], etc. )
 
 마지막으로 세 번째 트렌드는 실제 애플리케이션에 채택될 수 있도록 훨씬 더 큰 데이터 세트로 확장할 수 있는 계산 효율성에 중점을 두었습니다.
-Finally, the third trend focused on computational efficiency to scale to even larger datasets so that they could be adopted in real applications. 
+<br>
+( Finally, the third trend focused on computational efficiency to scale to even larger datasets so that they could be adopted in real applications. )
 
 Hidden TSN[278], TSM[128], X3D[44], TVN[161] 등을 예로 들 수 있습니다.
-Examples include Hidden TSN [278], TSM [128], X3D [44], TVN [161], etc.
+<br>
+( Examples include Hidden TSN [278], TSM [128], X3D [44], TVN [161], etc. )
 
 비디오 동작 인식을 위한 많은 수의 딥 러닝 기반 모델에도 불구하고 이러한 모델에 대한 포괄적인 조사는 없습니다.
-Despite the large number of deep learning based models for video action recognition, there is no comprehensive survey dedicated to these models. 
+<br>
+( Despite the large number of deep learning based models for video action recognition, there is no comprehensive survey dedicated to these models. )
 
 이전 Survey Paper들은 hand-crafted features에 더 공을 들이거나 비디오 캡션[236], 비디오 예측[104], 비디오 동작 감지[261] 및 제로 샷 비디오 동작 인식[ 96].등과 같은 광범위한 주제에 중점을 두었으나,
-Previous survey papers either put more efforts into hand-crafted features [77, 173] or focus on broader topics such as video captioning [236], video prediction [104], video action detection [261] and zero-shot video action recognition [96]. 
+<br>
+( Previous survey papers either put more efforts into hand-crafted features [77, 173] or focus on broader topics such as video captioning [236], video prediction [104], video action detection [261] and zero-shot video action recognition [96]. )
 
 이 Paper에서는 다음와 같은 것들에 중점을 둔다.
-In this paper:
+<br>
+( In this paper: )
 
-영상 동작 인식을 위한 딥러닝에 관한 200편 이상의 논문을 종합적으로 검토합니다.
-우리는 독자들에게 최신 발전을 시간순으로 체계적으로 설명하고 인기 있는 논문을 자세히 설명합니다.
-- We comprehensively review over 200 papers on deep learning for video action recognition. 
-We walk the readers through the recent advancements chronologically and systematically, with popular papers explained in detail.
+- 영상 동작 인식을 위한 딥러닝에 관한 200편 이상의 논문을 종합적으로 검토합니다. 우리는 독자들에게 최신 발전을 시간순으로 체계적으로 설명하고 인기 있는 논문을 자세히 설명합니다.
+  ( We comprehensively review over 200 papers on deep learning for video action recognition. We walk the readers through the recent advancements chronologically and systematically, with popular papers explained in detail. )
 
-우리는 정확성과 효율성 측면에서 동일한 데이터 세트에 대해 널리 채택된 방법을 벤치마킹합니다.
-또한 완전한 재현성을 위해 구현을 릴리스합니다.
-- We benchmark widely adopted methods on the same set of datasets in terms of both accuracy and efficiency.
-We also release our implementations for full reproducibility.
+- 우리는 정확성과 효율성 측면에서 동일한 데이터 세트에 대해 널리 채택된 방법을 벤치마킹합니다. 또한 완전한 재현성을 위해 구현을 릴리스합니다.
+  ( We benchmark widely adopted methods on the same set of datasets in terms of both accuracy and efficiency. We also release our implementations for full reproducibility.)
 
-우리는 향후 연구를 촉진하기 위해 이 분야의 도전 과제, 열린 문제 및 기회에 대해 자세히 설명합니다.
-- We elaborate on challenges, open problems, and opportunities in this field to facilitate future research.
+- 우리는 향후 연구를 촉진하기 위해 이 분야의 도전 과제, 열린 문제 및 기회에 대해 자세히 설명합니다.
+  ( We elaborate on challenges, open problems, and opportunities in this field to facilitate future research. )
 
 
 The rest of the survey is organized as following. 
 
 먼저 섹션 2에서 벤치마킹 및 기존 문제에 사용되는 인기 있는 데이터 세트에 대해 설명합니다.
-We first describe popular datasets used for benchmarking and existing challenges in section 2. 
+<br>
+( We first describe popular datasets used for benchmarking and existing challenges in section 2. )
 
 그런 다음 이 설문 조사의 주요 기여인 섹션 3에서 비디오 동작 인식을 위한 딥 러닝을 사용한 최근 발전을 제시합니다.
-Then we present recent advancements using deep learning for video action recognition in section 3, which is the major contribution of this survey. 
+<br>
+( Then we present recent advancements using deep learning for video action recognition in section 3, which is the major contribution of this survey. )
 
 섹션 4에서는 표준 벤치마크 데이터 세트에 대해 널리 채택된 접근 방식을 평가하고 섹션 5에서는 논의 및 향후 연구 기회를 제공합니다.
-In section 4, we evaluate widely adopted approaches on standard benchmark datasets, and provide discussions and future research opportunities in section 5.
+<br>
+( In section 4, we evaluate widely adopted approaches on standard benchmark datasets, and provide discussions and future research opportunities in section 5. )
 
-
-
+<br>
+<br>
+<br>
 
 ## 2. Datasets and Challenges
 
-2.1. Datasets
+<br>
 
-Deep learning methods usually improve in accuracy when the volume of the training data grows. 
+### 2.1. Datasets
+
+<br>
+
 딥 러닝 방법은 일반적으로 training data의 양이 증가하면 정확도가 향상됩니다.
+<br>
+( Deep learning methods usually improve in accuracy when the volume of the training data grows. )
 
-In the case of video action recognition, this means we need large-scale annotated datasets to learn effective models.
 video action recognition의 경우 이는 효과적인 모델을 학습하기 위해 large-scale annotated datasets가 필요함을 의미합니다.
+<br>
+( In the case of video action recognition, this means we need large-scale annotated datasets to learn effective models.)
 
-For the task of video action recognition, datasets are often built by the following process: 
 비디오 동작 인식 작업을 위해 데이터 세트는 종종 다음 프로세스에 의해 구축됩니다.
+<br>
+For the task of video action recognition, datasets are often built by the following process: 
 
-(1) Define an action list, by combining labels from previous action recognition datasets and adding new categories depending on the use case. 
-		이전 동작 인식 데이터 세트의 레이블을 결합하고 사용 사례에 따라 새 범주를 추가하여 동작 목록을 정의합니다.
-		
-(2) Obtain videos from various sources, such as YouTube and movies, by matching the video title/subtitle to the action list. 
-		YouTube나 영화와 같은 다양한 Source로부터 Video를 얻고 제목이나 부제목을 연관시켜 Action List를 만듭니다.
-		
-(3) Provide temporal annotations manually to indicate the start and end position of the action, and 
-		동작의 시작 및 종료 위치를 나타내기 위해 수동으로 임시 주석을 제공하고
-		
-(4) finally clean up the dataset by de-duplication and filtering out noisy classes/samples. 
-		마지막으로 중복 제거를 통해 데이터 세트를 정리하고 잡음이 많은 클래스/샘플을 필터링합니다.
 
-Below we review the most popular large-scale video action recognition datasets in Table 1 and Figure 2.
+(1) 이전 동작 인식 데이터 세트의 레이블을 결합하고 사용 사례에 따라 새 범주를 추가하여 동작 목록을 정의합니다.
+    <br>
+   ( Define an action list, by combining labels from previous action recognition datasets and adding new categories depending on the use case. )
+
+<br>
+
+(2) YouTube나 영화와 같은 다양한 Source로부터 Video를 얻고 제목이나 부제목을 연관시켜 Action List를 만듭니다.
+    <br>
+    ( Obtain videos from various sources, such as YouTube and movies, by matching the video title/subtitle to the action list. )
+
+<br>
+
+(3) 동작의 시작 및 종료 위치를 나타내기 위해 수동으로 임시 주석을 제공하고
+    <br>
+    ( Provide temporal annotations manually to indicate the start and end position of the action, and )
+
+<br>
+
+(4) 마지막으로 중복 제거를 통해 데이터 세트를 정리하고 잡음이 많은 클래스/샘플을 필터링합니다.
+    <br>
+    ( finally clean up the dataset by de-duplication and filtering out noisy classes/samples. )
+
+<br>
+
 아래 표 1과 그림 2에서 가장 인기 있는 대규모 비디오 동작 인식 데이터 세트를 검토합니다.
+<br>
+Below we review the most popular large-scale video action recognition datasets in Table 1 and Figure 2.
 
-HMDB51 [109] was introduced in 2011. It was collected mainly from movies, and a small proportion from public databases such as the Prelinger archive, YouTube and Google videos. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_01.png">
+</p>
+<br>
+<br>
+
+
 HMDB51[109]은 2011년에 도입되었습니다. 주로 영화에서 수집되었으며 Prelinger 아카이브, YouTube 및 Google 비디오와 같은 공공 데이터베이스에서 작은 비율로 수집되었습니다.
+<br>
+( HMDB51 [109] was introduced in 2011. It was collected mainly from movies, and a small proportion from public databases such as the Prelinger archive, YouTube and Google videos. )
 
-The dataset contains 6, 849 clips divided into 51 action categories, each containing a minimum of 101 clips. 
 데이터 세트에는 51개의 action categories로 나누어진 6,849개의 클립이 포함되어 있으며 각 범주에는 최소 101개의 클립이 포함되어 있습니다.
+<br>
+The dataset contains 6, 849 clips divided into 51 action categories, each containing a minimum of 101 clips. 
 
-The dataset has three official splits. Most previous papers either report the top-1 classification accuracy on split 1 or the average accuracy over three splits.
 데이터 세트에는 세 가지 공식 분할이 있습니다. 대부분의 이전 논문은 분할 1에서 상위 1위 분류 정확도 또는 세 분할에 대한 평균 정확도를 보고합니다.
+<br>
+The dataset has three official splits. Most previous papers either report the top-1 classification accuracy on split 1 or the average accuracy over three splits.
 
-
-UCF101 [190] was introduced in 2012 and is an extension of the previous UCF50 dataset. 
 UCF101[190]은 2012년에 나왔으며 이전 UCF50 데이터 세트의 확장입니다.
 
-It contains 13, 320 videos from YouTube spreading over 101 categories of human actions. 
+UCF101 [190] was introduced in 2012 and is an extension of the previous UCF50 dataset. 
+
 여기에는 101개 범주의 인간 행동에 대한 YouTube의 13,320개 동영상이 포함되어 있습니다.
+<br>
+It contains 13, 320 videos from YouTube spreading over 101 categories of human actions. 
 
-The dataset has three official splits similar to HMDB51, and is also evaluated in the same manner.
 데이터 세트에는 HMDB51과 유사한 3개의 공식 분할이 있으며 동일한 방식으로 평가됩니다.
+<br>
+The dataset has three official splits similar to HMDB51, and is also evaluated in the same manner.
 
-Sports1M [99] was introduced in 2014 as the first largescale video action dataset which consisted of more than 1 million YouTube videos annotated with 487 sports classes.
 Sports1M [99]은 2014년에 487개의 스포츠 클래스로 주석이 달린 100만 개 이상의 YouTube 동영상으로 구성된 최초의 대규모 동영상 작업 데이터 세트로 소개되었습니다.
+<br>
+Sports1M [99] was introduced in 2014 as the first largescale video action dataset which consisted of more than 1 million YouTube videos annotated with 487 sports classes.
 
-The categories are fine-grained which leads to low interclass variations. It has an official 10-fold cross-validation split for evaluation.
 categories는 세분화되어 클래스 간 변동이 적습니다. 평가를 위한 공식적인 10배 교차 검증 분할이 있습니다.
+<br>
+The categories are fine-grained which leads to low interclass variations. It has an official 10-fold cross-validation split for evaluation.
 
-
-ActivityNet [40] was originally introduced in 2015 and the ActivityNet family has several versions since its initial launch. 
 ActivityNet[40]은 2015년에 처음 소개되었으며 ActivityNet family는 초기 출시 이후 여러 버전이 있습니다.
+<br>
+ActivityNet [40] was originally introduced in 2015 and the ActivityNet family has several versions since its initial launch. 
 
-The most recent ActivityNet 200 (V1.3) contains 200 human daily living actions. It has 10, 024 training, 4, 926 validation, and 5, 044 testing videos. 
 최신 ActivityNet 200(V1.3)에는 200개의 인간 일상 생활 동작이 포함되어 있습니다. 10,024개의 Train, 4,926개의 Validation 및 5,044개의 Test 비디오가 있습니다.
+<br>
+The most recent ActivityNet 200 (V1.3) contains 200 human daily living actions. It has 10, 024 training, 4, 926 validation, and 5, 044 testing videos. 
 
-On average there are 137 untrimmed videos per class and 1.41 activity instances per video.
 평균적으로 class당 137개의 트리밍되지 않은 비디오와 비디오당 1.41개의 활동 인스턴스가 있습니다.
+<br>
+On average there are 137 untrimmed videos per class and 1.41 activity instances per video.
 
-
-YouTube8M [1] was introduced in 2016 and is by far the largest-scale video dataset that contains 8 million YouTube videos (500K hours of video in total) and annotated with 3, 862 action classes. 
 YouTube8M [1]은 2016년에 소개되었으며 800만 개의 YouTube 동영상(총 500K 시간의 동영상)을 포함하고 3,862개의 action classes로 주석이 달린 최대 규모의 동영상 데이터 세트입니다.
+<br>
+YouTube8M [1] was introduced in 2016 and is by far the largest-scale video dataset that contains 8 million YouTube videos (500K hours of video in total) and annotated with 3, 862 action classes. 
 
-Each video is annotated with one or multiple labels by a YouTube video annotation system. 
 각 비디오는 YouTube 비디오 주석 시스템에 의해 하나 이상의 레이블로 주석이 추가되었습니다.
+<br>
+Each video is annotated with one or multiple labels by a YouTube video annotation system. 
 
-This dataset is split into training, validation and test in the ratio 70:20:10. 
 이 데이터 세트는 70:20:10 비율로 교육, 검증 및 테스트로 나누어져 있습니다.
+<br>
+This dataset is split into training, validation and test in the ratio 70:20:10. 
 
-The validation set of this dataset is also extended with human-verified segment annotations to provide temporal localization information.
 이 데이터 세트의 검증 세트는 사람이 검증한 세그먼트 주석으로 확장되어 시간적 현지화 정보를 제공합니다.
+<br>
+The validation set of this dataset is also extended with human-verified segment annotations to provide temporal localization information.
 
-
-Charades [186] was introduced in 2016 as a dataset for real-life concurrent action understanding. 
 Charades [186]는 실제 동시 행동 이해를 위한 데이터 세트로 2016년에 소개되었습니다.
+<br>
+Charades [186] was introduced in 2016 as a dataset for real-life concurrent action understanding. 
 
-It contains 9, 848 videos with an average length of 30 seconds. 
 평균 길이가 30초인 9,848개의 동영상이 포함되어 있습니다.
+<br>
+It contains 9, 848 videos with an average length of 30 seconds. 
 
-This dataset includes 157 multi-label daily indoor activities, performed by 267 different people. 
 이 데이터 세트에는 267명의 서로 다른 사람들이 수행한 157개의 다중 레이블 일일 실내 활동이 포함되어 있습니다.
+<br>
+This dataset includes 157 multi-label daily indoor activities, performed by 267 different people. 
 
-It has an official train-validation split that has 7, 985 videos for training and the remaining 1, 863 for validation.
 7,985개의 Train 비디오와 validation 검사를 위한 나머지 1,863개로 나누어져 있습니다.
+<br>
+It has an official train-validation split that has 7, 985 videos for training and the remaining 1, 863 for validation.
 
-Kinetics Family is now the most widely adopted benchmark. Kinetics400 [100] was introduced in 2017 and it consists of approximately 240k training and 20k validation videos trimmed to 10 seconds from 400 human action categories. 
 Kinetics Family은 현재 가장 널리 채택된 벤치마크입니다. Kinetics400[100]은 2017년에 소개되었으며 400개의 인간 행동 범주에서 10초로 트리밍된 약 240k개의 교육 및 20k 검증 비디오로 구성됩니다.
+<br>
+Kinetics Family is now the most widely adopted benchmark. Kinetics400 [100] was introduced in 2017 and it consists of approximately 240k training and 20k validation videos trimmed to 10 seconds from 400 human action categories. 
 
-The Kinetics family continues to expand, with Kinetics-600 [12] released in 2018 with 480K videos and Kinetics700[13] in 2019 with 650K videos.
 Kinetics 제품군은 2018년에 480K 비디오로 출시된 Kinetics-600[12]과 2019년 650K 비디오로 출시된 Kinetics700[13]으로 계속 확장되고 있습니다.
+<br>
+The Kinetics family continues to expand, with Kinetics-600 [12] released in 2018 with 480K videos and Kinetics700[13] in 2019 with 650K videos.
 
-
-20BN-Something-Something [69] V1 was introduced in 2017 and V2 was introduced in 2018. 
 20BN-Something-Something [69] V1은 2017년에, V2는 2018년에 소개되었습니다.
+<br>
+20BN-Something-Something [69] V1 was introduced in 2017 and V2 was introduced in 2018. 
 
-This family is another popular benchmark that consists of 174 action classes that describe humans performing basic actions with everyday objects. 
 이 계열은 인간이 일상적인 물건으로 기본 동작을 수행하는 것을 설명하는 174개의 동작 클래스로 구성된 또 다른 인기 있는 벤치마크입니다.
+<br>
+This family is another popular benchmark that consists of 174 action classes that describe humans performing basic actions with everyday objects. 
 
-There are 108, 499 videos in V1 and 220, 847 videos in V2. 
 V1에는 108,499개의 비디오가 있고 V2에는 220,847개의 비디오가 있습니다.
+<br>
+There are 108, 499 videos in V1 and 220, 847 videos in V2. 
 
-Note that the Something-Something dataset requires strong temporal modeling because most activities cannot be inferred based on spatial features alone (e.g. opening something, covering something with something).
 Something-Something 데이터 세트는 대부분의 활동이 공간적 특징만으로는 유추될 수 없기 때문에 강력한 시간 모델링이 필요합니다(예: 무언가 열기, 무언가로 무언가 덮기).
+<br>
+Note that the Something-Something dataset requires strong temporal modeling because most activities cannot be inferred based on spatial features alone (e.g. opening something, covering something with something).
 
-
-AVA [70] was introduced in 2017 as the first large-scale spatio-temporal action detection dataset. 
 AVA[70]는 2017년 최초의 대규모 spatio-temporal action detection dataset로 도입되었습니다.
+<br>
+AVA [70] was introduced in 2017 as the first large-scale spatio-temporal action detection dataset. 
 
-It contains 430 15-minute video clips with 80 atomic actions labels (only 60 labels were used for evaluation). 
 여기에는 80개의 원자 작업 레이블이 있는 430개의 15분 비디오 클립이 포함되어 있습니다(60개의 레이블만 평가에 사용됨).
+<br>
+It contains 430 15-minute video clips with 80 atomic actions labels (only 60 labels were used for evaluation). 
 
-The annotations were provided at each key-frame which lead to 214, 622 training, 57, 472 validation and 120, 322 testing samples. 
 주석은 214,622개의 Train, 57,472개의 Validation 및 120,322개의 Test 샘플로 이어지는 각 키 프레임에서 제공되었습니다.
+<br>
+The annotations were provided at each key-frame which lead to 214, 622 training, 57, 472 validation and 120, 322 testing samples. 
 
-The AVA dataset was recently expanded to AVA-Kinetics with 352, 091 training, 89, 882 validation and 182, 457 testing samples [117].
 AVA 데이터 세트는 최근 352,091개의 훈련, 89,882개의 검증 및 182,457개의 테스트 샘플이 있는 AVA-Kinetics로 확장되었습니다[117].
+<br>
+The AVA dataset was recently expanded to AVA-Kinetics with 352, 091 training, 89, 882 validation and 182, 457 testing samples [117].
 
-
-Moments in Time [142] was introduced in 2018 and it is a large-scale dataset designed for event understanding. 
 Moments in Time [142]은 2018년에 소개되었으며 이벤트 이해를 위해 설계된 대규모 데이터 세트입니다.
+<br>
+Moments in Time [142] was introduced in 2018 and it is a large-scale dataset designed for event understanding. 
 
 It contains one million 3 second video clips, annotated with a dictionary of 339 classes. 
 여기에는 339개 클래스의 사전으로 주석이 달린 백만 개의 3초 비디오 클립이 포함되어 있습니다.
