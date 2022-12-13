@@ -321,104 +321,144 @@ Moments in Time [142]은 2018년에 소개되었으며 이벤트 이해를 위�
 <br>
 Moments in Time [142] was introduced in 2018 and it is a large-scale dataset designed for event understanding. 
 
-It contains one million 3 second video clips, annotated with a dictionary of 339 classes. 
 여기에는 339개 클래스의 사전으로 주석이 달린 백만 개의 3초 비디오 클립이 포함되어 있습니다.
+<br>
+It contains one million 3 second video clips, annotated with a dictionary of 339 classes. 
 
-Different from other datasets designed for human action understanding, Moments in Time dataset involves people, animals, objects and natural phenomena. 
 인간 행동 이해를 위해 설계된 다른 데이터 세트와 달리 Moments in Time 데이터 세트는 사람, 동물, 사물 및 자연 현상을 포함합니다.
+<br>
+Different from other datasets designed for human action understanding, Moments in Time dataset involves people, animals, objects and natural phenomena. 
 
-The dataset was extended to Multi-Moments in Time (M-MiT) [143] in 2019 by increasing the number of videos to 1.02 million, pruning vague classes, and increasing the number of labels per video.
 데이터 세트는 2019년에 비디오 수를 102만 개로 늘리고 모호한 클래스를 정리하고 비디오당 레이블 수를 늘려 M-MiT(Multi-Moments in Time) [143]로 확장되었습니다.
+<br>
+The dataset was extended to Multi-Moments in Time (M-MiT) [143] in 2019 by increasing the number of videos to 1.02 million, pruning vague classes, and increasing the number of labels per video.
 
-HACS [267] was introduced in 2019 as a new large-scale dataset for recognition and localization of human actions collected from Web videos. 
 HACS[267]는 웹 비디오에서 수집된 인간 행동의 인식 및 현지화를 위한 새로운 대규모 데이터 세트로 2019년에 소개되었습니다.
+<br>
+HACS [267] was introduced in 2019 as a new large-scale dataset for recognition and localization of human actions collected from Web videos. 
 
+두 종류의 manual annotations으로 구성됩니다.
+<br>
 It consists of two kinds of manual annotations. 
-두 종류의 수동 주석으로 구성됩니다.
 
-HACS Clips contains 1.55M 2-second clip annotations on 504K videos, and HACS Segments has 140K complete action segments (from action start to end) on 50K videos. 
 HACS 클립에는 504K 비디오에 대한 155만 개의 2초 클립 주석이 포함되어 있으며 HACS 세그먼트에는 50K 비디오에 대한 140K개의 완전한 동작 세그먼트(동작 시작부터 끝까지)가 있습니다.
+<br>
+HACS Clips contains 1.55M 2-second clip annotations on 504K videos, and HACS Segments has 140K complete action segments (from action start to end) on 50K videos. 
 
-The videos are annotated with the same 200 human action classes used in ActivityNet (V1.3) [40].
 비디오는 ActivityNet(V1.3)[40]에서 사용되는 것과 동일한 200개의 인간 행동 클래스로 주석이 추가됩니다.
+<br>
+The videos are annotated with the same 200 human action classes used in ActivityNet (V1.3) [40].
 
-HVU [34] dataset was released in 2020 for multi-label multi-task video understanding. 
 HVU [34] 데이터 세트는 multi-label multi-task video understanding를 위해 2020년에 릴리스되었습니다.
+<br>
+HVU [34] dataset was released in 2020 for multi-label multi-task video understanding. 
 
-This dataset has 572K videos and 3, 142 labels. 
 이 데이터세트에는 572,000개의 동영상과 3,142개의 라벨이 있습니다.
+<br>
+This dataset has 572K videos and 3, 142 labels. 
 
-The official split has 481K, 31K and 65K videos for train, validation, and test respectively.
 공식 분할에는 훈련, 검증 및 테스트를 위한 각각 481K, 31K 및 65K 비디오가 있습니다.
+<br>
+The official split has 481K, 31K and 65K videos for train, validation, and test respectively.
 
-This dataset has six task categories: scene, object, action, event, attribute, and concept. 
 이 데이터 세트에는 장면, 개체, 동작, 이벤트, 특성 및 개념의 6가지 작업 범주가 있습니다.
+<br>
+This dataset has six task categories: scene, object, action, event, attribute, and concept. 
 
-On average, there are about 2, 112 samples for each label. 
 평균적으로 각 레이블에 대해 약 2,112개의 샘플이 있습니다.
+<br>
+On average, there are about 2, 112 samples for each label. 
 
-The duration of the videos varies with a maximum length of 10 seconds.
 동영상 재생 시간은 최대 10초로 다양합니다.
+<br>
+The duration of the videos varies with a maximum length of 10 seconds.
 
-
-AViD [165] was introduced in 2020 as a dataset for anonymized action recognition. 
 AViD[165]는 2020년 익명화된 동작 인식을 위한 데이터 세트로 도입되었습니다.
+<br>
+AViD [165] was introduced in 2020 as a dataset for anonymized action recognition. 
 
-It contains 410K videos for training and 40K videos for testing. 
 여기에는 training용 410K 비디오와 testing용 40K 비디오가 포함되어 있습니다.
+<br>
+It contains 410K videos for training and 40K videos for testing. 
 
-Each video clip duration is between 3-15 seconds and in total it has 887 action classes. 
 각 비디오 클립 길이는 3-15초이며 총 887개의 액션 클래스가 있습니다.
+<br>
+Each video clip duration is between 3-15 seconds and in total it has 887 action classes. 
 
-During data collection, the authors tried to collect data from various countries to deal with data bias. 
 데이터 수집 중에 저자는 데이터 편향을 처리하기 위해 여러 국가에서 데이터를 수집하려고 했습니다.
+<br>
+During data collection, the authors tried to collect data from various countries to deal with data bias. 
 
-They also remove face identities to protect privacy of video makers. 
 또한 비디오 제작자의 개인 정보를 보호하기 위해 얼굴 ID를 제거합니다.
+<br>
+They also remove face identities to protect privacy of video makers. 
 
-Therefore, AViD dataset might not be a proper choice for recognizing face-related actions.
 따라서 AViD 데이터 세트는 얼굴 관련 동작을 인식하기 위한 적절한 선택이 아닐 수 있습니다.
+<br>
+Therefore, AViD dataset might not be a proper choice for recognizing face-related actions.
 
-
+방법들을 시간순으로 검토하기 전에 그림 4에 있는 위 데이터 세트의 몇 가지 시각적 예를 제시하여 서로 다른 특성을 보여줍니다.
+<br>
 Before we dive into the chronological review of methods, we present several visual examples from the above datasets in Figure 4 to show their different characteristics.
-방법을 시간순으로 검토하기 전에 그림 4에 있는 위 데이터 세트의 몇 가지 시각적 예를 제시하여 서로 다른 특성을 보여줍니다.
 
-In the top two rows, we pick action classes from UCF101 [190] and Kinetics400 [100] datasets. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_04.png">
+</p>
+<br>
+<br>
+
 상단 두 행에서 UCF101 [190] 및 Kinetics400 [100] 데이터 세트에서 작업 클래스를 선택합니다.
+<br>
+In the top two rows, we pick action classes from UCF101 [190] and Kinetics400 [100] datasets. 
 
-Interestingly, we find that these actions can sometimes be determined by the context or scene alone. 
 흥미롭게도 우리는 이러한 행동이 때때로 맥락이나 장면에 의해서만 결정될 수 있다는 것을 발견했습니다.
+<br>
+Interestingly, we find that these actions can sometimes be determined by the context or scene alone. 
 
-For example, the model can predict the action riding a bike as long as it recognizes a bike in the video frame. 
 예를 들어 모델은 비디오 프레임에서 자전거를 인식하는 한 자전거를 타는 동작을 예측할 수 있습니다.
+<br>
+For example, the model can predict the action riding a bike as long as it recognizes a bike in the video frame. 
 
-The model may also predict the action cricket bowling if it recognizes the cricket pitch. 
 모델은 크리켓 경기장을 인식하는 경우 액션 크리켓 볼링을 예측할 수도 있습니다.
+<br>
+The model may also predict the action cricket bowling if it recognizes the cricket pitch. 
 
-Hence for these classes, video action recognition may become an object/scene classification problem without the need of reasoning motion/temporal information. 
 따라서 이러한 클래스의 경우 비디오 동작 인식은 동작/시간 정보를 추론할 필요 없이 개체/장면 분류 문제가 될 수 있습니다.
+<br>
+Hence for these classes, video action recognition may become an object/scene classification problem without the need of reasoning motion/temporal information. 
 
-In the middle two rows, we pick action classes from Something-Something dataset [69]. 
 중간 두 행에서 Something-Something 데이터 세트 [69]에서 작업 클래스를 선택합니다.
+<br>
+In the middle two rows, we pick action classes from Something-Something dataset [69]. 
 
-This dataset focuses on human-object interaction, thus it is more fine-grained and requires strong temporal modeling. 
 이 데이터 세트는 인간-객체 상호 작용에 중점을 두므로 더 세분화되고 강력한 시간 모델링이 필요합니다.
+<br>
+This dataset focuses on human-object interaction, thus it is more fine-grained and requires strong temporal modeling. 
 
-For example, if we only look at the first frame of dropping something and picking something up without looking at other video frames, it is impossible to tell these two actions apart. 
 예를 들어 다른 비디오 프레임을 보지 않고 무언가를 떨어뜨리고 집는 첫 번째 프레임만 보면 이 두 동작을 구분할 수 없습니다.
+<br>
+For example, if we only look at the first frame of dropping something and picking something up without looking at other video frames, it is impossible to tell these two actions apart. 
 
-In the bottom row, we pick action classes from Moments in Time dataset [142]. 
 맨 아래 행에서 Moments in Time 데이터 세트[142]에서 작업 클래스를 선택합니다.
+<br>
+In the bottom row, we pick action classes from Moments in Time dataset [142]. 
 
-This dataset is different from most video action recognition datasets, and is designed to have large inter-class and intra-class variation that represent dynamical events at different levels of abstraction.
 이 데이터 세트는 대부분의 비디오 동작 인식 데이터 세트와 다르며 다양한 수준의 추상화에서 동적 이벤트를 나타내는 큰 클래스 간 및 클래스 내 변형을 갖도록 설계되었습니다.
+<br>
+This dataset is different from most video action recognition datasets, and is designed to have large inter-class and intra-class variation that represent dynamical events at different levels of abstraction.
 
-For example, the action climbing can have different actors (person or animal) in different environments (stairs or tree).
 예를 들어, 액션 클라이밍은 다양한 환경(계단 또는 나무)에서 다양한 행위자(사람 또는 동물)를 가질 수 있습니다.
+<br>
+For example, the action climbing can have different actors (person or animal) in different environments (stairs or tree).
 
+<br>
+<br>
 
+## 2.2. Challenges
 
-2.2. Challenges
+<br>
 
 There are several major challenges in developing effective video action recognition algorithms.
 효과적인 비디오 동작 인식 알고리즘을 개발하는 데는 몇 가지 주요 과제가 있습니다.
