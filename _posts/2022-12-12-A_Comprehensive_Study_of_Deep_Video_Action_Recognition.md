@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : There are several major challenges in developing effective video action recognition algorithms.
+
 <br>
 <br>
 <br>
@@ -460,231 +460,324 @@ For example, the action climbing can have different actors (person or animal) in
 
 <br>
 
-There are several major challenges in developing effective video action recognition algorithms.
 효과적인 비디오 동작 인식 알고리즘을 개발하는 데는 몇 가지 주요 과제가 있습니다.
+<br>
+There are several major challenges in developing effective video action recognition algorithms.
 
-In terms of dataset, first, defining the label space for training action recognition models is non-trivial. 
 데이터 세트 측면에서 첫째, 학습 동작 인식 모델을 위한 레이블 공간을 정의하는 것은 쉽지 않습니다.
+<br>
+In terms of dataset, first, defining the label space for training action recognition models is non-trivial. 
 
-It’s because human actions are usually composite concepts and the hierarchy of these concepts are not well-defined. 
 인간의 행동은 일반적으로 복합적인 개념이고 이러한 개념의 계층 구조가 잘 정의되어 있지 않기 때문입니다.
+<br>
+It’s because human actions are usually composite concepts and the hierarchy of these concepts are not well-defined. 
 
-Second, annotating videos for action recognition are laborious (e.g., need to watch all the video frames) and ambiguous (e.g, hard to determine the exact start and end of an action). 
 둘째, 행동 인식을 위한 동영상에 주석을 다는 것은 힘들고(예: 모든 비디오 프레임을 시청해야 함) 모호합니다(예: 행동의 정확한 시작과 끝을 결정하기 어려움).
+<br>
+Second, annotating videos for action recognition are laborious (e.g., need to watch all the video frames) and ambiguous (e.g, hard to determine the exact start and end of an action). 
 
-Third, some popular benchmark datasets (e.g., Kinetics family) only release the video links for users to download and not the actual video, which leads to a situation that methods are evaluated on different data. 
 셋째, 일부 인기 있는 벤치마크 데이터 세트(예: Kinetics 제품군)는 사용자가 다운로드할 수 있는 비디오 링크만 공개하고 실제 비디오는 공개하지 않아 방법이 다른 데이터에서 평가되는 상황이 발생합니다.
+<br>
+Third, some popular benchmark datasets (e.g., Kinetics family) only release the video links for users to download and not the actual video, which leads to a situation that methods are evaluated on different data. 
 
-It is impossible to do fair comparisons between methods and gain insights.
 방법을 공정하게 비교하고 통찰력을 얻는 것은 불가능합니다.
+<br>
+It is impossible to do fair comparisons between methods and gain insights.
 
-In terms of modeling, first, videos capturing human actions have both strong intra- and inter-class variations. 
 모델링 측면에서 첫째, 인간 행동을 포착한 비디오는 클래스 내 및 클래스 간 변이가 강합니다.
+<br>
+In terms of modeling, first, videos capturing human actions have both strong intra- and inter-class variations. 
 
-People can perform the same action in different speeds under various viewpoints. 
 사람들은 다양한 시점에서 다양한 속도로 동일한 작업을 수행할 수 있습니다.
+<br>
+People can perform the same action in different speeds under various viewpoints. 
 
-Besides, some actions share similar movement patterns that are hard to distinguish. 
 게다가 일부 동작은 구별하기 어려운 유사한 동작 패턴을 공유합니다.
+<br>
+Besides, some actions share similar movement patterns that are hard to distinguish. 
 
-Second, recognizing human actions requires simultaneous understanding of both short-term action-specific motion information and long-range temporal information. 
 둘째, 인간의 행위를 인식하기 위해서는 단기 행위별 동작 정보와 장거리 시간 정보를 동시에 이해해야 한다.
+<br>
+Second, recognizing human actions requires simultaneous understanding of both short-term action-specific motion information and long-range temporal information. 
 
+Single convolutional neural network을 사용하는 대신 다양한 관점을 처리하기 위해 정교한 모델이 필요할 수 있습니다.
+<br>
 We might need a sophisticated model to handle different perspectives rather than using a single convolutional neural network. 
-single convolutional neural network을 사용하는 대신 다양한 관점을 처리하기 위해 정교한 모델이 필요할 수 있습니다.
 
-Third, the computational cost is high for both training and inference, hindering both the development and deployment of action recognition models. 
 셋째, training and inference 모두 계산 비용이 높아 동작 인식 모델의 개발과 배포를 방해합니다.
+<br>
+Third, the computational cost is high for both training and inference, hindering both the development and deployment of action recognition models. 
 
-In the next section, we will demonstrate how video action recognition methods developed over the last decade to address the aforementioned challenges.
 다음 섹션에서는 앞서 언급한 과제를 해결하기 위해 지난 10년 동안 비디오 동작 인식 방법이 어떻게 개발되었는지 보여줍니다.
+<br>
+In the next section, we will demonstrate how video action recognition methods developed over the last decade to address the aforementioned challenges.
 
+<br>
+<br>
+<br>
 
+# 3. An Odyssey of Using Deep Learning for Video Action Recognition
 
+<br>
 
-
-3. An Odyssey of Using Deep Learning for Video Action Recognition
 In this section, we review deep learning based methods for video action recognition from 2014 to present and introduce the related earlier work in context.
 
 
-3.1. From hand-crafted features to CNNs
+## 3.1. From hand-crafted features to CNNs
 
-Despite there being some papers using Convolutional Neural Networks (CNNs) for video action recognition, [200, 5, 91], hand-crafted features [209, 210, 158, 112], particularly Improved Dense Trajectories (IDT) [210], dominated the video understanding literature before 2015, due to their high accuracy and good robustness. 
+<br>
+
 비디오 동작 인식을 위해 CNN(Convolutional Neural Networks)을 사용하는 일부 논문이 있음에도 불구하고 [200, 5, 91], hand-crafted features[209, 210, 158, 112], 특히 IDT(Improved Dense Trajectories) [210], 높은 정확도와 우수한 견고성으로 인해 2015년 이전에 video understanding literature을 지배했습니다.
+<br>
+Despite there being some papers using Convolutional Neural Networks (CNNs) for video action recognition, [200, 5, 91], hand-crafted features [209, 210, 158, 112], particularly Improved Dense Trajectories (IDT) [210], dominated the video understanding literature before 2015, due to their high accuracy and good robustness. 
 
-However, handcrafted features have heavy computational cost [244], and are hard to scale and deploy.
 그러나 handcrafted features는 computational cost가 많이 들고 [244] 확장 및 배포가 어렵습니다.
+<br>
+However, handcrafted features have heavy computational cost [244], and are hard to scale and deploy.
 
-With the rise of deep learning [107], researchers started to adapt CNNs for video problems. 
 딥 러닝[107]이 부상하면서 연구원들은 비디오 문제에 CNN을 적용하기 시작했습니다.
+<br>
+With the rise of deep learning [107], researchers started to adapt CNNs for video problems. 
 
-The seminal work DeepVideo [99] proposed to use a single 2D CNN model on each video frame independently and investigated several temporal connectivity patterns to learn spatio-temporal features for video action recognition, such as late fusion, early fusion and slow fusion. 
 DeepVideo[99]는 각 비디오 프레임에서 단일 2D CNN 모델을 독립적으로 사용하도록 제안하고 late fusion / early fusion / slow fusion과 같은 비디오 동작 인식을 위한 spatio-temporal features를 학습하기 위해 여러 시간 연결 패턴을 조사했습니다.
+<br>
+The seminal work DeepVideo [99] proposed to use a single 2D CNN model on each video frame independently and investigated several temporal connectivity patterns to learn spatio-temporal features for video action recognition, such as late fusion, early fusion and slow fusion. 
 
-Though this model made early progress with ideas that would prove to be useful later such as a multi-resolution network, its transfer learning performance on UCF101 [190] was 20% less than hand-crafted IDT features (65.4% vs 87.9%). 
 이 모델은 multi-resolution network와 같이 나중에 유용할 것으로 입증된 아이디어로 초기에 발전했지만 UCF101 [190]의 transfer learning performance는 hand-crafted IDT features보다 20% 낮았습니다(65.4% 대 87.9%).
+<br>
+Though this model made early progress with ideas that would prove to be useful later such as a multi-resolution network, its transfer learning performance on UCF101 [190] was 20% less than hand-crafted IDT features (65.4% vs 87.9%). 
 
-Furthermore, DeepVideo [99] found that a network fed by individual video frames, performs equally well when the input is changed to a stack of frames. 
 또한 DeepVideo [99]는 개별 비디오 프레임에 의해 공급되는 네트워크가 입력이 프레임 스택으로 변경될 때 동일하게 잘 수행됨을 발견했습니다.
+<br>
+Furthermore, DeepVideo [99] found that a network fed by individual video frames, performs equally well when the input is changed to a stack of frames. 
 
-This observation might indicate that the learnt spatio-temporal features did not capture the motion well. 
 이 관찰은 학습된 spatio-temporal features가 모션을 잘 캡처하지 못했음을 나타낼 수 있습니다.
+<br>
+This observation might indicate that the learnt spatio-temporal features did not capture the motion well. 
 
-It also encouraged people to think about why CNN models did not outperform traditional hand-crafted features in the video domain unlike in other computer vision tasks [107, 171].
 또한 다른 컴퓨터 비전 작업과 달리 CNN 모델이 비디오 영역에서 전통적인 hand-crafted features를 능가하지 못하는 이유에 대해 사람들이 생각하도록 장려했습니다[107, 171].
+<br>
+It also encouraged people to think about why CNN models did not outperform traditional hand-crafted features in the video domain unlike in other computer vision tasks [107, 171].
 
+<br>
+<br>
 
+## 3.2. Two-stream networks
 
+<br>
 
-
-3.2. Two-stream networks
-
-Since video understanding intuitively needs motion information, finding an appropriate way to describe the temporal relationship between frames is essential to improving the performance of CNN-based video action recognition.
 영상을 이해하려면 직관적인 움직임 정보가 필요하기 때문에 CNN 기반 영상 동작 인식의 성능을 향상시키기 위해서는 프레임 간의 시간적 관계를 설명하는 적절한 방법을 찾는 것이 필수적이다.
+<br>
+Since video understanding intuitively needs motion information, finding an appropriate way to describe the temporal relationship between frames is essential to improving the performance of CNN-based video action recognition.
 
-Optical flow [79] is an effective motion representation to describe object/scene movement. 
 Optical flow[79]은 객체/장면 이동을 설명하는 효과적인 동작 표현입니다.
+<br>
+Optical flow [79] is an effective motion representation to describe object/scene movement. 
 
-To be precise, it is the pattern of apparent motion of objects, surfaces, and edges in a visual scene caused by the relative motion between an observer and a scene. 
 정확히 말하면 관찰자와 장면 간의 상대적인 움직임으로 인해 시각적 장면에서 객체, 표면 및 가장자리의 겉보기 움직임 패턴입니다.
+<br>
+To be precise, it is the pattern of apparent motion of objects, surfaces, and edges in a visual scene caused by the relative motion between an observer and a scene. 
 
-We show several visualizations of optical flow in Figure 5. As we can see, optical flow is able to describe the motion pattern of each action accurately. 
 그림 5에서 Optical flow의 여러 시각화를 보여줍니다. 우리가 볼 수 있듯이 Optical flow은 각 작업의 모션 패턴을 정확하게 설명할 수 있습니다.
+<br>
+We show several visualizations of optical flow in Figure 5. As we can see, optical flow is able to describe the motion pattern of each action accurately. 
 
-The advantage of using optical flow is it provides orthogonal information compared to the the RGB image. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_05.png">
+</p>
+<br>
+<br>
+
 Optical flow을 사용하는 이점은 RGB 이미지에 비해 직교 정보(orthogonal information)를 제공한다는 것입니다.
+<br>
+The advantage of using optical flow is it provides orthogonal information compared to the the RGB image. 
 
-
-For example, the two images on the bottom of Figure 5 have cluttered backgrounds. 
 예를 들어 그림 5의 아래쪽에 있는 두 이미지는 배경이 어수선합니다.
+<br>
+For example, the two images on the bottom of Figure 5 have cluttered backgrounds. 
 
-Optical flow can effectively remove the nonmoving background and result in a simpler learning problem compared to using the original RGB images as input.
 Optical flow은 움직이지 않는 배경을 효과적으로 제거할 수 있으며 원본 RGB 이미지를 입력으로 사용하는 것과 비교하여 학습 문제가 더 간단해집니다.
+<br>
+Optical flow can effectively remove the nonmoving background and result in a simpler learning problem compared to using the original RGB images as input.
 
-In addition, optical flow has been shown to work well on video problems. 
 또한 Optical flow은 비디오 문제에 잘 작동하는 것으로 나타났습니다.
+<br>
+In addition, optical flow has been shown to work well on video problems. 
 
-Traditional hand-crafted features such as IDT [210] also contain optical-flow-like features, such as Histogram of Optical Flow (HOF) and Motion Boundary Histogram (MBH).
 IDT[210]와 같은 Traditional hand-crafted features에는 HOF(Histogram of Optical Flow) 및 MBH(Motion Boundary Histogram)와 같은 Optical flow와 같은 기능도 포함되어 있습니다.
+<br>
+Traditional hand-crafted features such as IDT [210] also contain optical-flow-like features, such as Histogram of Optical Flow (HOF) and Motion Boundary Histogram (MBH).
 
-Hence, Simonyan et al. [187] proposed two-stream networks, which included a spatial stream and a temporal stream as shown in Figure 6. 
 따라서 Simonyan et al. [187] 그림 6과 같이 공간 스트림과 시간 스트림을 포함하는 two-stream networks를 제안했습니다.
+<br>
+Hence, Simonyan et al. [187] proposed two-stream networks, which included a spatial stream and a temporal stream as shown in Figure 6. 
 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Fig_06.png">
+</p>
+<br>
+<br>
+
+이 방법은 인간의 시각 피질이 객체 인식을 수행하는 ventral stream과 동작을 인식하는 dorsal stream의 두 경로를 포함한다는 two-streams hypothesis[65]과 관련이 있습니다.
+<br>
 This method is related to the two-streams hypothesis [65], according to which the human visual cortex contains two pathways: the ventral stream (which performs object recognition) and the dorsal stream (which recognizes motion). 
-이 방법은 인간의 시각 피질이 객체 인식을 수행하는 ventral stream과 동작을 인식하는 dorsal stream의 두 경로를 포함한다는 두 스트림 가설[65]과 관련이 있습니다.
 
-The spatial stream takes raw video frame(s) as input to capture visual appearance information. 
 공간 스트림은 원시 비디오 프레임을 입력으로 사용하여 시각적 모양 정보를 캡처합니다.
+<br>
+The spatial stream takes raw video frame(s) as input to capture visual appearance information. 
 
+temporal stream은 비디오 프레임 간의 모션 정보를 캡처하기 위해 optical flow 이미지 스택을 입력으로 사용합니다.
+<br>
 The temporal stream takes a stack of optical flow images as input to capture motion information between video frames. 
-시간적 스트림은 비디오 프레임 간의 모션 정보를 캡처하기 위해 optical flow 이미지 스택을 입력으로 사용합니다.
 
-To be specific, [187] linearly rescaled the horizontal and vertical components of the estimated flow (i.e., motion in the x-direction and y-direction) to a [0, 255] range and compressed using JPEG. 
 구체적으로, [187]은 추정된 흐름(즉, x 방향 및 y 방향의 움직임)의 수평 및 수직 구성 요소를 [0, 255] 범위로 선형으로 재조정하고 JPEG를 사용하여 압축했습니다.
+<br>
+To be specific, [187] linearly rescaled the horizontal and vertical components of the estimated flow (i.e., motion in the x-direction and y-direction) to a [0, 255] range and compressed using JPEG. 
 
-The output corresponds to the two optical flow images shown in Figure 6. 
 출력은 그림 6에 표시된 두 개의 optical flow 이미지에 해당합니다.
+<br>
+The output corresponds to the two optical flow images shown in Figure 6. 
 
-The compressed optical flow images will then be concatenated as the input to the temporal stream with a dimension of H×W×2L, where H, W and L indicates the height, width and the length of the video frames. 
 압축된 optical flow 이미지는 H×W×2L 차원의 시간적 스트림에 대한 입력으로 연결됩니다. 여기서 H, W 및 L은 비디오 프레임의 높이, 너비 및 길이를 나타냅니다.
+<br>
+The compressed optical flow images will then be concatenated as the input to the temporal stream with a dimension of H×W×2L, where H, W and L indicates the height, width and the length of the video frames. 
 
-In the end, the final prediction is obtained by averaging the prediction scores from both streams.
 결국 두 스트림의 예측 점수를 평균하여 최종 예측을 얻습니다.
+<br>
+In the end, the final prediction is obtained by averaging the prediction scores from both streams.
 
+Extra temporal stream을 추가함으로써 처음으로 CNN 기반 접근 방식은 UCF101(88.0% 대 87.9%) 및 HMDB51[109](59.4% 대 61.1%)에서 이전 최고의 hand-crafted feature IDT와 유사한 성능을 달성하였고, 두 가지 중요한 사실을 제공합니다.
+<br>
 By adding the extra temporal stream, for the first time, a CNN-based approach achieved performance similar to the previous best hand-crafted feature IDT on UCF101 (88.0% vs 87.9%) and on HMDB51 [109] (59.4% vs 61.1%). [187] makes two important observations. 
-extra temporal stream을 추가함으로써 처음으로 CNN 기반 접근 방식은 UCF101(88.0% 대 87.9%) 및 HMDB51[109](59.4% 대 61.1%)에서 이전 최고의 hand-crafted feature IDT와 유사한 성능을 달성하였고, 두 가지 중요한 사실을 제공합니다.
 
-First, motion information is important for video action recognition. 
 첫째, 영상 동작 인식을 위해서는 동작 정보가 중요하다.
+<br>
+First, motion information is important for video action recognition. 
 
-Second, it is still challenging for CNNs to learn temporal information directly from raw video frames. 
 둘째, CNN이 원시 비디오 프레임에서 직접 시간 정보를 학습하는 것은 여전히 어려운 일입니다.
+<br>
+Second, it is still challenging for CNNs to learn temporal information directly from raw video frames. 
 
-Pre-computing optical flow as the motion representation is an effective way for deep learning to reveal its power. 
 모션 표현으로 optical flow을 미리 계산하는 것은 딥 러닝이 그 힘을 드러내는 효과적인 방법입니다.
+<br>
+Pre-computing optical flow as the motion representation is an effective way for deep learning to reveal its power. 
 
-Since [187] managed to close the gap between deep learning approaches and traditional hand-crafted features, many follow-up papers on twostream networks emerged and greatly advanced the development of video action recognition. Here, we divide them into several categories and review them individually
 [187]이 딥 러닝 접근 방식과 전통적인 hand-crafted features의 격차를 좁힐 수 있었기 때문에 two-stream 네트워크에 대한 많은 후속 논문이 등장하여 비디오 동작 인식의 개발을 크게 발전시켰습니다. 여기에서 여러 범주로 나누고 개별적으로 검토합니다.
+<br>
+Since [187] managed to close the gap between deep learning approaches and traditional hand-crafted features, many follow-up papers on twostream networks emerged and greatly advanced the development of video action recognition. Here, we divide them into several categories and review them individually
 
+<br>
+<br>
 
+### 3.2.1 Using deeper network architectures
 
+<br>
 
-
-3.2.1 Using deeper network architectures
-
-Two-stream networks [187] used a relatively shallow network architecture [107]. 
 Two-stream networks [187]는 상대적으로 얕은 네트워크 아키텍처[107]를 사용했습니다.
+<br>
+Two-stream networks [187] used a relatively shallow network architecture [107]. 
 
-Thus a natural extension to the two-stream networks involves using deeper networks. 
 따라서 2개 스트림 네트워크로 자연스럽게 확장하려면 더 깊은 네트워크를 사용해야 합니다.
+<br>
+Thus a natural extension to the two-stream networks involves using deeper networks. 
 
-However, Wang et al. [215] finds that simply using deeper networks does not yield better results, possibly due to overfitting on the small-sized video datasets [190, 109]. Recall from section 2.1, UCF101 and HMDB51 datasets only have thousands of training videos. 
 그러나 Wang et al. [215]는 단순히 더 깊은 네트워크를 사용하는 것이 더 나은 결과를 얻지 못한다는 것을 발견했습니다. 아마도 작은 크기의 비디오 데이터 세트에 대한 과적합 때문일 수 있습니다[190, 109]. 섹션 2.1, UCF101 및 HMDB51 데이터 세트에는 수천 개의 교육 비디오만 있습니다.
+<br>
+However, Wang et al. [215] finds that simply using deeper networks does not yield better results, possibly due to overfitting on the small-sized video datasets [190, 109]. Recall from section 2.1, UCF101 and HMDB51 datasets only have thousands of training videos. 
 
-Hence, Wang et al. [217] introduce a series of good practices, including crossmodality initialization, synchronized batch normalization,corner cropping and multi-scale cropping data augmentation, large dropout ratio, etc. to prevent deeper networks from overfitting. 
 따라서 Wang et al. [217] 더 깊은 네트워크가 과적합되는 것을 방지하기 위해 crossmodality initialization, synchronized batch normalization, corner cropping 및 multi-scale cropping data augmentation, large dropout ratio 등을 포함한 일련의 모범 사례를 소개합니다.
+<br>
+Hence, Wang et al. [217] introduce a series of good practices, including crossmodality initialization, synchronized batch normalization,corner cropping and multi-scale cropping data augmentation, large dropout ratio, etc. to prevent deeper networks from overfitting. 
 
+이러한 모범 사례를 통해 [217]는 UCF101에서 큰 차이로 [187]보다 성능이 뛰어난 VGG16 모델[188]로 two-stream network를 훈련할 수 있었습니다.
+<br>
 With these good practices, [217] was able to train a two-stream network with the VGG16 model [188] that outperforms [187] by a large margin on UCF101. 
-이러한 모범 사례를 통해 [217]는 UCF101에서 큰 차이로 [187]보다 성능이 뛰어난 VGG16 모델[188]로 2 스트림 네트워크를 훈련할 수 있었습니다.
 
-These good practices have been widely adopted and are still being used. 
 이러한 모범 사례는 널리 채택되어 여전히 사용되고 있습니다.
+<br>
+These good practices have been widely adopted and are still being used. 
 
-Later, Temporal Segment Networks (TSN) [218] performed a thorough investigation of network architectures, such as VGG16, ResNet [76], Inception [198], and demonstrated that deeper networks usually achieve higher recognition accuracy for video action recognition. 
 나중에 TSN(Temporal Segment Networks)[218]은 VGG16, ResNet[76], Inception[198]과 같은 네트워크 아키텍처에 대한 철저한 조사를 수행했으며 더 깊은 네트워크가 일반적으로 비디오 동작 인식에 대해 더 높은 인식 정확도를 달성한다는 것을 보여주었습니다.
+<br>
+Later, Temporal Segment Networks (TSN) [218] performed a thorough investigation of network architectures, such as VGG16, ResNet [76], Inception [198], and demonstrated that deeper networks usually achieve higher recognition accuracy for video action recognition. 
 
-We will describe more details about TSN in section 3.2.4. 
 섹션 3.2.4에서 TSN에 대한 자세한 내용을 설명합니다. 
+<br>
+We will describe more details about TSN in section 3.2.4. 
 
+<br>
+<br>
 
+### 3.2.2 Two-stream fusion 
 
-3.2.2 Two-stream fusion 
+<br>
 
-Since there are two streams in a two-stream network, there will be a stage that needs to merge the results from both networks to obtain the final prediction. 
 Two-stream 네트워크에는 두 개의 스트림이 있으므로 최종 예측을 얻기 위해 두 네트워크의 결과를 병합해야 하는 단계가 있습니다.
+<br>
+Since there are two streams in a two-stream network, there will be a stage that needs to merge the results from both networks to obtain the final prediction. 
 
-This stage is usually referred to as the spatial-temporal fusion step.
 이 단계는 일반적으로 spatial-temporal fusion step라고 합니다.
+<br>
+This stage is usually referred to as the spatial-temporal fusion step.
 
-The easiest and most straightforward way is late fusion, which performs a weighted average of predictions from both streams. 
 가장 쉽고 간단한 방법은 두 스트림에서 예측의 가중 평균을 수행하는 late fusion입니다.
+<br>
+The easiest and most straightforward way is late fusion, which performs a weighted average of predictions from both streams. 
 
+Late fusion이 널리 채택되고 있음에도 불구하고[187, 217], 많은 연구자들은 이것이 spatial appearance stream과 temporal motion stream 사이의 정보를 융합하는 최적의 방법이 아닐 수 있다고 주장합니다.
+<br>
 Despite late fusion being widely adopted [187, 217], many researchers claim that this may not be the optimal way to fuse the information between the spatial appearance stream and temporal motion stream. 
-late fusion이 널리 채택되고 있음에도 불구하고[187, 217], 많은 연구자들은 이것이 spatial appearance stream과 temporal motion stream 사이의 정보를 융합하는 최적의 방법이 아닐 수 있다고 주장합니다.
 
-They believe that earlier interactions between the two networks could benefit both streams during model learning and this is termed as early fusion.
 그들은 두 네트워크 간의 earlier interactions이 모델 학습 중에 두 스트림 모두에 도움이 될 수 있으며 이를 early fusion이라고 합니다.
+<br>
+They believe that earlier interactions between the two networks could benefit both streams during model learning and this is termed as early fusion.
 
-Fusion [50] is one of the first of several papers investigating the early fusion paradigm, including how to perform spatial fusion (e.g., using operators such as sum, max, bilinear, convolution and concatenation), where to fuse the network (e.g., the network layer where early interactions happen), and how to perform temporal fusion (e.g., using 2D or 3D convolutional fusion in later stages of the network).[50] shows that early fusion is beneficial for both streams to learn richer features and leads to improved performance over late fusion. 
 Fusion[50]은 네트워크를 융합할 위치(예: 초기 상호 작용이 발생하는 네트워크 계층), 시간 융합을 수행하는 방법(예: 네트워크의 후반 단계에서 2D 또는 3D 컨볼루션 융합 사용)[50] 초기 융합이 두 스트림 모두 더 풍부한 기능을 학습하는 데 도움이 되고 후기 융합보다 성능이 향상됨을 보여줍니다.
+<br>
+Fusion [50] is one of the first of several papers investigating the early fusion paradigm, including how to perform spatial fusion (e.g., using operators such as sum, max, bilinear, convolution and concatenation), where to fuse the network (e.g., the network layer where early interactions happen), and how to perform temporal fusion (e.g., using 2D or 3D convolutional fusion in later stages of the network).[50] shows that early fusion is beneficial for both streams to learn richer features and leads to improved performance over late fusion. 
 
+이 연구 라인에 따라 Feichtenhofer et al. [46]은 두 스트림 사이에 residual connections을 도입하여 ResNet [76]을 시공간(spatiotemporal) domain 으로 일반화합니다.
+<br>
 Following this line of research, Feichtenhofer et al. [46] generalizes ResNet [76] to the spatiotemporal domain by introducing residual connections between the two streams. 
-이 연구 라인에 따라 Feichtenhofer et al. [46]은 두 스트림 사이에 잔류 연결을 도입하여 ResNet [76]을 시공간(spatiotemporal) domain 으로 일반화합니다.
 
-Based on [46], Feichtenhofer et al. [47] further propose a multiplicative gating function for residual networks to learn better spatio-temporal features.
 [46]을 Base로 해서, Feichtenhofer et al. [47] 더 나은 spatio-temporal features을 학습하기 위해 residual networks에 대한 곱셈 게이팅 기능을 추가로 제안합니다.
+<br>
+Based on [46], Feichtenhofer et al. [47] further propose a multiplicative gating function for residual networks to learn better spatio-temporal features.
 
-Concurrently, [225] adopts a spatio-temporal pyramid to perform hierarchical early fusion between the two streams.
 동시에 [225]는 두 스트림 사이의 계층적 초기 융합을 수행하기 위해 spatio-temporal pyramid를 채택합니다.
+<br>
+Concurrently, [225] adopts a spatio-temporal pyramid to perform hierarchical early fusion between the two streams.
 
+<br>
+<br>
 
+### 3.2.3 Recurrent neural networks
 
-3.2.3 Recurrent neural networks
+<br>
 
-Since a video is essentially a temporal sequence, researchers have explored Recurrent Neural Networks (RNNs) for temporal modeling inside a video, particularly the usage of Long Short-Term Memory (LSTM) [78].
 비디오는 본질적으로 시간적 시퀀스이기 때문에 연구자들은 비디오 내부의 시간적 모델링, 특히 LSTM(Long Short-Term Memory)의 사용을 위해 RNN(Recurrent Neural Networks)을 탐색했습니다[78].
+<br>
+Since a video is essentially a temporal sequence, researchers have explored Recurrent Neural Networks (RNNs) for temporal modeling inside a video, particularly the usage of Long Short-Term Memory (LSTM) [78].
 
-LRCN [37] and Beyond-Short-Snippets [253] are the first of several papers that use LSTM for video action recognition under the two-stream networks setting. 
 LRCN[37]과 Beyond-Short-Snippets[253]는 두 스트림 네트워크 설정에서 비디오 동작 인식을 위해 LSTM을 사용하는 여러 논문 중 첫 번째입니다.
+<br>
+LRCN [37] and Beyond-Short-Snippets [253] are the first of several papers that use LSTM for video action recognition under the two-stream networks setting. 
 
+CNN의 feature maps을 심층 LSTM 네트워크에 대한 입력으로 사용하고 프레임 수준 CNN 기능을 비디오 수준 예측으로 집계합니다.
+<br>
 They take the feature maps from CNNs as an input to a deep LSTM network, and aggregate frame-level CNN features into videolevel predictions. 
-CNN의 기능 맵을 심층 LSTM 네트워크에 대한 입력으로 사용하고 프레임 수준 CNN 기능을 비디오 수준 예측으로 집계합니다.
 
-Note that they use LSTM on two streams separately, and the final results are still obtained by late fusion. 
 그들은 두 개의 스트림에서 개별적으로 LSTM을 사용하고 최종 결과는 여전히 late fusion에 의해 얻어집니다.
+<br>
+Note that they use LSTM on two streams separately, and the final results are still obtained by late fusion. 
 
-However, there is no clear empirical improvement from LSTM models [253] over the two-stream baseline [187]. 
 그러나 두 스트림 기준선[187]에 비해 LSTM 모델[253]에서 명확한 경험적 개선은 없습니다.
+<br>
+However, there is no clear empirical improvement from LSTM models [253] over the two-stream baseline [187]. 
 
 Following the CNN-LSTM framework, several variants are proposed, such as bi-directional LSTM [205], CNN-LSTM fusion [56] and hierarchical multi-granularity LSTM network [118]. 
 CNN-LSTM 프레임워크에 따라 bi-directional LSTM [205], CNN-LSTM fusion [56] 및 hierarchical multi-granularity LSTM network [118]와 같은 여러 변형이 제안됩니다. 
