@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-
+검색 : There are several major challenges in developing effective video action recognition algorithms.
 <br>
 <br>
 <br>
