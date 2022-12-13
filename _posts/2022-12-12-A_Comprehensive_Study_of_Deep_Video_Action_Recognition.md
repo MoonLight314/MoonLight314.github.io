@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-
+검색 : They extended the NetVLAD layer [4] to the video domain to perform video-level encoding, instead of using compact bilinear encoding as in [36].
 <br>
 <br>
 <br>
@@ -779,93 +779,124 @@ Note that they use LSTM on two streams separately, and the final results are sti
 <br>
 However, there is no clear empirical improvement from LSTM models [253] over the two-stream baseline [187]. 
 
-Following the CNN-LSTM framework, several variants are proposed, such as bi-directional LSTM [205], CNN-LSTM fusion [56] and hierarchical multi-granularity LSTM network [118]. 
 CNN-LSTM 프레임워크에 따라 bi-directional LSTM [205], CNN-LSTM fusion [56] 및 hierarchical multi-granularity LSTM network [118]와 같은 여러 변형이 제안됩니다. 
+<br>
+Following the CNN-LSTM framework, several variants are proposed, such as bi-directional LSTM [205], CNN-LSTM fusion [56] and hierarchical multi-granularity LSTM network [118]. 
 
-[125] described VideoLSTM which includes a correlation-based spatial attention mechanism and a lightweight motion-based attention mechanism. 
 [125]는 correlation-based spatial attention mechanism 과 lightweight motion-based attention mechanism을 포함하는 VideoLSTM을 설명했습니다. 
+<br>
+[125] described VideoLSTM which includes a correlation-based spatial attention mechanism and a lightweight motion-based attention mechanism. 
 
-VideoLSTM not only show improved results on action recognition, but also demonstrate how the learned attention can be used for action localization by relying on just the action class label. 
 VideoLSTM은 동작 인식에 대한 개선된 결과를 보여줄 뿐만 아니라 학습된 주의가 동작 클래스 레이블에만 의존하여 동작 현지화에 어떻게 사용될 수 있는지 보여줍니다.
+<br>
+VideoLSTM not only show improved results on action recognition, but also demonstrate how the learned attention can be used for action localization by relying on just the action class label. 
 
-Lattice-LSTM [196] extends LSTM by learning independent hidden state transitions of memory cells for individual spatial locations, so that it can accurately model long-term and complex motions. 
 Lattice-LSTM[196]은 개별 공간 위치에 대한 메모리 셀의 independent hidden state transitions을 학습하여 LSTM을 확장하여 장기적이고 복잡한 움직임을 정확하게 모델링할 수 있습니다.
+<br>
+Lattice-LSTM [196] extends LSTM by learning independent hidden state transitions of memory cells for individual spatial locations, so that it can accurately model long-term and complex motions. 
 
-ShuttleNet [183] is a concurrent work that considers both feedforward and feedback connections in a RNN to learn long-term dependencies. 
 ShuttleNet[183]은 장기 종속성을 학습하기 위해 RNN에서 피드포워드 및 피드백 연결을 모두 고려하는 동시 작업입니다.
+<br>
+ShuttleNet [183] is a concurrent work that considers both feedforward and feedback connections in a RNN to learn long-term dependencies. 
 
-FASTER [272] designed a FAST-GRU to aggregate clip-level features from an expensive backbone and a cheap backbone. 
 FASTER[272]는 값비싼 백본과 저렴한 백본에서 클립 수준 기능을 통합하기 위해 FAST-GRU를 설계했습니다.
+<br>
+FASTER [272] designed a FAST-GRU to aggregate clip-level features from an expensive backbone and a cheap backbone. 
 
+이 전략은 중복 클립의 처리 비용을 줄여 inference speed를 가속화합니다.
+<br>
 This strategy reduces the processing cost of redundant clips and hence accelerates the inference speed.
-이 전략은 중복 클립의 처리 비용을 줄여 추론 속도를 가속화합니다.
 
-However, the work mentioned above [37, 253, 125, 196, 183] use different two-stream networks/backbones. 
 그러나 위에서 언급한 작업[37, 253, 125, 196, 183]은 서로 다른 두 스트림 네트워크/백본을 사용합니다.
+<br>
+However, the work mentioned above [37, 253, 125, 196, 183] use different two-stream networks/backbones. 
 
-The differences between various methods using RNNs are thus unclear. Ma et al. [135] build a strong baseline for fair comparison and thoroughly study the effect of learning spatiotemporal features by using RNNs. 
 따라서 RNN을 사용하는 다양한 방법 간의 차이점은 명확하지 않습니다. Ma et al. [135] 공정한 비교를 위한 강력한 기준선을 구축하고 RNN을 사용하여 시공간적 특징을 학습하는 효과를 철저히 연구합니다.
+<br>
+The differences between various methods using RNNs are thus unclear. Ma et al. [135] build a strong baseline for fair comparison and thoroughly study the effect of learning spatiotemporal features by using RNNs. 
 
-They find that it requires proper care to achieve improved performance, e.g., LSTMs require pre-segmented data to fully exploit the temporal information. 
 예를 들어 LSTM은 시간 정보를 완전히 활용하기 위해 사전 분할된 데이터가 필요합니다.
+<br>
+They find that it requires proper care to achieve improved performance, e.g., LSTMs require pre-segmented data to fully exploit the temporal information. 
 
-RNNs are also intensively studied in video action localization [189] and video question answering [274], but these are beyond the scope of this survey.
 RNN은 또한 비디오 동작 현지화[189] 및 비디오 질문 응답[274]에서 집중적으로 연구되지만 이 설문 조사의 범위를 벗어납니다.
+<br>
+RNNs are also intensively studied in video action localization [189] and video question answering [274], but these are beyond the scope of this survey.
 
+<br>
+<br>
 
+### 3.2.4 Segment-based methods
 
-3.2.4 Segment-based methods
+<br>
 
+Optical flow 덕분에 two-stream networks는 프레임 간의 short-term motion information를 추론할 수 있습니다.
+<br>
 Thanks to optical flow, two-stream networks are able to reason about short-term motion information between frames.
-optical flow 덕분에 two-stream networks는 프레임 간의 short-term motion information를 추론할 수 있습니다.
 
-However, they still cannot capture long-range temporal information. 
 그러나 그들은 여전히 long-range temporal information를 캡처할 수 없습니다.
+<br>
+However, they still cannot capture long-range temporal information. 
 
+Two-stream networks의 이러한 약점에 동기를 부여한 Wang et al. [218]은 비디오 수준의 동작 인식을 수행하기 위해 TSN(Temporal Segment Network)을 제안했다.
+<br>
 Motivated by this weakness of two-stream networks , Wang et al. [218] proposed a Temporal Segment Network (TSN) to perform video-level action recognition.
-two-stream networks의 이러한 약점에 동기를 부여한 Wang et al. [218]은 비디오 수준의 동작 인식을 수행하기 위해 TSN(Temporal Segment Network)을 제안했다.
 
-Though initially proposed to be used with 2D CNNs, it is simple and generic. 
 처음에는 2D CNN과 함께 사용하도록 제안되었지만 간단하고 일반적입니다.
+<br>
+Though initially proposed to be used with 2D CNNs, it is simple and generic. 
 
-Thus recent work using either 2D or 3D CNNs, are still built upon this framework.
 따라서 2D 또는 3D CNN을 사용하는 최근 작업은 여전히 이 프레임워크를 기반으로 합니다.
+<br>
+Thus recent work using either 2D or 3D CNNs, are still built upon this framework.
 
-To be specific, as shown in Figure 6, TSN first divides a whole video into several segments, where the segments distribute uniformly along the temporal dimension. 
 구체적으로, 그림 6에 표시된 것처럼 TSN은 먼저 전체 비디오를 몇 개의 세그먼트로 나누고 세그먼트는 시간 차원을 따라 균일하게 분포됩니다.
+<br>
+To be specific, as shown in Figure 6, TSN first divides a whole video into several segments, where the segments distribute uniformly along the temporal dimension. 
 
-Then TSN randomly selects a single video frame within each segment and forwards them through the network. 
 그런 다음 TSN은 각 세그먼트 내에서 단일 비디오 프레임을 임의로 선택하여 네트워크를 통해 전달합니다.
+<br>
+Then TSN randomly selects a single video frame within each segment and forwards them through the network. 
 
-Here, the network shares weights for input frames from all the segments. 
 여기서 네트워크는 모든 세그먼트의 입력 프레임에 대한 가중치를 공유합니다.
+<br>
+Here, the network shares weights for input frames from all the segments. 
 
-In the end, a segmental consensus is performed to aggregate information from the sampled video frames. 
 마지막으로 샘플링된 비디오 프레임에서 정보를 집계하기 위해 segmental consensus가 수행됩니다.
+<br>
+In the end, a segmental consensus is performed to aggregate information from the sampled video frames. 
 
-The segmental consensus could be operators like average pooling, max pooling, bilinear encoding, etc. 
 segmental consensus 는 평균 풀링, 최대 풀링, 쌍선형 인코딩 등과 같은 연산자가 될 수 있습니다.
+<br>
+The segmental consensus could be operators like average pooling, max pooling, bilinear encoding, etc. 
 
-In this sense, TSN is capable of modeling long-range temporal structure because the model sees the content from the entire video. 
 이런 의미에서 TSN은 모델이 전체 비디오에서 콘텐츠를 보기 때문에 long-range temporal structure를 모델링할 수 있습니다.
+<br>
+In this sense, TSN is capable of modeling long-range temporal structure because the model sees the content from the entire video. 
 
+또한 이 sparse sampling strategy은 긴 비디오 시퀀스에 대한 교육 비용을 낮추지만 관련 정보를 보존합니다.
+<br>
 In addition, this sparse sampling strategy lowers the training cost over long video sequences but preserves relevant information.
-또한 이 희소 샘플링 전략은 긴 비디오 시퀀스에 대한 교육 비용을 낮추지만 관련 정보를 보존합니다.
 
-Given TSN’s good performance and simplicity, most two-stream methods afterwards become segment-based two-stream networks. 
 TSN의 우수한 성능과 단순성을 감안할 때 대부분의 two-stream methods은 나중에 세그먼트 기반 two-stream networks가 됩니다.
+<br>
+Given TSN’s good performance and simplicity, most two-stream methods afterwards become segment-based two-stream networks. 
 
+Segmental Consensus는 단순히 최대 또는 평균 풀링 작업을 수행하기 때문에 feature encoding 단계는 글로벌 비디오 기능을 생성하고 기존 접근 방식에서 제안한 성능 향상으로 이어질 수 있습니다[179, 97, 157].
+<br>
 Since the segmental consensus is simply doing a max or average pooling operation, a feature encoding step might generate a global video feature and lead to improved performance as suggested in traditional approaches [179, 97, 157]. 
-segmental consensus는 단순히 최대 또는 평균 풀링 작업을 수행하기 때문에 feature encoding 단계는 글로벌 비디오 기능을 생성하고 기존 접근 방식에서 제안한 성능 향상으로 이어질 수 있습니다[179, 97, 157].
 
-Deep Local Video Feature (DVOF) [114] proposed to treat the deep networks that trained on local inputs as feature extractors and train another encoding function to map the global features into global labels. 
 DVOF(Deep Local Video Feature) [114]는 로컬 입력에 대해 Train된 심층 네트워크를 feature extractors로 취급하고 다른 인코딩 기능을 Train하여 글로벌 기능을 글로벌 레이블에 매핑하도록 제안했습니다.
+<br>
+Deep Local Video Feature (DVOF) [114] proposed to treat the deep networks that trained on local inputs as feature extractors and train another encoding function to map the global features into global labels. 
 
-Temporal Linear Encoding (TLE) network [36] appeared concurrently with DVOF, but the encoding layer was embedded in the network so that the whole pipeline could be trained end-to-end. 
 TLE(Temporal Linear Encoding) 네트워크[36]는 DVOF와 동시에 등장했지만 전체 파이프라인이 end-to-end로 훈련될 수 있도록 인코딩 계층이 네트워크에 내장되었습니다.
+<br>
+Temporal Linear Encoding (TLE) network [36] appeared concurrently with DVOF, but the encoding layer was embedded in the network so that the whole pipeline could be trained end-to-end. 
 
-VLAD3 and ActionVLAD [123, 63] also appeared concurrently. 
 VLAD3와 ActionVLAD[123, 63]도 동시에 등장했다.
+<br>
+VLAD3 and ActionVLAD [123, 63] also appeared concurrently. 
 
 They extended the NetVLAD layer [4] to the video domain to perform video-level encoding, instead of using compact bilinear encoding as in [36].
 그들은 NetVLAD 레이어[4]를 비디오 도메인으로 확장하여 [36]에서와 같이 컴팩트한 바이리니어 인코딩을 사용하는 대신 비디오 레벨 인코딩을 수행했습니다.
