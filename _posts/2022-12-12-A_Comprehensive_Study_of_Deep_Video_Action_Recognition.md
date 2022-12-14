@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : They extended the NetVLAD layer [4] to the video domain to perform video-level encoding, instead of using compact bilinear encoding as in [36].
+검색 : Fortunately, there exists a dataset, Sports1M [99] which is large enough to support the training of a deep 3D network. 
 <br>
 <br>
 <br>
@@ -898,130 +898,175 @@ VLAD3와 ActionVLAD[123, 63]도 동시에 등장했다.
 <br>
 VLAD3 and ActionVLAD [123, 63] also appeared concurrently. 
 
-They extended the NetVLAD layer [4] to the video domain to perform video-level encoding, instead of using compact bilinear encoding as in [36].
 그들은 NetVLAD 레이어[4]를 비디오 도메인으로 확장하여 [36]에서와 같이 컴팩트한 바이리니어 인코딩을 사용하는 대신 비디오 레벨 인코딩을 수행했습니다.
+<br>
+They extended the NetVLAD layer [4] to the video domain to perform video-level encoding, instead of using compact bilinear encoding as in [36].
 
-To improve the temporal reasoning ability of TSN, Temporal Relation Network (TRN) [269] was proposed to learn and reason about temporal dependencies between video frames at multiple time scales. 
 TSN의 시간적 추론 능력을 향상시키기 위해 여러 시간 척도에서 비디오 프레임 간의 시간적 종속성을 학습하고 추론하기 위한 TRN(Temporal Relation Network)[269]이 제안되었습니다.
+<br>
+To improve the temporal reasoning ability of TSN, Temporal Relation Network (TRN) [269] was proposed to learn and reason about temporal dependencies between video frames at multiple time scales. 
 
-The recent state-of-the-art efficient model TSM [128] is also segment-based. 
 최근의 최첨단 효율적인 모델인 TSM[128]도 세그먼트 기반입니다.
+<br>
+The recent state-of-the-art efficient model TSM [128] is also segment-based. 
 
-We will discuss it in more detail in section 3.4.2.
 섹션 3.4.2에서 더 자세히 논의할 것입니다.
+<br>
+We will discuss it in more detail in section 3.4.2.
 
+<br>
+<br>
 
+### 3.2.5 Multi-stream networks
 
-3.2.5 Multi-stream networks
+<br>
 
-Two-stream networks are successful because appearance and motion information are two of the most important properties of a video. 
 Two-stream networks는 모양과 동작 정보가 비디오의 가장 중요한 두 가지 속성이기 때문에 성공적입니다.
+<br>
+Two-stream networks are successful because appearance and motion information are two of the most important properties of a video. 
 
-However, there are other factors that can help video action recognition as well, such as pose, object, audio and depth, etc.
 그러나 포즈, 개체, 오디오 및 깊이 등과 같이 비디오 동작 인식을 도울 수 있는 다른 요소가 있습니다.
+<br>
+However, there are other factors that can help video action recognition as well, such as pose, object, audio and depth, etc.
 
-Pose information is closely related to human action. 
 포즈 정보는 인간의 행동과 밀접한 관련이 있습니다.
+<br>
+Pose information is closely related to human action. 
 
-We can recognize most actions by just looking at a pose (skeleton) image without scene context. 
 우리는 장면 컨텍스트 없이 포즈(스켈레톤) 이미지만 보고 대부분의 작업을 인식할 수 있습니다.
+<br>
+We can recognize most actions by just looking at a pose (skeleton) image without scene context. 
 
-Although there is previous work on using pose for action recognition [150, 246], P-CNN [23] was one of the first deep learning methods that successfully used pose to improve video action recognition. 
 동작 인식을 위해 포즈를 사용하는 이전 작업[150, 246]이 있지만 P-CNN[23]은 비디오 동작 인식을 개선하기 위해 포즈를 성공적으로 사용한 최초의 딥 러닝 방법 중 하나입니다.
+<br>
+Although there is previous work on using pose for action recognition [150, 246], P-CNN [23] was one of the first deep learning methods that successfully used pose to improve video action recognition. 
 
-P-CNN proposed to aggregates motion and appearance information along tracks of human body parts, in a similar spirit to trajectory pooling [214]. 
 P-CNN은 궤적 풀링(trajectory pooling)[214]과 유사한 정신으로 인체 부위의 궤적을 따라 동작 및 모양 정보를 집계할 것을 제안했습니다. 
+<br>
+P-CNN proposed to aggregates motion and appearance information along tracks of human body parts, in a similar spirit to trajectory pooling [214]. 
 
+[282]은 이 파이프라인을 모양, 동작 및 포즈를 계산하고 통합하는 연결된 다중 스트림 프레임워크로 확장했습니다.
+<br>
 [282] extended this pipeline to a chained multi-stream framework, that computed and integrated appearance, motion and pose. 
-[282] 이 파이프라인을 모양, 동작 및 포즈를 계산하고 통합하는 연결된 다중 스트림 프레임워크로 확장했습니다.
 
-They introduced a Markov chain model that added these cues successively and obtained promising results on both action recognition and action localization. 
 그들은 이러한 신호를 연속적으로 추가하는 Markov 체인 모델을 도입했으며 동작 인식 및 동작 위치 파악 모두에서 유망한 결과를 얻었습니다.
+<br>
+They introduced a Markov chain model that added these cues successively and obtained promising results on both action recognition and action localization. 
 
-PoTion [25] was a follow-up work to P-CNN, but introduced a more powerful feature representation that encoded the movement of human semantic keypoints. 
 PoTion [25]은 P-CNN의 후속 작업이었지만 인간 의미론적 키포인트의 움직임을 인코딩하는 더 강력한 기능 표현을 도입했습니다.
+<br>
+PoTion [25] was a follow-up work to P-CNN, but introduced a more powerful feature representation that encoded the movement of human semantic keypoints. 
 
+그들은 먼저 적절한 human pose estimator를 실행하고 각 프레임에서 인간 관절에 대한 히트맵을 추출했습니다.
+<br>
 They first ran a decent human pose estimator and extracted heatmaps for the human joints in each frame. 
-그들은 먼저 적절한 인간 포즈 추정기를 실행하고 각 프레임에서 인간 관절에 대한 히트맵을 추출했습니다.
 
-They then obtained the PoTion representation by temporally aggregating these probability maps. 
 그런 다음 이러한 확률 맵을 시간적으로 집계하여 PoTion representation을 얻었습니다.
+<br>
+They then obtained the PoTion representation by temporally aggregating these probability maps. 
 
-PoTion is lightweight and outperforms previous pose representations [23, 282]. 
 PoTion은 가볍고 이전 포즈 표현을 능가합니다[23, 282].
+<br>
+PoTion is lightweight and outperforms previous pose representations [23, 282]. 
 
-In addition, it was shown to be complementary to standard appearance and motion streams, e.g. combining PoTion with I3D [14] achieved state-of-the-art result on UCF101 (98.2%).
 또한 표준 모양 및 모션 스트림을 보완하는 것으로 나타났습니다. PoTion을 I3D[14]와 결합하여 UCF101에서 state-of-the-art 결과를 달성했습니다(98.2%).
+<br>
+In addition, it was shown to be complementary to standard appearance and motion streams, e.g. combining PoTion with I3D [14] achieved state-of-the-art result on UCF101 (98.2%).
 
-Object information is another important cue because most human actions involve human-object interaction. 
 대부분의 인간 행동은 인간-객체 상호 작용을 포함하기 때문에 개체 정보는 또 다른 중요한 단서입니다.
+<br>
+Object information is another important cue because most human actions involve human-object interaction. 
 
-Wu [232] proposed to leverage both object features and scene features to help video action recognition. 
 Wu [232]는 비디오 동작 인식을 돕기 위해 object features와 scene features을 모두 활용하도록 제안했습니다.
+<br>
+Wu [232] proposed to leverage both object features and scene features to help video action recognition. 
 
-The object and scene features were extracted from state-of-the-art pretrained object and scene detectors. 
 객체 및 장면 특징은 state-of-the-art pretrained object and scene detectors에서 추출되었습니다.
+<br>
+The object and scene features were extracted from state-of-the-art pretrained object and scene detectors. 
 
+Wang et al. [252]은 네트워크를 end-to-end 훈련 가능하게 만들기 위해 한 걸음 더 나아갔습니다.
+<br>
 Wang et al. [252] took a step further to make the network end-to-end trainable. 
-Wang et al. [252] 네트워크를 end-to-end 훈련 가능하게 만들기 위해 한 걸음 더 나아갔습니다.
 
-They introduced a two-stream semantic region based method, by replacing a standard spatial stream with a Faster RCNN network [171], to extract semantic information about the object, person and scene.
 그들은 개체, 사람 및 장면에 대한 의미론적 정보를 추출하기 위해 표준 공간 스트림을 Faster RCNN 네트워크[171]로 대체함으로써 두 스트림 의미론적 영역 기반 방법을 도입했습니다.
+<br>
+They introduced a two-stream semantic region based method, by replacing a standard spatial stream with a Faster RCNN network [171], to extract semantic information about the object, person and scene.
 
-Audio signals usually come with video, and are complementary to the visual information. Wu et al. [233] introduced a multi-stream framework that integrates spatial, short-term motion, long-term temporal and audio in videos to digest complementary clues. 
 오디오 신호는 일반적으로 비디오와 함께 제공되며 시각적 정보를 보완합니다. Wuet al. [233] 상호 보완적인 단서를 소화하기 위해 비디오에서 spatial, short-term motion, long-term temporal and audio를 통합하는 다중 스트림 프레임워크를 도입했습니다.
+<br>
+Audio signals usually come with video, and are complementary to the visual information. Wu et al. [233] introduced a multi-stream framework that integrates spatial, short-term motion, long-term temporal and audio in videos to digest complementary clues. 
 
-Recently, Xiao et al. [237] introduced AudioSlowFast following [45], by adding another audio pathway to model vision and sound in an unified representation.
 최근 Xiao et al. [237]은 [45]에 이어 AudioSlowFast를 도입했으며, 통합된 표현으로 모델 비전과 사운드에 또 다른 오디오 경로를 추가했습니다.
+<br>
+Recently, Xiao et al. [237] introduced AudioSlowFast following [45], by adding another audio pathway to model vision and sound in an unified representation.
 
-In RGB-D video action recognition field, using depth information is standard practice [59]. 
 RGB-D 영상 동작 인식 분야에서는 깊이 정보를 이용하는 것이 표준 관행이다[59].
+<br>
+In RGB-D video action recognition field, using depth information is standard practice [59]. 
 
-However, for visionbased video action recognition (e.g., only given monocular videos), we do not have access to ground truth depth information as in the RGB-D domain. 
 그러나 비전 기반 비디오 동작 인식(예: 주어진 단안 비디오만)의 경우 RGB-D 도메인에서와 같이 실측 깊이 정보에 액세스할 수 없습니다.
+<br>
+However, for visionbased video action recognition (e.g., only given monocular videos), we do not have access to ground truth depth information as in the RGB-D domain. 
 
-An early attempt Depth2Action [280] uses off-the-shelf depth estimators to extract depth information from videos and use it for action recognition.
 초기 시도인 Depth2Action[280]은 기성 깊이 추정기를 사용하여 비디오에서 깊이 정보를 추출하고 이를 동작 인식에 사용합니다.
+<br>
+An early attempt Depth2Action [280] uses off-the-shelf depth estimators to extract depth information from videos and use it for action recognition.
 
-Essentially, multi-stream networks is a way of multimodality learning, using different cues as input signals to help video action recognition. 
 기본적으로 다중 스트림 네트워크는 다양한 단서를 입력 신호로 사용하여 비디오 동작 인식을 돕는 다중 양식 학습 방법입니다.
+<br>
+Essentially, multi-stream networks is a way of multimodality learning, using different cues as input signals to help video action recognition. 
 
-We will discuss more on multi-modality learning in section 5.12. 
 섹션 5.12에서 다중 양식 학습에 대해 더 논의할 것입니다. 
+<br>
+We will discuss more on multi-modality learning in section 5.12. 
 
+<br>
+<br>
 
+## 3.3. The rise of 3D CNNs 
 
-3.3. The rise of 3D CNNs 
+<br>
 
-Pre-computing optical flow is computationally intensive and storage demanding, which is not friendly for large-scale training or real-time deployment. 
 사전 컴퓨팅 optical flow은 계산 집약적이고 스토리지가 많이 필요하므로 대규모 교육이나 실시간 배포에 적합하지 않습니다.
+<br>
+Pre-computing optical flow is computationally intensive and storage demanding, which is not friendly for large-scale training or real-time deployment. 
 
-A conceptually easy way to understand a video is as a 3D tensor with two spatial and one time dimension. 
 비디오를 이해하는 개념적으로 쉬운 방법은 2개의 공간 차원과 1개의 시간 차원을 가진 3D 텐서입니다.
+<br>
+A conceptually easy way to understand a video is as a 3D tensor with two spatial and one time dimension. 
 
-Hence, this leads to the usage of 3D CNNs as a processing unit to model the temporal information in a video.
 따라서 비디오의 시간 정보를 모델링하기 위한 처리 단위로 3D CNN을 사용하게 됩니다.
+<br>
+Hence, this leads to the usage of 3D CNNs as a processing unit to model the temporal information in a video.
 
-The seminal work for using 3D CNNs for action recognition is [91]. 
 동작 인식을 위해 3D CNN을 사용하는 중요한 작업은 [91]입니다.
+<br>
+The seminal work for using 3D CNNs for action recognition is [91]. 
 
-While inspiring, the network was not deep enough to show its potential. 
 영감을 주기는 했지만 네트워크는 그 잠재력을 보여줄 만큼 충분히 깊지 않았습니다.
+<br>
+While inspiring, the network was not deep enough to show its potential. 
 
-Tran et al. [202] extended [91] to a deeper 3D network, termed C3D. 
 Tran et al. C3D라고 하는 더 깊은 3D 네트워크로 확장되었습니다[91].
+<br>
+Tran et al. [202] extended [91] to a deeper 3D network, termed C3D. 
 
-C3D follows the modular design of [188], which could be thought of as a 3D version of VGG16 network. 
 C3D는 VGG16 네트워크의 3D 버전으로 생각할 수 있는 [188]의 모듈식 설계를 따릅니다.
+<br>
+C3D follows the modular design of [188], which could be thought of as a 3D version of VGG16 network. 
 
-Its performance on standard benchmarks is not satisfactory, but shows strong generalization capability and can be used as a generic feature extractor for various video tasks [250].
 표준 벤치마크에서의 성능은 만족스럽지 않지만 강력한 일반화 기능을 보여 다양한 비디오 작업을 위한 generic feature extractor로 사용할 수 있습니다[250].
+<br>
+Its performance on standard benchmarks is not satisfactory, but shows strong generalization capability and can be used as a generic feature extractor for various video tasks [250].
 
-However, 3D networks are hard to optimize. 
 그러나 3D 네트워크는 최적화하기 어렵습니다.
+<br>
+However, 3D networks are hard to optimize. 
 
-In order to train a 3D convolutional filter well, people need a largescale dataset with diverse video content and action categories. 
 3D 컨벌루션 필터를 잘 훈련시키기 위해서는 다양한 비디오 콘텐츠와 동작 범주가 포함된 대규모 데이터 세트가 필요합니다.
+<br>
+In order to train a 3D convolutional filter well, people need a largescale dataset with diverse video content and action categories. 
 
 Fortunately, there exists a dataset, Sports1M [99] which is large enough to support the training of a deep 3D network. 
 다행스럽게도 심층 3D 네트워크 교육을 지원하기에 충분히 큰 Sports1M [99] 데이터 세트가 있습니다.
