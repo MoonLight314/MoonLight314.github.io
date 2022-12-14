@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-
+검색 : Despite training on a large corpus of videos, C3D [202] performs inferior to concurrent work [187, 214, 217], possibly due to difficulties in optimization of 3D kernels.
 <br>
 <br>
 <br>
@@ -1772,130 +1772,182 @@ They demonstrate that the efficient student network can reduce the inference tim
 <br>
 Recently, SCSampler [106] trains a lightweight network to sample the most salient video clips based on compressed video representations, and achieve state-of-the-art performance on both Kinetics400 and Sports1M dataset.
 
-They also empirically show that such saliency-based sampling is not only efficient, but also enjoys higher accuracy than using all the video frames.
 그들은 또한 이러한 현저성 기반 샘플링이 효율적일 뿐만 아니라 모든 비디오 프레임을 사용하는 것보다 더 높은 정확도를 갖는다는 것을 경험적으로 보여줍니다.
+<br>
+They also empirically show that such saliency-based sampling is not only efficient, but also enjoys higher accuracy than using all the video frames.
 
+<br>
+<br>
 
+### 3.5.5 Visual tempo
 
+<br>
 
-
-3.5.5 Visual tempo
-
-Visual tempo is a concept to describe how fast an action goes. 
 Visual tempo는 동작이 얼마나 빨리 진행되는지를 나타내는 개념입니다.
+<br>
+Visual tempo is a concept to describe how fast an action goes. 
 
-Many action classes have different visual tempos. 
 많은 액션 클래스는 visual tempo가 다릅니다.
+<br>
+Many action classes have different visual tempos. 
 
-In most cases, the key to distinguish them is their visual tempos, as they might share high similarities in visual appearance, such as walking, jogging and running [248]. 
-대부분의 경우, 걷기, 조깅, 달리기와 같이 visual appearance에서 높은 유사성을 공유할 수 있기 때문에 시각적 템포를 구분하는 핵심이 됩니다[248].
+대부분의 경우, 걷기, 조깅, 달리기와 같이 visual appearance에서 높은 유사성을 공유할 수 있기 때문에 시각적 템포를 구분하는 핵심이 됩니다[248]. 
+<br>
+In most cases, the key to distinguish them is their visual tempos, as they might share high similarities in visual appearance, such as walking, jogging and running [248].
 
-There are several papers exploring different temporal rates (tempos) for improved temporal modeling [273, 147, 82, 281, 45, 248]. 
-개선된 시간 모델링 [273, 147, 82, 281, 45, 248]을 위해 다양한 시간 속도(템포)를 탐색하는 여러 논문이 있습니다.
+개선된 시간 모델링 [273, 147, 82, 281, 45, 248]을 위해 다양한 시간 속도(템포)를 탐색하는 여러 논문이 있습니다. 
+<br>
+There are several papers exploring different temporal rates (tempos) for improved temporal modeling [273, 147, 82, 281, 45, 248].
 
-Initial attempts usually capture the video tempo through sampling raw videos at multiple rates and constructing an input-level frame pyramid [273, 147, 281]. 
-초기 시도는 일반적으로 여러 속도로 원시 비디오를 샘플링하고 입력 레벨 프레임 피라미드를 구성하여 비디오 템포를 캡처합니다[273, 147, 281].
+초기 시도는 일반적으로 여러 속도로 원시 비디오를 샘플링하고 입력 레벨 프레임 피라미드를 구성하여 비디오 템포를 캡처합니다[273, 147, 281]. 
+<br>
+Initial attempts usually capture the video tempo through sampling raw videos at multiple rates and constructing an input-level frame pyramid [273, 147, 281].
 
-Recently, SlowFast [45], as we discussed in section 3.3.4, utilizes the characteristics of visual tempo to design a two-pathway network for better accuracy and efficiency tradeoff. 
 최근 SlowFast[45]는 섹션 3.3.4에서 논의한 바와 같이 시각적 템포의 특성을 활용하여 더 나은 정확도와 효율성 트레이드오프를 위한 two-pathway network를 설계합니다.
+<br>
+Recently, SlowFast [45], as we discussed in section 3.3.4, utilizes the characteristics of visual tempo to design a two-pathway network for better accuracy and efficiency tradeoff. 
 
-CIDC [121] proposed directional temporal modeling along with a local backbone for video temporal modeling. 
-CIDC[121]는 video temporal modeling을 위한 local backbone과 함께 방향성 temporal modeling을 제안했습니다.
+CIDC[121]는 video temporal modeling을 위한 local backbone과 함께 방향성 temporal modeling을 제안했습니다. 
+<br>
+CIDC [121] proposed directional temporal modeling along with a local backbone for video temporal modeling.
 
-TPN [248] extends the tempo modeling to the featurelevel and shows consistent improvement over previous approaches. 
-TPN[248]은 템포 모델링을 기능 수준으로 확장하고 이전 접근 방식에 비해 일관된 개선을 보여줍니다.
+TPN[248]은 템포 모델링을 기능 수준으로 확장하고 이전 접근 방식에 비해 일관된 개선을 보여줍니다. 
+<br>
+TPN [248] extends the tempo modeling to the featurelevel and shows consistent improvement over previous approaches.
 
-We would like to point out that visual tempo is also widely used in self-supervised video representation learning [6, 247, 16] since it can naturally provide supervision signals to train a deep network. 
 우리는 시각적 템포가 딥 네트워크 훈련을 위한 감독 신호를 자연스럽게 제공할 수 있기 때문에 자기 감독 비디오 표현 학습[6, 247, 16]에서도 널리 사용된다는 점을 지적하고 싶습니다.
+<br>
+We would like to point out that visual tempo is also widely used in self-supervised video representation learning [6, 247, 16] since it can naturally provide supervision signals to train a deep network. 
 
+self-supervised video representation learning에 대한 자세한 내용은 섹션 5.13에서 논의할 것입니다.
+<br>
 We will discuss more details on self-supervised video representation learning in section 5.13.
-자기 감독 비디오 표현 학습에 대한 자세한 내용은 섹션 5.13에서 논의할 것입니다.
 
+<br>
+<br>
 
+# 4. Evaluation and Benchmarking
 
+<br>
 
-4. Evaluation and Benchmarking
-
-In this section, we compare popular approaches on benchmark datasets. To be specific, we first introduce standard evaluation schemes in section 4.1. 
 이 섹션에서는 벤치마크 데이터 세트에 대한 인기 있는 접근 방식을 비교합니다. 구체적으로 먼저 4.1절에서 표준 평가 체계를 소개합니다.
+<br>
+In this section, we compare popular approaches on benchmark datasets. To be specific, we first introduce standard evaluation schemes in section 4.1. 
 
-Then we divide common benchmarks into three categories, scenefocused (UCF101, HMDB51 and Kinetics400 in section 4.2), motion-focused (Sth-Sth V1 and V2 in section 4.3) and multi-label (Charades in section 4.4). 
 그런 다음 공통 벤치마크를 장면 중심(섹션 4.2의 UCF101, HMDB51 및 Kinetics400), 모션 중심(섹션 4.3의 Sth-Sth V1 및 V2) 및 다중 레이블(섹션 4.4의 Charades)의 세 가지 범주로 나눕니다.
+<br>
+Then we divide common benchmarks into three categories, scenefocused (UCF101, HMDB51 and Kinetics400 in section 4.2), motion-focused (Sth-Sth V1 and V2 in section 4.3) and multi-label (Charades in section 4.4). 
 
-In the end, we present a fair comparison among popular methods in terms of both recognition accuracy and efficiency in section 4.5.
 마지막으로 4.5절에서 인식 정확도와 효율성 측면에서 널리 사용되는 방법을 공정하게 비교합니다.
+<br>
+In the end, we present a fair comparison among popular methods in terms of both recognition accuracy and efficiency in section 4.5.
 
+<br>
+<br>
 
+## 4.1. Evaluation scheme
 
-4.1. Evaluation scheme
+<br>
 
-During model training, we usually randomly pick a video frame/clip to form mini-batch samples. 
 모델 학습 중에 일반적으로 비디오 프레임/클립을 임의로 선택하여 미니 배치 샘플을 형성합니다.
+<br>
+During model training, we usually randomly pick a video frame/clip to form mini-batch samples. 
 
-However, for evaluation, we need a standardized pipeline in order to perform fair comparisons. 
 그러나 평가를 위해서는 공정한 비교를 수행하기 위해 표준화된 파이프라인이 필요합니다.
+<br>
+However, for evaluation, we need a standardized pipeline in order to perform fair comparisons. 
 
-For 2D CNNs, a widely adopted evaluation scheme is to evenly sample 25 frames from each video following [187, 217]. 
 2D CNN의 경우 널리 채택되는 평가 체계는 [187, 217]에 따라 각 비디오에서 25개 프레임을 고르게 샘플링하는 것입니다.
+<br>
+For 2D CNNs, a widely adopted evaluation scheme is to evenly sample 25 frames from each video following [187, 217]. 
 
-For each frame, we perform ten-crop data augmentation by cropping the 4 corners and 1 center, flipping them horizontally and averaging the prediction scores (before softmax operation) over all crops of the samples, i.e., this means we use 250 frames per video for inference.
 각 프레임에 대해 4개의 모서리와 1개의 중앙을 자르고 수평으로 뒤집고 샘플의 모든 자르기에 대해 예측 점수(softmax 작업 전)를 평균화하여 ten-crop data augmentation를 수행합니다. 즉, 추론을 위해 비디오당 250프레임을 사용함을 의미합니다.
+<br>
+For each frame, we perform ten-crop data augmentation by cropping the 4 corners and 1 center, flipping them horizontally and averaging the prediction scores (before softmax operation) over all crops of the samples, i.e., this means we use 250 frames per video for inference.
 
-For 3D CNNs, a widely adopted evaluation scheme termed 30-view strategy is to evenly sample 10 clips from each video following [219]. 
-3D CNN의 경우 30-view strategy 이라고 하는 널리 채택된 평가 체계는 [219]에 따라 각 비디오에서 10개의 클립을 고르게 샘플링하는 것입니다.
+3D CNN의 경우 30-view strategy 이라고 하는 널리 채택된 평가 체계는 [219]에 따라 각 비디오에서 10개의 클립을 고르게 샘플링하는 것입니다. 
+<br>
+For 3D CNNs, a widely adopted evaluation scheme termed 30-view strategy is to evenly sample 10 clips from each video following [219].
 
-For each video clip, we perform three-crop data augmentation. 
 각 비디오 클립에 대해 3회 자르기 데이터 증대를 수행합니다.
+<br>
+For each video clip, we perform three-crop data augmentation. 
 
-To be specific, we scale the shorter spatial side to 256 pixels and take three crops of 256 × 256 to cover the spatial dimensions and average the prediction scores.
 구체적으로, 우리는 더 짧은 공간 측면을 256픽셀로 확장하고 공간 차원을 커버하고 예측 점수의 평균을 내기 위해 256 × 256의 세 가지 크롭을 취합니다.
+<br>
+To be specific, we scale the shorter spatial side to 256 pixels and take three crops of 256 × 256 to cover the spatial dimensions and average the prediction scores.
 
-However, the evaluation schemes are not fixed. 
 그러나 평가 체계는 고정되어 있지 않습니다.
+<br>
+However, the evaluation schemes are not fixed. 
 
-They are evolving and adapting to new network architectures and different datasets. 
 그들은 새로운 네트워크 아키텍처와 다양한 데이터 세트에 맞게 진화하고 적응하고 있습니다. 
+<br>
+They are evolving and adapting to new network architectures and different datasets. 
 
-For example, TSM [128] only uses two clips per video for small-sized datasets [190, 109], and perform three-crop data augmentation for each clip despite its being a 2D CNN. 
 예를 들어, TSM[128]은 작은 크기의 데이터 세트[190, 109]에 대해 비디오당 두 개의 클립만 사용하고, 2D CNN임에도 불구하고 각 클립에 대해 세 번의 자르기 데이터 확장을 수행합니다.
+<br>
+For example, TSM [128] only uses two clips per video for small-sized datasets [190, 109], and perform three-crop data augmentation for each clip despite its being a 2D CNN. 
 
-We will mention any deviations from the standard evaluation pipeline. 
 표준 평가 파이프라인과의 편차를 언급할 것입니다.
+<br>
+We will mention any deviations from the standard evaluation pipeline. 
 
-In terms of evaluation metric, we report accuracy for single-label action recognition, and mAP (mean average precision) for multi-label action recognition.
 평가 메트릭 측면에서 단일 레이블 작업 인식에 대한 정확도와 다중 레이블 작업 인식에 대한 mAP(평균 평균 정밀도)를 보고합니다.
+<br>
+In terms of evaluation metric, we report accuracy for single-label action recognition, and mAP (mean average precision) for multi-label action recognition.
 
+<br>
+<br>
 
+## 4.2. Scene-focused datasets
 
+<br>
 
-4.2. Scene-focused datasets
-
-Here, we compare recent state-of-the-art approaches on scene-focused datasets: UCF101, HMDB51 and Kinetics400. 
 여기에서는 UCF101, HMDB51 및 Kinetics400과 같은 scene-focused datasets에 대한 state-of-the-art approaches을 비교합니다.
+<br>
+Here, we compare recent state-of-the-art approaches on scene-focused datasets: UCF101, HMDB51 and Kinetics400. 
 
-The reason we call them scene-focused is because most action videos in these datasets are short, and can be recognized by static scene appearance alone as shown in Figure 4.
 scene-focused이라고 부르는 이유는 이러한 데이터 세트의 대부분의 액션 비디오가 짧고 그림 4에 표시된 것처럼 정적 장면 모양만으로 인식할 수 있기 때문입니다.
+<br>
+The reason we call them scene-focused is because most action videos in these datasets are short, and can be recognized by static scene appearance alone as shown in Figure 4.
 
-Following the chronology, we first present results for early attempts of using deep learning and the two-stream networks at the top of Table 2. 
 연표에 따라 딥 러닝과 two-stream networks를 사용한 초기 시도에 대한 결과를 먼저 표 2 상단에 제시합니다.
+<br>
+Following the chronology, we first present results for early attempts of using deep learning and the two-stream networks at the top of Table 2. 
 
-We make several observations. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_02.png">
+</p>
+<br>
+<br>
+
+
 우리는 몇 가지 관찰을 합니다.
+<br>
+We make several observations. 
 
-First, without motion/temporal modeling, the performance of DeepVideo [99] is inferior to all other approaches. 
 첫째, 모션/시간 모델링이 없으면 DeepVideo[99]의 성능이 다른 모든 접근 방식보다 열등합니다.
+<br>
+First, without motion/temporal modeling, the performance of DeepVideo [99] is inferior to all other approaches. 
 
-Second, it is helpful to transfer knowledge from traditional methods (non-CNN-based) to deep learning. 
 둘째, 전통적인 방법(비 CNN 기반)에서 딥 러닝으로 지식을 이전하는 것이 도움이 됩니다.
+<br>
+Second, it is helpful to transfer knowledge from traditional methods (non-CNN-based) to deep learning. 
 
-For example, TDD [214] uses trajectory pooling to extract motion-aware CNN features. 
 예를 들어, TDD[214]는 궤적 풀링을 사용하여 동작 인식 CNN 기능을 추출합니다.
+<br>
+For example, TDD [214] uses trajectory pooling to extract motion-aware CNN features. 
 
-TLE [36] embeds global feature encoding, which is an important step in traditional video action recognition pipeline, into a deep network.
 TLE[36]는 기존의 비디오 동작 인식 파이프라인에서 중요한 단계인 전역 기능 인코딩을 딥 네트워크에 내장합니다.
+<br>
+TLE [36] embeds global feature encoding, which is an important step in traditional video action recognition pipeline, into a deep network.
 
-We then compare 3D CNNs based approaches in the middle of Table 2. 
 그런 다음 표 2의 중간에서 3D CNN 기반 접근 방식을 비교합니다.
+<br>
+We then compare 3D CNNs based approaches in the middle of Table 2. 
 
 Despite training on a large corpus of videos, C3D [202] performs inferior to concurrent work [187, 214, 217], possibly due to difficulties in optimization of 3D kernels. 
 많은 비디오 코퍼스에 대한 training에도 불구하고 C3D[202]는 동시 작업[187, 214, 217]보다 열악한 성능을 보이는데, 아마도 3D 커널 최적화의 어려움 때문일 것입니다.
