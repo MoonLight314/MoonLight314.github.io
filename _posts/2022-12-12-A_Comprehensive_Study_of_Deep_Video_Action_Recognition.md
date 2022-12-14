@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : Fortunately, there exists a dataset, Sports1M [99] which is large enough to support the training of a deep 3D network. 
+
 <br>
 <br>
 <br>
@@ -1068,190 +1068,253 @@ However, 3D networks are hard to optimize.
 <br>
 In order to train a 3D convolutional filter well, people need a largescale dataset with diverse video content and action categories. 
 
-Fortunately, there exists a dataset, Sports1M [99] which is large enough to support the training of a deep 3D network. 
 다행스럽게도 심층 3D 네트워크 교육을 지원하기에 충분히 큰 Sports1M [99] 데이터 세트가 있습니다.
+<br>
+Fortunately, there exists a dataset, Sports1M [99] which is large enough to support the training of a deep 3D network. 
 
+그러나 C3D Train은 수렴하는 데 몇 주가 걸립니다.
+<br>
 However, the training of C3D takes weeks to converge. 
-그러나 C3D 교육은 수렴하는 데 몇 주가 걸립니다.
 
-Despite the popularity of C3D, most users just adopt it as a feature extractor for different use cases instead of modifying/fine-tuning the network. 
-C3D의 인기에도 불구하고 대부분의 사용자는 네트워크를 수정/미세 조정하는 대신 다양한 사용 사례에 대한 기능 추출기로 채택합니다.
+C3D의 인기에도 불구하고 대부분의 사용자는 네트워크를 수정/미세 조정하는 대신 다양한 사용 사례에 대한 기능 추출기로 채택합니다. 
+<br>
+Despite the popularity of C3D, most users just adopt it as a feature extractor for different use cases instead of modifying/fine-tuning the network.
 
-This is partially the reason why two-stream networks based on 2D CNNs dominated the video action recognition domain from year 2014 to 2017.
 이것이 2D CNN을 기반으로 하는 two-stream networks가 2014년부터 2017년까지 비디오 동작 인식 영역을 지배한 이유 중 하나입니다.
+<br>
+This is partially the reason why two-stream networks based on 2D CNNs dominated the video action recognition domain from year 2014 to 2017.
 
-The situation changed when Carreira et al. [14] proposed I3D in year 2017. As shown in Figure 6, I3D takes a video clip as input, and forwards it through stacked 3D convolutional layers. 
 Carreira et al. [14]는 2017년에 I3D를 제안했습니다. 그림 6에서 볼 수 있듯이 I3D는 비디오 클립을 입력으로 가져와 쌓인 3D 컨볼루션 레이어를 통해 전달합니다.
+<br>
+The situation changed when Carreira et al. [14] proposed I3D in year 2017. As shown in Figure 6, I3D takes a video clip as input, and forwards it through stacked 3D convolutional layers. 
 
-A video clip is a sequence of video frames, usually 16 or 32 frames are used. 
 비디오 클립은 일련의 비디오 프레임이며 일반적으로 16개 또는 32개 프레임이 사용됩니다.
+<br>
+A video clip is a sequence of video frames, usually 16 or 32 frames are used. 
 
-
-The major contributions of I3D are: 
 I3D의 주요 기여는 다음과 같습니다.
+<br>
+The major contributions of I3D are: 
 
-1) it adapts mature image classification architectures to use for 3D CNN; 
 1) 3D CNN에 사용하기 위해 mature image classification architectures를 채택합니다.
+<br>
+1) it adapts mature image classification architectures to use for 3D CNN; 
 
-2) For model weights, it adopts a method developed for initializing optical flow networks in [217] to inflate the ImageNet pre-trained 2D model weights to their counterparts in the 3D model. 
 2) 모델 가중치의 경우 ImageNet 사전 훈련된 2D 모델 가중치를 3D 모델의 해당 가중치로 팽창시키기 위해 [217]에서 optical flow networks 초기화를 위해 개발된 방법을 채택합니다.
+<br>
+2) For model weights, it adopts a method developed for initializing optical flow networks in [217] to inflate the ImageNet pre-trained 2D model weights to their counterparts in the 3D model. 
 
-Hence, I3D bypasses the dilemma that 3D CNNs have to be trained from scratch. 
 따라서 I3D는 3D CNN이 처음부터 훈련되어야 하는 딜레마를 우회합니다.
+<br>
+Hence, I3D bypasses the dilemma that 3D CNNs have to be trained from scratch. 
 
-With pre-training on a new large-scale dataset Kinetics400 [100], I3D achieved a 95.6% on UCF101 and 74.8% on HMDB51. 
 새로운 대규모 데이터 세트 Kinetics400[100]에 대한 pre-training을 통해 I3D는 UCF101에서 95.6%, HMDB51에서 74.8%를 달성했습니다.
+<br>
+With pre-training on a new large-scale dataset Kinetics400 [100], I3D achieved a 95.6% on UCF101 and 74.8% on HMDB51. 
 
-I3D ended the era where different methods reported numbers on small-sized datasets such as UCF101 and HMDB512 . 
 I3D는 서로 다른 방법으로 UCF101 및 HMDB512와 같은 작은 크기의 데이터 세트에 숫자를 보고하던 시대를 마감했습니다. 
+<br>
+I3D ended the era where different methods reported numbers on small-sized datasets such as UCF101 and HMDB512 . 
 
-Publications following I3D needed to report their performance on Kinetics400, or other large-scale benchmark datasets, which pushed video action recognition to the next level. 
-I3D를 따르는 간행물은 Kinetics400 또는 다른 대규모 벤치마크 데이터 세트에 대한 성능을 보고해야 했으며, 이를 통해 비디오 동작 인식을 다음 단계로 끌어올렸습니다.
+I3D를 따르는 간행물은 Kinetics400 또는 다른 대규모 벤치마크 데이터 세트에 대한 성능을 보고해야 했으며, 이를 통해 비디오 동작 인식을 다음 단계로 끌어올렸습니다. 
+<br>
+Publications following I3D needed to report their performance on Kinetics400, or other large-scale benchmark datasets, which pushed video action recognition to the next level.
 
-In the next few years, 3D CNNs advanced quickly and became top performers on almost every benchmark dataset. 
 향후 몇 년 동안 3D CNN은 빠르게 발전하여 거의 모든 벤치마크 데이터 세트에서 최고의 성능을 발휘했습니다.
+<br>
+In the next few years, 3D CNNs advanced quickly and became top performers on almost every benchmark dataset. 
 
-We will review the 3D CNNs based literature in several categories below.
 아래의 여러 범주에서 3D CNN 기반 문헌을 검토할 것입니다.
+<br>
+We will review the 3D CNNs based literature in several categories below.
 
-We want to point out that 3D CNNs are not replacing two-stream networks, and they are not mutually exclusive.
 우리는 3D CNN이 two-stream networks를 대체하지 않으며 상호 배타적이지 않다는 점을 지적하고 싶습니다.
+<br>
+We want to point out that 3D CNNs are not replacing two-stream networks, and they are not mutually exclusive.
 
-They just use different ways to model the temporal relationship in a video. 
 그들은 비디오에서 시간 관계를 모델링하기 위해 다른 방법을 사용합니다. 
+<br>
+They just use different ways to model the temporal relationship in a video. 
 
+또한 two-stream approach는 특정 방식이 아닌 영상 이해를 위한 포괄적인 프레임워크입니다.
+<br>
 Furthermore, the two-stream approach is a generic framework for video understanding, instead of a specific method. 
-또한 2스트림 접근 방식은 특정 방식이 아닌 영상 이해를 위한 포괄적인 프레임워크입니다.
 
-As long as there are two networks, one for spatial appearance modeling using RGB frames, the other for temporal motion modeling using optical flow, the method may be categorized into the family of two-stream networks. 
 하나는 RGB 프레임을 이용한 공간적 외관 모델링을 위한 네트워크이고, 다른 하나는 optical flow를 이용한 시간적 움직임 모델링을 위한 두 개의 네트워크가 있는 한, 이 방법은 two-stream networks 계열로 분류될 수 있습니다.
+<br>
+As long as there are two networks, one for spatial appearance modeling using RGB frames, the other for temporal motion modeling using optical flow, the method may be categorized into the family of two-stream networks. 
 
-In [14], they also build a temporal stream with I3D architecture and achieved even higher performance, 98.0% on UCF101 and 80.9% on HMDB51. 
 [14]에서 그들은 또한 I3D 아키텍처로 시간적 스트림을 구축하고 UCF101에서 98.0%, HMDB51에서 80.9%로 훨씬 더 높은 성능을 달성했습니다.
+<br>
+In [14], they also build a temporal stream with I3D architecture and achieved even higher performance, 98.0% on UCF101 and 80.9% on HMDB51. 
 
-Hence, the final I3D model is a combination of 3D CNNs and twostream networks. 
 따라서 최종 I3D 모델은 3D CNN과 twostream networks의 조합입니다.
+<br>
+Hence, the final I3D model is a combination of 3D CNNs and twostream networks. 
 
-However, the contribution of I3D does not lie in the usage of optical flow.
 그러나 I3D의 기여는 optical flow의 사용에 있지 않습니다.
+<br>
+However, the contribution of I3D does not lie in the usage of optical flow.
 
+<br>
+<br>
 
+### 3.3.1 Mapping from 2D to 3D CNNs
 
-3.3.1 Mapping from 2D to 3D CNNs
+<br>
 
-2D CNNs enjoy the benefit of pre-training brought by the large-scale of image datasets such as ImageNet [30] and Places205 [270], which cannot be matched even with the largest video datasets available today. 
 2D CNN은 ImageNet [30] 및 Places205 [270]와 같은 대규모 이미지 데이터 세트가 제공하는 사전 훈련의 이점을 누리고 있으며, 이는 오늘날 사용 가능한 가장 큰 비디오 데이터 세트와도 비교할 수 없습니다.
+<br>
+2D CNNs enjoy the benefit of pre-training brought by the large-scale of image datasets such as ImageNet [30] and Places205 [270], which cannot be matched even with the largest video datasets available today. 
 
-On these datasets numerous efforts have been devoted to the search for 2D CNN architectures that are more accurate and generalize better. 
 이러한 데이터 세트에서 더 정확하고 더 잘 일반화되는 2D CNN 아키텍처를 찾기 위해 많은 노력을 기울였습니다.
+<br>
+On these datasets numerous efforts have been devoted to the search for 2D CNN architectures that are more accurate and generalize better. 
 
-Below we describe the efforts to capitalize on these advances for 3D CNNs.
 아래에서는 3D CNN에 대한 이러한 발전을 활용하기 위한 노력에 대해 설명합니다.
+<br>
+Below we describe the efforts to capitalize on these advances for 3D CNNs.
 
-ResNet3D [74] directly took 2D ResNet [76] and replaced all the 2D convolutional filters with 3D kernels. 
 ResNet3D[74]는 2D ResNet[76]을 직접 가져와 모든 2D 컨볼루션 필터를 3D 커널로 교체했습니다.
+<br>
+ResNet3D [74] directly took 2D ResNet [76] and replaced all the 2D convolutional filters with 3D kernels. 
 
-They believed that by using deep 3D CNNs together with large-scale datasets one can exploit the success of 2D CNNs on ImageNet. 
 그들은 대규모 데이터 세트와 함께 깊은 3D CNN을 사용함으로써 ImageNet에서 2D CNN의 성공을 활용할 수 있다고 믿었습니다.
+<br>
+They believed that by using deep 3D CNNs together with large-scale datasets one can exploit the success of 2D CNNs on ImageNet. 
 
-Motivated by ResNeXt [238], Chen et al. [20] presented a multi-fiber architecture that slices a complex neural network into an ensemble of lightweight networks (fibers) that facilitate information flow between fibers, reduces the computational cost at the same time. 
-ResNeXt [238], Chen et al. [20]은 복잡한 신경망을 섬유 사이의 정보 흐름을 용이하게 하는 경량 네트워크(섬유)의 앙상블로 분할하는 다중 섬유 아키텍처를 제시하고 동시에 계산 비용을 줄입니다.
+ResNeXt [238], Chen et al. [20]은 복잡한 신경망을 섬유 사이의 정보 흐름을 용이하게 하는 경량 네트워크(섬유)의 앙상블로 분할하는 다중 섬유 아키텍처를 제시하고 동시에 계산 비용을 줄입니다. 
+<br>
+Motivated by ResNeXt [238], Chen et al. [20] presented a multi-fiber architecture that slices a complex neural network into an ensemble of lightweight networks (fibers) that facilitate information flow between fibers, reduces the computational cost at the same time.
 
-Inspired by SENet [81], STCNet [33] propose to integrate channel-wise information inside a 3D block to capture both spatial-channels and temporal-channels correlation information throughout the network.
 SENet[81]에서 영감을 얻은 STCNet[33]은 네트워크 전체에서 spatial-channels과 temporal-channels correlation information를 모두 캡처하기 위해 3D 블록 내부에 채널별 정보를 통합할 것을 제안합니다.
+<br>
+Inspired by SENet [81], STCNet [33] propose to integrate channel-wise information inside a 3D block to capture both spatial-channels and temporal-channels correlation information throughout the network.
 
+<br>
+<br>
 
+### 3.3.2 Unifying 2D and 3D CNNs
 
-3.3.2 Unifying 2D and 3D CNNs
+<br>
 
-To reduce the complexity of 3D network training, P3D [169] and R2+1D [204] explore the idea of 3D factorization.
 3D 네트워크 교육의 복잡성을 줄이기 위해 P3D [169] 및 R2+1D [204]는 3D 분해 아이디어를 탐구합니다.
+<br>
+To reduce the complexity of 3D network training, P3D [169] and R2+1D [204] explore the idea of 3D factorization.
 
-To be specific, a 3D kernel (e.g., 3×3×3) can be factorized to two separate operations, a 2D spatial convolution (e.g.,1 × 3 × 3) and a 1D temporal convolution (e.g., 3 × 1 × 1).
 구체적으로 말하면, 3D 커널(예: 3×3×3)은 2D 공간 컨볼루션(예: 1 × 3 × 3)과 1D 시간적 컨볼루션(예: 3 × 1 × 1)의 두 가지 개별 연산으로 분해될 수 있습니다. ).
+<br>
+To be specific, a 3D kernel (e.g., 3×3×3) can be factorized to two separate operations, a 2D spatial convolution (e.g.,1 × 3 × 3) and a 1D temporal convolution (e.g., 3 × 1 × 1).
 
-The differences between P3D and R2+1D are how they arrange the two factorized operations and how they formulate each residual block. 
 P3D와 R2+1D의 차이점은 두 분해 연산을 배열하는 방법과 각 residual block을 만드는 방법입니다.
+<br>
+The differences between P3D and R2+1D are how they arrange the two factorized operations and how they formulate each residual block. 
 
-Trajectory convolution [268] follows this idea but uses deformable convolution for the temporal component to better cope with motion.
 Trajectory convolution[268]은 이 아이디어를 따르지만 움직임에 더 잘 대처하기 위해 temporal component에 대해 변형 가능한 콘볼루션을 사용합니다.
+<br>
+Trajectory convolution [268] follows this idea but uses deformable convolution for the temporal component to better cope with motion.
 
-Another way of simplifying 3D CNNs is to mix 2D and 3D convolutions in a single network. 
 3D CNN을 단순화하는 또 다른 방법은 단일 네트워크에서 2D 및 3D 컨볼루션을 혼합하는 것입니다.
+<br>
+Another way of simplifying 3D CNNs is to mix 2D and 3D convolutions in a single network. 
 
-MiCTNet [271] integrates 2D and 3D CNNs to generate deeper and more informative feature maps, while reducing training complexity in each round of spatio-temporal fusion. 
-MiCTNet[271]은 2D 및 3D CNN을 통합하여 더 깊고 유익한 기능 맵을 생성하는 동시에 시공간 융합의 각 라운드에서 훈련 복잡성을 줄입니다.
+MiCTNet[271]은 2D 및 3D CNN을 통합하여 더 깊고 유익한 기능 맵을 생성하는 동시에 시공간 융합의 각 라운드에서 훈련 복잡성을 줄입니다. 
+<br>
+MiCTNet [271] integrates 2D and 3D CNNs to generate deeper and more informative feature maps, while reducing training complexity in each round of spatio-temporal fusion.
 
-ARTNet [213] introduces an appearance-and-relation network by using a new building block. 
-ARTNet [213]은 새로운 building block을 사용하여 외관 및 관계 네트워크를 도입합니다.
+ARTNet [213]은 새로운 building block을 사용하여 외관 및 관계 네트워크를 도입합니다. 
+<br>
+ARTNet [213] introduces an appearance-and-relation network by using a new building block.
 
-The building block consists of a spatial branch using 2D CNNs and a relation branch using 3D CNNs. 
-building block은 2D CNN을 사용하는 spatial branch와 3D CNN을 사용하는 relation branch로 구성됩니다.
+building block은 2D CNN을 사용하는 spatial branch와 3D CNN을 사용하는 relation branch로 구성됩니다. 
+<br>
+The building block consists of a spatial branch using 2D CNNs and a relation branch using 3D CNNs.
 
-S3D [239] combines the merits from approaches mentioned above. 
-S3D[239]는 위에서 언급한 접근 방식의 장점을 결합합니다.
+S3D[239]는 위에서 언급한 접근 방식의 장점을 결합합니다. 
+<br>
+S3D [239] combines the merits from approaches mentioned above.
 
-It first replaces the 3D convolutions at the bottom of the network with 2D kernels, and find that this kind of top-heavy network has higher recognition accuracy. 
 먼저 네트워크 하단의 3D 컨볼루션을 2D 커널로 대체하고 이러한 종류의 상단이 무거운 네트워크가 인식 정확도가 더 높다는 것을 발견합니다.
+<br>
+It first replaces the 3D convolutions at the bottom of the network with 2D kernels, and find that this kind of top-heavy network has higher recognition accuracy. 
 
-Then S3D factorizes the remaining 3D kernels as P3D and R2+1D do, to further reduce the model size and training complexity. 
 그런 다음 S3D는 P3D 및 R2+1D처럼 나머지 3D 커널을 분해하여 모델 크기와 교육 복잡성을 더욱 줄입니다.
+<br>
+Then S3D factorizes the remaining 3D kernels as P3D and R2+1D do, to further reduce the model size and training complexity. 
 
-A concurrent work named ECO [283] also adopts such a top-heavy network to achieve online video understanding.
 ECO [283]도 온라인 비디오 이해를 달성하기 위해 이러한 top-heavy 네트워크를 채택합니다.
+<br>
+A concurrent work named ECO [283] also adopts such a top-heavy network to achieve online video understanding.
 
+<br>
+<br>
 
+### 3.3.3 Long-range temporal modeling
 
+<br>
 
-3.3.3 Long-range temporal modeling
-
-In 3D CNNs, long-range temporal connection may be achieved by stacking multiple short temporal convolutions, e.g., 3×3×3 filters. 
 3D CNN에서 긴 범위의 시간적 연결은 예를 들어 3×3×3 필터와 같은 여러 개의 짧은 시간적 컨볼루션을 쌓아서 달성할 수 있습니다.
+<br>
+In 3D CNNs, long-range temporal connection may be achieved by stacking multiple short temporal convolutions, e.g., 3×3×3 filters. 
 
-However, useful temporal information may be lost in the later stages of a deep network, especially for frames far apart.
 그러나 특히 멀리 떨어져 있는 프레임의 경우 심층 네트워크의 후반 단계에서 유용한 시간 정보가 손실될 수 있습니다.
+<br>
+However, useful temporal information may be lost in the later stages of a deep network, especially for frames far apart.
 
-In order to perform long-range temporal modeling, LTC [206] introduces and evaluates long-term temporal convolutions over a large number of video frames. 
 장거리 시간 모델링을 수행하기 위해 LTC [206]는 많은 수의 비디오 프레임에 대한 장기 시간 컨벌루션을 도입하고 평가합니다.
+<br>
+In order to perform long-range temporal modeling, LTC [206] introduces and evaluates long-term temporal convolutions over a large number of video frames. 
 
-However, limited by GPU memory, they have to sacrifice input resolution to use more frames. 
 그러나 GPU 메모리에 의해 제한되어 더 많은 프레임을 사용하려면 입력 해상도를 희생해야 합니다.
+<br>
+However, limited by GPU memory, they have to sacrifice input resolution to use more frames. 
 
-After that, T3D [32] adopted a densely connected structure [83] to keep the original temporal information as complete as possible to make the final prediction. 
 그 후 T3D[32]는 조밀하게 연결된 구조[83]를 채택하여 원래 시간 정보를 최대한 완전하게 유지하여 최종 예측을 수행했습니다.
+<br>
+After that, T3D [32] adopted a densely connected structure [83] to keep the original temporal information as complete as possible to make the final prediction. 
 
-Later, Wang et al. [219] introduced a new building block, termed non-local. 
 나중에 Wang et al. [219] 비로컬(non-local)이라는 새로운 빌딩 블록을 도입했습니다.
+<br>
+Later, Wang et al. [219] introduced a new building block, termed non-local. 
 
-Non-local is a generic operation similar to self-attention [207], which can be used for many computer vision tasks in a plug-and-play manner. 
 Non-local은 플러그 앤 플레이 방식으로 많은 컴퓨터 비전 작업에 사용할 수 있는 self-attention[207]과 유사한 일반적인 작업입니다.
+<br>
+Non-local is a generic operation similar to self-attention [207], which can be used for many computer vision tasks in a plug-and-play manner. 
 
-As shown in Figure 6, they used a spacetime non-local module after later residual blocks to capture the long-range dependence in both space and temporal domain, and achieved improved performance over baselines without bells and whistles. 
-그림 6에서 볼 수 있듯이, 그들은 공간 및 시간 영역 모두에서 장거리 의존성을 포착하기 위해 나중 잔차 블록 이후에 시공간 비국소 모듈을 사용했고 종소리 없이 기준선에 비해 향상된 성능을 달성했습니다.
+그림 6에서 볼 수 있듯이, 그들은 공간 및 시간 영역 모두에서 장거리 의존성을 포착하기 위해 나중 잔차 블록 이후에 시공간 비국소 모듈을 사용했고 종소리 없이 기준선에 비해 향상된 성능을 달성했습니다. 
+<br>
+As shown in Figure 6, they used a spacetime non-local module after later residual blocks to capture the long-range dependence in both space and temporal domain, and achieved improved performance over baselines without bells and whistles.
 
-Wu et al. [229] proposed a feature bank representation, which embeds information of the entire video into a memory cell, to make context-aware prediction. 
-Wuet al. [229]는 상황 인식 예측을 위해 전체 비디오의 정보를 메모리 셀에 임베딩하는 특징 뱅크 표현을 제안했습니다.
+Wuet al. [229]는 상황 인식 예측을 위해 전체 비디오의 정보를 메모리 셀에 임베딩하는 특징 뱅크 표현을 제안했습니다. 
+<br>
+Wu et al. [229] proposed a feature bank representation, which embeds information of the entire video into a memory cell, to make context-aware prediction.
 
-Recently, V4D [264] proposed video-level 4D CNNs, to model the evolution of long-range spatio-temporal representation with 4D convolutions.
 최근 V4D[264]는 4D 컨볼루션을 사용한 장거리 시공간 표현의 진화를 모델링하기 위해 비디오 수준의 4D CNN을 제안했습니다.
+<br>
+Recently, V4D [264] proposed video-level 4D CNNs, to model the evolution of long-range spatio-temporal representation with 4D convolutions.
 
+<br>
+<br>
 
+### 3.3.4 Enhancing 3D efficiency
 
+<br>
 
-
-3.3.4 Enhancing 3D efficiency
-
-In order to further improve the efficiency of 3D CNNs (i.e., in terms of GFLOPs, model parameters and latency), many variants of 3D CNNs begin to emerge.
 3D CNN의 효율성을 더욱 향상시키기 위해(즉, GFLOP, 모델 매개변수 및 대기 시간 측면에서) 3D CNN의 많은 변형이 등장하기 시작했습니다.
+<br>
+In order to further improve the efficiency of 3D CNNs (i.e., in terms of GFLOPs, model parameters and latency), many variants of 3D CNNs begin to emerge.
 
-Motivated by the development in efficient 2D networks, researchers started to adopt channel-wise separable convolution and extend it for video classification [111, 203].
 효율적인 2D 네트워크의 개발에 동기를 부여받은 연구자들은 채널별로 분리 가능한 컨벌루션을 채택하고 비디오 분류를 위해 확장하기 시작했습니다[111, 203].
+<br>
+Motivated by the development in efficient 2D networks, researchers started to adopt channel-wise separable convolution and extend it for video classification [111, 203].
 
-CSN [203] reveals that it is a good practice to factorize 3D convolutions by separating channel interactions and spatiotemporal interactions, and is able to obtain state-of-the-art performance while being 2 to 3 times faster than the previous best approaches. 
 CSN [203]은 채널 상호 작용과 시공간 상호 작용을 분리하여 3D 컨볼루션을 분해하는 것이 좋은 방법이며 이전 최상의 접근 방식보다 2~3배 빠르면서도 최신 성능을 얻을 수 있음을 밝혔습니다.
+<br>
+CSN [203] reveals that it is a good practice to factorize 3D convolutions by separating channel interactions and spatiotemporal interactions, and is able to obtain state-of-the-art performance while being 2 to 3 times faster than the previous best approaches. 
 
-These methods are also related to multi-fiber networks [20] as they are all inspired by group convolution.
 이러한 방법은 모두 group convolution에서 영감을 받았기 때문에 multi-fiber networks [20]와도 관련이 있습니다.
+<br>
+These methods are also related to multi-fiber networks [20] as they are all inspired by group convolution.
 
 Recently, Feichtenhofer et al. [45] proposed SlowFast, an efficient network with a slow pathway and a fast path way. 
 최근 Feichtenhofer et al. [45]는 slow pathway와 fast path way를 가진 효율적인 네트워크인 SlowFast를 제안했습니다.
