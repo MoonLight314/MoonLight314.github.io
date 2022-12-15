@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : Despite training on a large corpus of videos, C3D [202] performs inferior to concurrent work [187, 214, 217], possibly due to difficulties in optimization of 3D kernels.
+검색 : Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
 <br>
 <br>
 <br>
@@ -1949,48 +1949,64 @@ TLE [36] embeds global feature encoding, which is an important step in tradition
 <br>
 We then compare 3D CNNs based approaches in the middle of Table 2. 
 
+많은 비디오 코퍼스에 대한 training에도 불구하고 C3D[202]는 동시 작업[187, 214, 217]에서 열악한 성능을 보이는데, 아마도 3D 커널 최적화의 어려움 때문일 것입니다.
+<br>
 Despite training on a large corpus of videos, C3D [202] performs inferior to concurrent work [187, 214, 217], possibly due to difficulties in optimization of 3D kernels. 
-많은 비디오 코퍼스에 대한 training에도 불구하고 C3D[202]는 동시 작업[187, 214, 217]보다 열악한 성능을 보이는데, 아마도 3D 커널 최적화의 어려움 때문일 것입니다.
 
-Motivated by this, several papers - I3D [14], P3D [169], R2+1D [204] and S3D [239] factorize 3D convolution filters to 2D spatial kernels and 1D temporal kernels to ease the training. 
 이것에 동기를 부여하여 I3D[14], P3D[169], R2+1D[204] 및 S3D[239]와 같은 여러 논문에서 3D 컨볼루션 필터를 2D 공간 커널 및 1D 시간 커널로 분해하여 훈련을 용이하게 합니다.
+<br>
+Motivated by this, several papers - I3D [14], P3D [169], R2+1D [204] and S3D [239] factorize 3D convolution filters to 2D spatial kernels and 1D temporal kernels to ease the training. 
 
-In addition, I3D introduces an inflation strategy to avoid training from scratch by bootstrap ping the 3D model weights from well-trained 2D networks. 
 또한 I3D는 잘 훈련된 2D 네트워크에서 3D 모델 가중치를 부트스트랩하여 처음부터 훈련하는 것을 방지하는 인플레이션 전략을 도입합니다.
+<br>
+In addition, I3D introduces an inflation strategy to avoid training from scratch by bootstrap ping the 3D model weights from well-trained 2D networks. 
 
-By using these techniques, they achieve comparable performance to the best two-stream network methods [36] without the need for optical flow. 
 이러한 기술을 사용하여 optical flow 없이도 최상의 two-stream network 방법[36]에 필적하는 성능을 달성합니다.
+<br>
+By using these techniques, they achieve comparable performance to the best two-stream network methods [36] without the need for optical flow. 
 
-Furthermore, recent 3D models obtain even higher accuracy, by using more training samples [203], additional pathways [45], or architecture search [44].
 또한 최근 3D 모델은 더 많은 training samples[203], additional pathways[45] 또는 architecture search[44]을 사용하여 훨씬 더 높은 정확도를 얻습니다.
+<br>
+Furthermore, recent 3D models obtain even higher accuracy, by using more training samples [203], additional pathways [45], or architecture search [44].
 
-Finally, we show recent efficient models in the bottom of Table 2. 
 마지막으로 표 2 하단에 최근의 효율적인 모델을 보여줍니다.
+<br>
+Finally, we show recent efficient models in the bottom of Table 2. 
 
-We can see that these methods are able to achieve higher recognition accuracy than two-stream networks (top), and comparable performance to 3D CNNs (middle). 
 우리는 이러한 방법이 two-stream networks(상단)보다 더 높은 인식 정확도를 달성할 수 있고 3D CNN(중간)에 필적하는 성능을 달성할 수 있음을 볼 수 있습니다.
+<br>
+We can see that these methods are able to achieve higher recognition accuracy than two-stream networks (top), and comparable performance to 3D CNNs (middle). 
 
+2D CNN이고 광학 흐름을 사용하지 않기 때문에 이러한 방법은 Train 및 Inference 측면에서 모두 효율적입니다.
+<br>
 Since they are 2D CNNs and do not use optical flow, these methods are efficient in terms of both training and inference. 
-2D CNN이고 광학 흐름을 사용하지 않기 때문에 이러한 방법은 교육 및 추론 측면에서 모두 효율적입니다.
 
-Most of them are real-time approaches, and some can do online video action recognition [128]. 
 대부분 실시간 접근 방식이며 일부는 온라인 비디오 동작 인식이 가능합니다[128].
+<br>
+Most of them are real-time approaches, and some can do online video action recognition [128]. 
 
-We believe 2D CNN plus temporal modeling is a promising direction due to the need of efficiency. 
 우리는 효율성의 필요성 때문에 2D CNN과 시간 모델링이 유망한 방향이라고 생각합니다. 
+<br>
+We believe 2D CNN plus temporal modeling is a promising direction due to the need of efficiency. 
 
-Here, temporal modeling could be attention based, flow based or 3D kernel based.
 여기서 시간 모델링은 attention based, flow based 또는 3D 커널 기반일 수 있습니다.
+<br>
+Here, temporal modeling could be attention based, flow based or 3D kernel based.
 
+<br>
+<br>
 
+## 4.3. Motion-focused datasets
 
-4.3. Motion-focused datasets
+<br>
 
-In this section, we compare the recent state-of-the-art approaches on the 20BN-Something-Something (Sth-Sth) dataset. 
 이 섹션에서는 20BN-Something-Something(Sth-Sth) 데이터 세트에 대한 최신 최신 접근 방식을 비교합니다.
+<br>
+In this section, we compare the recent state-of-the-art approaches on the 20BN-Something-Something (Sth-Sth) dataset. 
 
-We report top1 accuracy on both V1 and V2. SthSth datasets focus on humans performing basic actions with daily objects. 
 V1과 V2 모두에서 최고 정확도 1위를 보고합니다. SthSth 데이터 세트는 일상적인 개체로 기본 작업을 수행하는 인간에 중점을 둡니다.
+<br>
+We report top1 accuracy on both V1 and V2. SthSth datasets focus on humans performing basic actions with daily objects. 
 
 Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
 scene-focused datasets와 달리 Sth-Sth 데이터세트의 배경 장면은 최종 액션 클래스 예측에 거의 기여하지 않습니다.
