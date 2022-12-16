@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
+
 <br>
 <br>
 <br>
@@ -2008,65 +2008,101 @@ V1과 V2 모두에서 최고 정확도 1위를 보고합니다. SthSth 데이터
 <br>
 We report top1 accuracy on both V1 and V2. SthSth datasets focus on humans performing basic actions with daily objects. 
 
-Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
 scene-focused datasets와 달리 Sth-Sth 데이터세트의 배경 장면은 최종 액션 클래스 예측에 거의 기여하지 않습니다.
+<br>
+Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
 
-In addition, there are classes such as “Pushing something from left to right” and “Pushing something from right to left”, and which require strong motion reasoning.
 그 외에도 "왼쪽에서 오른쪽으로 밀기", "오른쪽에서 왼쪽으로 밀기"와 같이 강력한 동작 추론이 필요한 클래스가 있습니다.
+<br>
+In addition, there are classes such as “Pushing something from left to right” and “Pushing something from right to left”, and which require strong motion reasoning.
 
-By comparing the previous work in Table 3, we observe that using longer input (e.g., 16 frames) is generally better. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_03.png">
+</p>
+<br>
+<br>
+
+
+
 표 3의 이전 작업을 비교하면 더 긴 입력(예: 16프레임)을 사용하는 것이 일반적으로 더 좋다는 것을 알 수 있습니다.
+<br>
+By comparing the previous work in Table 3, we observe that using longer input (e.g., 16 frames) is generally better. 
 
-Moreover, methods that focus on temporal modeling [128, 122, 92] work better than stacked 3D kernels [14].
 게다가, 시간적 모델링에 초점을 맞춘 방법[128, 122, 92]은 stacked 3D kernels[14]보다 더 잘 작동합니다.
+<br>
+Moreover, methods that focus on temporal modeling [128, 122, 92] work better than stacked 3D kernels [14].
 
-For example, TSM [128], TEA [122] and MSNet [110] insert an explicit temporal reasoning module into 2D ResNet backbones and achieves state-of-the-art results. 
 예를 들어, TSM[128], TEA[122] 및 MSNet[110]은 명시적 temporal reasoning module을 2D ResNet 백본에 삽입하고 state-of-the-art 결과를 얻습니다.
+<br>
+For example, TSM [128], TEA [122] and MSNet [110] insert an explicit temporal reasoning module into 2D ResNet backbones and achieves state-of-the-art results. 
 
-This implies that the Sth-Sth dataset needs strong temporal motion reasoning as well as spatial semantics information.
 이는 Sth-Sth 데이터셋이 공간적 의미론적 정보뿐만 아니라 강력한 시간적 움직임 추론을 필요로 함을 의미합니다.
+<br>
+This implies that the Sth-Sth dataset needs strong temporal motion reasoning as well as spatial semantics information.
 
+<br>
+<br>
 
+## 4.4. Multi-label datasets
 
+<br>
 
-
-4.4. Multi-label datasets
-
-In this section, we first compare the recent state-of-the art approaches on Charades dataset [186] and then we list some recent work that use assemble model or additional object information on Charades.
 이 섹션에서는 먼저 Charades 데이터 세트 [186]에 대한 state-of-the art 접근 방식을 비교한 다음 Charades에 대한 모델 또는 추가 개체 정보를 사용하는 최근 작업을 나열합니다.
+<br>
+In this section, we first compare the recent state-of-the art approaches on Charades dataset [186] and then we list some recent work that use assemble model or additional object information on Charades.
 
-Comparing the previous work in Table 4, we make the following observations. 
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_04.png">
+</p>
+<br>
+<br>
+
 표 4의 이전 작업을 비교하여 다음과 같은 관찰을 수행합니다.
+<br>
+Comparing the previous work in Table 4, we make the following observations. 
 
-First, 3D models [229, 45] generally perform better than 2D models [186, 231] and 2D models with optical flow input. 
-첫째, 3D 모델[229, 45]은 일반적으로 2D 모델[186, 231] 및 optical flow 입력이 있는 2D 모델보다 성능이 좋습니다.
+첫째, 3D 모델[229, 45]은 일반적으로 2D 모델[186, 231] 및 optical flow 입력이 있는 2D 모델보다 성능이 좋습니다. 
+<br>
+First, 3D models [229, 45] generally perform better than 2D models [186, 231] and 2D models with optical flow input.
 
-This indicates that the spatiotemporal reasoning is critical for long-term complex concurrent action understanding. 
-이것은 시공간 추론이 장기적으로 복잡한 동시 행동 이해에 중요하다는 것을 나타냅니다.
+이것은 시공간 추론이 장기적으로 복잡한 동시 행동 이해에 중요하다는 것을 나타냅니다. 
+<br>
+This indicates that the spatiotemporal reasoning is critical for long-term complex concurrent action understanding.
 
-Second, longer input helps with the recognition [229] probably because some actions require long-term feature to recognize. 
 둘째, 더 긴 입력은 인식에 도움이 됩니다[229]. 아마도 일부 동작은 인식하는 데 장기적인 기능이 필요하기 때문입니다.
+<br>
+Second, longer input helps with the recognition [229] probably because some actions require long-term feature to recognize. 
 
-Third, models with strong backbones that are pre-trained on larger datasets generally have better performance [45]. 
 셋째, 더 큰 데이터 세트에서 사전 훈련된 강력한 백본을 가진 모델은 일반적으로 더 나은 성능을 보입니다[45].
+<br>
+Third, models with strong backbones that are pre-trained on larger datasets generally have better performance [45]. 
 
-This is because Charades is a medium-scaled dataset which doesn’t contain enough diversity to train a deep model.
 이는 Charades가 심층 모델을 교육하기에 충분한 다양성을 포함하지 않는 중간 규모의 데이터 세트이기 때문입니다.
+<br>
+This is because Charades is a medium-scaled dataset which doesn’t contain enough diversity to train a deep model.
 
-Recently, researchers explored the alternative direction for complex concurrent action recognition by assembling models [177] or providing additional human-object interaction information [90]. 
-최근 연구자들은 모델을 조립하거나[177], 추가적인 인간-객체 상호 작용 정보를 제공함으로써[90] 복잡한 동시 행동 인식을 위한 대안적 방향을 탐색했습니다.
+최근 연구자들은 모델을 조립하거나[177], 추가적인 인간-객체 상호 작용 정보를 제공함으로써[90] 복잡한 동시 행동 인식을 위한 대안적 방향을 탐색했습니다. 
+<br>
+Recently, researchers explored the alternative direction for complex concurrent action recognition by assembling models [177] or providing additional human-object interaction information [90].
 
-These papers significantly outperformed previous literature that only finetune a single model on Charades. 
 이 논문은 Charades에서 단일 모델만 미세 조정하는 이전 문헌보다 훨씬 뛰어난 성능을 보였습니다.
+<br>
+These papers significantly outperformed previous literature that only finetune a single model on Charades. 
 
-It demonstrates that exploring spatio-temporal human-object interactions and finding a way to avoid overfitting are the keys for concurrent action understanding.
 시공간적 인간-객체 상호 작용을 탐색하고 과적합을 방지하는 방법을 찾는 것이 동시 작업 이해의 핵심임을 보여줍니다.
+<br>
+It demonstrates that exploring spatio-temporal human-object interactions and finding a way to avoid overfitting are the keys for concurrent action understanding.
 
+<br>
+<br>
 
+## 4.5. Speed comparison
 
-
-
-4.5. Speed comparison
+<br>
 
 To deploy a model in real-life applications, we usually need to know whether it meets the speed requirement before we can proceed. 
 실제 응용 프로그램에 모델을 배포하려면 일반적으로 진행하기 전에 모델이 속도 요구 사항을 충족하는지 여부를 알아야 합니다.
