@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-
+검색 : Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
 <br>
 <br>
 <br>
