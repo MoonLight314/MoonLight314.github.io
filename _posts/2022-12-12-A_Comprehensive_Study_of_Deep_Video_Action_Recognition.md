@@ -2104,173 +2104,239 @@ It demonstrates that exploring spatio-temporal human-object interactions and fin
 
 <br>
 
-To deploy a model in real-life applications, we usually need to know whether it meets the speed requirement before we can proceed. 
 실제 응용 프로그램에 모델을 배포하려면 일반적으로 진행하기 전에 모델이 속도 요구 사항을 충족하는지 여부를 알아야 합니다.
+<br>
+To deploy a model in real-life applications, we usually need to know whether it meets the speed requirement before we can proceed. 
 
-In this section, we evaluate the approaches mentioned above to perform a thorough comparison in terms of (1) number of parameters, (2) FLOPS, (3) latency and (4) frame per second.
 이 섹션에서는 (1) 매개변수 수, (2) FLOPS, (3) 대기 시간 및 (4) 초당 프레임 측면에서 철저한 비교를 수행하기 위해 위에서 언급한 접근 방식을 평가합니다.
+<br>
+In this section, we evaluate the approaches mentioned above to perform a thorough comparison in terms of (1) number of parameters, (2) FLOPS, (3) latency and (4) frame per second.
 
-We present the results in Table 5. 
 결과를 표 5에 제시합니다.
+<br>
+We present the results in Table 5. 
 
-Here, we use the models in the GluonCV video action recognition model zoo3 since all these models are trained using the same data, same data augmentation strategy and under same 30-view evaluation scheme, thus fair comparison. 
-여기서 우리는 GluonCV 비디오 동작 인식 모델 zoo3의 모델을 사용합니다. 이러한 모든 모델은 동일한 데이터, 동일한 데이터 확대 전략 및 동일한 30개 보기 평가 체계를 사용하여 훈련되므로 공정한 비교입니다.
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_05.png">
+</p>
+<br>
+<br>
 
-All the timings are done on a single Tesla V100 GPU with 105 repeated runs, while the first 5 runs are ignored for warming up. 
+여기서 우리는 GluonCV 비디오 동작 인식 모델 zoo3의 모델을 사용합니다. 이러한 모든 모델은 동일한 데이터, 동일한data augmentation strategy 및 동일한 30개 보기 평가 체계를 사용하여 훈련되므로 공정한 비교입니다. 
+<br>
+Here, we use the models in the GluonCV video action recognition model zoo3 since all these models are trained using the same data, same data augmentation strategy and under same 30-view evaluation scheme, thus fair comparison.
+
 모든 타이밍은 단일 Tesla V100 GPU에서 105회의 반복 실행으로 수행되며 처음 5회의 실행은 워밍업을 위해 무시됩니다.
+<br>
+All the timings are done on a single Tesla V100 GPU with 105 repeated runs, while the first 5 runs are ignored for warming up. 
 
-We always use a batch size of 1. 
 우리는 항상 배치 크기 1을 사용합니다.
+<br>
+We always use a batch size of 1. 
 
-In terms of model input, we use the suggested settings in the original paper. 
 모델 입력의 경우 원본 논문에서 제안한 설정을 사용합니다.
+<br>
+In terms of model input, we use the suggested settings in the original paper. 
 
-As we can see in Table 5, if we compare latency, 2D models are much faster than all other 3D variants. 
 표 5에서 볼 수 있듯이 대기 시간을 비교하면 2D 모델이 다른 모든 3D 모델보다 훨씬 빠릅니다.
+<br>
+As we can see in Table 5, if we compare latency, 2D models are much faster than all other 3D variants. 
 
-This is probably why most real-world video applications still adopt frame-wise methods. 
 이것이 아마도 대부분의 실제 비디오 응용 프로그램이 여전히 프레임 단위 방법을 채택하는 이유일 것입니다.
+<br>
+This is probably why most real-world video applications still adopt frame-wise methods. 
 
-Secondly, as mentioned in [170, 259], FLOPS is not strongly correlated with the actual inference time (i.e., latency). 
 둘째, [170, 259]에서 언급한 바와 같이 FLOPS는 실제 추론 시간(즉, 대기 시간)과 강한 상관 관계가 없습니다.
+<br>
+Secondly, as mentioned in [170, 259], FLOPS is not strongly correlated with the actual inference time (i.e., latency). 
 
-Third, if comparing performance, most 3D models give similar accuracy around 75%, but pretraining with a larger dataset can significantly boost the performance. 
-셋째, 성능을 비교해 보면 대부분의 3D 모델이 75% 정도 비슷한 정확도를 보여주지만 더 큰 데이터 세트로 사전 훈련을 하면 성능을 크게 높일 수 있습니다.
+셋째, 성능을 비교해 보면 대부분의 3D 모델이 75% 정도 비슷한 정확도를 보여주지만 더 큰 데이터 세트로 사전 훈련을 하면 성능을 크게 높일 수 있습니다. 
+<br>
+Third, if comparing performance, most 3D models give similar accuracy around 75%, but pretraining with a larger dataset can significantly boost the performance.
 
-This indicates the importance of training data and partially suggests that self-supervised pre-training might be a promising way to further improve existing methods.
 이는 훈련 데이터의 중요성을 나타내며 부분적으로 자체 감독 사전 훈련이 기존 방법을 더욱 개선할 수 있는 유망한 방법일 수 있음을 시사합니다.
+<br>
+This indicates the importance of training data and partially suggests that self-supervised pre-training might be a promising way to further improve existing methods.
 
+<br>
+<br>
 
+# 5. Discussion and Future Work
 
+<br>
 
-5. Discussion and Future Work
+우리는 2014년부터 비디오 동작 인식을 위한 200개 이상의 딥 러닝 기반 방법을 조사했습니다. 
+<br>
+We have surveyed more than 200 deep learning based methods for video action recognition since year 2014.
 
-We have surveyed more than 200 deep learning based methods for video action recognition since year 2014. 
-우리는 2014년부터 비디오 동작 인식을 위한 200개 이상의 딥 러닝 기반 방법을 조사했습니다.
-
-Despite the performance on benchmark datasets plateauing, there are many active and promising directions in this task worth exploring.
 벤치마크 데이터 세트의 성능이 정체되고 있음에도 불구하고 이 작업에는 탐색할 가치가 있는 적극적이고 유망한 방향이 많이 있습니다.
+<br>
+Despite the performance on benchmark datasets plateauing, there are many active and promising directions in this task worth exploring.
 
+<br>
+<br>
 
+## 5.1. Analysis and insights
 
+<br>
 
-5.1. Analysis and insights
-
-More and more methods haven been developed to improve video action recognition, at the same time, 
 비디오 동작 인식을 개선하는 동시에 점점 더 많은 방법이 개발되었습니다.
+<br>
+More and more methods haven been developed to improve video action recognition, at the same time, 
 
-there are some papers summarizing these methods and providing analysis and insights. 
 이러한 방법을 요약하고 분석 및 통찰력을 제공하는 일부 논문이 있습니다.
+<br>
+there are some papers summarizing these methods and providing analysis and insights. 
 
-Huang et al. [82] perform an explicit analysis of the effect of temporal information for video understanding. 
-Huang et al. 비디오 이해를 위한 시간 정보의 효과에 대한 명시적 분석을 수행합니다.
+Huang et al. 비디오 이해를 위한 시간 정보의 효과에 대한 명시적 분석을 수행합니다. 
+<br>
+Huang et al. [82] perform an explicit analysis of the effect of temporal information for video understanding.
 
-They try to answer the question “how important is the motion in the video for recognizing the action”.
 그들은 "동작을 인식하는 데 비디오의 동작이 얼마나 중요한지"라는 질문에 답하려고 합니다.
+<br>
+They try to answer the question “how important is the motion in the video for recognizing the action”.
 
-Feichtenhofer et al. [48, 49] provide an amazing visualization of what two-stream models have learned in order to understand how these deep representations work and what they are capturing. 
-Feichtenhofer et al. [48, 49]는 이러한 깊은 표현이 어떻게 작동하고 무엇을 캡처하는지 이해하기 위해 two-stream models이 학습한 놀라운 시각화를 제공합니다. 
+Feichtenhofer et al. [48, 49]는 이러한 깊은 표현이 어떻게 작동하고 무엇을 캡처하는지 이해하기 위해 two-stream models이 학습한 놀라운 시각화를 제공합니다.  
+<br>
+Feichtenhofer et al. [48, 49] provide an amazing visualization of what two-stream models have learned in order to understand how these deep representations work and what they are capturing.
 
-Li et al. [124] introduce a concept, representation bias of a dataset, and find that current datasets are biased towards static representations. 
-Li et al. [124] 개념, 데이터 세트의 표현 편향을 소개하고 현재 데이터 세트가 정적 표현으로 편향되어 있음을 발견합니다.
+Li et al. [124] 개념, 데이터 세트의 표현 편향을 소개하고 현재 데이터 세트가 정적 표현으로 편향되어 있음을 발견합니다. 
+<br>
+Li et al. [124] introduce a concept, representation bias of a dataset, and find that current datasets are biased towards static representations.
 
-Experiments on such biased datasets may lead to erroneous conclusions, which is indeed a big problem that limits the development of video action recognition. 
 이러한 편향된 데이터 세트에 대한 실험은 잘못된 결론으로 이어질 수 있으며 이는 실제로 비디오 동작 인식의 개발을 제한하는 큰 문제입니다.
+<br>
+Experiments on such biased datasets may lead to erroneous conclusions, which is indeed a big problem that limits the development of video action recognition. 
 
-Recently, Piergiovanni et al. introduced the AViD [165] dataset to cope with data bias by collecting data from diverse groups of people. 
 최근 Piergiovanni et al. 다양한 그룹의 사람들로부터 데이터를 수집하여 데이터 편향에 대처하기 위해 AViD [165] 데이터 세트를 도입했습니다.
+<br>
+Recently, Piergiovanni et al. introduced the AViD [165] dataset to cope with data bias by collecting data from diverse groups of people. 
 
-These papers provide great insights to help fellow researchers to understand the challenges, open problems and where the next breakthrough might reside.
 이 논문은 동료 연구자들이 당면 과제, 해결되지 않은 문제 및 다음 돌파구를 이해하는 데 도움이 되는 훌륭한 통찰력을 제공합니다.
+<br>
+These papers provide great insights to help fellow researchers to understand the challenges, open problems and where the next breakthrough might reside.
 
+<br>
+<br>
 
+## 5.2. Data augmentation
 
+<br>
 
+mixup[258], cutout[31], CutMix[254], AutoAugment[27], FastAutoAug[126] 등과 같은 이미지 인식 도메인에서 수많은Data augmentation 방법이 제안되었습니다. 
+<br>
+Numerous data augmentation methods have been proposed in image recognition domain, such as mixup [258], cutout [31], CutMix [254], AutoAugment [27], FastAutoAug [126], etc.
 
-5.2. Data augmentation
-
-Numerous data augmentation methods have been proposed in image recognition domain, such as mixup [258], cutout [31], CutMix [254], AutoAugment [27], FastAutoAug [126], etc. 
-mixup[258], cutout[31], CutMix[254], AutoAugment[27], FastAutoAug[126] 등과 같은 이미지 인식 도메인에서 수많은 데이터 증가 방법이 제안되었습니다.
-
+그러나 비디오 동작 인식은 여전히 2015년 이전에 도입된 기본 Data augmentation 기술[217, 188]을 채택하고 있습니다. 여기에는 무작위 크기 조정, 무작위 자르기 및 무작위 수평 뒤집기가 포함됩니다.
+<br>
 However, video action recognition still adopts basic data augmentation techniques introduced before year 2015 [217, 188], including random resizing, random cropping and random horizontal flipping. 
-그러나 비디오 동작 인식은 여전히 2015년 이전에 도입된 기본 데이터 확대 기술[217, 188]을 채택하고 있습니다. 여기에는 무작위 크기 조정, 무작위 자르기 및 무작위 수평 뒤집기가 포함됩니다.
 
+최근 SimCLR[17]과 다른 논문들은 color jittering과 random rotation이 representation learning에 크게 도움이 된다는 것을 보여주었다. 따라서 비디오 동작 인식을 위해 다양한 Data augmentation 기술을 사용하는 조사가 특히 유용합니다.
+<br>
 Recently, SimCLR [17] and other papers have shown that color jittering and random rotation greatly help representation learning. Hence, an investigation of using different data augmentation techniques for video action recognition is particularly useful. 
-최근 SimCLR[17]과 다른 논문들은 color jittering과 random rotation이 representation learning에 크게 도움이 된다는 것을 보여주었다. 따라서 비디오 동작 인식을 위해 다양한 데이터 증대 기술을 사용하는 조사가 특히 유용합니다.
 
-This may change the data pre-processing pipeline for all existing methods.
 이것은 기존의 모든 방법에 대한 데이터 사전 처리 파이프라인을 변경할 수 있습니다.
+<br>
+This may change the data pre-processing pipeline for all existing methods.
 
+<br>
+<br>
 
+## 5.3. Video domain adaptation
 
-5.3. Video domain adaptation
+<br>
 
-Domain adaptation (DA) has been studied extensively in recent years to address the domain shift problem. 
 도메인 적응(DA)은 도메인 이동 문제를 해결하기 위해 최근 몇 년 동안 광범위하게 연구되었습니다.
+<br>
+Domain adaptation (DA) has been studied extensively in recent years to address the domain shift problem. 
 
-Despite the accuracy on standard datasets getting higher and higher, the generalization capability of current video models across datasets or domains is less explored.
 표준 데이터 세트에 대한 정확도가 점점 더 높아지고 있음에도 불구하고 데이터 세트 또는 도메인에 걸친 현재 비디오 모델의 일반화 기능은 덜 탐색됩니다.
+<br>
+Despite the accuracy on standard datasets getting higher and higher, the generalization capability of current video models across datasets or domains is less explored.
 
-There is early work on video domain adaptation [193, 241, 89, 159]. 
 비디오 도메인 적응에 대한 초기 작업이 있습니다[193, 241, 89, 159].
+<br>
+There is early work on video domain adaptation [193, 241, 89, 159]. 
 
-However, these literature focus on smallscale video DA with only a few overlapping categories, which may not reflect the actual domain discrepancy and may lead to biased conclusions. 
 그러나 이러한 문헌은 실제 도메인 불일치를 반영하지 않을 수 있고 편향된 결론으로 이어질 수 있는 몇 개의 겹치는 범주만 있는 소규모 비디오 DA에 중점을 둡니다.
+<br>
+However, these literature focus on smallscale video DA with only a few overlapping categories, which may not reflect the actual domain discrepancy and may lead to biased conclusions. 
 
-Chen et al. [15] introduce two larger-scale datasets to investigate video DA and find that aligning temporal dynamics is particularly useful. 
 Chenet al. [15] 비디오 DA를 조사하고 시간 역학을 정렬하는 것이 특히 유용하다는 것을 찾기 위해 두 개의 더 큰 규모의 데이터 세트를 소개합니다.
+<br>
+Chen et al. [15] introduce two larger-scale datasets to investigate video DA and find that aligning temporal dynamics is particularly useful. 
 
-Pan et al. [152] adopts co-attention to solve the temporal misalignment problem. 
 Pan et al. [152] 시간적 오정렬 문제를 해결하기 위해 co-attention을 채택한다.
+<br>
+Pan et al. [152] adopts co-attention to solve the temporal misalignment problem. 
 
-Very recently, Munro et al. [145] explore a multi-modal self-supervision method for fine-grained video action recognition and show the effectiveness of multi-modality learning in video DA. 
 아주 최근에 Munro et al. 세분화된 비디오 동작 인식을 위한 다중 모드 자기 감독 방법을 탐색하고 비디오 DA에서 다중 모드 학습의 효과를 보여줍니다.
+<br>
+Very recently, Munro et al. [145] explore a multi-modal self-supervision method for fine-grained video action recognition and show the effectiveness of multi-modality learning in video DA. 
 
-Shuffle and Attend [95] argues that aligning features of all sampled clips results in a sub-optimal solution due to the fact that all clips do not include relevant semantics. 
-Shuffle and Attend [95]는 모든 클립이 관련 의미 체계를 포함하지 않기 때문에 샘플링된 모든 클립의 기능을 정렬하면 차선책의 솔루션이 된다고 주장합니다.
+Shuffle and Attend [95]는 모든 클립이 관련 의미 체계를 포함하지 않기 때문에 샘플링된 모든 클립의 기능을 정렬하면 차선책의 솔루션이 된다고 주장합니다. 
+<br>
+Shuffle and Attend [95] argues that aligning features of all sampled clips results in a sub-optimal solution due to the fact that all clips do not include relevant semantics.
 
+따라서 그들은 유익한 클립에 더 집중하고 non-informative 클립을 폐기하기 위해 attention mechanism을 사용할 것을 제안합니다.
+<br>
 Therefore, they propose to use an attention mechanism to focus more on informative clips and discard the non-informative ones.
-따라서 그들은 유익한 클립에 더 집중하고 비정보 클립을 폐기하기 위해 어텐션 메커니즘을 사용할 것을 제안합니다.
 
-In conclusion, video DA is a promising direction, especially for researchers with less computing resources.
 결론적으로 비디오 DA는 특히 컴퓨팅 리소스가 적은 연구자들에게 유망한 방향입니다.
+<br>
+In conclusion, video DA is a promising direction, especially for researchers with less computing resources.
 
+<br>
+<br>
 
+## 5.4. Neural architecture search
 
+<br>
 
-
-5.4. Neural architecture search
-
-Neural architecture search (NAS) has attracted great interest in recent years and is a promising research direction. 
 신경망 구조 검색(NAS)은 최근 몇 년 동안 큰 관심을 끌었으며 유망한 연구 방향입니다.
+<br>
+Neural architecture search (NAS) has attracted great interest in recent years and is a promising research direction. 
 
+그러나 컴퓨팅 리소스에 대한 greedy need를 감안할 때 이 분야에 대한 논문은 몇 편만 출판되었습니다[156, 163, 161, 178].
+<br>
 However, given its greedy need for computing resources, only a few papers have been published in this area [156, 163, 161, 178]. 
-그러나 컴퓨팅 리소스에 대한 탐욕스러운 요구를 감안할 때 이 분야에 대한 논문은 몇 편만 출판되었습니다[156, 163, 161, 178].
 
+매개변수와 런타임을 공동으로 최적화하는 TVN 제품군[161]은 인간이 설계한 최신 모델로 경쟁력 있는 정확도를 달성하고 훨씬 더 빠르게 실행할 수 있습니다(1초 비디오 클립당 CPU에서 37~100ms, GPU에서 10ms 이내).
+<br>
 The TVN family [161], which jointly optimize parameters and runtime, can achieve competitive accuracy with human-designed contemporary models, and run much faster (within 37 to 100 ms on a CPU and 10 ms on a GPU per 1 second video clip). 
-매개변수와 런타임을 공동으로 최적화하는 TVN 제품군[161]은 인간이 설계한 최신 모델로 경쟁력 있는 정확도를 달성하고 훨씬 더 빠르게 실행할 수 있습니다(1초 비디오 클립당 CPU에서 37~100ms, GPU에서 10ms 이내). .
 
-AssembleNet [178] and AssembleNet++ [177] provide a generic approach to learn the connectivity among feature representations across input modalities, and show surprisingly good performance on Charades and other benchmarks. 
-AssembleNet[178] 및 AssembleNet++[177]는 입력 양식 전반에 걸쳐 feature representations 간의 연결성을 학습하는 일반적인 접근 방식을 제공하고 Charades 및 기타 벤치마크에서 놀라울 정도로 우수한 성능을 보여줍니다. 
+AssembleNet[178] 및 AssembleNet++[177]는 입력 양식 전반에 걸쳐 feature representations 간의 연결성을 학습하는 일반적인 접근 방식을 제공하고 Charades 및 기타 벤치마크에서 놀라울 정도로 우수한 성능을 보여줍니다.  
+<br>
+AssembleNet [178] and AssembleNet++ [177] provide a generic approach to learn the connectivity among feature representations across input modalities, and show surprisingly good performance on Charades and other benchmarks.
 
-AttentionNAS [222] proposed a solution for spatio-temporal attention cell search.
 AttentionNAS [222]는 spatio-temporal attention cell 검색을 위한 솔루션을 제안했습니다.
+<br>
+AttentionNAS [222] proposed a solution for spatio-temporal attention cell search.
 
-The found cell can be plugged into any network to improve the spatio-temporal features. 
 발견된 셀은 spatio-temporal features을 개선하기 위해 모든 네트워크에 연결할 수 있습니다.
+<br>
+The found cell can be plugged into any network to improve the spatio-temporal features. 
 
-All previous papers do show their potential for video understanding.
 이전의 모든 논문은 비디오 이해에 대한 잠재력을 보여줍니다.
+<br>
+All previous papers do show their potential for video understanding.
 
-Recently, some efficient ways of searching architectures have been proposed in the image recognition domain, such as DARTS [130], Proxyless NAS [11], ENAS [160], oneshot NAS [7], etc. 
-최근 DARTS[130], Proxyless NAS[11], ENAS[160], oneshot NAS[7] 등과 같은 이미지 인식 도메인에서 아키텍처를 검색하는 효율적인 방법이 제안되었습니다.
+최근 DARTS[130], Proxyless NAS[11], ENAS[160], oneshot NAS[7] 등과 같은 이미지 인식 도메인에서 아키텍처를 검색하는 효율적인 방법이 제안되었습니다. 
+<br>
+Recently, some efficient ways of searching architectures have been proposed in the image recognition domain, such as DARTS [130], Proxyless NAS [11], ENAS [160], oneshot NAS [7], etc.
 
-It would be interesting to combine efficient 2D CNNs and efficient searching algorithms to perform video NAS for a reasonable cost.
 효율적인 2D CNN과 효율적인 검색 알고리즘을 결합하여 합리적인 비용으로 비디오 NAS를 수행하는 것이 흥미로울 것입니다.
+<br>
+It would be interesting to combine efficient 2D CNNs and efficient searching algorithms to perform video NAS for a reasonable cost.
 
+<br>
+<br>
 
+## 5.5. Efficient model development
 
-5.5. Efficient model development
+<br>
 
 Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
 정확성에도 불구하고 실제 응용 측면에서 비디오 이해 문제에 대한 딥 러닝 기반 방법을 배포하는 것은 어렵습니다.
