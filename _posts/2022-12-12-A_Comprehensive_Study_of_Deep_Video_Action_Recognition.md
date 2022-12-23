@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-
+검색 : Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
 <br>
 <br>
 <br>
@@ -2483,71 +2483,92 @@ ZSL(Zero-shot learning)은 이미지 이해 영역에서 유행하고 있으며 
 <br>
 Zero-shot learning (ZSL) has been trending in the image understanding domain, and has recently been adapted to video action recognition. 
 
-Its goal is to transfer the learned knowledge to classify previously unseen categories. 
 그것의 목표는 이전에 볼 수 없었던 범주를 분류하기 위해 학습된 지식을 전송하는 것입니다.
+<br>
+Its goal is to transfer the learned knowledge to classify previously unseen categories. 
 
-Due to (1) the expensive data sourcing and annotation and (2) the set of possible human actions is huge, zero-shot action recognition is a very useful task for real-world applications.
 (1) 값비싼 데이터 소싱 및 주석과 (2) 가능한 인간 행동 세트가 방대하기 때문에 제로 샷 행동 인식은 실제 응용 프로그램에 매우 유용한 작업입니다.
+<br>
+Due to (1) the expensive data sourcing and annotation and (2) the set of possible human actions is huge, zero-shot action recognition is a very useful task for real-world applications.
 
-There are many early attempts [242, 88, 243, 137, 168, 57] in this direction. 
 이 방향으로 많은 초기 시도[242, 88, 243, 137, 168, 57]가 있습니다.
+<br>
+There are many early attempts [242, 88, 243, 137, 168, 57] in this direction. 
 
-Most of them follow a standard framework, which is to first extract visual features from videos using a pretrained network, and then train a joint model that maps the visual embedding to a semantic embedding space.
 그들 중 대부분은 사전 훈련된 네트워크를 사용하여 비디오에서 시각적 특징을 먼저 추출한 다음 시각적 임베딩을 시맨틱 임베딩 공간에 매핑하는 공동 모델을 훈련시키는 표준 프레임워크를 따릅니다.
+<br>
+Most of them follow a standard framework, which is to first extract visual features from videos using a pretrained network, and then train a joint model that maps the visual embedding to a semantic embedding space.
 
-In this manner, the model can be applied to new classes by finding the test class whose embedding is the nearestneighbor of the model’s output. 
 이러한 방식으로 임베딩이 모델 출력의 가장 가까운 이웃인 테스트 클래스를 찾아 새 클래스에 모델을 적용할 수 있습니다.
+<br>
+In this manner, the model can be applied to new classes by finding the test class whose embedding is the nearestneighbor of the model’s output. 
 
-A recent work URL [279] proposes to learn a universal representation that generalizes across datasets. 
 최근 작업 URL [279]은 데이터 세트 전체에서 일반화하는 보편적인 표현을 학습할 것을 제안합니다.
+<br>
+A recent work URL [279] proposes to learn a universal representation that generalizes across datasets. 
 
-Following URL [279], [10] present the first end-to-end ZSL action recognition model. 
 다음 URL [279], [10]은 최초의 종단 간 ZSL 동작 인식 모델을 제시합니다.
+<br>
+Following URL [279], [10] present the first end-to-end ZSL action recognition model. 
 
-They also establish a new ZSL training and evaluation protocol, and provide an in-depth analysis to further advance this field.
 또한 새로운 ZSL 교육 및 평가 프로토콜을 설정하고 이 분야를 더욱 발전시키기 위해 심층 분석을 제공합니다.
+<br>
+They also establish a new ZSL training and evaluation protocol, and provide an in-depth analysis to further advance this field.
 
-Inspired by the success of pre-training and then zero-shot in NLP domain, we believe ZSL action recognition is a promising research topic.
 NLP 도메인에서 사전 훈련 후 제로 샷의 성공에 영감을 받아 ZSL 동작 인식이 유망한 연구 주제라고 생각합니다.
+<br>
+Inspired by the success of pre-training and then zero-shot in NLP domain, we believe ZSL action recognition is a promising research topic.
 
+<br>
+<br>
 
+## 5.9. Weakly-supervised video action recognition
 
+<br>
 
-
-5.9. Weakly-supervised video action recognition
-
-Building a high-quality video action recognition dataset [190, 100] usually requires multiple laborious steps:
 고품질 비디오 동작 인식 데이터 세트[190, 100]를 구축하려면 일반적으로 여러 힘든 단계가 필요합니다.
+<br>
+Building a high-quality video action recognition dataset [190, 100] usually requires multiple laborious steps:
 
-1) first sourcing a large amount of raw videos, typically from the internet; 
 1) 먼저 일반적으로 인터넷에서 대량의 원시 비디오를 소싱합니다.
+<br>
+1) first sourcing a large amount of raw videos, typically from the internet; 
 
-2) removing videos irrelevant to the categories in the dataset; 
 2) 데이터 세트의 카테고리와 관련 없는 비디오를 제거합니다.
+<br>
+2) removing videos irrelevant to the categories in the dataset; 
 
-3) manually trimming the video segments that have actions of interest; 
 3) 관심 있는 동작이 있는 비디오 세그먼트를 수동으로 트리밍합니다.
+<br>
+3) manually trimming the video segments that have actions of interest; 
 
-4) refining the categorical labels. Weakly-supervised action recognition explores how to reduce the cost for curating training data.
 4) 범주 레이블을 세분화합니다. Weakly-supervised action recognition은 훈련 데이터 큐레이팅 비용을 줄이는 방법을 탐색합니다.
+<br>
+4) refining the categorical labels. Weakly-supervised action recognition explores how to reduce the cost for curating training data.
 
-The first direction of research [19, 60, 58] aims to reduce the cost of sourcing videos and accurate categorical labeling. 
 연구의 첫 번째 방향[19, 60, 58]은 비디오 소싱 비용과 정확한 범주 라벨링을 줄이는 것을 목표로 합니다.
+<br>
+The first direction of research [19, 60, 58] aims to reduce the cost of sourcing videos and accurate categorical labeling. 
 
-They design training methods that use training data such as action-related images or partially annotated videos, gathered from publicly available sources such as Internet.
 그들은 인터넷과 같이 공개적으로 사용 가능한 소스에서 수집된 동작 관련 이미지 또는 부분적으로 주석이 달린 비디오와 같은 교육 데이터를 사용하는 교육 방법을 설계합니다.
+<br>
+They design training methods that use training data such as action-related images or partially annotated videos, gathered from publicly available sources such as Internet.
 
-Thus this paradigm is also referred to as webly-supervised learning [19, 58]. 
 따라서 이 패러다임은 webly-supervised learning[19, 58]이라고도 합니다.
+<br>
+Thus this paradigm is also referred to as webly-supervised learning [19, 58]. 
 
-Recent work on omni-supervised learning [60, 64, 38] also follows this paradigm but features bootstrapping on unlabelled videos by distilling the models’ own inference results.
 옴니 감독 학습에 대한 최근 작업[60, 64, 38]도 이 패러다임을 따르지만 모델 자체 추론 결과를 추출하여 레이블이 지정되지 않은 비디오에 대한 부트스트래핑을 특징으로 합니다.
+<br>
+Recent work on omni-supervised learning [60, 64, 38] also follows this paradigm but features bootstrapping on unlabelled videos by distilling the models’ own inference results.
 
-The second direction aims at removing trimming, the most time consuming part in annotation. UntrimmedNet [216] proposed a method to learn action recognition model on untrimmed videos with only categorical labels [149, 172]. 
 두 번째 방향은 애노테이션에서 가장 시간이 많이 걸리는 부분인 트리밍을 제거하는 것을 목표로 합니다. UntrimmedNet[216]은 범주 레이블만 있는 트리밍되지 않은 비디오에 대한 동작 인식 모델을 학습하는 방법을 제안했습니다[149, 172].
+<br>
+The second direction aims at removing trimming, the most time consuming part in annotation. UntrimmedNet [216] proposed a method to learn action recognition model on untrimmed videos with only categorical labels [149, 172]. 
 
-This task is also related to weaklysupervised temporal action localization which aims to automatically generate the temporal span of the actions. 
 이 작업은 또한 작업의 시간 범위를 자동으로 생성하는 것을 목표로 하는 약한 감독 시간 작업 지역화와 관련이 있습니다.
+<br>
+This task is also related to weaklysupervised temporal action localization which aims to automatically generate the temporal span of the actions. 
 
 Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
 몇몇 논문은 이 두 작업에 대한 모델을 동시에 [155] 또는 반복적으로 [184] 학습할 것을 제안합니다.
