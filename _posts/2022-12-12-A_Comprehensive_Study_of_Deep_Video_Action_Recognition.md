@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
+
 <br>
 <br>
 <br>
@@ -2338,113 +2338,150 @@ It would be interesting to combine efficient 2D CNNs and efficient searching alg
 
 <br>
 
-Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
 정확성에도 불구하고 실제 응용 측면에서 비디오 이해 문제에 대한 딥 러닝 기반 방법을 배포하는 것은 어렵습니다.
+<br>
+Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
 
-There are several major challenges: 
 몇 가지 주요 과제가 있습니다.
+<br>
+There are several major challenges: 
 
-(1) most methods are developed in offline settings, which means the input is a short video clip, not a video stream in an online setting; 
-(1) 대부분의 방법은 오프라인 설정에서 개발됩니다. 즉, 입력이 온라인 설정의 비디오 스트림이 아닌 짧은 비디오 클립임을 의미합니다.
+(1) 대부분의 방법은 오프라인 설정에서 개발됩니다. 즉, 입력이 온라인 설정의 비디오 스트림이 아닌 짧은 비디오 클립임을 의미합니다. 
+<br>
+(1) most methods are developed in offline settings, which means the input is a short video clip, not a video stream in an online setting;
 
-(2) most methods do not meet the real-time requirement; 
 (2) 대부분의 방법은 실시간 요구 사항을 충족하지 않습니다.
+<br>
+(2) most methods do not meet the real-time requirement; 
 
-(3) incompatibility of 3D convolutions or other non-standard operators on non-GPU devices (e.g., edge devices).
 (3) GPU가 아닌 장치(예: 에지 장치)에서 3D 컨볼루션 또는 기타 비표준 연산자의 비호환성.
+<br>
+(3) incompatibility of 3D convolutions or other non-standard operators on non-GPU devices (e.g., edge devices).
 
-Hence, the development of efficient network architecture based on 2D convolutions is a promising direction. 
 따라서 2D 컨볼루션을 기반으로 한 효율적인 네트워크 아키텍처의 개발이 유망한 방향입니다.
+<br>
+Hence, the development of efficient network architecture based on 2D convolutions is a promising direction. 
 
-The approaches proposed in the image classification domain can be easily adapted to video action recognition, e.g. model compression, model quantization, model pruning, distributed training [68, 127], mobile networks [80, 265], mixed precision training, etc. 
 이미지 분류 도메인에서 제안된 접근 방식은 비디오 동작 인식에 쉽게 적용할 수 있습니다. ( 모델 압축, 모델 양자화, 모델 가지치기, 분산 훈련[68, 127], 모바일 네트워크[80, 265], 혼합 정밀 훈련 등 )
+<br>
+The approaches proposed in the image classification domain can be easily adapted to video action recognition, e.g. model compression, model quantization, model pruning, distributed training [68, 127], mobile networks [80, 265], mixed precision training, etc. 
 
-However, more effort is needed for the online setting since the input to most action recognition applications is a video stream, such as surveillance monitoring. 
 그러나 대부분의 동작 인식 응용 프로그램에 대한 입력은 감시 모니터링과 같은 비디오 스트림이기 때문에 온라인 설정에 더 많은 노력이 필요합니다.
+<br>
+However, more effort is needed for the online setting since the input to most action recognition applications is a video stream, such as surveillance monitoring. 
 
-We may need a new and more comprehensive dataset for benchmarking online video action recognition methods. 
 온라인 비디오 동작 인식 방법을 벤치마킹하기 위해 새롭고 보다 포괄적인 데이터 세트가 필요할 수 있습니다.
+<br>
+We may need a new and more comprehensive dataset for benchmarking online video action recognition methods. 
 
-Lastly, using compressed videos might be desirable because most videos are already compressed, and we have free access to motion information.
 마지막으로 대부분의 동영상이 이미 압축되어 있고 모션 정보에 자유롭게 액세스할 수 있으므로 압축된 동영상을 사용하는 것이 바람직할 수 있습니다.
+<br>
+Lastly, using compressed videos might be desirable because most videos are already compressed, and we have free access to motion information.
 
+<br>
+<br>
 
+## 5.6. New datasets
 
+<br>
 
-
-5.6. New datasets
-
-Data is more or at least as important as model development for machine learning. 
 데이터는 기계 학습을 위한 모델 개발만큼 중요합니다.
+<br>
+Data is more or at least as important as model development for machine learning. 
 
-For video action recognition, most datasets are biased towards spatial representations [124], i.e., most actions can be recognized by a single frame inside the video without considering the temporal movement. 
-비디오 동작 인식의 경우 대부분의 데이터 세트는 공간 표현[124]에 편향되어 있습니다. 즉, 대부분의 동작은 시간적 움직임을 고려하지 않고 비디오 내부의 단일 프레임으로 인식할 수 있습니다.
+비디오 동작 인식의 경우 대부분의 데이터 세트는 공간 표현[124]에 편향되어 있습니다. 즉, 대부분의 동작은 시간적 움직임을 고려하지 않고 비디오 내부의 단일 프레임으로 인식할 수 있습니다. 
+<br>
+For video action recognition, most datasets are biased towards spatial representations [124], i.e., most actions can be recognized by a single frame inside the video without considering the temporal movement.
 
-Hence, a new dataset in terms of long-term temporal modeling is required to advance video understanding. 
 따라서 비디오 이해를 향상시키기 위해서는 장기 시간 모델링 측면에서 새로운 데이터 세트가 필요합니다.
+<br>
+Hence, a new dataset in terms of long-term temporal modeling is required to advance video understanding. 
 
-Furthermore, most current datasets are collected from YouTube. 
 또한 대부분의 최신 데이터 세트는 YouTube에서 수집됩니다.
+<br>
+Furthermore, most current datasets are collected from YouTube. 
 
-Due to copyright/privacy issues, the dataset organizer often only releases the YouTube id or video link for users to download and not the actual video. 
-저작권/개인정보 보호 문제로 인해 데이터세트 구성자는 실제 동영상이 아닌 사용자가 다운로드할 수 있는 YouTube ID 또는 동영상 링크만 공개하는 경우가 많습니다.
+저작권/개인정보 보호 문제로 인해 데이터세트 구성자는 실제 동영상이 아닌 사용자가 다운로드할 수 있는 YouTube ID 또는 동영상 링크만 공개하는 경우가 많습니다. 
+<br>
+Due to copyright/privacy issues, the dataset organizer often only releases the YouTube id or video link for users to download and not the actual video.
 
-The first problem is that downloading the large-scale datasets might be slow for some regions. 
 첫 번째 문제는 대규모 데이터 세트를 다운로드하는 것이 일부 지역에서 느릴 수 있다는 것입니다.
+<br>
+The first problem is that downloading the large-scale datasets might be slow for some regions. 
 
-In particular, YouTube recently started to block massive downloading from a single IP.
 특히 유튜브는 최근 단일 IP로부터의 대량 다운로드를 차단하기 시작했다.
+<br>
+In particular, YouTube recently started to block massive downloading from a single IP.
 
-Thus, many researchers may not even get the dataset to start working in this field. 
 따라서 많은 연구자들이 이 분야에서 작업을 시작하기 위해 데이터 세트를 얻지 못할 수도 있습니다.
+<br>
+Thus, many researchers may not even get the dataset to start working in this field. 
 
-The second problem is, due to region limitation and privacy issues, some videos are not accessible anymore. 
 두 번째 문제는 지역 제한 및 개인 정보 보호 문제로 인해 일부 동영상에 더 이상 액세스할 수 없다는 것입니다.
+<br>
+The second problem is, due to region limitation and privacy issues, some videos are not accessible anymore. 
 
-For example, the original Kinetcis400 dataset has over 300K videos, but at this moment, we can only crawl about 280K videos. 
 예를 들어 원래 Kinetcis400 데이터 세트에는 300,000개가 넘는 비디오가 있지만 현재로서는 약 280,000개의 비디오만 크롤링할 수 있습니다.
+<br>
+For example, the original Kinetcis400 dataset has over 300K videos, but at this moment, we can only crawl about 280K videos. 
 
-On average, we lose 5% of the videos every year. 
 평균적으로 매년 동영상의 5%가 손실됩니다.
+<br>
+On average, we lose 5% of the videos every year. 
 
-It is impossible to do fair comparisons between methods when they are trained and evaluated on different data.
 방법이 서로 다른 데이터에 대해 훈련되고 평가될 때 방법 간에 공정한 비교를 수행하는 것은 불가능합니다.
+<br>
+It is impossible to do fair comparisons between methods when they are trained and evaluated on different data.
 
+<br>
+<br>
 
+## 5.7. Video adversarial attack
 
+<br>
 
-5.7. Video adversarial attack
-
-Adversarial examples have been well studied on image models. 
 적대적인 예는 이미지 모델에 대해 잘 연구되었습니다. 
+<br>
+Adversarial examples have been well studied on image models. 
 
-[199] first shows that an adversarial sample, computed by inserting a small amount of noise on the original image, may lead to a wrong prediction. 
 [199]는 먼저 원본 이미지에 소량의 노이즈를 삽입하여 계산된 적대적 샘플이 잘못된 예측으로 이어질 수 있음을 보여줍니다.
+<br>
+[199] first shows that an adversarial sample, computed by inserting a small amount of noise on the original image, may lead to a wrong prediction. 
 
-However, limited work has been done on attacking video models.
 그러나 video models 공격에 대한 작업은 제한적으로 수행되었습니다.
+<br>
+However, limited work has been done on attacking video models.
 
-This task usually considers two settings, a white-box attack [86, 119, 66, 21] where the adversary can always get the full access to the model including exact gradients of a given input, or a black-box one [93, 245, 226], in which the structure and parameters of the model are blocked so that the attacker can only access the (input, output) pair through queries. 
 이 작업은 일반적으로 공격자가 주어진 입력의 정확한 그래디언트를 포함하여 모델에 대한 전체 액세스 권한을 항상 얻을 수 있는 화이트 박스 공격[86, 119, 66, 21] 또는 블랙 박스 공격[93, 245, 226] 공격자가 쿼리를 통해서만 (입력, 출력) 쌍에 액세스할 수 있도록 모델의 구조와 매개 변수가 차단됩니다.
+<br>
+This task usually considers two settings, a white-box attack [86, 119, 66, 21] where the adversary can always get the full access to the model including exact gradients of a given input, or a black-box one [93, 245, 226], in which the structure and parameters of the model are blocked so that the attacker can only access the (input, output) pair through queries. 
 
-Recent work ME-Sampler [260] leverages the motion information directly in generating adversarial videos, and is shown to successfully attack a number of video classification models using many fewer queries. 
 최근 작업 ME-Sampler [260]는 적대적 비디오를 생성하는 데 직접 모션 정보를 활용하고 훨씬 적은 쿼리를 사용하여 여러 비디오 분류 모델을 성공적으로 공격하는 것으로 나타났습니다.
+<br>
+Recent work ME-Sampler [260] leverages the motion information directly in generating adversarial videos, and is shown to successfully attack a number of video classification models using many fewer queries. 
 
-In summary, this direction is useful since many companies provide APIs for services such as video classification, anomaly detection, shot detection, face detection, etc. 
 정리하면 영상 분류, 이상 감지, 샷 감지, 얼굴 감지 등과 같은 서비스에 대한 API를 많은 회사에서 제공하기 때문에 이 방향이 유용합니다.
+<br>
+In summary, this direction is useful since many companies provide APIs for services such as video classification, anomaly detection, shot detection, face detection, etc. 
 
-In addition, this topic is also related to detecting DeepFake videos. 
 또한 이 항목은 DeepFake 비디오 탐지와도 관련이 있습니다.
+<br>
+In addition, this topic is also related to detecting DeepFake videos. 
 
-Hence, investigating both attacking and defending methods is crucial to keeping these video services safe.
 따라서 이러한 비디오 서비스를 안전하게 유지하려면 공격 방법과 방어 방법을 모두 조사하는 것이 중요합니다.
+<br>
+Hence, investigating both attacking and defending methods is crucial to keeping these video services safe.
 
+<br>
+<br>
 
+## 5.8. Zero-shot action recognition
 
-5.8. Zero-shot action recognition
+<br>
 
-Zero-shot learning (ZSL) has been trending in the image understanding domain, and has recently been adapted to video action recognition. 
 ZSL(Zero-shot learning)은 이미지 이해 영역에서 유행하고 있으며 최근 비디오 동작 인식에 적용되었습니다.
+<br>
+Zero-shot learning (ZSL) has been trending in the image understanding domain, and has recently been adapted to video action recognition. 
 
 Its goal is to transfer the learned knowledge to classify previously unseen categories. 
 그것의 목표는 이전에 볼 수 없었던 범주를 분류하기 위해 학습된 지식을 전송하는 것입니다.
