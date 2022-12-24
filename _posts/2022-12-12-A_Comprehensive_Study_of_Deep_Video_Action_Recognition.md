@@ -4,7 +4,7 @@ date: 2022-12-12 08:26:28 -0400
 categories: Deep Learning
 ---
 # A Comprehensive Study of Deep Video Action Recognition
-검색 : Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
+
 <br>
 <br>
 <br>
@@ -2570,242 +2570,334 @@ The second direction aims at removing trimming, the most time consuming part in 
 <br>
 This task is also related to weaklysupervised temporal action localization which aims to automatically generate the temporal span of the actions. 
 
-Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
 몇몇 논문은 이 두 작업에 대한 모델을 동시에 [155] 또는 반복적으로 [184] 학습할 것을 제안합니다.
+<br>
+Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
 
+<br>
+<br>
 
-5.10. Fine-grained video action recognition
+## 5.10. Fine-grained video action recognition
 
-Popular action recognition datasets, such as UCF101 [190] or Kinetics400 [100], mostly comprise actions happening in various scenes. 
+<br>
+
 UCF101[190] 또는 Kinetics400[100]과 같은 인기 있는 동작 인식 데이터 세트는 대부분 다양한 장면에서 발생하는 동작으로 구성됩니다.
+<br>
+Popular action recognition datasets, such as UCF101 [190] or Kinetics400 [100], mostly comprise actions happening in various scenes. 
 
-However, models learned on these datasets could overfit to contextual information irrelevant to the actions [224, 227, 24]. 
 그러나 이러한 데이터 세트에서 학습된 모델은 작업과 관련 없는 컨텍스트 정보에 과적합될 수 있습니다[224, 227, 24].
+<br>
+However, models learned on these datasets could overfit to contextual information irrelevant to the actions [224, 227, 24]. 
 
-Several datasets have been proposed to study the problem of fine-grained action recognition, which could examine the models’ capacities in modeling action specific information.
 세분화된 행동 인식의 문제를 연구하기 위해 여러 데이터 세트가 제안되었으며, 이는 행동 특정 정보를 모델링하는 모델의 능력을 검사할 수 있습니다.
+<br>
+Several datasets have been proposed to study the problem of fine-grained action recognition, which could examine the models’ capacities in modeling action specific information.
 
-These datasets comprise fine-grained actions in human activities such as cooking [28, 108, 174], working [103] and sports [181, 124]. 
 이러한 데이터 세트는 요리[28, 108, 174], 작업[103] 및 스포츠[181, 124]와 같은 인간 활동의 세분화된 작업으로 구성됩니다.
+<br>
+These datasets comprise fine-grained actions in human activities such as cooking [28, 108, 174], working [103] and sports [181, 124]. 
 
-For example, FineGym [181] is a recent large dataset annotated with different moves and sub-actions in gymnastic videos.
 예를 들어, FineGym [181]은 체조 비디오에서 다양한 동작 및 하위 동작으로 주석이 달린 최근 대규모 데이터 세트입니다.
+<br>
+For example, FineGym [181] is a recent large dataset annotated with different moves and sub-actions in gymnastic videos.
 
+<br>
+<br>
 
+## 5.11. Egocentric action recognition
 
+<br>
 
-
-5.11. Egocentric action recognition
-
-Recently, large-scale egocentric action recognition [29, 28] has attracted increasing interest with the emerging of wearable cameras devices. 
 최근 웨어러블 카메라 장치의 등장으로 대규모 자기 중심적 행동 인식[29, 28]에 대한 관심이 높아지고 있다.
+<br>
+Recently, large-scale egocentric action recognition [29, 28] has attracted increasing interest with the emerging of wearable cameras devices. 
 
-Egocentric action recognition requires a fine understanding of hand motion and the interacting objects in the complex environment. 
 자기 중심적 행동 인식은 복잡한 환경에서 손 동작과 상호 작용하는 개체에 대한 정밀한 이해가 필요합니다.
+<br>
+Egocentric action recognition requires a fine understanding of hand motion and the interacting objects in the complex environment. 
 
-A few papers leverage object detection features to offer fine object context to improve egocentric video recognition [136, 223, 229, 180]. 
 몇몇 논문은 객체 감지 기능을 활용하여 자기 중심적인 비디오 인식을 개선하기 위해 미세한 객체 컨텍스트를 제공합니다[136, 223, 229, 180].
+<br>
+A few papers leverage object detection features to offer fine object context to improve egocentric video recognition [136, 223, 229, 180]. 
 
-Others incorporate spatio-temporal attention [192] or gaze annotations [131] to localize the interacting object to facilitate action recognition. 
 다른 것들은 동작 인식을 용이하게 하기 위해 상호 작용하는 객체를 위치시키기 위해 시공간 주의[192] 또는 시선 주석[131]을 통합합니다.
+<br>
+Others incorporate spatio-temporal attention [192] or gaze annotations [131] to localize the interacting object to facilitate action recognition. 
 
-Similar to third-person action recognition, multi-modal inputs (e.g., optical flow and audio) have been demonstrated to be effective in egocentric action recognition [101].
 3인칭 동작 인식과 유사하게 다중 모드 입력(예: optical flow & audio)이 자기 중심적 동작 인식에 효과적인 것으로 입증되었습니다[101].
+<br>
+Similar to third-person action recognition, multi-modal inputs (e.g., optical flow and audio) have been demonstrated to be effective in egocentric action recognition [101].
 
+<br>
+<br>
 
+## 5.12. Multi-modality
 
+<br>
 
-5.12. Multi-modality
-
-Multi-modal video understanding has attracted increasing attention in recent years [55, 3, 129, 167, 154, 2, 105].
 Multi-modal video 이해는 최근 몇 년 동안 주목을 끌었습니다 [55, 3, 129, 167, 154, 2, 105].
+<br>
+Multi-modal video understanding has attracted increasing attention in recent years [55, 3, 129, 167, 154, 2, 105].
 
-There are two main categories for multi-modal video understanding. 
 다중 모달 비디오 이해에는 두 가지 주요 범주가 있습니다.
+<br>
+There are two main categories for multi-modal video understanding. 
 
-The first group of approaches use multimodalities such as scene, object, motion, and audio to enrich the video representations. 
 첫 번째 접근 방식 그룹은 장면, 개체, 동작 및 오디오와 같은 다중 형식을 사용하여 비디오 표현을 풍부하게 합니다.
+<br>
+The first group of approaches use multimodalities such as scene, object, motion, and audio to enrich the video representations. 
 
-In the second group, the goal is to design a model which utilizes modality information as a supervision signal for pre-training models [195, 138, 249, 62, 2].
 두 번째 그룹의 목표는 모달 정보를 사전 학습 모델에 대한 감독 신호로 활용하는 모델을 설계하는 것입니다[195, 138, 249, 62, 2].
+<br>
+In the second group, the goal is to design a model which utilizes modality information as a supervision signal for pre-training models [195, 138, 249, 62, 2].
 
-Multi-modality for comprehensive video understanding Learning a robust and comprehensive representation of video is extremely challenging due to the complexity of semantics in videos. 
 포괄적인 비디오 이해를 위한 다중 방식 비디오의 의미 체계가 복잡하기 때문에 강력하고 포괄적인 비디오 표현을 학습하는 것은 매우 어렵습니다.
+<br>
+Multi-modality for comprehensive video understanding Learning a robust and comprehensive representation of video is extremely challenging due to the complexity of semantics in videos. 
 
-Video data often includes variations in different forms including appearance, motion, audio, text or scene [55, 129, 166]. 
 비디오 데이터는 종종 모양, 동작, 오디오, 텍스트 또는 장면을 포함한 다양한 형태의 변형을 포함합니다[55, 129, 166].
+<br>
+Video data often includes variations in different forms including appearance, motion, audio, text or scene [55, 129, 166]. 
 
-Therefore, utilizing these multi-modal representations is a critical step in understanding video content more efficiently. 
 따라서 이러한 다중 모달 표현을 활용하는 것은 비디오 콘텐츠를 보다 효율적으로 이해하는 데 중요한 단계입니다.
+<br>
+Therefore, utilizing these multi-modal representations is a critical step in understanding video content more efficiently. 
 
-The multi-modal representations of video can be approximated by gathering representations of various modalities such as scene, object, audio, motion, appearance and text. 
 비디오의 다중 모드 표현은 장면, 개체, 오디오, 동작, 모양 및 텍스트와 같은 다양한 형식의 표현을 수집하여 근사화할 수 있습니다.
+<br>
+The multi-modal representations of video can be approximated by gathering representations of various modalities such as scene, object, audio, motion, appearance and text. 
 
-Ngiam et al. [148] was an early attempt to suggest using multiple modalities to obtain better features. 
 Ngiam et al. [148] 더 나은 기능을 얻기 위해 여러 양식을 사용하도록 제안하려는 초기 시도였습니다.
+<br>
+Ngiam et al. [148] was an early attempt to suggest using multiple modalities to obtain better features. 
 
-They utilized videos of lips and their corresponding speech for multi-modal representation learning. 
 그들은 다중 모달 표현 학습을 위해 입술 비디오와 해당 음성을 활용했습니다. 
+<br>
+They utilized videos of lips and their corresponding speech for multi-modal representation learning. 
 
-Miech et al. [139] proposed a mixture-of embedding-experts model to combine multiple modalities including motion, appearance, audio, and face features and learn the shared embedding space between these modalities and text. 
 Miechet al. [139]는 모션, 모양, 오디오 및 얼굴 특징을 포함한 여러 양식을 결합하고 이러한 양식과 텍스트 사이의 공유 임베딩 공간을 학습하기 위해 임베딩 전문가 혼합 모델을 제안했습니다.
+<br>
+Miech et al. [139] proposed a mixture-of embedding-experts model to combine multiple modalities including motion, appearance, audio, and face features and learn the shared embedding space between these modalities and text. 
 
-Roig et al. [175] combines multiple modalities such as action, scene, object and acoustic event features in a pyramidal structure for action recognition. 
 Roiget al. [175] 동작 인식을 위한 피라미드 구조에서 동작, 장면, 개체 및 음향 이벤트 기능과 같은 여러 양식을 결합합니다.
+<br>
+Roig et al. [175] combines multiple modalities such as action, scene, object and acoustic event features in a pyramidal structure for action recognition. 
 
-They show that adding each modality improves the final action recognition accuracy. 
 각 양식을 추가하면 최종 동작 인식 정확도가 향상됨을 보여줍니다.
+<br>
+They show that adding each modality improves the final action recognition accuracy. 
 
-Both CE [129] and MMT [55], follow a similar research line to [139] where the goal is to combine multiple-modalities to obtain a comprehensive representation of video for joint video-text representation learning. 
 CE[129]와 MMT[55] 모두 [139]와 유사한 연구 라인을 따르며, 목표는 공동 비디오-텍스트 표현 학습을 위한 비디오의 포괄적인 표현을 얻기 위해 다중 양식을 결합하는 것입니다.
+<br>
+Both CE [129] and MMT [55], follow a similar research line to [139] where the goal is to combine multiple-modalities to obtain a comprehensive representation of video for joint video-text representation learning. 
 
-Piergiovanni et al. [166] utilized textual data together with video data to learn a joint embedding space. 
 Piergiovanni et al. [166] 공동 임베딩 공간을 학습하기 위해 비디오 데이터와 함께 텍스트 데이터를 활용했습니다.
+<br>
+Piergiovanni et al. [166] utilized textual data together with video data to learn a joint embedding space. 
 
-Using this learned joint embedding space, the method is capable of doing zero-shot action recognition. 
 이 학습된 관절 임베딩 공간을 사용하여 이 방법은 제로 샷 동작 인식을 수행할 수 있습니다.
+<br>
+Using this learned joint embedding space, the method is capable of doing zero-shot action recognition. 
 
-This line of research is promising due to the availability of strong semantic extraction models and also success of transformers on both vision and language tasks.
 이 연구 라인은 강력한 의미 추출 모델의 가용성과 비전 및 언어 작업 모두에서 변환기의 성공으로 인해 유망합니다.
+<br>
+This line of research is promising due to the availability of strong semantic extraction models and also success of transformers on both vision and language tasks.
 
-Multi-modality for self-supervised video representation learning Most videos contain multiple modalities such as audio or text/caption. 
 자기 감독 비디오 표현 학습을 위한 다중 양식 대부분의 비디오에는 오디오 또는 텍스트/캡션과 같은 다중 양식이 포함되어 있습니다.
+<br>
+Multi-modality for self-supervised video representation learning Most videos contain multiple modalities such as audio or text/caption. 
 
-These modalities are great source of supervision for learning video representations [3, 144, 154, 2, 162]. 
 이러한 양식은 비디오 표현 학습을 위한 훌륭한 감독 소스입니다[3, 144, 154, 2, 162].
+<br>
+These modalities are great source of supervision for learning video representations [3, 144, 154, 2, 162]. 
 
-Korbar et al. [105] incorporated the natural synchronization between audio and video as a supervision signal in their contrastive learning objective for selfsupervised representation learning. In multi-modal selfsupervised representation learning, the dataset plays an important role. 
 Korbaret al. [105] 자기 감독 표현 학습을 위한 대조 학습 목표에서 감독 신호로 오디오와 비디오 사이의 자연스러운 동기화를 통합했습니다. 다중 모드 자기 지도 학습에서 데이터 세트는 중요한 역할을 합니다.
+<br>
+Korbar et al. [105] incorporated the natural synchronization between audio and video as a supervision signal in their contrastive learning objective for selfsupervised representation learning. In multi-modal selfsupervised representation learning, the dataset plays an important role. 
 
-VideoBERT [195] collected 310K cooking videos from YouTube. 
 VideoBERT [195]는 YouTube에서 310,000개의 요리 동영상을 수집했습니다.
+<br>
+VideoBERT [195] collected 310K cooking videos from YouTube. 
 
-However, this dataset is not publicly available. 
 그러나 이 데이터 세트는 공개적으로 사용할 수 없습니다.
+<br>
+However, this dataset is not publicly available. 
 
-Similar to BERT, VideoBERT used a “masked language model” training objective and also quantized the visual representations into “visual words”. 
 BERT와 유사하게 VideoBERT는 "마스킹된 언어 모델" 교육 목표를 사용했으며 시각적 표현을 "시각적 단어"로 양자화했습니다.
+<br>
+Similar to BERT, VideoBERT used a “masked language model” training objective and also quantized the visual representations into “visual words”. 
 
-Miech et al. [140] introduced HowTo100M dataset in 2019. 
 Miechet al. [140]은 2019년에 HowTo100M 데이터 세트를 도입했습니다.
+<br>
+Miech et al. [140] introduced HowTo100M dataset in 2019. 
 
-This dataset includes 136M clips from 1.22M videos with their corresponding text. 
 이 데이터 세트에는 해당 텍스트가 있는 122만 개의 비디오에서 1억 3600만 개의 클립이 포함되어 있습니다.
+<br>
+This dataset includes 136M clips from 1.22M videos with their corresponding text. 
 
-They collected the dataset from YouTube with the aim of obtaining instructional videos (how to perform an activity). 
 교육용 비디오(활동 수행 방법)를 얻기 위해 YouTube에서 데이터 세트를 수집했습니다.
+<br>
+They collected the dataset from YouTube with the aim of obtaining instructional videos (how to perform an activity). 
 
-In total, it covers 23.6K instructional tasks. 
 전체적으로 23.6K 교육 작업을 다룹니다.
+<br>
+In total, it covers 23.6K instructional tasks. 
 
-MIL-NCE [138] used this dataset for self-supervised cross-modal representation learning. 
 MIL-NCE[138]는 이 데이터 세트를 자기 감독 교차 모달 표현 학습에 사용했습니다.
+<br>
+MIL-NCE [138] used this dataset for self-supervised cross-modal representation learning. 
 
-They tackled the problem of visually misaligned narrations, by considering multiple positive pairs in the contrastive learning objective. 
 그들은 대조 학습 목표에서 여러 긍정적인 쌍을 고려하여 시각적으로 잘못 정렬된 내레이션 문제를 해결했습니다.
+<br>
+They tackled the problem of visually misaligned narrations, by considering multiple positive pairs in the contrastive learning objective. 
 
-ActBERT [275], utilized HowTo100M dataset for pre-training of the model in a self-supervised way. 
 ActBERT [275]는 자체 감독 방식으로 모델의 사전 훈련을 위해 HowTo100M 데이터 세트를 활용했습니다.
+<br>
+ActBERT [275], utilized HowTo100M dataset for pre-training of the model in a self-supervised way. 
 
-They incorporated visual, action, text and object features for cross modal representation learning. 
 교차 모달 표현 학습을 위해 시각적, 동작, 텍스트 및 개체 기능을 통합했습니다. 
+<br>
+They incorporated visual, action, text and object features for cross modal representation learning. 
 
-Recently AVLnet [176] and MMV [2] considered three modalities visual, audio and language for self-supervised representation learning. 
 최근 AVLnet [176] 및 MMV [2]는 자기 지도 학습을 위한 시각, 오디오 및 언어의 세 가지 양식을 고려했습니다.
+<br>
+Recently AVLnet [176] and MMV [2] considered three modalities visual, audio and language for self-supervised representation learning. 
 
-This research direction is also increasingly getting more attention due to the success of contrastive learning on many vision and language tasks and the access to the abundance of unlabeled multimodal video data on platforms such as YouTube, Instagram or Flickr. 
 이 연구 방향은 또한 많은 비전 및 언어 작업에 대한 대조 학습의 성공과 YouTube, Instagram 또는 Flickr와 같은 플랫폼에서 레이블이 지정되지 않은 다중 모드 비디오 데이터에 대한 액세스로 인해 점점 더 많은 관심을 받고 있습니다.
+<br>
+This research direction is also increasingly getting more attention due to the success of contrastive learning on many vision and language tasks and the access to the abundance of unlabeled multimodal video data on platforms such as YouTube, Instagram or Flickr. 
 
-The top section of Table 6 compares multi-modal self-supervised representation learning methods. 
 표 6의 상단 섹션은 다중 모드 자기 감독 표현 학습 방법을 비교합니다.
+<br>
+The top section of Table 6 compares multi-modal self-supervised representation learning methods. 
 
-We will discuss more work on video-only representation learning in the next section.
+<br>
+<br>
+<p align="center">
+  <img src="/assets/A_Comprehensive_Study_of_Deep_Video_Action_Recognition/Table_06.png">
+</p>
+<br>
+<br>
+
 다음 섹션에서 비디오 전용 표현 학습에 대한 더 많은 작업에 대해 논의할 것입니다.
+<br>
+We will discuss more work on video-only representation learning in the next section.
 
+<br>
+<br>
 
+## 5.13. Self-supervised video representation learning
 
+<br>
 
-
-5.13. Self-supervised video representation learning
-
-Self-supervised learning has attracted more attention recently as it is able to leverage a large amount of unlabeled data by designing a pretext task to obtain free supervisory signals from data itself. 
 Self-supervised learning은 데이터 자체에서 free supervisory signals를 얻기 위해 구실 작업을 설계하여 레이블이 지정되지 않은 대량의 데이터를 활용할 수 있기 때문에 최근 더 많은 관심을 받고 있습니다.
+<br>
+Self-supervised learning has attracted more attention recently as it is able to leverage a large amount of unlabeled data by designing a pretext task to obtain free supervisory signals from data itself. 
 
-It first emerged in image representation learning. 
 image representation learning에서 처음 등장했습니다.
+<br>
+It first emerged in image representation learning. 
 
-On images, the first stream of papers aimed at designing pretext tasks for completing missing information, such as image coloring [262] and image reordering [153, 61, 263]. 
 이미지에서 첫 번째 논문은 image coloring[262] 및 image reordering[153, 61, 263]과 같이 누락된 정보를 완성하기 위한 구실 작업을 설계하는 것을 목표로 했습니다.
+<br>
+On images, the first stream of papers aimed at designing pretext tasks for completing missing information, such as image coloring [262] and image reordering [153, 61, 263]. 
 
-The second stream of papers uses instance discrimination [235] as the pretext task and contrastive losses [235, 151] for supervision. 
 논문의 두 번째 흐름은 감독을 위한 pretext task 및 contrastive losses[235, 151]로 instance discrimination[235]을 사용합니다.
+<br>
+The second stream of papers uses instance discrimination [235] as the pretext task and contrastive losses [235, 151] for supervision. 
 
-They learn visual representation by modeling visual similarity of object instances without class labels [235, 75, 201, 18, 17].
 클래스 레이블이 없는 개체 인스턴스의 시각적 유사성을 모델링하여 시각적 표현을 학습합니다[235, 75, 201, 18, 17].
+<br>
+They learn visual representation by modeling visual similarity of object instances without class labels [235, 75, 201, 18, 17].
 
-Self-supervised learning is also viable for videos. 
 Self-supervised learning은 비디오에서도 실행 가능합니다. 
+<br>
+Self-supervised learning is also viable for videos. 
 
-Compared with images, videos has another axis, temporal dimension, which we can use to craft pretext tasks. 
 이미지와 비교하여 비디오는 구실 작업을 만드는 데 사용할 수 있는 또 다른 축인 시간적 차원을 가지고 있습니다.
+<br>
+Compared with images, videos has another axis, temporal dimension, which we can use to craft pretext tasks. 
 
-Information completion tasks for this purpose include predicting the correct order of shuffled frames [141, 52] and video clips [240]. 
 이를 위한 정보 완성 작업에는 셔플된 프레임[141, 52]과 비디오 클립[240]의 올바른 순서를 예측하는 것이 포함됩니다.
+<br>
+Information completion tasks for this purpose include predicting the correct order of shuffled frames [141, 52] and video clips [240]. 
 
-Jing et al. [94] focus on the spatial dimension only by predicting the rotation angles of rotated video clips. 
 Jing et al. [94] 회전된 비디오 클립의 회전 각도를 예측하여 공간적 차원에만 집중합니다.
+<br>
+Jing et al. [94] focus on the spatial dimension only by predicting the rotation angles of rotated video clips. 
 
-Combining temporal and spatial information, several tasks have been introduced to solve a space-time cubic puzzle, anticipate future frames [208], forecast long-term motions [134] and predict motion and appearance statistics [211]. 
 시간 및 공간 정보를 결합하여 시공간 큐빅 퍼즐을 풀고 미래 프레임을 예측하고 [208] 장기 동작을 예측하고 [134] 동작 및 모양 통계를 예측하기 위해 여러 작업이 도입되었습니다 [211].
+<br>
+Combining temporal and spatial information, several tasks have been introduced to solve a space-time cubic puzzle, anticipate future frames [208], forecast long-term motions [134] and predict motion and appearance statistics [211]. 
 
-RSPNet [16] and visual tempo [247] exploit the relative speed between video clips as a supervision signal.
 RSPNet[16]과 시각적 템포[247]는 감독 신호로 비디오 클립 간의 상대 속도를 이용합니다.
+<br>
+RSPNet [16] and visual tempo [247] exploit the relative speed between video clips as a supervision signal.
 
-The added temporal axis can also provide flexibility in designing instance discrimination pretexts [67, 167]. 
 추가된 시간 축은 또한 인스턴스 차별 구실을 설계하는 데 유연성을 제공할 수 있습니다[67, 167].
+<br>
+The added temporal axis can also provide flexibility in designing instance discrimination pretexts [67, 167]. 
 
-Inspired by the decoupling of 3D convolution to spatial and temporal separable convolutions [239], Zhang et al. [266] proposed to decouple the video representation learning into two sub-tasks: spatial contrast and temporal contrast. 
 3D 컨볼루션을 공간 및 시간 분리 가능한 컨볼루션으로 분리하는 데 영감을 받아 [239], Zhang et al. 비디오 표현 학습을 공간 대비와 시간 대비의 두 가지 하위 작업으로 분리하도록 제안되었습니다.
+<br>
+Inspired by the decoupling of 3D convolution to spatial and temporal separable convolutions [239], Zhang et al. [266] proposed to decouple the video representation learning into two sub-tasks: spatial contrast and temporal contrast. 
 
-Recently, Han et al. [72] proposed memory augmented dense predictive coding for self-supervised video representation learning. 
 최근 Han et al. [72] self-supervised video representation learning을 위한 memory Augmented dense Predictive Coding을 제안했다.
+<br>
+Recently, Han et al. [72] proposed memory augmented dense predictive coding for self-supervised video representation learning. 
 
-They split each video into several blocks and the embedding of future block is predicted by the combination of condensed representations in memory.
 그들은 각 비디오를 여러 블록으로 분할하고 미래 블록의 임베딩은 메모리에 압축된 표현의 조합에 의해 예측됩니다.
+<br>
+They split each video into several blocks and the embedding of future block is predicted by the combination of condensed representations in memory.
 
-The temporal continuity in videos inspires researchers to design other pretext tasks around correspondence. 
 비디오의 시간적 연속성은 연구자들이 서신에 대한 다른 구실 작업을 설계하도록 영감을 줍니다.
+<br>
+The temporal continuity in videos inspires researchers to design other pretext tasks around correspondence. 
 
-Wang et al. [221] proposed to learn representation by performing cycle-consistency tracking. 
 Wang et al. [221] 주기 일관성 추적을 수행하여 표현을 학습하는 방법을 제안했습니다.
+<br>
+Wang et al. [221] proposed to learn representation by performing cycle-consistency tracking. 
 
-Specifically, they track the same object backward and then forward in the consecutive video frames, and use the inconsistency between the start and end points as the loss function. 
 특히 연속 비디오 프레임에서 동일한 객체를 뒤로 추적한 다음 앞으로 추적하고 시작점과 끝점 사이의 불일치를 손실 함수로 사용합니다.
+<br>
+Specifically, they track the same object backward and then forward in the consecutive video frames, and use the inconsistency between the start and end points as the loss function. 
 
-TCC [39] is a concurrent paper. 
 TCC [39]는 동시 논문입니다.
+<br>
+TCC [39] is a concurrent paper. 
 
-Instead of tracking local objects, [39] used cycle-consistency to perform frame-wise temporal alignment as a supervision signal. [120] was a follow-up work of [221], and utilized both object-level and pixel-level correspondence across video frames. 
 로컬 객체를 추적하는 대신 [39]는 주기 일관성을 사용하여 감독 신호로 프레임별 시간 정렬을 수행했습니다. [120]은 [221]의 후속 작업으로 비디오 프레임 전체에서 개체 수준 및 픽셀 수준 대응을 모두 활용했습니다.
+<br>
+Instead of tracking local objects, [39] used cycle-consistency to perform frame-wise temporal alignment as a supervision signal. [120] was a follow-up work of [221], and utilized both object-level and pixel-level correspondence across video frames. 
 
-Recently, long-range temporal correspondence is modelled as a random walk graph to help learning video representation in [87].
 최근에는 [87]에서 비디오 표현 학습을 돕기 위해 장거리 시간 대응을 랜덤 워크 그래프로 모델링했습니다.
+<br>
+Recently, long-range temporal correspondence is modelled as a random walk graph to help learning video representation in [87].
 
-We compare video self-supervised representation learning methods at the bottom section of Table 6. 
 표 6의 하단 섹션에서 비디오 자기 감독 표현 학습 방법을 비교합니다.
+<br>
+We compare video self-supervised representation learning methods at the bottom section of Table 6. 
 
-A clear trend can be observed that recent papers have achieved much better linear evaluation accuracy and fine-tuning accuracy comparable to supervised pre-training. 
 최근 논문이 supervised pre-training에 비해 훨씬 더 나은 선형 평가 정확도와 미세 조정 정확도를 달성했다는 분명한 추세를 관찰할 수 있습니다.
+<br>
+A clear trend can be observed that recent papers have achieved much better linear evaluation accuracy and fine-tuning accuracy comparable to supervised pre-training. 
 
-This shows that self-supervised learning could be a promising direction towards learning better video representations.
 이는 self-supervised learning이 더 나은 비디오 표현 학습을 향한 유망한 방향이 될 수 있음을 보여줍니다.
+<br>
+This shows that self-supervised learning could be a promising direction towards learning better video representations.
 
+<br>
+<br>
+<br>
 
+# 6. Conclusion
 
-6. Conclusion
+<br>
 
+이 조사에서는 비디오 동작 인식에 대한 최근 접근 방식을 기반으로 하는 200개 이상의 딥 러닝에 대한 포괄적인 리뷰를 제공합니다.
+<br>
 In this survey, we present a comprehensive review of 200+ deep learning based recent approaches to video action recognition. 
-이 설문 조사에서는 비디오 동작 인식에 대한 최근 접근 방식을 기반으로 하는 200개 이상의 딥 러닝에 대한 포괄적인 리뷰를 제공합니다.
 
+이것이 완전한 목록은 아니지만 설문조사가 이 분야에 진출하려는 사람들에게는 따라하기 쉬운 지침서가 되고 새로운 연구 방향을 찾으려는 사람들에게는 고무적인 토론이 되기를 바랍니다.
+<br>
 Although this is not an exhaustive list, we hope the survey serves as an easy-to-follow tutorial for those seeking to enter the field, and an inspiring discussion for those seeking to find new research directions. 
-이것이 완전한 목록은 아니지만 설문조사가 이 분야에 진출하려는 사람들에게는 따라하기 쉬운 지침서가 되고 새로운 연구 방향을 찾으려는 사람들에게는 고무적인 토론이 되기를 바랍니다.**
