@@ -11,7 +11,7 @@ categories: Deep Learning
 
 ## 1. Introduction
 
-video understanding에서 가장 중요한 작업 중 하나는 인간의 행동을 이해하는 것입니다.
+**video understanding에서 가장 중요한 작업 중 하나는 인간의 행동을 이해하는 것입니다.**
 <br>
 ( One of the most important tasks in video understanding is to understand human actions. )
 
