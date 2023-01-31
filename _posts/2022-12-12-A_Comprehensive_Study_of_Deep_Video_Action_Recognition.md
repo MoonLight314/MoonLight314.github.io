@@ -1653,59 +1653,59 @@ Finally, [22] propose a generalization of the original ranking formulation [53] 
 
 <br>
 
-대부분의 비디오 동작 인식 방식은 원시 비디오(또는 디코딩된 비디오 프레임)를 입력으로 사용합니다.
+**대부분의 비디오 동작 인식 방식은 원시 비디오(또는 디코딩된 비디오 프레임)를 입력으로 사용합니다.**
 <br>
 Most video action recognition approaches use raw videos (or decoded video frames) as input. 
 
-그러나 원시 비디오를 사용하는 데는 엄청난 양의 데이터와 높은 시간적 중복성과 같은 몇 가지 단점이 있습니다.
+**그러나 원시 비디오를 사용하는 데는 엄청난 양의 데이터와 높은 시간적 중복성과 같은 몇 가지 단점이 있습니다.**
 <br>
 However, there are several drawbacks of using raw videos, such as the huge amount of data and high temporal redundancy. 
 
-비디오 압축 방법은 일반적으로 다른 프레임(즉, I-프레임)의 콘텐츠를 재사용하여 하나의 프레임을 저장하고 인접한 프레임이 유사하다는 사실로 인해 차이점(즉, P-프레임 및 B-프레임)만 저장합니다. 
+**비디오 압축 방법은 일반적으로 다른 프레임(즉, I-프레임)의 콘텐츠를 재사용하여 하나의 프레임을 저장하고 인접한 프레임이 유사하다는 사실로 인해 차이점(즉, P-프레임 및 B-프레임)만 저장합니다.**
 <br>
 Video compression methods usually store one frame by reusing contents from another frame (i.e., I-frame) and only store the difference (i.e., P-frames and B-frames) due to the fact that adjacent frames are similar.
 
-여기서 I-프레임은 원본 RGB 비디오 프레임이고, P-프레임과 B-프레임에는 차이를 저장하는 데 사용되는 움직임 벡터와 레지듀얼이 포함됩니다.
+**여기서 I-프레임은 원본 RGB 비디오 프레임이고, P-프레임과 B-프레임에는 차이를 저장하는 데 사용되는 움직임 벡터와 레지듀얼이 포함됩니다.**
 <br>
 Here, the I-frame is the original RGB video frame, and P-frames and B-frames include the motion vector and residual, which are used to store the difference. 
 
-비디오 압축 영역의 발전에 동기를 부여받은 연구원들은 효과적인 비디오 모델을 훈련하기 위한 입력으로 압축된 비디오 표현을 채택하기 시작했습니다.
+**비디오 압축 영역의 발전에 동기를 부여받은 연구원들은 효과적인 비디오 모델을 훈련하기 위한 입력으로 압축된 비디오 표현을 채택하기 시작했습니다.**
 <br>
 Motivated by the developments in the video compression domain, researchers started to adopt compressed video representations as input to train effective video models.
 
-motion vector 는 구조가 거칠고 부정확한 움직임을 포함할 수 있으므로 Zhang et al. motion-vector-based temporal stream이 optical-flow-based temporal stream을 모방하도록 돕기 위해 knowledge distillation를 채택했습니다.
+**motion vector 는 구조가 거칠고 부정확한 움직임을 포함할 수 있으므로 Zhang et al. motion-vector-based temporal stream이 optical-flow-based temporal stream을 모방하도록 돕기 위해 knowledge distillation를 채택했습니다.**
 <br>
 Since the motion vector has coarse structure and may contain inaccurate movements, Zhang et al. [256] adopted knowledge distillation to help the motion-vector-based temporal stream mimic the optical-flow-based temporal stream.
 
-그러나 그들의 접근 방식은 각 프레임을 추출하고 처리해야 했습니다.
+**그러나 그들의 접근 방식은 각 프레임을 추출하고 처리해야 했습니다.**
 <br>
 However, their approach required extracting and processing each frame. 
 
-그들은 표준 two-stream networks로 비슷한 인식 정확도를 얻었지만 27배 더 빨랐습니다.
+**그들은 표준 two-stream networks로 비슷한 인식 정확도를 얻었지만 27배 더 빨랐습니다.**
 <br>
 They obtained comparable recognition accuracy with standard two-stream networks, but were 27 times faster. 
 
-Wuet al. [231] I 프레임에는 Heavyweight CNN을, P 프레임에는 Lightweight CNN을 사용했습니다.
+**Wuet al. [231] I 프레임에는 Heavyweight CNN을, P 프레임에는 Lightweight CNN을 사용했습니다.**
 <br>
 Wu et al. [231] used a heavyweight CNN for the I frame and lightweight CNN’s for the P frames. 
 
-이것은 각각의 P 프레임에 대한 motion vectors 와 잔차(residuals)가 축적에 의해 I 프레임으로 다시 참조되어야 한다는 것을 요구했습니다.
+**이것은 각각의 P 프레임에 대한 motion vectors 와 잔차(residuals)가 축적에 의해 I 프레임으로 다시 참조되어야 한다는 것을 요구했습니다.**
 <br>
 This required that the motion vectors and residuals for each P frame be referred back to the I frame by accumulation.
 
-DMC-Net[185]은 적대적 손실(adversarial loss)을 사용하는 [231]의 후속 작업입니다.
+**DMC-Net[185]은 적대적 손실(adversarial loss)을 사용하는 [231]의 후속 작업입니다.**
 <br>
 DMC-Net [185] is a follow-up work to [231] using adversarial loss. 
 
-그것은 [256]에서와 같이 knowledge distillation 대신 fine motion details을 캡처하는 동작 벡터를 돕기 위해 경량 생성기 네트워크를 채택합니다.
+**그것은 [256]에서와 같이 knowledge distillation 대신 fine motion details을 캡처하는 동작 벡터를 돕기 위해 경량 생성기 네트워크를 채택합니다.**
 <br>
 It adopts a lightweight generator network to help the motion vector capturing fine motion details, instead of knowledge distillation as in [256]. 
 
-최근 논문인 SCSampler[106]도 중요한 클립을 샘플링하기 위해 압축된 비디오 표현을 채택했으며 다음 섹션 3.5.4에서 이에 대해 논의할 것입니다. 
+**최근 논문인 SCSampler[106]도 중요한 클립을 샘플링하기 위해 압축된 비디오 표현을 채택했으며 다음 섹션 3.5.4에서 이에 대해 논의할 것입니다.**
 <br>
 A recent paper SCSampler [106], also adopts compressed video representation for sampling salient clips and we will discuss it in the next section 3.5.4. 
 
-아직까지 추가된 복잡성으로 인해 압축된 접근 방식 중 어느 것도 B 프레임을 처리할 수 없습니다.
+**아직까지 추가된 복잡성으로 인해 압축된 접근 방식 중 어느 것도 B 프레임을 처리할 수 없습니다.**
 <br>
 As yet none of the compressed approaches can deal with B-frames due to the added complexity.
 
@@ -1716,63 +1716,63 @@ As yet none of the compressed approaches can deal with B-frames due to the added
 
 <br>
 
-앞서 언급한 대부분의 딥 러닝 방법은 최종 예측을 위해 모든 비디오 프레임/클립을 동등하게 취급합니다.
+**앞서 언급한 대부분의 딥 러닝 방법은 최종 예측을 위해 모든 비디오 프레임/클립을 동등하게 취급합니다.**
 <br>
 Most of the aforementioned deep learning methods treat every video frame/clip equally for the final prediction. 
 
-그러나 차별적 행동은 짧은 순간에만 발생하며 대부분의 다른 동영상 콘텐츠는 레이블이 지정된 행동 범주와 관련이 없거나 약합니다.
+**그러나 차별적 행동은 짧은 순간에만 발생하며 대부분의 다른 동영상 콘텐츠는 레이블이 지정된 행동 범주와 관련이 없거나 약합니다.**
 <br>
 However, discriminative actions only happen in a few moments, and most of the other video content is irrelevant or weakly related to the labeled action category. 
 
-이 패러다임에는 몇 가지 단점이 있습니다.
+**이 패러다임에는 몇 가지 단점이 있습니다.**
 <br>
 There are several drawbacks of this paradigm. 
 
-첫째, 관련 없는 비디오 프레임이 많은 부분을 교육하면 성능이 저하될 수 있습니다.
+**첫째, 관련 없는 비디오 프레임이 많은 부분을 교육하면 성능이 저하될 수 있습니다.**
 <br>
 First, training with a large proportion of irrelevant video frames may hurt performance.
 
-둘째, 이러한 균일한 샘플링은 추론 중에 효율적이지 않습니다.
+**둘째, 이러한 균일한 샘플링은 추론 중에 효율적이지 않습니다.**
 <br>
 Second, such uniform sampling is not efficient during inference.
 
-인간이 전체 비디오에서 몇 번만 보고 비디오를 이해하는 방식[251]에서 부분적으로 영감을 받아 성능을 개선하고 추론 중에 모델을 보다 효율적으로 만들기 위해 가장 유익한 비디오 프레임/클립을 샘플링하는 많은 방법이 제안되었습니다.
+**인간이 전체 비디오에서 몇 번만 보고 비디오를 이해하는 방식[251]에서 부분적으로 영감을 받아 성능을 개선하고 추론 중에 모델을 보다 효율적으로 만들기 위해 가장 유익한 비디오 프레임/클립을 샘플링하는 많은 방법이 제안되었습니다.**
 <br>
 Partially inspired by how human understand a video using just a few glimpses over the entire video [251], many methods were proposed to sample the most informative video frames/clips for both improving the performance and making the model more efficient during inference.
 
-KVM[277]은 키 볼륨을 동시에 식별하고 작업 분류를 수행하기 위해 end-to-end framework를 제안하려는 첫 번째 시도 중 하나입니다.
+**KVM[277]은 키 볼륨을 동시에 식별하고 작업 분류를 수행하기 위해 end-to-end framework를 제안하려는 첫 번째 시도 중 하나입니다.**
 <br>
 KVM [277] is one of the first attempts to propose an end-to-end framework to simultaneously identify key volumes and do action classification. 
 
-나중에 [98]은 각 비디오 프레임의 중요도 점수를 온라인 방식으로 예측하는 AdaScan을 소개하며 이를 adaptive temporal pooling이라고 합니다.
+**나중에 [98]은 각 비디오 프레임의 중요도 점수를 온라인 방식으로 예측하는 AdaScan을 소개하며 이를 adaptive temporal pooling이라고 합니다.**
 <br>
 Later, [98] introduce AdaScan that predicts the importance score of each video frame in an online fashion, which they term as adaptive temporal pooling. 
 
-이 두 방법 모두 향상된 성능을 달성하지만 여전히 추론 중에 효율성을 나타내지 않는 표준 평가 체계를 채택합니다. 
+**이 두 방법 모두 향상된 성능을 달성하지만 여전히 추론 중에 효율성을 나타내지 않는 표준 평가 체계를 채택합니다. **
 <br>
 Both of these methods achieve improved performance, but they still adopt the standard evaluation scheme which does not show efficiency during inference.
 
-최근 접근 방식은 효율성에 더 중점을 둡니다[41, 234, 8, 106].
+**최근 접근 방식은 효율성에 더 중점을 둡니다[41, 234, 8, 106].**
 <br>
 Recent approaches focus more on the efficiency [41, 234, 8, 106].
 
-AdaFrame [234]은 [251, 98]을 따르지만 보다 유익한 비디오 클립을 검색하기 위해 reinforcement learning 기반 접근 방식을 사용합니다. 
+**AdaFrame [234]은 [251, 98]을 따르지만 보다 유익한 비디오 클립을 검색하기 위해 reinforcement learning 기반 접근 방식을 사용합니다.**
 <br>
 AdaFrame [234] follows [251, 98] but uses a reinforcement learning based approach to search more informative video clips.
 
-동시에, [8]은 teacher-student framework를 사용합니다. 즉, 모든 것을 볼 수 있는 교사를 사용하여 컴퓨팅 효율적으로 아주 작은 학생을 교육할 수 있습니다. 
+**동시에, [8]은 teacher-student framework를 사용합니다. 즉, 모든 것을 볼 수 있는 교사를 사용하여 컴퓨팅 효율적으로 아주 작은 학생을 교육할 수 있습니다.**
 <br>
 Concurrently, [8] uses a teacher-student framework, i.e., a see-it-all teacher can be used to train a compute efficient see-very-little student.
 
-그들은 효율적인 학생 네트워크가 무시할 수 있는 성능 저하로 추론 시간을 30%까지 줄이고 FLOP 수를 약 90%까지 줄일 수 있음을 보여줍니다.
+**그들은 효율적인 학생 네트워크가 무시할 수 있는 성능 저하로 추론 시간을 30%까지 줄이고 FLOP 수를 약 90%까지 줄일 수 있음을 보여줍니다.**
 <br>
 They demonstrate that the efficient student network can reduce the inference time by 30% and the number of FLOPs by approximately 90% with negligible performance drop. 
 
-최근에 SCSampler [106]는 압축된 비디오 표현을 기반으로 가장 두드러진 비디오 클립을 샘플링하고 Kinetics400 및 Sports1M 데이터 세트 모두에서 state-of-the-art performance을 달성하기 위해 경량 네트워크를 훈련합니다. 
+**최근에 SCSampler [106]는 압축된 비디오 표현을 기반으로 가장 두드러진 비디오 클립을 샘플링하고 Kinetics400 및 Sports1M 데이터 세트 모두에서 state-of-the-art performance을 달성하기 위해 경량 네트워크를 훈련합니다.**
 <br>
 Recently, SCSampler [106] trains a lightweight network to sample the most salient video clips based on compressed video representations, and achieve state-of-the-art performance on both Kinetics400 and Sports1M dataset.
 
-그들은 또한 이러한 현저성 기반 샘플링이 효율적일 뿐만 아니라 모든 비디오 프레임을 사용하는 것보다 더 높은 정확도를 갖는다는 것을 경험적으로 보여줍니다.
+**그들은 또한 이러한 현저성 기반 샘플링이 효율적일 뿐만 아니라 모든 비디오 프레임을 사용하는 것보다 더 높은 정확도를 갖는다는 것을 경험적으로 보여줍니다.**
 <br>
 They also empirically show that such saliency-based sampling is not only efficient, but also enjoys higher accuracy than using all the video frames.
 
@@ -1783,43 +1783,43 @@ They also empirically show that such saliency-based sampling is not only efficie
 
 <br>
 
-Visual tempo는 동작이 얼마나 빨리 진행되는지를 나타내는 개념입니다.
+**Visual tempo는 동작이 얼마나 빨리 진행되는지를 나타내는 개념입니다.**
 <br>
 Visual tempo is a concept to describe how fast an action goes. 
 
-많은 액션 클래스는 visual tempo가 다릅니다.
+**많은 액션 클래스는 visual tempo가 다릅니다.**
 <br>
 Many action classes have different visual tempos. 
 
-대부분의 경우, 걷기, 조깅, 달리기와 같이 visual appearance에서 높은 유사성을 공유할 수 있기 때문에 시각적 템포를 구분하는 핵심이 됩니다[248]. 
+**대부분의 경우, 걷기, 조깅, 달리기와 같이 visual appearance에서 높은 유사성을 공유할 수 있기 때문에 시각적 템포를 구분하는 핵심이 됩니다[248].**
 <br>
 In most cases, the key to distinguish them is their visual tempos, as they might share high similarities in visual appearance, such as walking, jogging and running [248].
 
-개선된 시간 모델링 [273, 147, 82, 281, 45, 248]을 위해 다양한 시간 속도(템포)를 탐색하는 여러 논문이 있습니다. 
+**개선된 시간 모델링 [273, 147, 82, 281, 45, 248]을 위해 다양한 시간 속도(템포)를 탐색하는 여러 논문이 있습니다.**
 <br>
 There are several papers exploring different temporal rates (tempos) for improved temporal modeling [273, 147, 82, 281, 45, 248].
 
-초기 시도는 일반적으로 여러 속도로 원시 비디오를 샘플링하고 입력 레벨 프레임 피라미드를 구성하여 비디오 템포를 캡처합니다[273, 147, 281]. 
+**초기 시도는 일반적으로 여러 속도로 원시 비디오를 샘플링하고 입력 레벨 프레임 피라미드를 구성하여 비디오 템포를 캡처합니다[273, 147, 281].**
 <br>
 Initial attempts usually capture the video tempo through sampling raw videos at multiple rates and constructing an input-level frame pyramid [273, 147, 281].
 
-최근 SlowFast[45]는 섹션 3.3.4에서 논의한 바와 같이 시각적 템포의 특성을 활용하여 더 나은 정확도와 효율성 트레이드오프를 위한 two-pathway network를 설계합니다.
+**최근 SlowFast[45]는 섹션 3.3.4에서 논의한 바와 같이 시각적 템포의 특성을 활용하여 더 나은 정확도와 효율성 트레이드오프를 위한 two-pathway network를 설계합니다.**
 <br>
 Recently, SlowFast [45], as we discussed in section 3.3.4, utilizes the characteristics of visual tempo to design a two-pathway network for better accuracy and efficiency tradeoff. 
 
-CIDC[121]는 video temporal modeling을 위한 local backbone과 함께 방향성 temporal modeling을 제안했습니다. 
+**CIDC[121]는 video temporal modeling을 위한 local backbone과 함께 방향성 temporal modeling을 제안했습니다.**
 <br>
 CIDC [121] proposed directional temporal modeling along with a local backbone for video temporal modeling.
 
-TPN[248]은 템포 모델링을 기능 수준으로 확장하고 이전 접근 방식에 비해 일관된 개선을 보여줍니다. 
+**TPN[248]은 템포 모델링을 기능 수준으로 확장하고 이전 접근 방식에 비해 일관된 개선을 보여줍니다.**
 <br>
 TPN [248] extends the tempo modeling to the featurelevel and shows consistent improvement over previous approaches.
 
-우리는 시각적 템포가 딥 네트워크 훈련을 위한 감독 신호를 자연스럽게 제공할 수 있기 때문에 자기 감독 비디오 표현 학습[6, 247, 16]에서도 널리 사용된다는 점을 지적하고 싶습니다.
+**우리는 시각적 템포가 딥 네트워크 훈련을 위한 감독 신호를 자연스럽게 제공할 수 있기 때문에 자기 감독 비디오 표현 학습[6, 247, 16]에서도 널리 사용된다는 점을 지적하고 싶습니다.**
 <br>
 We would like to point out that visual tempo is also widely used in self-supervised video representation learning [6, 247, 16] since it can naturally provide supervision signals to train a deep network. 
 
-self-supervised video representation learning에 대한 자세한 내용은 섹션 5.13에서 논의할 것입니다.
+**self-supervised video representation learning에 대한 자세한 내용은 섹션 5.13에서 논의할 것입니다.**
 <br>
 We will discuss more details on self-supervised video representation learning in section 5.13.
 
@@ -1830,15 +1830,15 @@ We will discuss more details on self-supervised video representation learning in
 
 <br>
 
-이 섹션에서는 벤치마크 데이터 세트에 대한 인기 있는 접근 방식을 비교합니다. 구체적으로 먼저 4.1절에서 표준 평가 체계를 소개합니다.
+**이 섹션에서는 벤치마크 데이터 세트에 대한 인기 있는 접근 방식을 비교합니다. 구체적으로 먼저 4.1절에서 표준 평가 체계를 소개합니다.**
 <br>
 In this section, we compare popular approaches on benchmark datasets. To be specific, we first introduce standard evaluation schemes in section 4.1. 
 
-그런 다음 공통 벤치마크를 장면 중심(섹션 4.2의 UCF101, HMDB51 및 Kinetics400), 모션 중심(섹션 4.3의 Sth-Sth V1 및 V2) 및 다중 레이블(섹션 4.4의 Charades)의 세 가지 범주로 나눕니다.
+**그런 다음 공통 벤치마크를 장면 중심(섹션 4.2의 UCF101, HMDB51 및 Kinetics400), 모션 중심(섹션 4.3의 Sth-Sth V1 및 V2) 및 다중 레이블(섹션 4.4의 Charades)의 세 가지 범주로 나눕니다.**
 <br>
 Then we divide common benchmarks into three categories, scenefocused (UCF101, HMDB51 and Kinetics400 in section 4.2), motion-focused (Sth-Sth V1 and V2 in section 4.3) and multi-label (Charades in section 4.4). 
 
-마지막으로 4.5절에서 인식 정확도와 효율성 측면에서 널리 사용되는 방법을 공정하게 비교합니다.
+**마지막으로 4.5절에서 인식 정확도와 효율성 측면에서 널리 사용되는 방법을 공정하게 비교합니다.**
 <br>
 In the end, we present a fair comparison among popular methods in terms of both recognition accuracy and efficiency in section 4.5.
 
@@ -1849,51 +1849,51 @@ In the end, we present a fair comparison among popular methods in terms of both 
 
 <br>
 
-모델 학습 중에 일반적으로 비디오 프레임/클립을 임의로 선택하여 미니 배치 샘플을 형성합니다.
+**모델 학습 중에 일반적으로 비디오 프레임/클립을 임의로 선택하여 미니 배치 샘플을 형성합니다.**
 <br>
 During model training, we usually randomly pick a video frame/clip to form mini-batch samples. 
 
-그러나 평가를 위해서는 공정한 비교를 수행하기 위해 표준화된 파이프라인이 필요합니다.
+**그러나 평가를 위해서는 공정한 비교를 수행하기 위해 표준화된 파이프라인이 필요합니다.**
 <br>
 However, for evaluation, we need a standardized pipeline in order to perform fair comparisons. 
 
-2D CNN의 경우 널리 채택되는 평가 체계는 [187, 217]에 따라 각 비디오에서 25개 프레임을 고르게 샘플링하는 것입니다.
+**2D CNN의 경우 널리 채택되는 평가 체계는 [187, 217]에 따라 각 비디오에서 25개 프레임을 고르게 샘플링하는 것입니다.**
 <br>
 For 2D CNNs, a widely adopted evaluation scheme is to evenly sample 25 frames from each video following [187, 217]. 
 
-각 프레임에 대해 4개의 모서리와 1개의 중앙을 자르고 수평으로 뒤집고 샘플의 모든 자르기에 대해 예측 점수(softmax 작업 전)를 평균화하여 ten-crop data augmentation를 수행합니다. 즉, 추론을 위해 비디오당 250프레임을 사용함을 의미합니다.
+**각 프레임에 대해 4개의 모서리와 1개의 중앙을 자르고 수평으로 뒤집고 샘플의 모든 자르기에 대해 예측 점수(softmax 작업 전)를 평균화하여 ten-crop data augmentation를 수행합니다. 즉, 추론을 위해 비디오당 250프레임을 사용함을 의미합니다.**
 <br>
 For each frame, we perform ten-crop data augmentation by cropping the 4 corners and 1 center, flipping them horizontally and averaging the prediction scores (before softmax operation) over all crops of the samples, i.e., this means we use 250 frames per video for inference.
 
-3D CNN의 경우 30-view strategy 이라고 하는 널리 채택된 평가 체계는 [219]에 따라 각 비디오에서 10개의 클립을 고르게 샘플링하는 것입니다. 
+**3D CNN의 경우 30-view strategy 이라고 하는 널리 채택된 평가 체계는 [219]에 따라 각 비디오에서 10개의 클립을 고르게 샘플링하는 것입니다.**
 <br>
 For 3D CNNs, a widely adopted evaluation scheme termed 30-view strategy is to evenly sample 10 clips from each video following [219].
 
-각 비디오 클립에 대해 3회 자르기 데이터 증대를 수행합니다.
+**각 비디오 클립에 대해 3회 자르기 데이터 증대를 수행합니다.**
 <br>
 For each video clip, we perform three-crop data augmentation. 
 
-구체적으로, 우리는 더 짧은 공간 측면을 256픽셀로 확장하고 공간 차원을 커버하고 예측 점수의 평균을 내기 위해 256 × 256의 세 가지 크롭을 취합니다.
+**구체적으로, 우리는 더 짧은 공간 측면을 256픽셀로 확장하고 공간 차원을 커버하고 예측 점수의 평균을 내기 위해 256 × 256의 세 가지 크롭을 취합니다.**
 <br>
 To be specific, we scale the shorter spatial side to 256 pixels and take three crops of 256 × 256 to cover the spatial dimensions and average the prediction scores.
 
-그러나 평가 체계는 고정되어 있지 않습니다.
+**그러나 평가 체계는 고정되어 있지 않습니다.**
 <br>
 However, the evaluation schemes are not fixed. 
 
-그들은 새로운 네트워크 아키텍처와 다양한 데이터 세트에 맞게 진화하고 적응하고 있습니다. 
+**그들은 새로운 네트워크 아키텍처와 다양한 데이터 세트에 맞게 진화하고 적응하고 있습니다.**
 <br>
 They are evolving and adapting to new network architectures and different datasets. 
 
-예를 들어, TSM[128]은 작은 크기의 데이터 세트[190, 109]에 대해 비디오당 두 개의 클립만 사용하고, 2D CNN임에도 불구하고 각 클립에 대해 세 번의 자르기 데이터 확장을 수행합니다.
+**예를 들어, TSM[128]은 작은 크기의 데이터 세트[190, 109]에 대해 비디오당 두 개의 클립만 사용하고, 2D CNN임에도 불구하고 각 클립에 대해 세 번의 자르기 데이터 확장을 수행합니다.**
 <br>
 For example, TSM [128] only uses two clips per video for small-sized datasets [190, 109], and perform three-crop data augmentation for each clip despite its being a 2D CNN. 
 
-표준 평가 파이프라인과의 편차를 언급할 것입니다.
+**표준 평가 파이프라인과의 편차를 언급할 것입니다.**
 <br>
 We will mention any deviations from the standard evaluation pipeline. 
 
-평가 메트릭 측면에서 단일 레이블 작업 인식에 대한 정확도와 다중 레이블 작업 인식에 대한 mAP(평균 평균 정밀도)를 보고합니다.
+**평가 메트릭 측면에서 단일 레이블 작업 인식에 대한 정확도와 다중 레이블 작업 인식에 대한 mAP(평균 평균 정밀도)를 보고합니다.**
 <br>
 In terms of evaluation metric, we report accuracy for single-label action recognition, and mAP (mean average precision) for multi-label action recognition.
 
@@ -1904,15 +1904,15 @@ In terms of evaluation metric, we report accuracy for single-label action recogn
 
 <br>
 
-여기에서는 UCF101, HMDB51 및 Kinetics400과 같은 scene-focused datasets에 대한 state-of-the-art approaches을 비교합니다.
+**여기에서는 UCF101, HMDB51 및 Kinetics400과 같은 scene-focused datasets에 대한 state-of-the-art approaches을 비교합니다.**
 <br>
 Here, we compare recent state-of-the-art approaches on scene-focused datasets: UCF101, HMDB51 and Kinetics400. 
 
-scene-focused이라고 부르는 이유는 이러한 데이터 세트의 대부분의 액션 비디오가 짧고 그림 4에 표시된 것처럼 정적 장면 모양만으로 인식할 수 있기 때문입니다.
+**scene-focused이라고 부르는 이유는 이러한 데이터 세트의 대부분의 액션 비디오가 짧고 그림 4에 표시된 것처럼 정적 장면 모양만으로 인식할 수 있기 때문입니다.**
 <br>
 The reason we call them scene-focused is because most action videos in these datasets are short, and can be recognized by static scene appearance alone as shown in Figure 4.
 
-연표에 따라 딥 러닝과 two-stream networks를 사용한 초기 시도에 대한 결과를 먼저 표 2 상단에 제시합니다.
+**연표에 따라 딥 러닝과 two-stream networks를 사용한 초기 시도에 대한 결과를 먼저 표 2 상단에 제시합니다.**
 <br>
 Following the chronology, we first present results for early attempts of using deep learning and the two-stream networks at the top of Table 2. 
 
@@ -1925,71 +1925,71 @@ Following the chronology, we first present results for early attempts of using d
 <br>
 
 
-우리는 몇 가지 관찰을 합니다.
+**우리는 몇 가지 관찰을 합니다.**
 <br>
 We make several observations. 
 
-첫째, 모션/시간 모델링이 없으면 DeepVideo[99]의 성능이 다른 모든 접근 방식보다 열등합니다.
+**첫째, 모션/시간 모델링이 없으면 DeepVideo[99]의 성능이 다른 모든 접근 방식보다 열등합니다.**
 <br>
 First, without motion/temporal modeling, the performance of DeepVideo [99] is inferior to all other approaches. 
 
-둘째, 전통적인 방법(비 CNN 기반)에서 딥 러닝으로 지식을 이전하는 것이 도움이 됩니다.
+**둘째, 전통적인 방법(비 CNN 기반)에서 딥 러닝으로 지식을 이전하는 것이 도움이 됩니다.**
 <br>
 Second, it is helpful to transfer knowledge from traditional methods (non-CNN-based) to deep learning. 
 
-예를 들어, TDD[214]는 궤적 풀링을 사용하여 동작 인식 CNN 기능을 추출합니다.
+**예를 들어, TDD[214]는 궤적 풀링을 사용하여 동작 인식 CNN 기능을 추출합니다.**
 <br>
 For example, TDD [214] uses trajectory pooling to extract motion-aware CNN features. 
 
-TLE[36]는 기존의 비디오 동작 인식 파이프라인에서 중요한 단계인 전역 기능 인코딩을 딥 네트워크에 내장합니다.
+**TLE[36]는 기존의 비디오 동작 인식 파이프라인에서 중요한 단계인 전역 기능 인코딩을 딥 네트워크에 내장합니다.**
 <br>
 TLE [36] embeds global feature encoding, which is an important step in traditional video action recognition pipeline, into a deep network.
 
-그런 다음 표 2의 중간에서 3D CNN 기반 접근 방식을 비교합니다.
+**그런 다음 표 2의 중간에서 3D CNN 기반 접근 방식을 비교합니다.**
 <br>
 We then compare 3D CNNs based approaches in the middle of Table 2. 
 
-많은 비디오 코퍼스에 대한 training에도 불구하고 C3D[202]는 동시 작업[187, 214, 217]에서 열악한 성능을 보이는데, 아마도 3D 커널 최적화의 어려움 때문일 것입니다.
+**많은 비디오 코퍼스에 대한 training에도 불구하고 C3D[202]는 동시 작업[187, 214, 217]에서 열악한 성능을 보이는데, 아마도 3D 커널 최적화의 어려움 때문일 것입니다.**
 <br>
 Despite training on a large corpus of videos, C3D [202] performs inferior to concurrent work [187, 214, 217], possibly due to difficulties in optimization of 3D kernels. 
 
-이것에 동기를 부여하여 I3D[14], P3D[169], R2+1D[204] 및 S3D[239]와 같은 여러 논문에서 3D 컨볼루션 필터를 2D 공간 커널 및 1D 시간 커널로 분해하여 훈련을 용이하게 합니다.
+**이것에 동기를 부여하여 I3D[14], P3D[169], R2+1D[204] 및 S3D[239]와 같은 여러 논문에서 3D 컨볼루션 필터를 2D 공간 커널 및 1D 시간 커널로 분해하여 훈련을 용이하게 합니다.**
 <br>
 Motivated by this, several papers - I3D [14], P3D [169], R2+1D [204] and S3D [239] factorize 3D convolution filters to 2D spatial kernels and 1D temporal kernels to ease the training. 
 
-또한 I3D는 잘 훈련된 2D 네트워크에서 3D 모델 가중치를 부트스트랩하여 처음부터 훈련하는 것을 방지하는 인플레이션 전략을 도입합니다.
+**또한 I3D는 잘 훈련된 2D 네트워크에서 3D 모델 가중치를 부트스트랩하여 처음부터 훈련하는 것을 방지하는 인플레이션 전략을 도입합니다.**
 <br>
 In addition, I3D introduces an inflation strategy to avoid training from scratch by bootstrap ping the 3D model weights from well-trained 2D networks. 
 
-이러한 기술을 사용하여 optical flow 없이도 최상의 two-stream network 방법[36]에 필적하는 성능을 달성합니다.
+**이러한 기술을 사용하여 optical flow 없이도 최상의 two-stream network 방법[36]에 필적하는 성능을 달성합니다.**
 <br>
 By using these techniques, they achieve comparable performance to the best two-stream network methods [36] without the need for optical flow. 
 
-또한 최근 3D 모델은 더 많은 training samples[203], additional pathways[45] 또는 architecture search[44]을 사용하여 훨씬 더 높은 정확도를 얻습니다.
+**또한 최근 3D 모델은 더 많은 training samples[203], additional pathways[45] 또는 architecture search[44]을 사용하여 훨씬 더 높은 정확도를 얻습니다.**
 <br>
 Furthermore, recent 3D models obtain even higher accuracy, by using more training samples [203], additional pathways [45], or architecture search [44].
 
-마지막으로 표 2 하단에 최근의 효율적인 모델을 보여줍니다.
+**마지막으로 표 2 하단에 최근의 효율적인 모델을 보여줍니다.**
 <br>
 Finally, we show recent efficient models in the bottom of Table 2. 
 
-우리는 이러한 방법이 two-stream networks(상단)보다 더 높은 인식 정확도를 달성할 수 있고 3D CNN(중간)에 필적하는 성능을 달성할 수 있음을 볼 수 있습니다.
+**우리는 이러한 방법이 two-stream networks(상단)보다 더 높은 인식 정확도를 달성할 수 있고 3D CNN(중간)에 필적하는 성능을 달성할 수 있음을 볼 수 있습니다.**
 <br>
 We can see that these methods are able to achieve higher recognition accuracy than two-stream networks (top), and comparable performance to 3D CNNs (middle). 
 
-2D CNN이고 광학 흐름을 사용하지 않기 때문에 이러한 방법은 Train 및 Inference 측면에서 모두 효율적입니다.
+**2D CNN이고 광학 흐름을 사용하지 않기 때문에 이러한 방법은 Train 및 Inference 측면에서 모두 효율적입니다.**
 <br>
 Since they are 2D CNNs and do not use optical flow, these methods are efficient in terms of both training and inference. 
 
-대부분 실시간 접근 방식이며 일부는 온라인 비디오 동작 인식이 가능합니다[128].
+**대부분 실시간 접근 방식이며 일부는 온라인 비디오 동작 인식이 가능합니다[128].**
 <br>
 Most of them are real-time approaches, and some can do online video action recognition [128]. 
 
-우리는 효율성의 필요성 때문에 2D CNN과 시간 모델링이 유망한 방향이라고 생각합니다. 
+**우리는 효율성의 필요성 때문에 2D CNN과 시간 모델링이 유망한 방향이라고 생각합니다.**
 <br>
 We believe 2D CNN plus temporal modeling is a promising direction due to the need of efficiency. 
 
-여기서 시간 모델링은 attention based, flow based 또는 3D 커널 기반일 수 있습니다.
+**여기서 시간 모델링은 attention based, flow based 또는 3D 커널 기반일 수 있습니다.**
 <br>
 Here, temporal modeling could be attention based, flow based or 3D kernel based.
 
@@ -2000,19 +2000,19 @@ Here, temporal modeling could be attention based, flow based or 3D kernel based.
 
 <br>
 
-이 섹션에서는 20BN-Something-Something(Sth-Sth) 데이터 세트에 대한 최신 최신 접근 방식을 비교합니다.
+**이 섹션에서는 20BN-Something-Something(Sth-Sth) 데이터 세트에 대한 최신 최신 접근 방식을 비교합니다.**
 <br>
 In this section, we compare the recent state-of-the-art approaches on the 20BN-Something-Something (Sth-Sth) dataset. 
 
-V1과 V2 모두에서 최고 정확도 1위를 보고합니다. SthSth 데이터 세트는 일상적인 개체로 기본 작업을 수행하는 인간에 중점을 둡니다.
+**V1과 V2 모두에서 최고 정확도 1위를 보고합니다. SthSth 데이터 세트는 일상적인 개체로 기본 작업을 수행하는 인간에 중점을 둡니다.**
 <br>
 We report top1 accuracy on both V1 and V2. SthSth datasets focus on humans performing basic actions with daily objects. 
 
-scene-focused datasets와 달리 Sth-Sth 데이터세트의 배경 장면은 최종 액션 클래스 예측에 거의 기여하지 않습니다.
+**scene-focused datasets와 달리 Sth-Sth 데이터세트의 배경 장면은 최종 액션 클래스 예측에 거의 기여하지 않습니다.**
 <br>
 Different from scene-focused datasets, background scene in Sth-Sth datasets contributes little to the final action class prediction. 
 
-그 외에도 "왼쪽에서 오른쪽으로 밀기", "오른쪽에서 왼쪽으로 밀기"와 같이 강력한 동작 추론이 필요한 클래스가 있습니다.
+**그 외에도 "왼쪽에서 오른쪽으로 밀기", "오른쪽에서 왼쪽으로 밀기"와 같이 강력한 동작 추론이 필요한 클래스가 있습니다.**
 <br>
 In addition, there are classes such as “Pushing something from left to right” and “Pushing something from right to left”, and which require strong motion reasoning.
 
@@ -2026,19 +2026,19 @@ In addition, there are classes such as “Pushing something from left to right�
 
 
 
-표 3의 이전 작업을 비교하면 더 긴 입력(예: 16프레임)을 사용하는 것이 일반적으로 더 좋다는 것을 알 수 있습니다.
+**표 3의 이전 작업을 비교하면 더 긴 입력(예: 16프레임)을 사용하는 것이 일반적으로 더 좋다는 것을 알 수 있습니다.**
 <br>
 By comparing the previous work in Table 3, we observe that using longer input (e.g., 16 frames) is generally better. 
 
-게다가, 시간적 모델링에 초점을 맞춘 방법[128, 122, 92]은 stacked 3D kernels[14]보다 더 잘 작동합니다.
+**게다가, 시간적 모델링에 초점을 맞춘 방법[128, 122, 92]은 stacked 3D kernels[14]보다 더 잘 작동합니다.**
 <br>
 Moreover, methods that focus on temporal modeling [128, 122, 92] work better than stacked 3D kernels [14].
 
-예를 들어, TSM[128], TEA[122] 및 MSNet[110]은 명시적 temporal reasoning module을 2D ResNet 백본에 삽입하고 state-of-the-art 결과를 얻습니다.
+**예를 들어, TSM[128], TEA[122] 및 MSNet[110]은 명시적 temporal reasoning module을 2D ResNet 백본에 삽입하고 state-of-the-art 결과를 얻습니다.**
 <br>
 For example, TSM [128], TEA [122] and MSNet [110] insert an explicit temporal reasoning module into 2D ResNet backbones and achieves state-of-the-art results. 
 
-이는 Sth-Sth 데이터셋이 공간적 의미론적 정보뿐만 아니라 강력한 시간적 움직임 추론을 필요로 함을 의미합니다.
+**이는 Sth-Sth 데이터셋이 공간적 의미론적 정보뿐만 아니라 강력한 시간적 움직임 추론을 필요로 함을 의미합니다.**
 <br>
 This implies that the Sth-Sth dataset needs strong temporal motion reasoning as well as spatial semantics information.
 
@@ -2049,7 +2049,7 @@ This implies that the Sth-Sth dataset needs strong temporal motion reasoning as 
 
 <br>
 
-이 섹션에서는 먼저 Charades 데이터 세트 [186]에 대한 state-of-the art 접근 방식을 비교한 다음 Charades에 대한 모델 또는 추가 개체 정보를 사용하는 최근 작업을 나열합니다.
+**이 섹션에서는 먼저 Charades 데이터 세트 [186]에 대한 state-of-the art 접근 방식을 비교한 다음 Charades에 대한 모델 또는 추가 개체 정보를 사용하는 최근 작업을 나열합니다.**
 <br>
 In this section, we first compare the recent state-of-the art approaches on Charades dataset [186] and then we list some recent work that use assemble model or additional object information on Charades.
 
@@ -2061,39 +2061,39 @@ In this section, we first compare the recent state-of-the art approaches on Char
 <br>
 <br>
 
-표 4의 이전 작업을 비교하여 다음과 같은 관찰을 수행합니다.
+**표 4의 이전 작업을 비교하여 다음과 같은 관찰을 수행합니다.**
 <br>
 Comparing the previous work in Table 4, we make the following observations. 
 
-첫째, 3D 모델[229, 45]은 일반적으로 2D 모델[186, 231] 및 optical flow 입력이 있는 2D 모델보다 성능이 좋습니다. 
+**첫째, 3D 모델[229, 45]은 일반적으로 2D 모델[186, 231] 및 optical flow 입력이 있는 2D 모델보다 성능이 좋습니다.**
 <br>
 First, 3D models [229, 45] generally perform better than 2D models [186, 231] and 2D models with optical flow input.
 
-이것은 시공간 추론이 장기적으로 복잡한 동시 행동 이해에 중요하다는 것을 나타냅니다. 
+**이것은 시공간 추론이 장기적으로 복잡한 동시 행동 이해에 중요하다는 것을 나타냅니다.**
 <br>
 This indicates that the spatiotemporal reasoning is critical for long-term complex concurrent action understanding.
 
-둘째, 더 긴 입력은 인식에 도움이 됩니다[229]. 아마도 일부 동작은 인식하는 데 장기적인 기능이 필요하기 때문입니다.
+**둘째, 더 긴 입력은 인식에 도움이 됩니다[229]. 아마도 일부 동작은 인식하는 데 장기적인 기능이 필요하기 때문입니다.**
 <br>
 Second, longer input helps with the recognition [229] probably because some actions require long-term feature to recognize. 
 
-셋째, 더 큰 데이터 세트에서 사전 훈련된 강력한 백본을 가진 모델은 일반적으로 더 나은 성능을 보입니다[45].
+**셋째, 더 큰 데이터 세트에서 사전 훈련된 강력한 백본을 가진 모델은 일반적으로 더 나은 성능을 보입니다[45].**
 <br>
 Third, models with strong backbones that are pre-trained on larger datasets generally have better performance [45]. 
 
-이는 Charades가 심층 모델을 교육하기에 충분한 다양성을 포함하지 않는 중간 규모의 데이터 세트이기 때문입니다.
+**이는 Charades가 심층 모델을 교육하기에 충분한 다양성을 포함하지 않는 중간 규모의 데이터 세트이기 때문입니다.**
 <br>
 This is because Charades is a medium-scaled dataset which doesn’t contain enough diversity to train a deep model.
 
-최근 연구자들은 모델을 조립하거나[177], 추가적인 인간-객체 상호 작용 정보를 제공함으로써[90] 복잡한 동시 행동 인식을 위한 대안적 방향을 탐색했습니다. 
+**최근 연구자들은 모델을 조립하거나[177], 추가적인 인간-객체 상호 작용 정보를 제공함으로써[90] 복잡한 동시 행동 인식을 위한 대안적 방향을 탐색했습니다.**
 <br>
 Recently, researchers explored the alternative direction for complex concurrent action recognition by assembling models [177] or providing additional human-object interaction information [90].
 
-이 논문은 Charades에서 단일 모델만 미세 조정하는 이전 문헌보다 훨씬 뛰어난 성능을 보였습니다.
+**이 논문은 Charades에서 단일 모델만 미세 조정하는 이전 문헌보다 훨씬 뛰어난 성능을 보였습니다.**
 <br>
 These papers significantly outperformed previous literature that only finetune a single model on Charades. 
 
-시공간적 인간-객체 상호 작용을 탐색하고 과적합을 방지하는 방법을 찾는 것이 동시 작업 이해의 핵심임을 보여줍니다.
+**시공간적 인간-객체 상호 작용을 탐색하고 과적합을 방지하는 방법을 찾는 것이 동시 작업 이해의 핵심임을 보여줍니다.**
 <br>
 It demonstrates that exploring spatio-temporal human-object interactions and finding a way to avoid overfitting are the keys for concurrent action understanding.
 
@@ -2104,15 +2104,15 @@ It demonstrates that exploring spatio-temporal human-object interactions and fin
 
 <br>
 
-실제 응용 프로그램에 모델을 배포하려면 일반적으로 진행하기 전에 모델이 속도 요구 사항을 충족하는지 여부를 알아야 합니다.
+**실제 응용 프로그램에 모델을 배포하려면 일반적으로 진행하기 전에 모델이 속도 요구 사항을 충족하는지 여부를 알아야 합니다.**
 <br>
 To deploy a model in real-life applications, we usually need to know whether it meets the speed requirement before we can proceed. 
 
-이 섹션에서는 (1) 매개변수 수, (2) FLOPS, (3) 대기 시간 및 (4) 초당 프레임 측면에서 철저한 비교를 수행하기 위해 위에서 언급한 접근 방식을 평가합니다.
+**이 섹션에서는 (1) 매개변수 수, (2) FLOPS, (3) 대기 시간 및 (4) 초당 프레임 측면에서 철저한 비교를 수행하기 위해 위에서 언급한 접근 방식을 평가합니다.**
 <br>
 In this section, we evaluate the approaches mentioned above to perform a thorough comparison in terms of (1) number of parameters, (2) FLOPS, (3) latency and (4) frame per second.
 
-결과를 표 5에 제시합니다.
+**결과를 표 5에 제시합니다.**
 <br>
 We present the results in Table 5. 
 
@@ -2124,39 +2124,39 @@ We present the results in Table 5.
 <br>
 <br>
 
-여기서 우리는 GluonCV 비디오 동작 인식 모델 zoo3의 모델을 사용합니다. 이러한 모든 모델은 동일한 데이터, 동일한data augmentation strategy 및 동일한 30개 보기 평가 체계를 사용하여 훈련되므로 공정한 비교입니다. 
+**여기서 우리는 GluonCV 비디오 동작 인식 모델 zoo3의 모델을 사용합니다. 이러한 모든 모델은 동일한 데이터, 동일한 data augmentation strategy 및 동일한 30개 보기 평가 체계를 사용하여 훈련되므로 공정한 비교입니다.** 
 <br>
 Here, we use the models in the GluonCV video action recognition model zoo3 since all these models are trained using the same data, same data augmentation strategy and under same 30-view evaluation scheme, thus fair comparison.
 
-모든 타이밍은 단일 Tesla V100 GPU에서 105회의 반복 실행으로 수행되며 처음 5회의 실행은 워밍업을 위해 무시됩니다.
+**모든 타이밍은 단일 Tesla V100 GPU에서 105회의 반복 실행으로 수행되며 처음 5회의 실행은 워밍업을 위해 무시됩니다.**
 <br>
 All the timings are done on a single Tesla V100 GPU with 105 repeated runs, while the first 5 runs are ignored for warming up. 
 
-우리는 항상 배치 크기 1을 사용합니다.
+**우리는 항상 배치 크기 1을 사용합니다.**
 <br>
 We always use a batch size of 1. 
 
-모델 입력의 경우 원본 논문에서 제안한 설정을 사용합니다.
+**모델 입력의 경우 원본 논문에서 제안한 설정을 사용합니다.**
 <br>
 In terms of model input, we use the suggested settings in the original paper. 
 
-표 5에서 볼 수 있듯이 대기 시간을 비교하면 2D 모델이 다른 모든 3D 모델보다 훨씬 빠릅니다.
+**표 5에서 볼 수 있듯이 대기 시간을 비교하면 2D 모델이 다른 모든 3D 모델보다 훨씬 빠릅니다.**
 <br>
 As we can see in Table 5, if we compare latency, 2D models are much faster than all other 3D variants. 
 
-이것이 아마도 대부분의 실제 비디오 응용 프로그램이 여전히 프레임 단위 방법을 채택하는 이유일 것입니다.
+**이것이 아마도 대부분의 실제 비디오 응용 프로그램이 여전히 프레임 단위 방법을 채택하는 이유일 것입니다.**
 <br>
 This is probably why most real-world video applications still adopt frame-wise methods. 
 
-둘째, [170, 259]에서 언급한 바와 같이 FLOPS는 실제 추론 시간(즉, 대기 시간)과 강한 상관 관계가 없습니다.
+**둘째, [170, 259]에서 언급한 바와 같이 FLOPS는 실제 추론 시간(즉, 대기 시간)과 강한 상관 관계가 없습니다.**
 <br>
 Secondly, as mentioned in [170, 259], FLOPS is not strongly correlated with the actual inference time (i.e., latency). 
 
-셋째, 성능을 비교해 보면 대부분의 3D 모델이 75% 정도 비슷한 정확도를 보여주지만 더 큰 데이터 세트로 사전 훈련을 하면 성능을 크게 높일 수 있습니다. 
+**셋째, 성능을 비교해 보면 대부분의 3D 모델이 75% 정도 비슷한 정확도를 보여주지만 더 큰 데이터 세트로 사전 훈련을 하면 성능을 크게 높일 수 있습니다.** 
 <br>
 Third, if comparing performance, most 3D models give similar accuracy around 75%, but pretraining with a larger dataset can significantly boost the performance.
 
-이는 훈련 데이터의 중요성을 나타내며 부분적으로 자체 감독 사전 훈련이 기존 방법을 더욱 개선할 수 있는 유망한 방법일 수 있음을 시사합니다.
+**이는 훈련 데이터의 중요성을 나타내며 부분적으로 자체 감독 사전 훈련이 기존 방법을 더욱 개선할 수 있는 유망한 방법일 수 있음을 시사합니다.**
 <br>
 This indicates the importance of training data and partially suggests that self-supervised pre-training might be a promising way to further improve existing methods.
 
@@ -2167,11 +2167,11 @@ This indicates the importance of training data and partially suggests that self-
 
 <br>
 
-우리는 2014년부터 비디오 동작 인식을 위한 200개 이상의 딥 러닝 기반 방법을 조사했습니다. 
+**우리는 2014년부터 비디오 동작 인식을 위한 200개 이상의 딥 러닝 기반 방법을 조사했습니다.**
 <br>
 We have surveyed more than 200 deep learning based methods for video action recognition since year 2014.
 
-벤치마크 데이터 세트의 성능이 정체되고 있음에도 불구하고 이 작업에는 탐색할 가치가 있는 적극적이고 유망한 방향이 많이 있습니다.
+**벤치마크 데이터 세트의 성능이 정체되고 있음에도 불구하고 이 작업에는 탐색할 가치가 있는 적극적이고 유망한 방향이 많이 있습니다.**
 <br>
 Despite the performance on benchmark datasets plateauing, there are many active and promising directions in this task worth exploring.
 
@@ -2182,39 +2182,39 @@ Despite the performance on benchmark datasets plateauing, there are many active 
 
 <br>
 
-비디오 동작 인식을 개선하는 동시에 점점 더 많은 방법이 개발되었습니다.
+**비디오 동작 인식을 개선하는 동시에 점점 더 많은 방법이 개발되었습니다.**
 <br>
 More and more methods haven been developed to improve video action recognition, at the same time, 
 
-이러한 방법을 요약하고 분석 및 통찰력을 제공하는 일부 논문이 있습니다.
+**이러한 방법을 요약하고 분석 및 통찰력을 제공하는 일부 논문이 있습니다.**
 <br>
 there are some papers summarizing these methods and providing analysis and insights. 
 
-Huang et al. 비디오 이해를 위한 시간 정보의 효과에 대한 명시적 분석을 수행합니다. 
+**Huang et al. 비디오 이해를 위한 시간 정보의 효과에 대한 명시적 분석을 수행합니다.**
 <br>
 Huang et al. [82] perform an explicit analysis of the effect of temporal information for video understanding.
 
-그들은 "동작을 인식하는 데 비디오의 동작이 얼마나 중요한지"라는 질문에 답하려고 합니다.
+**그들은 "동작을 인식하는 데 비디오의 동작이 얼마나 중요한지"라는 질문에 답하려고 합니다.**
 <br>
 They try to answer the question “how important is the motion in the video for recognizing the action”.
 
-Feichtenhofer et al. [48, 49]는 이러한 깊은 표현이 어떻게 작동하고 무엇을 캡처하는지 이해하기 위해 two-stream models이 학습한 놀라운 시각화를 제공합니다.  
+**Feichtenhofer et al. [48, 49]는 이러한 깊은 표현이 어떻게 작동하고 무엇을 캡처하는지 이해하기 위해 two-stream models이 학습한 놀라운 시각화를 제공합니다.**  
 <br>
 Feichtenhofer et al. [48, 49] provide an amazing visualization of what two-stream models have learned in order to understand how these deep representations work and what they are capturing.
 
-Li et al. [124] 개념, 데이터 세트의 표현 편향을 소개하고 현재 데이터 세트가 정적 표현으로 편향되어 있음을 발견합니다. 
+**Li et al. [124] 개념, 데이터 세트의 표현 편향을 소개하고 현재 데이터 세트가 정적 표현으로 편향되어 있음을 발견합니다.** 
 <br>
 Li et al. [124] introduce a concept, representation bias of a dataset, and find that current datasets are biased towards static representations.
 
-이러한 편향된 데이터 세트에 대한 실험은 잘못된 결론으로 이어질 수 있으며 이는 실제로 비디오 동작 인식의 개발을 제한하는 큰 문제입니다.
+**이러한 편향된 데이터 세트에 대한 실험은 잘못된 결론으로 이어질 수 있으며 이는 실제로 비디오 동작 인식의 개발을 제한하는 큰 문제입니다.**
 <br>
 Experiments on such biased datasets may lead to erroneous conclusions, which is indeed a big problem that limits the development of video action recognition. 
 
-최근 Piergiovanni et al. 다양한 그룹의 사람들로부터 데이터를 수집하여 데이터 편향에 대처하기 위해 AViD [165] 데이터 세트를 도입했습니다.
+**최근 Piergiovanni et al. 다양한 그룹의 사람들로부터 데이터를 수집하여 데이터 편향에 대처하기 위해 AViD [165] 데이터 세트를 도입했습니다.**
 <br>
 Recently, Piergiovanni et al. introduced the AViD [165] dataset to cope with data bias by collecting data from diverse groups of people. 
 
-이 논문은 동료 연구자들이 당면 과제, 해결되지 않은 문제 및 다음 돌파구를 이해하는 데 도움이 되는 훌륭한 통찰력을 제공합니다.
+**이 논문은 동료 연구자들이 당면 과제, 해결되지 않은 문제 및 다음 돌파구를 이해하는 데 도움이 되는 훌륭한 통찰력을 제공합니다.**
 <br>
 These papers provide great insights to help fellow researchers to understand the challenges, open problems and where the next breakthrough might reside.
 
@@ -2225,19 +2225,19 @@ These papers provide great insights to help fellow researchers to understand the
 
 <br>
 
-mixup[258], cutout[31], CutMix[254], AutoAugment[27], FastAutoAug[126] 등과 같은 이미지 인식 도메인에서 수많은Data augmentation 방법이 제안되었습니다. 
+**mixup[258], cutout[31], CutMix[254], AutoAugment[27], FastAutoAug[126] 등과 같은 이미지 인식 도메인에서 수많은 Data augmentation 방법이 제안되었습니다.** 
 <br>
 Numerous data augmentation methods have been proposed in image recognition domain, such as mixup [258], cutout [31], CutMix [254], AutoAugment [27], FastAutoAug [126], etc.
 
-그러나 비디오 동작 인식은 여전히 2015년 이전에 도입된 기본 Data augmentation 기술[217, 188]을 채택하고 있습니다. 여기에는 무작위 크기 조정, 무작위 자르기 및 무작위 수평 뒤집기가 포함됩니다.
+**그러나 비디오 동작 인식은 여전히 2015년 이전에 도입된 기본 Data augmentation 기술[217, 188]을 채택하고 있습니다. 여기에는 무작위 크기 조정, 무작위 자르기 및 무작위 수평 뒤집기가 포함됩니다.**
 <br>
 However, video action recognition still adopts basic data augmentation techniques introduced before year 2015 [217, 188], including random resizing, random cropping and random horizontal flipping. 
 
-최근 SimCLR[17]과 다른 논문들은 color jittering과 random rotation이 representation learning에 크게 도움이 된다는 것을 보여주었다. 따라서 비디오 동작 인식을 위해 다양한 Data augmentation 기술을 사용하는 조사가 특히 유용합니다.
+**최근 SimCLR[17]과 다른 논문들은 color jittering과 random rotation이 representation learning에 크게 도움이 된다는 것을 보여주었다. 따라서 비디오 동작 인식을 위해 다양한 Data augmentation 기술을 사용하는 조사가 특히 유용합니다.**
 <br>
 Recently, SimCLR [17] and other papers have shown that color jittering and random rotation greatly help representation learning. Hence, an investigation of using different data augmentation techniques for video action recognition is particularly useful. 
 
-이것은 기존의 모든 방법에 대한 데이터 사전 처리 파이프라인을 변경할 수 있습니다.
+**이것은 기존의 모든 방법에 대한 데이터 사전 처리 파이프라인을 변경할 수 있습니다.**
 <br>
 This may change the data pre-processing pipeline for all existing methods.
 
@@ -2248,43 +2248,43 @@ This may change the data pre-processing pipeline for all existing methods.
 
 <br>
 
-도메인 적응(DA)은 도메인 이동 문제를 해결하기 위해 최근 몇 년 동안 광범위하게 연구되었습니다.
+**도메인 적응(DA)은 도메인 이동 문제를 해결하기 위해 최근 몇 년 동안 광범위하게 연구되었습니다.**
 <br>
 Domain adaptation (DA) has been studied extensively in recent years to address the domain shift problem. 
 
-표준 데이터 세트에 대한 정확도가 점점 더 높아지고 있음에도 불구하고 데이터 세트 또는 도메인에 걸친 현재 비디오 모델의 일반화 기능은 덜 탐색됩니다.
+**표준 데이터 세트에 대한 정확도가 점점 더 높아지고 있음에도 불구하고 데이터 세트 또는 도메인에 걸친 현재 비디오 모델의 일반화 기능은 덜 탐색됩니다.**
 <br>
 Despite the accuracy on standard datasets getting higher and higher, the generalization capability of current video models across datasets or domains is less explored.
 
-비디오 도메인 적응에 대한 초기 작업이 있습니다[193, 241, 89, 159].
+**비디오 도메인 적응에 대한 초기 작업이 있습니다[193, 241, 89, 159].**
 <br>
 There is early work on video domain adaptation [193, 241, 89, 159]. 
 
-그러나 이러한 문헌은 실제 도메인 불일치를 반영하지 않을 수 있고 편향된 결론으로 이어질 수 있는 몇 개의 겹치는 범주만 있는 소규모 비디오 DA에 중점을 둡니다.
+**그러나 이러한 문헌은 실제 도메인 불일치를 반영하지 않을 수 있고 편향된 결론으로 이어질 수 있는 몇 개의 겹치는 범주만 있는 소규모 비디오 DA에 중점을 둡니다.**
 <br>
 However, these literature focus on smallscale video DA with only a few overlapping categories, which may not reflect the actual domain discrepancy and may lead to biased conclusions. 
 
-Chenet al. [15] 비디오 DA를 조사하고 시간 역학을 정렬하는 것이 특히 유용하다는 것을 찾기 위해 두 개의 더 큰 규모의 데이터 세트를 소개합니다.
+**Chenet al. [15] 비디오 DA를 조사하고 시간 역학을 정렬하는 것이 특히 유용하다는 것을 찾기 위해 두 개의 더 큰 규모의 데이터 세트를 소개합니다.**
 <br>
 Chen et al. [15] introduce two larger-scale datasets to investigate video DA and find that aligning temporal dynamics is particularly useful. 
 
-Pan et al. [152] 시간적 오정렬 문제를 해결하기 위해 co-attention을 채택한다.
+**Pan et al. [152] 시간적 오정렬 문제를 해결하기 위해 co-attention을 채택한다.**
 <br>
 Pan et al. [152] adopts co-attention to solve the temporal misalignment problem. 
 
-아주 최근에 Munro et al. 세분화된 비디오 동작 인식을 위한 다중 모드 자기 감독 방법을 탐색하고 비디오 DA에서 다중 모드 학습의 효과를 보여줍니다.
+**아주 최근에 Munro et al. 세분화된 비디오 동작 인식을 위한 다중 모드 자기 감독 방법을 탐색하고 비디오 DA에서 다중 모드 학습의 효과를 보여줍니다.**
 <br>
 Very recently, Munro et al. [145] explore a multi-modal self-supervision method for fine-grained video action recognition and show the effectiveness of multi-modality learning in video DA. 
 
-Shuffle and Attend [95]는 모든 클립이 관련 의미 체계를 포함하지 않기 때문에 샘플링된 모든 클립의 기능을 정렬하면 차선책의 솔루션이 된다고 주장합니다. 
+**Shuffle and Attend [95]는 모든 클립이 관련 의미 체계를 포함하지 않기 때문에 샘플링된 모든 클립의 기능을 정렬하면 차선책의 솔루션이 된다고 주장합니다.** 
 <br>
 Shuffle and Attend [95] argues that aligning features of all sampled clips results in a sub-optimal solution due to the fact that all clips do not include relevant semantics.
 
-따라서 그들은 유익한 클립에 더 집중하고 non-informative 클립을 폐기하기 위해 attention mechanism을 사용할 것을 제안합니다.
+**따라서 그들은 유익한 클립에 더 집중하고 non-informative 클립을 폐기하기 위해 attention mechanism을 사용할 것을 제안합니다.**
 <br>
 Therefore, they propose to use an attention mechanism to focus more on informative clips and discard the non-informative ones.
 
-결론적으로 비디오 DA는 특히 컴퓨팅 리소스가 적은 연구자들에게 유망한 방향입니다.
+**결론적으로 비디오 DA는 특히 컴퓨팅 리소스가 적은 연구자들에게 유망한 방향입니다.**
 <br>
 In conclusion, video DA is a promising direction, especially for researchers with less computing resources.
 
@@ -2295,39 +2295,39 @@ In conclusion, video DA is a promising direction, especially for researchers wit
 
 <br>
 
-신경망 구조 검색(NAS)은 최근 몇 년 동안 큰 관심을 끌었으며 유망한 연구 방향입니다.
+**신경망 구조 검색(NAS)은 최근 몇 년 동안 큰 관심을 끌었으며 유망한 연구 방향입니다.**
 <br>
 Neural architecture search (NAS) has attracted great interest in recent years and is a promising research direction. 
 
-그러나 컴퓨팅 리소스에 대한 greedy need를 감안할 때 이 분야에 대한 논문은 몇 편만 출판되었습니다[156, 163, 161, 178].
+**그러나 컴퓨팅 리소스에 대한 greedy need를 감안할 때 이 분야에 대한 논문은 몇 편만 출판되었습니다[156, 163, 161, 178].**
 <br>
 However, given its greedy need for computing resources, only a few papers have been published in this area [156, 163, 161, 178]. 
 
-매개변수와 런타임을 공동으로 최적화하는 TVN 제품군[161]은 인간이 설계한 최신 모델로 경쟁력 있는 정확도를 달성하고 훨씬 더 빠르게 실행할 수 있습니다(1초 비디오 클립당 CPU에서 37~100ms, GPU에서 10ms 이내).
+**매개변수와 런타임을 공동으로 최적화하는 TVN 제품군[161]은 인간이 설계한 최신 모델로 경쟁력 있는 정확도를 달성하고 훨씬 더 빠르게 실행할 수 있습니다(1초 비디오 클립당 CPU에서 37~100ms, GPU에서 10ms 이내).**
 <br>
 The TVN family [161], which jointly optimize parameters and runtime, can achieve competitive accuracy with human-designed contemporary models, and run much faster (within 37 to 100 ms on a CPU and 10 ms on a GPU per 1 second video clip). 
 
-AssembleNet[178] 및 AssembleNet++[177]는 입력 양식 전반에 걸쳐 feature representations 간의 연결성을 학습하는 일반적인 접근 방식을 제공하고 Charades 및 기타 벤치마크에서 놀라울 정도로 우수한 성능을 보여줍니다.  
+**AssembleNet[178] 및 AssembleNet++[177]는 입력 양식 전반에 걸쳐 feature representations 간의 연결성을 학습하는 일반적인 접근 방식을 제공하고 Charades 및 기타 벤치마크에서 놀라울 정도로 우수한 성능을 보여줍니다.**  
 <br>
 AssembleNet [178] and AssembleNet++ [177] provide a generic approach to learn the connectivity among feature representations across input modalities, and show surprisingly good performance on Charades and other benchmarks.
 
-AttentionNAS [222]는 spatio-temporal attention cell 검색을 위한 솔루션을 제안했습니다.
+**AttentionNAS [222]는 spatio-temporal attention cell 검색을 위한 솔루션을 제안했습니다.**
 <br>
 AttentionNAS [222] proposed a solution for spatio-temporal attention cell search.
 
-발견된 셀은 spatio-temporal features을 개선하기 위해 모든 네트워크에 연결할 수 있습니다.
+**발견된 셀은 spatio-temporal features을 개선하기 위해 모든 네트워크에 연결할 수 있습니다.**
 <br>
 The found cell can be plugged into any network to improve the spatio-temporal features. 
 
-이전의 모든 논문은 비디오 이해에 대한 잠재력을 보여줍니다.
+**이전의 모든 논문은 비디오 이해에 대한 잠재력을 보여줍니다.**
 <br>
 All previous papers do show their potential for video understanding.
 
-최근 DARTS[130], Proxyless NAS[11], ENAS[160], oneshot NAS[7] 등과 같은 이미지 인식 도메인에서 아키텍처를 검색하는 효율적인 방법이 제안되었습니다. 
+**최근 DARTS[130], Proxyless NAS[11], ENAS[160], oneshot NAS[7] 등과 같은 이미지 인식 도메인에서 아키텍처를 검색하는 효율적인 방법이 제안되었습니다.** 
 <br>
 Recently, some efficient ways of searching architectures have been proposed in the image recognition domain, such as DARTS [130], Proxyless NAS [11], ENAS [160], oneshot NAS [7], etc.
 
-효율적인 2D CNN과 효율적인 검색 알고리즘을 결합하여 합리적인 비용으로 비디오 NAS를 수행하는 것이 흥미로울 것입니다.
+**효율적인 2D CNN과 효율적인 검색 알고리즘을 결합하여 합리적인 비용으로 비디오 NAS를 수행하는 것이 흥미로울 것입니다.**
 <br>
 It would be interesting to combine efficient 2D CNNs and efficient searching algorithms to perform video NAS for a reasonable cost.
 
@@ -2338,43 +2338,43 @@ It would be interesting to combine efficient 2D CNNs and efficient searching alg
 
 <br>
 
-정확성에도 불구하고 실제 응용 측면에서 비디오 이해 문제에 대한 딥 러닝 기반 방법을 배포하는 것은 어렵습니다.
+**정확성에도 불구하고 실제 응용 측면에서 비디오 이해 문제에 대한 딥 러닝 기반 방법을 배포하는 것은 어렵습니다.**
 <br>
 Despite their accuracy, it is difficult to deploy deep learning based methods for video understanding problems in terms of real-world applications. 
 
-몇 가지 주요 과제가 있습니다.
+**몇 가지 주요 과제가 있습니다.**
 <br>
 There are several major challenges: 
 
-(1) 대부분의 방법은 오프라인 설정에서 개발됩니다. 즉, 입력이 온라인 설정의 비디오 스트림이 아닌 짧은 비디오 클립임을 의미합니다. 
+**(1) 대부분의 방법은 오프라인 설정에서 개발됩니다. 즉, 입력이 온라인 설정의 비디오 스트림이 아닌 짧은 비디오 클립임을 의미합니다.**
 <br>
 (1) most methods are developed in offline settings, which means the input is a short video clip, not a video stream in an online setting;
 
-(2) 대부분의 방법은 실시간 요구 사항을 충족하지 않습니다.
+**(2) 대부분의 방법은 실시간 요구 사항을 충족하지 않습니다.**
 <br>
 (2) most methods do not meet the real-time requirement; 
 
-(3) GPU가 아닌 장치(예: 에지 장치)에서 3D 컨볼루션 또는 기타 비표준 연산자의 비호환성.
+**(3) GPU가 아닌 장치(예: 에지 장치)에서 3D 컨볼루션 또는 기타 비표준 연산자의 비호환성.**
 <br>
 (3) incompatibility of 3D convolutions or other non-standard operators on non-GPU devices (e.g., edge devices).
 
-따라서 2D 컨볼루션을 기반으로 한 효율적인 네트워크 아키텍처의 개발이 유망한 방향입니다.
+**따라서 2D 컨볼루션을 기반으로 한 효율적인 네트워크 아키텍처의 개발이 유망한 방향입니다.**
 <br>
 Hence, the development of efficient network architecture based on 2D convolutions is a promising direction. 
 
-이미지 분류 도메인에서 제안된 접근 방식은 비디오 동작 인식에 쉽게 적용할 수 있습니다. ( 모델 압축, 모델 양자화, 모델 가지치기, 분산 훈련[68, 127], 모바일 네트워크[80, 265], 혼합 정밀 훈련 등 )
+**이미지 분류 도메인에서 제안된 접근 방식은 비디오 동작 인식에 쉽게 적용할 수 있습니다. ( 모델 압축, 모델 양자화, 모델 가지치기, 분산 훈련[68, 127], 모바일 네트워크[80, 265], 혼합 정밀 훈련 등 )**
 <br>
 The approaches proposed in the image classification domain can be easily adapted to video action recognition, e.g. model compression, model quantization, model pruning, distributed training [68, 127], mobile networks [80, 265], mixed precision training, etc. 
 
-그러나 대부분의 동작 인식 응용 프로그램에 대한 입력은 감시 모니터링과 같은 비디오 스트림이기 때문에 온라인 설정에 더 많은 노력이 필요합니다.
+**그러나 대부분의 동작 인식 응용 프로그램에 대한 입력은 감시 모니터링과 같은 비디오 스트림이기 때문에 온라인 설정에 더 많은 노력이 필요합니다.**
 <br>
 However, more effort is needed for the online setting since the input to most action recognition applications is a video stream, such as surveillance monitoring. 
 
-온라인 비디오 동작 인식 방법을 벤치마킹하기 위해 새롭고 보다 포괄적인 데이터 세트가 필요할 수 있습니다.
+**온라인 비디오 동작 인식 방법을 벤치마킹하기 위해 새롭고 보다 포괄적인 데이터 세트가 필요할 수 있습니다.**
 <br>
 We may need a new and more comprehensive dataset for benchmarking online video action recognition methods. 
 
-마지막으로 대부분의 동영상이 이미 압축되어 있고 모션 정보에 자유롭게 액세스할 수 있으므로 압축된 동영상을 사용하는 것이 바람직할 수 있습니다.
+**마지막으로 대부분의 동영상이 이미 압축되어 있고 모션 정보에 자유롭게 액세스할 수 있으므로 압축된 동영상을 사용하는 것이 바람직할 수 있습니다.**
 <br>
 Lastly, using compressed videos might be desirable because most videos are already compressed, and we have free access to motion information.
 
@@ -2385,51 +2385,51 @@ Lastly, using compressed videos might be desirable because most videos are alrea
 
 <br>
 
-데이터는 기계 학습을 위한 모델 개발만큼 중요합니다.
+**데이터는 기계 학습을 위한 모델 개발만큼 중요합니다.**
 <br>
 Data is more or at least as important as model development for machine learning. 
 
-비디오 동작 인식의 경우 대부분의 데이터 세트는 공간 표현[124]에 편향되어 있습니다. 즉, 대부분의 동작은 시간적 움직임을 고려하지 않고 비디오 내부의 단일 프레임으로 인식할 수 있습니다. 
+**비디오 동작 인식의 경우 대부분의 데이터 세트는 공간 표현[124]에 편향되어 있습니다. 즉, 대부분의 동작은 시간적 움직임을 고려하지 않고 비디오 내부의 단일 프레임으로 인식할 수 있습니다.** 
 <br>
 For video action recognition, most datasets are biased towards spatial representations [124], i.e., most actions can be recognized by a single frame inside the video without considering the temporal movement.
 
-따라서 비디오 이해를 향상시키기 위해서는 장기 시간 모델링 측면에서 새로운 데이터 세트가 필요합니다.
+**따라서 비디오 이해를 향상시키기 위해서는 장기 시간 모델링 측면에서 새로운 데이터 세트가 필요합니다.**
 <br>
 Hence, a new dataset in terms of long-term temporal modeling is required to advance video understanding. 
 
-또한 대부분의 최신 데이터 세트는 YouTube에서 수집됩니다.
+**또한 대부분의 최신 데이터 세트는 YouTube에서 수집됩니다.**
 <br>
 Furthermore, most current datasets are collected from YouTube. 
 
-저작권/개인정보 보호 문제로 인해 데이터세트 구성자는 실제 동영상이 아닌 사용자가 다운로드할 수 있는 YouTube ID 또는 동영상 링크만 공개하는 경우가 많습니다. 
+**저작권/개인정보 보호 문제로 인해 데이터세트 구성자는 실제 동영상이 아닌 사용자가 다운로드할 수 있는 YouTube ID 또는 동영상 링크만 공개하는 경우가 많습니다.** 
 <br>
 Due to copyright/privacy issues, the dataset organizer often only releases the YouTube id or video link for users to download and not the actual video.
 
-첫 번째 문제는 대규모 데이터 세트를 다운로드하는 것이 일부 지역에서 느릴 수 있다는 것입니다.
+**첫 번째 문제는 대규모 데이터 세트를 다운로드하는 것이 일부 지역에서 느릴 수 있다는 것입니다.**
 <br>
 The first problem is that downloading the large-scale datasets might be slow for some regions. 
 
-특히 유튜브는 최근 단일 IP로부터의 대량 다운로드를 차단하기 시작했다.
+**특히 유튜브는 최근 단일 IP로부터의 대량 다운로드를 차단하기 시작했다.**
 <br>
 In particular, YouTube recently started to block massive downloading from a single IP.
 
-따라서 많은 연구자들이 이 분야에서 작업을 시작하기 위해 데이터 세트를 얻지 못할 수도 있습니다.
+**따라서 많은 연구자들이 이 분야에서 작업을 시작하기 위해 데이터 세트를 얻지 못할 수도 있습니다.**
 <br>
 Thus, many researchers may not even get the dataset to start working in this field. 
 
-두 번째 문제는 지역 제한 및 개인 정보 보호 문제로 인해 일부 동영상에 더 이상 액세스할 수 없다는 것입니다.
+**두 번째 문제는 지역 제한 및 개인 정보 보호 문제로 인해 일부 동영상에 더 이상 액세스할 수 없다는 것입니다.**
 <br>
 The second problem is, due to region limitation and privacy issues, some videos are not accessible anymore. 
 
-예를 들어 원래 Kinetcis400 데이터 세트에는 300,000개가 넘는 비디오가 있지만 현재로서는 약 280,000개의 비디오만 크롤링할 수 있습니다.
+**예를 들어 원래 Kinetcis400 데이터 세트에는 300,000개가 넘는 비디오가 있지만 현재로서는 약 280,000개의 비디오만 크롤링할 수 있습니다.**
 <br>
 For example, the original Kinetcis400 dataset has over 300K videos, but at this moment, we can only crawl about 280K videos. 
 
-평균적으로 매년 동영상의 5%가 손실됩니다.
+**평균적으로 매년 동영상의 5%가 손실됩니다.**
 <br>
 On average, we lose 5% of the videos every year. 
 
-방법이 서로 다른 데이터에 대해 훈련되고 평가될 때 방법 간에 공정한 비교를 수행하는 것은 불가능합니다.
+**방법이 서로 다른 데이터에 대해 훈련되고 평가될 때 방법 간에 공정한 비교를 수행하는 것은 불가능합니다.**
 <br>
 It is impossible to do fair comparisons between methods when they are trained and evaluated on different data.
 
@@ -2440,35 +2440,35 @@ It is impossible to do fair comparisons between methods when they are trained an
 
 <br>
 
-적대적인 예는 이미지 모델에 대해 잘 연구되었습니다. 
+**적대적인 예는 이미지 모델에 대해 잘 연구되었습니다.** 
 <br>
 Adversarial examples have been well studied on image models. 
 
-[199]는 먼저 원본 이미지에 소량의 노이즈를 삽입하여 계산된 적대적 샘플이 잘못된 예측으로 이어질 수 있음을 보여줍니다.
+**[199]는 먼저 원본 이미지에 소량의 노이즈를 삽입하여 계산된 적대적 샘플이 잘못된 예측으로 이어질 수 있음을 보여줍니다.**
 <br>
 [199] first shows that an adversarial sample, computed by inserting a small amount of noise on the original image, may lead to a wrong prediction. 
 
-그러나 video models 공격에 대한 작업은 제한적으로 수행되었습니다.
+**그러나 video models 공격에 대한 작업은 제한적으로 수행되었습니다.**
 <br>
 However, limited work has been done on attacking video models.
 
-이 작업은 일반적으로 공격자가 주어진 입력의 정확한 그래디언트를 포함하여 모델에 대한 전체 액세스 권한을 항상 얻을 수 있는 화이트 박스 공격[86, 119, 66, 21] 또는 블랙 박스 공격[93, 245, 226] 공격자가 쿼리를 통해서만 (입력, 출력) 쌍에 액세스할 수 있도록 모델의 구조와 매개 변수가 차단됩니다.
+**이 작업은 일반적으로 공격자가 주어진 입력의 정확한 그래디언트를 포함하여 모델에 대한 전체 액세스 권한을 항상 얻을 수 있는 화이트 박스 공격[86, 119, 66, 21] 또는 블랙 박스 공격[93, 245, 226] 공격자가 쿼리를 통해서만 (입력, 출력) 쌍에 액세스할 수 있도록 모델의 구조와 매개 변수가 차단됩니다.**
 <br>
 This task usually considers two settings, a white-box attack [86, 119, 66, 21] where the adversary can always get the full access to the model including exact gradients of a given input, or a black-box one [93, 245, 226], in which the structure and parameters of the model are blocked so that the attacker can only access the (input, output) pair through queries. 
 
-최근 작업 ME-Sampler [260]는 적대적 비디오를 생성하는 데 직접 모션 정보를 활용하고 훨씬 적은 쿼리를 사용하여 여러 비디오 분류 모델을 성공적으로 공격하는 것으로 나타났습니다.
+**최근 작업 ME-Sampler [260]는 적대적 비디오를 생성하는 데 직접 모션 정보를 활용하고 훨씬 적은 쿼리를 사용하여 여러 비디오 분류 모델을 성공적으로 공격하는 것으로 나타났습니다.**
 <br>
 Recent work ME-Sampler [260] leverages the motion information directly in generating adversarial videos, and is shown to successfully attack a number of video classification models using many fewer queries. 
 
-정리하면 영상 분류, 이상 감지, 샷 감지, 얼굴 감지 등과 같은 서비스에 대한 API를 많은 회사에서 제공하기 때문에 이 방향이 유용합니다.
+**정리하면 영상 분류, 이상 감지, 샷 감지, 얼굴 감지 등과 같은 서비스에 대한 API를 많은 회사에서 제공하기 때문에 이 방향이 유용합니다.**
 <br>
 In summary, this direction is useful since many companies provide APIs for services such as video classification, anomaly detection, shot detection, face detection, etc. 
 
-또한 이 항목은 DeepFake 비디오 탐지와도 관련이 있습니다.
+**또한 이 항목은 DeepFake 비디오 탐지와도 관련이 있습니다.**
 <br>
 In addition, this topic is also related to detecting DeepFake videos. 
 
-따라서 이러한 비디오 서비스를 안전하게 유지하려면 공격 방법과 방어 방법을 모두 조사하는 것이 중요합니다.
+**따라서 이러한 비디오 서비스를 안전하게 유지하려면 공격 방법과 방어 방법을 모두 조사하는 것이 중요합니다.**
 <br>
 Hence, investigating both attacking and defending methods is crucial to keeping these video services safe.
 
@@ -2479,43 +2479,43 @@ Hence, investigating both attacking and defending methods is crucial to keeping 
 
 <br>
 
-ZSL(Zero-shot learning)은 이미지 이해 영역에서 유행하고 있으며 최근 비디오 동작 인식에 적용되었습니다.
+**ZSL(Zero-shot learning)은 이미지 이해 영역에서 유행하고 있으며 최근 비디오 동작 인식에 적용되었습니다.**
 <br>
 Zero-shot learning (ZSL) has been trending in the image understanding domain, and has recently been adapted to video action recognition. 
 
-그것의 목표는 이전에 볼 수 없었던 범주를 분류하기 위해 학습된 지식을 전송하는 것입니다.
+**그것의 목표는 이전에 볼 수 없었던 범주를 분류하기 위해 학습된 지식을 전송하는 것입니다.**
 <br>
 Its goal is to transfer the learned knowledge to classify previously unseen categories. 
 
-(1) 값비싼 데이터 소싱 및 주석과 (2) 가능한 인간 행동 세트가 방대하기 때문에 제로 샷 행동 인식은 실제 응용 프로그램에 매우 유용한 작업입니다.
+**(1) 값비싼 데이터 소싱 및 주석과 (2) 가능한 인간 행동 세트가 방대하기 때문에 제로 샷 행동 인식은 실제 응용 프로그램에 매우 유용한 작업입니다.**
 <br>
 Due to (1) the expensive data sourcing and annotation and (2) the set of possible human actions is huge, zero-shot action recognition is a very useful task for real-world applications.
 
-이 방향으로 많은 초기 시도[242, 88, 243, 137, 168, 57]가 있습니다.
+**이 방향으로 많은 초기 시도[242, 88, 243, 137, 168, 57]가 있습니다.**
 <br>
 There are many early attempts [242, 88, 243, 137, 168, 57] in this direction. 
 
-그들 중 대부분은 사전 훈련된 네트워크를 사용하여 비디오에서 시각적 특징을 먼저 추출한 다음 시각적 임베딩을 시맨틱 임베딩 공간에 매핑하는 공동 모델을 훈련시키는 표준 프레임워크를 따릅니다.
+**그들 중 대부분은 사전 훈련된 네트워크를 사용하여 비디오에서 시각적 특징을 먼저 추출한 다음 시각적 임베딩을 시맨틱 임베딩 공간에 매핑하는 공동 모델을 훈련시키는 표준 프레임워크를 따릅니다.**
 <br>
 Most of them follow a standard framework, which is to first extract visual features from videos using a pretrained network, and then train a joint model that maps the visual embedding to a semantic embedding space.
 
-이러한 방식으로 임베딩이 모델 출력의 가장 가까운 이웃인 테스트 클래스를 찾아 새 클래스에 모델을 적용할 수 있습니다.
+**이러한 방식으로 임베딩이 모델 출력의 가장 가까운 이웃인 테스트 클래스를 찾아 새 클래스에 모델을 적용할 수 있습니다.**
 <br>
 In this manner, the model can be applied to new classes by finding the test class whose embedding is the nearestneighbor of the model’s output. 
 
-최근 작업 URL [279]은 데이터 세트 전체에서 일반화하는 보편적인 표현을 학습할 것을 제안합니다.
+**최근 작업 URL [279]은 데이터 세트 전체에서 일반화하는 보편적인 표현을 학습할 것을 제안합니다.**
 <br>
 A recent work URL [279] proposes to learn a universal representation that generalizes across datasets. 
 
-다음 URL [279], [10]은 최초의 종단 간 ZSL 동작 인식 모델을 제시합니다.
+**다음 URL [279], [10]은 최초의 종단 간 ZSL 동작 인식 모델을 제시합니다.**
 <br>
 Following URL [279], [10] present the first end-to-end ZSL action recognition model. 
 
-또한 새로운 ZSL 교육 및 평가 프로토콜을 설정하고 이 분야를 더욱 발전시키기 위해 심층 분석을 제공합니다.
+**또한 새로운 ZSL 교육 및 평가 프로토콜을 설정하고 이 분야를 더욱 발전시키기 위해 심층 분석을 제공합니다.**
 <br>
 They also establish a new ZSL training and evaluation protocol, and provide an in-depth analysis to further advance this field.
 
-NLP 도메인에서 사전 훈련 후 제로 샷의 성공에 영감을 받아 ZSL 동작 인식이 유망한 연구 주제라고 생각합니다.
+**NLP 도메인에서 사전 훈련 후 제로 샷의 성공에 영감을 받아 ZSL 동작 인식이 유망한 연구 주제라고 생각합니다.**
 <br>
 Inspired by the success of pre-training and then zero-shot in NLP domain, we believe ZSL action recognition is a promising research topic.
 
@@ -2526,51 +2526,51 @@ Inspired by the success of pre-training and then zero-shot in NLP domain, we bel
 
 <br>
 
-고품질 비디오 동작 인식 데이터 세트[190, 100]를 구축하려면 일반적으로 여러 힘든 단계가 필요합니다.
+**고품질 비디오 동작 인식 데이터 세트[190, 100]를 구축하려면 일반적으로 여러 힘든 단계가 필요합니다.**
 <br>
 Building a high-quality video action recognition dataset [190, 100] usually requires multiple laborious steps:
 
-1) 먼저 일반적으로 인터넷에서 대량의 원시 비디오를 소싱합니다.
+**1) 먼저 일반적으로 인터넷에서 대량의 원시 비디오를 소싱합니다.**
 <br>
 1) first sourcing a large amount of raw videos, typically from the internet; 
 
-2) 데이터 세트의 카테고리와 관련 없는 비디오를 제거합니다.
+**2) 데이터 세트의 카테고리와 관련 없는 비디오를 제거합니다.**
 <br>
 2) removing videos irrelevant to the categories in the dataset; 
 
-3) 관심 있는 동작이 있는 비디오 세그먼트를 수동으로 트리밍합니다.
+**3) 관심 있는 동작이 있는 비디오 세그먼트를 수동으로 트리밍합니다.**
 <br>
 3) manually trimming the video segments that have actions of interest; 
 
-4) 범주 레이블을 세분화합니다. Weakly-supervised action recognition은 훈련 데이터 큐레이팅 비용을 줄이는 방법을 탐색합니다.
+**4) 범주 레이블을 세분화합니다. Weakly-supervised action recognition은 훈련 데이터 큐레이팅 비용을 줄이는 방법을 탐색합니다.**
 <br>
 4) refining the categorical labels. Weakly-supervised action recognition explores how to reduce the cost for curating training data.
 
-연구의 첫 번째 방향[19, 60, 58]은 비디오 소싱 비용과 정확한 범주 라벨링을 줄이는 것을 목표로 합니다.
+**연구의 첫 번째 방향[19, 60, 58]은 비디오 소싱 비용과 정확한 범주 라벨링을 줄이는 것을 목표로 합니다.**
 <br>
 The first direction of research [19, 60, 58] aims to reduce the cost of sourcing videos and accurate categorical labeling. 
 
-그들은 인터넷과 같이 공개적으로 사용 가능한 소스에서 수집된 동작 관련 이미지 또는 부분적으로 주석이 달린 비디오와 같은 교육 데이터를 사용하는 교육 방법을 설계합니다.
+**그들은 인터넷과 같이 공개적으로 사용 가능한 소스에서 수집된 동작 관련 이미지 또는 부분적으로 주석이 달린 비디오와 같은 교육 데이터를 사용하는 교육 방법을 설계합니다.**
 <br>
 They design training methods that use training data such as action-related images or partially annotated videos, gathered from publicly available sources such as Internet.
 
-따라서 이 패러다임은 webly-supervised learning[19, 58]이라고도 합니다.
+**따라서 이 패러다임은 webly-supervised learning[19, 58]이라고도 합니다.**
 <br>
 Thus this paradigm is also referred to as webly-supervised learning [19, 58]. 
 
-옴니 감독 학습에 대한 최근 작업[60, 64, 38]도 이 패러다임을 따르지만 모델 자체 추론 결과를 추출하여 레이블이 지정되지 않은 비디오에 대한 부트스트래핑을 특징으로 합니다.
+**옴니 감독 학습에 대한 최근 작업[60, 64, 38]도 이 패러다임을 따르지만 모델 자체 추론 결과를 추출하여 레이블이 지정되지 않은 비디오에 대한 부트스트래핑을 특징으로 합니다.**
 <br>
 Recent work on omni-supervised learning [60, 64, 38] also follows this paradigm but features bootstrapping on unlabelled videos by distilling the models’ own inference results.
 
-두 번째 방향은 애노테이션에서 가장 시간이 많이 걸리는 부분인 트리밍을 제거하는 것을 목표로 합니다. UntrimmedNet[216]은 범주 레이블만 있는 트리밍되지 않은 비디오에 대한 동작 인식 모델을 학습하는 방법을 제안했습니다[149, 172].
+**두 번째 방향은 애노테이션에서 가장 시간이 많이 걸리는 부분인 트리밍을 제거하는 것을 목표로 합니다. UntrimmedNet[216]은 범주 레이블만 있는 트리밍되지 않은 비디오에 대한 동작 인식 모델을 학습하는 방법을 제안했습니다[149, 172].**
 <br>
 The second direction aims at removing trimming, the most time consuming part in annotation. UntrimmedNet [216] proposed a method to learn action recognition model on untrimmed videos with only categorical labels [149, 172]. 
 
-이 작업은 또한 작업의 시간 범위를 자동으로 생성하는 것을 목표로 하는 약한 감독 시간 작업 지역화와 관련이 있습니다.
+**이 작업은 또한 작업의 시간 범위를 자동으로 생성하는 것을 목표로 하는 약한 감독 시간 작업 지역화와 관련이 있습니다.**
 <br>
 This task is also related to weaklysupervised temporal action localization which aims to automatically generate the temporal span of the actions. 
 
-몇몇 논문은 이 두 작업에 대한 모델을 동시에 [155] 또는 반복적으로 [184] 학습할 것을 제안합니다.
+**몇몇 논문은 이 두 작업에 대한 모델을 동시에 [155] 또는 반복적으로 [184] 학습할 것을 제안합니다.**
 <br>
 Several papers propose to simultaneously [155] or iteratively [184] learn models for these two tasks.
 
@@ -2581,23 +2581,23 @@ Several papers propose to simultaneously [155] or iteratively [184] learn models
 
 <br>
 
-UCF101[190] 또는 Kinetics400[100]과 같은 인기 있는 동작 인식 데이터 세트는 대부분 다양한 장면에서 발생하는 동작으로 구성됩니다.
+**UCF101[190] 또는 Kinetics400[100]과 같은 인기 있는 동작 인식 데이터 세트는 대부분 다양한 장면에서 발생하는 동작으로 구성됩니다.**
 <br>
 Popular action recognition datasets, such as UCF101 [190] or Kinetics400 [100], mostly comprise actions happening in various scenes. 
 
-그러나 이러한 데이터 세트에서 학습된 모델은 작업과 관련 없는 컨텍스트 정보에 과적합될 수 있습니다[224, 227, 24].
+**그러나 이러한 데이터 세트에서 학습된 모델은 작업과 관련 없는 컨텍스트 정보에 과적합될 수 있습니다[224, 227, 24].**
 <br>
 However, models learned on these datasets could overfit to contextual information irrelevant to the actions [224, 227, 24]. 
 
-세분화된 행동 인식의 문제를 연구하기 위해 여러 데이터 세트가 제안되었으며, 이는 행동 특정 정보를 모델링하는 모델의 능력을 검사할 수 있습니다.
+**세분화된 행동 인식의 문제를 연구하기 위해 여러 데이터 세트가 제안되었으며, 이는 행동 특정 정보를 모델링하는 모델의 능력을 검사할 수 있습니다.**
 <br>
 Several datasets have been proposed to study the problem of fine-grained action recognition, which could examine the models’ capacities in modeling action specific information.
 
-이러한 데이터 세트는 요리[28, 108, 174], 작업[103] 및 스포츠[181, 124]와 같은 인간 활동의 세분화된 작업으로 구성됩니다.
+**이러한 데이터 세트는 요리[28, 108, 174], 작업[103] 및 스포츠[181, 124]와 같은 인간 활동의 세분화된 작업으로 구성됩니다.**
 <br>
 These datasets comprise fine-grained actions in human activities such as cooking [28, 108, 174], working [103] and sports [181, 124]. 
 
-예를 들어, FineGym [181]은 체조 비디오에서 다양한 동작 및 하위 동작으로 주석이 달린 최근 대규모 데이터 세트입니다.
+**예를 들어, FineGym [181]은 체조 비디오에서 다양한 동작 및 하위 동작으로 주석이 달린 최근 대규모 데이터 세트입니다.**
 <br>
 For example, FineGym [181] is a recent large dataset annotated with different moves and sub-actions in gymnastic videos.
 
@@ -2608,23 +2608,23 @@ For example, FineGym [181] is a recent large dataset annotated with different mo
 
 <br>
 
-최근 웨어러블 카메라 장치의 등장으로 대규모 자기 중심적 행동 인식[29, 28]에 대한 관심이 높아지고 있다.
+**최근 웨어러블 카메라 장치의 등장으로 대규모 자기 중심적 행동 인식[29, 28]에 대한 관심이 높아지고 있다.**
 <br>
 Recently, large-scale egocentric action recognition [29, 28] has attracted increasing interest with the emerging of wearable cameras devices. 
 
-자기 중심적 행동 인식은 복잡한 환경에서 손 동작과 상호 작용하는 개체에 대한 정밀한 이해가 필요합니다.
+**자기 중심적 행동 인식은 복잡한 환경에서 손 동작과 상호 작용하는 개체에 대한 정밀한 이해가 필요합니다.**
 <br>
 Egocentric action recognition requires a fine understanding of hand motion and the interacting objects in the complex environment. 
 
-몇몇 논문은 객체 감지 기능을 활용하여 자기 중심적인 비디오 인식을 개선하기 위해 미세한 객체 컨텍스트를 제공합니다[136, 223, 229, 180].
+**몇몇 논문은 객체 감지 기능을 활용하여 자기 중심적인 비디오 인식을 개선하기 위해 미세한 객체 컨텍스트를 제공합니다[136, 223, 229, 180].**
 <br>
 A few papers leverage object detection features to offer fine object context to improve egocentric video recognition [136, 223, 229, 180]. 
 
-다른 것들은 동작 인식을 용이하게 하기 위해 상호 작용하는 객체를 위치시키기 위해 시공간 주의[192] 또는 시선 주석[131]을 통합합니다.
+**다른 것들은 동작 인식을 용이하게 하기 위해 상호 작용하는 객체를 위치시키기 위해 시공간 주의[192] 또는 시선 주석[131]을 통합합니다.**
 <br>
 Others incorporate spatio-temporal attention [192] or gaze annotations [131] to localize the interacting object to facilitate action recognition. 
 
-3인칭 동작 인식과 유사하게 다중 모드 입력(예: optical flow & audio)이 자기 중심적 동작 인식에 효과적인 것으로 입증되었습니다[101].
+**3인칭 동작 인식과 유사하게 다중 모드 입력(예: optical flow & audio)이 자기 중심적 동작 인식에 효과적인 것으로 입증되었습니다[101].**
 <br>
 Similar to third-person action recognition, multi-modal inputs (e.g., optical flow and audio) have been demonstrated to be effective in egocentric action recognition [101].
 
@@ -2635,43 +2635,43 @@ Similar to third-person action recognition, multi-modal inputs (e.g., optical fl
 
 <br>
 
-Multi-modal video 이해는 최근 몇 년 동안 주목을 끌었습니다 [55, 3, 129, 167, 154, 2, 105].
+**Multi-modal video 이해는 최근 몇 년 동안 주목을 끌었습니다 [55, 3, 129, 167, 154, 2, 105].**
 <br>
 Multi-modal video understanding has attracted increasing attention in recent years [55, 3, 129, 167, 154, 2, 105].
 
-다중 모달 비디오 이해에는 두 가지 주요 범주가 있습니다.
+**다중 모달 비디오 이해에는 두 가지 주요 범주가 있습니다.**
 <br>
 There are two main categories for multi-modal video understanding. 
 
-첫 번째 접근 방식 그룹은 장면, 개체, 동작 및 오디오와 같은 다중 형식을 사용하여 비디오 표현을 풍부하게 합니다.
+**첫 번째 접근 방식 그룹은 장면, 개체, 동작 및 오디오와 같은 다중 형식을 사용하여 비디오 표현을 풍부하게 합니다.**
 <br>
 The first group of approaches use multimodalities such as scene, object, motion, and audio to enrich the video representations. 
 
-두 번째 그룹의 목표는 모달 정보를 사전 학습 모델에 대한 감독 신호로 활용하는 모델을 설계하는 것입니다[195, 138, 249, 62, 2].
+**두 번째 그룹의 목표는 모달 정보를 사전 학습 모델에 대한 감독 신호로 활용하는 모델을 설계하는 것입니다[195, 138, 249, 62, 2].**
 <br>
 In the second group, the goal is to design a model which utilizes modality information as a supervision signal for pre-training models [195, 138, 249, 62, 2].
 
-포괄적인 비디오 이해를 위한 다중 방식 비디오의 의미 체계가 복잡하기 때문에 강력하고 포괄적인 비디오 표현을 학습하는 것은 매우 어렵습니다.
+**포괄적인 비디오 이해를 위한 다중 방식 비디오의 의미 체계가 복잡하기 때문에 강력하고 포괄적인 비디오 표현을 학습하는 것은 매우 어렵습니다.**
 <br>
 Multi-modality for comprehensive video understanding Learning a robust and comprehensive representation of video is extremely challenging due to the complexity of semantics in videos. 
 
-비디오 데이터는 종종 모양, 동작, 오디오, 텍스트 또는 장면을 포함한 다양한 형태의 변형을 포함합니다[55, 129, 166].
+**비디오 데이터는 종종 모양, 동작, 오디오, 텍스트 또는 장면을 포함한 다양한 형태의 변형을 포함합니다[55, 129, 166].**
 <br>
 Video data often includes variations in different forms including appearance, motion, audio, text or scene [55, 129, 166]. 
 
-따라서 이러한 다중 모달 표현을 활용하는 것은 비디오 콘텐츠를 보다 효율적으로 이해하는 데 중요한 단계입니다.
+**따라서 이러한 다중 모달 표현을 활용하는 것은 비디오 콘텐츠를 보다 효율적으로 이해하는 데 중요한 단계입니다.**
 <br>
 Therefore, utilizing these multi-modal representations is a critical step in understanding video content more efficiently. 
 
-비디오의 다중 모드 표현은 장면, 개체, 오디오, 동작, 모양 및 텍스트와 같은 다양한 형식의 표현을 수집하여 근사화할 수 있습니다.
+**비디오의 다중 모드 표현은 장면, 개체, 오디오, 동작, 모양 및 텍스트와 같은 다양한 형식의 표현을 수집하여 근사화할 수 있습니다.**
 <br>
 The multi-modal representations of video can be approximated by gathering representations of various modalities such as scene, object, audio, motion, appearance and text. 
 
-Ngiam et al. [148] 더 나은 기능을 얻기 위해 여러 양식을 사용하도록 제안하려는 초기 시도였습니다.
+**Ngiam et al. [148] 더 나은 기능을 얻기 위해 여러 양식을 사용하도록 제안하려는 초기 시도였습니다.**
 <br>
 Ngiam et al. [148] was an early attempt to suggest using multiple modalities to obtain better features. 
 
-그들은 다중 모달 표현 학습을 위해 입술 비디오와 해당 음성을 활용했습니다. 
+대부분의 비디오 동작 인식 방식은 원시 비디오(또는 디코딩된 비디오 프레임)를 입력으로 사용합니다.
 <br>
 They utilized videos of lips and their corresponding speech for multi-modal representation learning. 
 
