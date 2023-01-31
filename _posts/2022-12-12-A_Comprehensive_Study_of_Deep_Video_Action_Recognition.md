@@ -1379,51 +1379,51 @@ In the next section, we will continue to talk about efficient video modeling, bu
 <br>
 With the increase of dataset size and the need for deployment, efficiency becomes an important concern.
 
-two-stream networks 기반 방법을 사용하는 경우 optical flow를 미리 계산하고 로컬 디스크에 저장해야 합니다.
+**two-stream networks 기반 방법을 사용하는 경우 optical flow를 미리 계산하고 로컬 디스크에 저장해야 합니다.**
 <br>
 If we use methods based on two-stream networks, we need to pre-compute optical flow and store them on local disk. 
 
-Kinetics400 데이터 세트를 예로 들어 모든 optical flow 이미지를 저장하려면 4.5TB의 디스크 공간이 필요합니다.
+**Kinetics400 데이터 세트를 예로 들어 모든 optical flow 이미지를 저장하려면 4.5TB의 디스크 공간이 필요합니다.**
 <br>
 Taking Kinetics400 dataset as an illustrative example, storing all the optical flow images requires 4.5TB disk space. 
 
-이러한 엄청난 양의 데이터로 인해 I/O는 훈련 중에 가장 빡빡한 병목 현상이 되어 GPU 리소스가 낭비되고 실험 주기가 길어집니다.
+**이러한 엄청난 양의 데이터로 인해 I/O는 훈련 중에 가장 빡빡한 병목 현상이 되어 GPU 리소스가 낭비되고 실험 주기가 길어집니다.**
 <br>
 Such a huge amount of data would make I/O become the tightest bottleneck during training, leading to a waste of GPU resources and longer experiment cycle. 
 
-또한 pre-computing optical flow은 저렴하지 않습니다. 이는 모든 two-stream networks 방법이 실시간이 아님을 의미합니다.
+**또한 pre-computing optical flow은 저렴하지 않습니다. 이는 모든 two-stream networks 방법이 실시간이 아님을 의미합니다.**
 <br>
 In addition, pre-computing optical flow is not cheap, which means all the two-stream networks methods are not real-time.
 
-3D CNN을 기반으로 하는 방법을 사용하는 경우 사람들은 여전히 3D CNN이 훈련하기 어렵고 배포하기 어렵다는 것을 알게 됩니다.
+**3D CNN을 기반으로 하는 방법을 사용하는 경우 사람들은 여전히 3D CNN이 훈련하기 어렵고 배포하기 어렵다는 것을 알게 됩니다.**
 <br>
 If we use methods based on 3D CNNs, people still find that 3D CNNs are hard to train and challenging to deploy.
 
-training 측면에서 고급 8-GPU 머신을 사용하여 Kinetics400 데이터 세트에서 교육된 표준 SlowFast 네트워크는 완료하는 데 10일이 걸립니다.
+**training 측면에서 고급 8-GPU 머신을 사용하여 Kinetics400 데이터 세트에서 교육된 표준 SlowFast 네트워크는 완료하는 데 10일이 걸립니다.**
 <br>
 In terms of training, a standard SlowFast network trained on Kinetics400 dataset using a high-end 8-GPU machine takes 10 days to complete. 
 
-이러한 긴 실험 주기와 막대한 컴퓨팅 비용으로 인해 비디오 이해 연구는 컴퓨팅 리소스가 풍부한 대기업/연구소에서만 접근할 수 있습니다. 
+**이러한 긴 실험 주기와 막대한 컴퓨팅 비용으로 인해 비디오 이해 연구는 컴퓨팅 리소스가 풍부한 대기업/연구소에서만 접근할 수 있습니다.**
 <br>
 Such a long experimental cycle and huge computing cost makes video understanding research only accessible to big companies/labs with abundant computing resources.
 
-딥 비디오 모델 [230]의 훈련 속도를 높이려는 최근 몇 가지 시도가 있지만 대부분의 이미지 기반 컴퓨터 비전 작업에 비해 여전히 비용이 많이 듭니다.
+**딥 비디오 모델 [230]의 훈련 속도를 높이려는 최근 몇 가지 시도가 있지만 대부분의 이미지 기반 컴퓨터 비전 작업에 비해 여전히 비용이 많이 듭니다.**
 <br>
 There are several recent attempts to speed up the training of deep video models [230], but these are still expensive compared to most image-based computer vision tasks. 
 
-배포 측면에서 3D 컨볼루션은 다른 플랫폼에 대해 2D 컨볼루션만큼 잘 지원되지 않습니다.
+**배포 측면에서 3D 컨볼루션은 다른 플랫폼에 대해 2D 컨볼루션만큼 잘 지원되지 않습니다.**
 <br>
 In terms of deployment, 3D convolution is not as well supported as 2D convolution for different platforms.
 
-또한 3D CNN은 추가 IO 비용을 추가하는 입력으로 더 많은 비디오 프레임을 필요로 합니다.
+**또한 3D CNN은 추가 IO 비용을 추가하는 입력으로 더 많은 비디오 프레임을 필요로 합니다.**
 <br>
 Furthermore, 3D CNNs require more video frames as input which adds additional IO cost.
 
-이에 연구원들은 2018년부터 동영상 동작 인식의 정확성과 효율성을 동시에 향상시킬 수 있는 다른 대안을 조사하기 시작했습니다. 
+**이에 연구원들은 2018년부터 동영상 동작 인식의 정확성과 효율성을 동시에 향상시킬 수 있는 다른 대안을 조사하기 시작했습니다.**
 <br>
 Hence, starting from year 2018, researchers started to investigate other alternatives to see how they could improve accuracy and efficiency at the same time for video action recognition.
 
-아래의 여러 범주에서 최근의 효율적인 비디오 모델링 방법을 검토할 것입니다.
+**아래의 여러 범주에서 최근의 효율적인 비디오 모델링 방법을 검토할 것입니다.**
 <br>
 We will review recent efficient video modeling methods in several categories below.
 
@@ -1434,59 +1434,59 @@ We will review recent efficient video modeling methods in several categories bel
 
 <br>
 
-two-stream networks의 주요 단점 중 하나는 optical flow가 필요하다는 것입니다.
+**two-stream networks의 주요 단점 중 하나는 optical flow가 필요하다는 것입니다.**
 <br>
 One of the major drawback of two-stream networks is its need for optical flow. 
 
-Pre-computing optical flow은 계산 비용이 많이 들고 저장 공간이 많이 필요하며 비디오 동작 인식을 위해 종단 간 훈련이 불가능합니다. 
+**Pre-computing optical flow은 계산 비용이 많이 들고 저장 공간이 많이 필요하며 비디오 동작 인식을 위해 종단 간 훈련이 불가능합니다.**
 <br>
 Pre-computing optical flow is computationally expensive, storage demanding, and not end-to-end trainable for video action recognition.
 
-적어도 추론 시간 동안 optical flow을 사용하지 않고 모션 정보를 인코딩하는 방법을 찾을 수 있다면 매력적입니다.
+**적어도 추론 시간 동안 optical flow을 사용하지 않고 모션 정보를 인코딩하는 방법을 찾을 수 있다면 매력적입니다.**
 <br>
 It is appealing if we can find a way to encode motion information without using optical flow, at least during inference time.
 
-[146]과 [35]는 비디오 동작 인식을 위한 네트워크 내부의 optical flow을 추정하는 학습을 위한 초기 시도입니다. 
+**[146]과 [35]는 비디오 동작 인식을 위한 네트워크 내부의 optical flow을 추정하는 학습을 위한 초기 시도입니다.**
 <br>
 [146] and [35] are early attempts for learning to estimate optical flow inside a network for video action recognition.
 
-이 두 가지 접근 방식은 추론 중에 optical flow이 필요하지 않지만 flow estimation network를 훈련시키기 위해 훈련 중에 optical flow이 필요합니다. 
+**이 두 가지 접근 방식은 추론 중에 optical flow이 필요하지 않지만 flow estimation network를 훈련시키기 위해 훈련 중에 optical flow가 필요합니다.**
 <br>
 Although these two approaches do not need optical flow during inference, they require optical flow during training in order to train the flow estimation network.
 
-Hidden two-stream networks[278]는 기존의 optical flow 계산을 대체하기 위해 MotionNet을 제안했습니다. 
+**Hidden two-stream networks[278]는 기존의 optical flow 계산을 대체하기 위해 MotionNet을 제안했습니다.**
 <br>
 Hidden two-stream networks [278] proposed MotionNet to replace the traditional optical flow computation.
 
-MotionNet은 unsupervised manner로 동작 정보를 학습하는 경량 네트워크이며 temporal stream과 연결될 때 end-to-end 학습이 가능합니다. 
+**MotionNet은 unsupervised manner로 동작 정보를 학습하는 경량 네트워크이며 temporal stream과 연결될 때 end-to-end 학습이 가능합니다.**
 <br>
 MotionNet is a lightweight network to learn motion information in an unsupervised manner, and when concatenated with the temporal stream, is end-to-end trainable.
 
-따라서 hidden twostream CNNs[278]은 원시 비디오 프레임만 입력으로 사용하고 훈련 또는 추론 단계에 관계없이 optical flow을 명시적으로 계산하지 않고 동작 클래스를 직접 예측합니다. 
+**따라서 hidden twostream CNNs[278]은 원시 비디오 프레임만 입력으로 사용하고 훈련 또는 추론 단계에 관계없이 optical flow을 명시적으로 계산하지 않고 동작 클래스를 직접 예측합니다.**
 <br>
 Thus, hidden twostream CNNs [278] only take raw video frames as input and directly predict action classes without explicitly computing optical flow, regardless of whether its the training or inference stage.
 
-PAN [257] mimics the optical flow features by computing the difference between consecutive feature maps. 
+**PAN [257]은 consecutive feature maps 간의 차이를 계산하여 optical flow features을 모방합니다.**
 <br>
-PAN [257]은 consecutive feature maps 간의 차이를 계산하여 optical flow features을 모방합니다.
+PAN [257] mimics the optical flow features by computing the difference between consecutive feature maps.
 
-이 방향에 따라 [197, 42, 116, 164]는 데이터에서 optical flow와 유사한 기능을 학습하기 위해 end-to-end 훈련 가능한 CNN을 계속 조사합니다.
+**이 방향에 따라 [197, 42, 116, 164]는 데이터에서 optical flow와 유사한 기능을 학습하기 위해 end-to-end 훈련 가능한 CNN을 계속 조사합니다.**
 <br>
 Following this direction, [197, 42, 116, 164] continue to investigate end-to-end trainable CNNs to learn opticalflow-like features from data. 
 
-그들은 광학 흐름의 정의에서 직접 그러한 features를 도출합니다[255].
+**그들은 광학 흐름의 정의에서 직접 그러한 features를 도출합니다[255].**
 <br>
 They derive such features directly from the definition of optical flow [255]. 
 
-MARS[26] 및 D3D[191]는 예를 들어 시간 스트림의 출력을 예측하기 위해 공간 스트림을 조정하여 이중 스트림 네트워크를 단일 스트림으로 결합하기 위해 knowledge distillation를 사용했습니다. 
+**MARS[26] 및 D3D[191]는 예를 들어 시간 스트림의 출력을 예측하기 위해 공간 스트림을 조정하여 이중 스트림 네트워크를 단일 스트림으로 결합하기 위해 knowledge distillation를 사용했습니다.**
 <br>
 MARS [26] and D3D [191] used knowledge distillation to combine twostream networks into a single stream, e.g., by tuning the spatial stream to predict the outputs of the temporal stream.
 
-최근 Kwon et al. [110] 모션 특징을 추정하기 위해 MotionSqueeze 모듈을 도입했습니다. 
+**최근 Kwon et al. [110] 모션 특징을 추정하기 위해 MotionSqueeze 모듈을 도입했습니다.**
 <br>
 Recently, Kwon et al. [110] introduced MotionSqueeze module to estimate the motion features.
 
-제안된 모듈은 end-to-end 훈련이 가능하며 [278]과 유사하게 모든 네트워크에 연결할 수 있습니다.
+**제안된 모듈은 end-to-end 훈련이 가능하며 [278]과 유사하게 모든 네트워크에 연결할 수 있습니다.**
 <br>
 The proposed module is end-to-end trainable and can be plugged into any network, similar to [278].
 
@@ -1497,71 +1497,71 @@ The proposed module is end-to-end trainable and can be plugged into any network,
 
 <br>
 
-프레임 간의 시간적 관계를 모델링하기 위한 간단하고 자연스러운 선택은 3D 컨볼루션을 사용하는 것입니다. 
+**프레임 간의 시간적 관계를 모델링하기 위한 간단하고 자연스러운 선택은 3D 컨볼루션을 사용하는 것입니다.**
 <br>
 A simple and natural choice to model temporal relationship between frames is using 3D convolution.
 
-그러나 이 목표를 달성하기 위한 많은 대안이 있습니다.
+**그러나 이 목표를 달성하기 위한 많은 대안이 있습니다.**
 <br>
 However, there are many alternatives to achieve this goal. 
 
-여기에서는 3D 컨볼루션 없이 시간적 모델링을 수행하는 최근 작업을 검토합니다.
+**여기에서는 3D 컨볼루션 없이 시간적 모델링을 수행하는 최근 작업을 검토합니다.**
 <br>
 Here, we will review some recent work that performs temporal modeling without 3D convolution.
 
-Lin et al. TSM(Temporal Shift Module)이라는 새로운 방법을 소개합니다.
+**Lin et al. TSM(Temporal Shift Module)이라는 새로운 방법을 소개합니다.**
 <br>
 Lin et al. [128] introduce a new method, termed temporal shift module (TSM). 
 
-TSM은 shift operation[228]을 비디오 이해로 확장합니다.
+**TSM은 shift operation[228]을 비디오 이해로 확장합니다.**
 <br>
 TSM extends the shift operation [228] to video understanding. 
 
-시간적 차원을 따라 채널의 일부를 이동하여 이웃 프레임 간에 정보 교환을 용이하게 합니다. 
+**시간적 차원을 따라 채널의 일부를 이동하여 이웃 프레임 간에 정보 교환을 용이하게 합니다.**
 <br>
 It shifts part of the channels along the temporal dimension, thus facilitating information exchanged among neighboring frames.
 
-spatial feature 학습 능력을 유지하기 위해 residual block의 residual branch 내부에 시간 이동 모듈을 넣었습니다.
+**spatial feature 학습 능력을 유지하기 위해 residual block의 residual branch 내부에 시간 이동 모듈을 넣었습니다.**
 <br>
 In order to keep spatial feature learning capacity, they put temporal shift module inside the residual branch in a residual block. 
 
-따라서 원래 활성화의 모든 정보는 ID 매핑을 통해 시간 이동 후에도 여전히 액세스할 수 있습니다.
+**따라서 원래 활성화의 모든 정보는 ID 매핑을 통해 시간 이동 후에도 여전히 액세스할 수 있습니다.**
 <br>
 Thus all the information in the original activation is still accessible after temporal shift through identity mapping. 
 
-TSM의 가장 큰 장점은 2D CNN에 삽입하여 zero computation and zero parameters에서 시간 모델링을 달성할 수 있다는 것입니다.
+**TSM의 가장 큰 장점은 2D CNN에 삽입하여 zero computation and zero parameters에서 시간 모델링을 달성할 수 있다는 것입니다.**
 <br>
 The biggest advantage of TSM is that it can be inserted into a 2D CNN to achieve temporal modeling at zero computation and zero parameters. 
 
-TSM과 유사하게 TIN[182]은 시간 컨벌루션을 모델링하기 위해 시간 인터레이스 모듈을 도입합니다.
+**TSM과 유사하게 TIN[182]은 시간 컨벌루션을 모델링하기 위해 시간 인터레이스 모듈을 도입합니다.**
 <br>
 Similar to TSM, TIN [182] introduces a temporal interlacing module to model the temporal convolution.
 
-장기 시간 모델링 [92, 122, 132, 133]을 수행하기 위해 주의를 사용하는 몇 가지 최근 2D CNN 접근 방식이 있습니다.
+**장기 시간 모델링 [92, 122, 132, 133]을 수행하기 위해 주의를 사용하는 몇 가지 최근 2D CNN 접근 방식이 있습니다.**
 <br>
 There are several recent 2D CNNs approaches using attention to perform long-term temporal modeling [92, 122, 132, 133]. 
 
-STM[92]에서는 시공간적 특징을 표현하기 위한 채널별 시공간 모듈과 움직임 특징을 효율적으로 부호화하기 위한 채널별 모션 모듈을 제안한다. 
+**STM[92]에서는 시공간적 특징을 표현하기 위한 채널별 시공간 모듈과 움직임 특징을 효율적으로 부호화하기 위한 채널별 모션 모듈을 제안한다.**
 <br>
 STM [92] proposes a channel-wise spatiotemporal module to present the spatio-temporal features and a channel-wise motion module to efficiently encode motion features.
 
-TEA[122]는 STM과 유사하지만 SENet[81]에서 영감을 얻은 TEA는 동작 패턴을 향상시키기 위해 시공간적 특징을 재보정하기 위해 동작 특징을 사용합니다.
+**TEA[122]는 STM과 유사하지만 SENet[81]에서 영감을 얻은 TEA는 동작 패턴을 향상시키기 위해 시공간적 특징을 재보정하기 위해 동작 특징을 사용합니다.**
 <br>
 TEA [122] is similar to STM, but inspired by SENet [81], TEA uses motion features to recalibrate the spatio-temporal features to enhance the motion pattern.
 
-특히 TEA에는 두 가지 구성 요소가 있습니다. motion excitation 및 multiple temporal aggregation, 첫 번째는 단거리 모션 모델링을 처리하고 두 번째는 장거리 시간 모델링을 위해 시간 수용 필드를 효율적으로 확장합니다. 
+**특히 TEA에는 두 가지 구성 요소가 있습니다. motion excitation 및 multiple temporal aggregation, 첫 번째는 단거리 모션 모델링을 처리하고 두 번째는 장거리 시간 모델링을 위해 시간 수용 필드를 효율적으로 확장합니다.**
 <br>
 Specifically, TEA has two components: motion excitation and multiple temporal aggregation, while the first one handles short-range motion modeling and the second one efficiently enlarge the temporal receptive field for long-range temporal modeling.
 
-그것들은 상호 보완적이고 가볍기 때문에 TEA는 FLOP를 많은 2D CNN만큼 낮게 유지하면서 이전 최고의 접근 방식으로 경쟁력 있는 결과를 얻을 수 있습니다. 
+**그것들은 상호 보완적이고 가볍기 때문에 TEA는 FLOP를 많은 2D CNN만큼 낮게 유지하면서 이전 최고의 접근 방식으로 경쟁력 있는 결과를 얻을 수 있습니다.**
 <br>
 They are complementary and both light-weight, thus TEA is able to achieve competitive results with previous best approaches while keeping FLOPs as low as many 2D CNNs.
 
-최근에 TEINet[132]도 시간적 모델링을 향상시키기 위해 주의를 기울였습니다.
+**최근에 TEINet[132]도 시간적 모델링을 향상시키기 위해 주의를 기울였습니다.**
 <br>
 Recently, TEINet [132] also adopts attention to enhance temporal modeling. 
 
-위의 어텐션 기반 방법은 비로컬 어텐션을 사용하는 반면 채널 어텐션을 사용하기 때문에 논로컬[219]과 다릅니다.
+**위의 어텐션 기반 방법은 비로컬 어텐션을 사용하는 반면 채널 어텐션을 사용하기 때문에 논로컬[219]과 다릅니다.**
 <br>
 Note that, the above attention-based methods are different from nonlocal [219], because they use channel attention while nonlocal uses spatial attention.
 
@@ -1572,7 +1572,7 @@ Note that, the above attention-based methods are different from nonlocal [219], 
 
 <br>
 
-이 섹션에서는 지난 10년 동안 비디오 동작 인식에 널리 사용된 몇 가지 다른 방향을 보여드리겠습니다.
+**이 섹션에서는 지난 10년 동안 비디오 동작 인식에 널리 사용된 몇 가지 다른 방향을 보여드리겠습니다.**
 <br>
 In this section, we are going to show several other directions that are popular for video action recognition in the last decade.
 
@@ -1583,27 +1583,27 @@ In this section, we are going to show several other directions that are popular 
 
 <br>
 
-CNN 기반 접근 방식이 그 우수성을 입증하고 점차 전통적인 수작업 방법을 대체했지만, 전통적인 local feature pipeline은 여전히 궤적 사용과 같은 무시할 수 없는 장점을 가지고 있습니다.
+**CNN 기반 접근 방식이 그 우수성을 입증하고 점차 전통적인 수작업 방법을 대체했지만, 전통적인 local feature pipeline은 여전히 궤적 사용과 같은 무시할 수 없는 장점을 가지고 있습니다.**
 <br>
 While CNN-based approaches have demonstrated their superiority and gradually replaced the traditional hand-crafted methods, the traditional local feature pipeline still has its merits which should not be ignored, such as the usage of trajectory.
 
-trajectory-based methods[210]의 우수한 성능에 영감을 받아 Wang et al. [214]는 깊은 컨벌루션 기능을 효과적인 디스크립터로 집계하기 위해 trajectory-constrained pooling을 수행할 것을 제안했으며, 이를 TDD라고 합니다.
+**trajectory-based methods[210]의 우수한 성능에 영감을 받아 Wang et al. [214]는 깊은 컨벌루션 기능을 효과적인 디스크립터로 집계하기 위해 trajectory-constrained pooling을 수행할 것을 제안했으며, 이를 TDD라고 합니다.**
 <br>
 Inspired by the good performance of trajectory-based methods [210], Wang et al. [214] proposed to conduct trajectory-constrained pooling to aggregate deep convolutional features into effective descriptors, which they term as TDD. 
 
-여기서 궤적(trajectory )은 시간적 차원에서 픽셀을 추적하는 경로로 정의됩니다.
+**여기서 궤적(trajectory )은 시간적 차원에서 픽셀을 추적하는 경로로 정의됩니다.**
 <br>
 Here, a trajectory is defined as a path tracking down pixels in the temporal dimension. 
 
-이 새로운 비디오 표현은 hand-crafted features와 딥 러닝 기능의 장점을 모두 공유하며 2015년 UCF101 및 HMDB51 데이터 세트 모두에서 최고의 성능 중 하나가 되었습니다.
+**이 새로운 비디오 표현은 hand-crafted features와 딥 러닝 기능의 장점을 모두 공유하며 2015년 UCF101 및 HMDB51 데이터 세트 모두에서 최고의 성능 중 하나가 되었습니다.**
 <br>
 This new video representation shares the merits of both hand-crafted features and deep-learned features, and became one of the top performers on both UCF101 and HMDB51 datasets in the year 2015. 
 
-동시에 Lan et al. [113]은 ISA(Independent Subspace Analysis)와 dense trajectories을 표준 two-stream networks에 통합했으며 데이터 독립적 접근 방식과 데이터 기반 접근 방식 간의 보완성을 보여줍니다. 
+**동시에 Lan et al. [113]은 ISA(Independent Subspace Analysis)와 dense trajectories을 표준 two-stream networks에 통합했으며 데이터 독립적 접근 방식과 데이터 기반 접근 방식 간의 보완성을 보여줍니다.**
 <br>
 Concurrently, Lan et al. [113] incorporated both Independent Subspace Analysis (ISA) and dense trajectories into the standard two-stream networks, and show the complementarity between data-independent and data-driven approaches.
 
-CNN을 고정된 특징 추출기로 취급하는 대신 Zhao et al. [268] 궤적의 도움으로 시간적 차원을 따라 특징을 학습하기 위해 궤적 콘볼루션을 제안했습니다.
+**CNN을 고정된 특징 추출기로 취급하는 대신 Zhao et al. [268] 궤적의 도움으로 시간적 차원을 따라 특징을 학습하기 위해 궤적 콘볼루션을 제안했습니다.**
 <br>
 Instead of treating CNNs as a fixed feature extractor, Zhao et al. [268] proposed trajectory convolution to learn features along the temporal dimension with the help of trajectories.
 
@@ -1614,35 +1614,35 @@ Instead of treating CNNs as a fixed feature extractor, Zhao et al. [268] propose
 
 <br>
 
-비디오 내에서 시간 정보를 모델링하는 또 다른 방법은 Rank pooling(일명 learning-to-rank)이라고 합니다. 
+**비디오 내에서 시간 정보를 모델링하는 또 다른 방법은 Rank pooling(일명 learning-to-rank)이라고 합니다.**
 <br>
 There is another way to model temporal information inside a video, termed rank pooling (a.k.a learning-to-rank).
 
-이 라인의 중요한 작업은 VideoDarwin[53]에서 시작하는데, ranking machine를 사용하여 시간 경과에 따른 모양의 진화를 학습하고 ranking function을 반환합니다. 
+**이 라인의 중요한 작업은 VideoDarwin[53]에서 시작하는데, ranking machine를 사용하여 시간 경과에 따른 모양의 진화를 학습하고 ranking function을 반환합니다.**
 <br>
 The seminal work in this line starts from VideoDarwin [53], that uses a ranking machine to learn the evolution of the appearance over time and returns a ranking function.
 
-순위 함수는 비디오의 프레임을 시간적으로 정렬할 수 있어야 하므로 이 순위 함수의 매개 변수를 새로운 비디오 표현으로 사용합니다.
+**순위 함수는 비디오의 프레임을 시간적으로 정렬할 수 있어야 하므로 이 순위 함수의 매개 변수를 새로운 비디오 표현으로 사용합니다.**
 <br>
 The ranking function should be able to order the frames of a video temporally, thus they use the parameters of this ranking function as a new video representation. 
 
-VideoDarwin[53]은 딥 러닝 기반 방법은 아니지만 유사한 성능과 효율성을 달성합니다.
+**VideoDarwin[53]은 딥 러닝 기반 방법은 아니지만 유사한 성능과 효율성을 달성합니다.**
 <br>
 VideoDarwin [53] is not a deep learning based method, but achieves comparable performance and efficiency.
 
-딥 러닝에 rank pooling을 적용하기 위해 Fernando[54]는 종단 간 기능 학습을 달성하기 위해 차별화 가능한 rank pooling layer을 도입했습니다.
+**딥 러닝에 rank pooling을 적용하기 위해 Fernando[54]는 종단 간 기능 학습을 달성하기 위해 차별화 가능한 rank pooling layer을 도입했습니다.**
 <br>
 To adapt rank pooling to deep learning, Fernando [54] introduces a differentiable rank pooling layer to achieve endto-end feature learning. 
 
-이 방향에 따라 Bilen et al. [9] 동적 이미지라고 하는 비디오당 단일 RGB 이미지를 생성하는 비디오의 원시 이미지 픽셀에 rank pooling을 적용합니다.
+**이 방향에 따라 Bilen et al. [9] 동적 이미지라고 하는 비디오당 단일 RGB 이미지를 생성하는 비디오의 원시 이미지 픽셀에 rank pooling을 적용합니다.**
 <br>
 Following this direction, Bilen et al. [9] apply rank pooling on the raw image pixels of a video producing a single RGB image per video, termed dynamic images. 
 
-Fernando [51]의 또 다른 동시 작업은 여러 수준의 시간 인코딩을 쌓아 순위 풀링을 계층적 순위 풀링으로 확장합니다.
+**Fernando [51]의 또 다른 동시 작업은 여러 수준의 시간 인코딩을 쌓아 순위 풀링을 계층적 순위 풀링으로 확장합니다.**
 <br>
 Another concurrent work by Fernando [51] extends rank pooling to hierarchical rank pooling by stacking multiple levels of temporal encoding. 
 
-마지막으로 [22]는 하위 공간 표현을 사용하여 원래 순위 공식[53]의 일반화를 제안하고 계산 비용이 저렴하면서 동작의 동적 진화를 훨씬 더 잘 표현할 수 있음을 보여줍니다.
+**마지막으로 [22]는 하위 공간 표현을 사용하여 원래 순위 공식[53]의 일반화를 제안하고 계산 비용이 저렴하면서 동작의 동적 진화를 훨씬 더 잘 표현할 수 있음을 보여줍니다.**
 <br>
 Finally, [22] propose a generalization of the original ranking formulation [53] using subspace representations and show that it leads to significantly better representation of the dynamic evolution of actions, while being computationally cheap.
 
