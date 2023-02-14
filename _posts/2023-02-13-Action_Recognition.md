@@ -1,5 +1,5 @@
 ---
-title: "I3D - Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset"
+title: "I3D"
 date: 2023-02-14 08:26:28 -0400
 categories: Deep Learning
 ---
