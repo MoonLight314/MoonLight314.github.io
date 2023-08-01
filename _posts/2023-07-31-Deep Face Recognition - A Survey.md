@@ -485,3 +485,171 @@ Architecture들은 표 II에 표시된 대로 backbone 및 assembled Network로 
 <br>
 <br>
 
+**Inspired by the extraordinary success on the ImageNet [74] challenge, the typical CNN architectures, e.g. AlexNet, VGGNet, GoogleNet, ResNet and SENet, are introduced and widely used as the baseline models in FR (directly or slightly modified).**  
+ImageNet [74] 챌린지의 놀라운 성공에 영감을 받아 전형적인 CNN Architecture, 예를 들어 AlexNet, VGGNet, GoogleNet, ResNet 및 SENet이 도입되어 FR의 기본 Model로 널리 사용됩니다(직접 또는 약간 수정됨).
+
+<br>
+
+**In addition to the mainstream, some assembled networks, e.g. multi-task networks and multi-input networks, are utilized in FR.**  
+주류 외에도 일부 assembled networks, 예를 들어, multi-task networks 및 multi-input networks는 FR에서 활용됩니다. 
+
+<br>
+
+**Hu et al. shows that accumulating the results of assembled networks provides an increase in performance compared with an individual network.**  
+Huet al.은 assembled network의 결과를 누적하면 개별 Network에 비해 성능이 향상됨을 보여줍니다.
+
+<br>
+<br>
+<br>
+
+## Loss Function 
+
+<br>
+<br>
+
+**The softmax loss is commonly used as the supervision signal in object recognition, and it encourages the separability of features.**  
+softmax loss는 일반적으로 객체 인식에서 supervision signal로 사용되며 특징의 분리성을 장려합니다.
+
+<br>
+
+**However, the softmax loss is not sufficiently effective for FR because intra-variations could be larger than inter-differences and more discriminative features are required when recognizing different people.**  
+그러나 softmax loss는 inter-difference보다 intra-variation이 클 수 있고 다른 사람을 인식할 때 더 많은 discriminative 특징이 필요하기 때문에 FR에 대해 충분히 효과적이지 않습니다.
+
+<br>
+
+**Many works focus on creating novel loss functions to make features not only more separable but also discriminative, as shown in Table III.**  
+많은 작업은 표 III에 나와 있는 것처럼 features를 더 분리 가능할 뿐만 아니라 차별적으로 만들기 위해 새로운 손실 기능을 만드는 데 중점을 둡니다.    
+
+<br>
+<br>
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_03.png">
+</p>
+<br>
+<br>
+
+## 3) Face Matching by Deep Features 
+
+<br>
+<br>
+<br>
+
+**FR can be categorized as face verification and face identification.**  
+FR은 face verification과 face identification로 분류할 수 있습니다.
+
+<br>
+
+**In either scenario, a set of known subjects is initially enrolled in the system (the gallery), and during testing, a new subject (the probe) is presented.**  
+두 시나리오 모두 set of known subjects가 처음에 시스템(Gallery)에 등록되고 테스트 중에 new subject (the probe)가 표시됩니다.
+
+<br>
+
+**After the deep networks are trained on massive data with the supervision of an appropriate loss function, each of the test images is passed through the networks to obtain a deep feature representation.**  
+Deep Network가 적절한 Loss Function의 감독 하에 방대한 데이터에 대해 학습된 후 각 테스트 이미지가 Network를 통과하여 deep feature representation을 얻습니다.
+
+<br>
+
+**Using cosine distance or L2 distance, face verification computes one-to-one similarity between the gallery and probe to determine whether the two images are of the same subject, whereas face identification computes one-to-many similarity to determine the specific identity of a probe face.**  
+cosine distance or L2 distance를 사용하여 얼굴 확인(face verification)은 gallery와 probe 간의 one-to-one similarity을 계산하여 두 이미지가 동일한 대상인지 여부를 결정하는 반면, 얼굴 식별(face identification)은 one-to-many similarity을 계산하여 specific identity of a probe face를 결정합니다.
+
+<br>
+
+**In addition to these, other methods are introduced to postprocess the deep features such that the face matching is performed efficiently and accurately, such as metric learning, sparse-representation-based classifier (SRC), and so forth.**  
+이 외에도 metric learning, sparse-representation-based classifier(SRC) 등과 같이 얼굴 매칭이 효율적이고 정확하게 수행되도록 deep features을 postprocess하는 다른 방법이 도입됩니다.
+
+<br>
+
+**To sum up, we present FR modules and their commonlyused methods in Fig. 4 to help readers to get a view of the whole FR.**  
+요약하면 독자가 전체 FR을 볼 수 있도록 그림 4에 FR Module과 일반적으로 사용되는 방법을 제시합니다.
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_04.png">
+</p>
+<br>
+<br>
+
+**In deep FR, various training and testing face databases are constructed, and different architectures and losses of deep FR always follow those of deep object classification and are modified according to unique characteristics of FR.**  
+deep FR에서는 다양한 Train 및 테스트 얼굴 Database가 구축되며 deep FR의 다양한 Architecture와 손실은 항상 deep object classification을 따르고 FR의 고유한 특성에 따라 수정됩니다.
+
+<br>
+
+**Moreover, in order to address unconstrained facial changes, face processing methods are further designed to handle poses, expressions and occlusions variations.**  
+또한 제약 없는 얼굴 변화를 처리하기 위해 포즈, 표정 및 폐색 변화를 처리하도록 얼굴 처리 방법이 추가로 설계되었습니다.
+
+<br>
+
+**Benefiting from these strategies, deep FR system significantly improves the SOTA and surpasses human performance.**  
+이러한 전략의 이점을 활용하여 Deep FR 시스템은 SOTA를 크게 개선하고 인간을 능가합니다.
+
+<br>
+
+**When the applications of FR becomes more and more mature in general scenario, recently, different solutions are driven for more difficult specific scenarios, such as cross-pose FR, crossage FR, video FR.**  
+일반적인 시나리오에서 FR의 적용이 점점 더 성숙해짐에 따라 최근에는 교차 포즈 FR, 교차 FR, 비디오 FR과 같이 더 어려운 특정 시나리오에 대해 서로 다른 솔루션이 구동됩니다.      
+
+<br>
+<br>
+<br>
+<br>
+
+## III. NETWORK ARCHITECTURE AND TRAINING LOSS
+
+<br>
+<br>
+<br>
+
+**For most applications, it is difficult to include the candidate faces during the training stage, which makes FR become a “zero-shot” learning task.**  
+대부분의 애플리케이션에서 Train 단계 동안 후보 얼굴을 포함하는 것은 어렵기 때문에 FR은 "제로 샷" 학습 작업이 됩니다.
+
+<br>
+
+**Fortunately, since all human faces share a similar shape and texture, the representation learned from a small proportion of faces can generalize well to the rest.**  
+다행스럽게도 모든 사람의 얼굴은 비슷한 모양과 질감이기 때문에 얼굴의 작은 부분에서 학습된 표현은 나머지 얼굴에 잘 일반화될 수 있습니다.
+
+<br>
+
+**Based on this theory, a straightforward way to improve generalized performance is to include as many IDs as possible in the training set.**
+이 이론에 따라 일반화된 성능을 향상시키는 간단한 방법은 Training Set에 가능한 한 많은 ID를 포함하는 것입니다.
+
+<br>
+
+**For example, Internet giants such as Facebook and Google have reported their deep FR system trained by 106 − 107 IDs.**  
+예를 들어, Facebook 및 Google과 같은 거대 인터넷 기업은 106 - 107 ID로 Train된 Deep FR 시스템을 보고했습니다.
+
+<br>
+
+**Unfortunately, these personal datasets, as well as prerequisite GPU clusters for distributed model training, are not accessible for academic community.**  
+안타깝게도 이러한 개인 Dataset와 분산 Model 교육을 위한 필수 GPU 클러스터는 학계에서 액세스할 수 없습니다.
+
+<br>
+
+**Currently, public available training databases for academic research consist of only 103−105 IDs.**  
+현재 학술 연구를 위해 공개적으로 사용 가능한 Train Database는 103-105개의 ID로만 구성됩니다.
+
+<br>
+
+**Instead, academic community makes effort to design effective loss functions and adopts efficient architectures to make deep features more discriminative using the relatively small training data sets.**  
+대신 학계에서는 효과적인 Loss Function를 설계하기 위해 노력하고 상대적으로 작은 Train Dataset를 사용하여 깊은 특성을 보다 식별할 수 있도록 효율적인 Architecture를 채택합니다.
+
+<br>
+
+**For instance, the accuracy of most popular LFW benchmark has been boosted from 97% to above 99.8% in the pasting four years, as enumerated in Table IV.**  
+예를 들어, 가장 인기 있는 LFW benchmark의 정확도는 지난 4년 동안 97%에서 99.8% 이상으로 향상되었으며 표 IV에 열거되어 있습니다.
+
+<br>
+
+**In this section, we survey the research efforts on different loss functions and network architectures that have significantly improved deep FR methods.**
+이 섹션에서는 Deep FR 방법을 크게 개선한 다양한 loss functions 및 Network Architecture에 대한 연구 노력을 조사합니다.  
+
+<br>
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_04.png">
+</p>
+<br>
+<br>
+
