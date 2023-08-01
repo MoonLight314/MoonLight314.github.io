@@ -653,3 +653,313 @@ deep FR에서는 다양한 Train 및 테스트 얼굴 Database가 구축되며 d
 <br>
 <br>
 
+### A. Evolution of Discriminative Loss Functions
+
+<br>
+<br>
+<br>
+
+**Inheriting from the object classification network such as AlexNet, the initial Deepface and DeepID adopted cross-entropy based softmax loss for feature learning.**  
+AlexNet과 같은 객체 분류 Network에서 상속받은 초기 Deepface 및 DeepID는 feature learning을 위해 cross-entropy based softmax loss를 채택했습니다.
+
+<br>
+
+**After that, people realized that the softmax loss is not sufficient by itself to learn discriminative features, and more researchers began to explore novel loss functions for enhanced generalization ability.**  
+그 후 사람들은 softmax loss만으로는 판별 기능을 학습하기에 충분하지 않다는 것을 깨달았고 더 많은 연구자들이 일반화 능력을 향상시키기 위해 새로운 Loss Function를 탐색하기 시작했습니다.
+
+<br>
+
+**This becomes the hottest research topic in deep FR research, as illustrated in Fig. 5.**
+이는 그림 5에서 볼 수 있듯이 Deep FR 연구에서 가장 뜨거운 연구 주제가 됩니다.
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_05.png">
+</p>
+<br>
+<br>
+
+**Before 2017, Euclidean-distance-based loss played an important role; In 2017, angular/cosine-margin-based loss as well as feature and weight normalization became popular.**  
+2017년 이전에는 Euclidean-distance-based loss가 중요한 역할을 했습니다. 2017년에는 angular/cosine-margin-based loss와 feature and weight normalization가 인기를 끌었습니다.
+
+<br>
+
+**It should be noted that, although some loss functions share the similar basic idea, the new one is usually designed to facilitate the training procedure by easier parameter or sample selection.**  
+일부 Loss Function은 유사한 기본 아이디어를 공유하지만 새로운 Loss Function는 일반적으로 더 쉬운 매개변수 또는 샘플 선택을 통해 Train 절차를 용이하게 하도록 설계되었습니다.    
+
+<br>
+<br>
+<br>
+<br>
+
+### 1) Euclidean-distance-based Loss  
+
+<br>
+
+**Euclidean-distancebased loss is a metric learning method that embeds images into Euclidean space in which intra-variance is reduced and inter-variance is enlarged.**  
+Euclidean-distance-based loss는 intra-variance를 줄이고 inter-variance를 확대한 Euclidean 공간에 이미지를 삽입하는 메트릭 학습 방법입니다.
+
+<br>
+
+**The contrastive loss and the triplet loss are the commonly used loss functions.**  
+Contrastive loss와 triplet loss는 일반적으로 사용되는 loss function이다.
+
+<br>
+
+**The contrastive loss requires face image pairs, and then pulls together positive pairs and pushes apart negative pairs.**  
+대조적인 손실에는 얼굴 이미지 쌍이 필요하며 양수 쌍을 함께 당기고 음수 쌍을 밀어냅니다.  
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_02.png">
+</p>
+<br>
+<br>
+
+**where yij = 1 means xi and xj are matching samples and yij = 0 means non-matching samples. f(·) is the feature embedding,  + and 
+− control the margins of the matching and non-matching pairs respectivel**  
+
+<br>
+
+**DeepID2 combined the face identification (softmax) and verification (contrastive loss) supervisory signals to learn a discriminative representation, and joint Bayesian (JB) was applied to obtain a robust embedding space.**  
+DeepID2는 얼굴 식별(softmax)과 검증(contrastive loss) 감독 신호를 결합하여 차별적인 표현을 학습하고 joint Bayesian(JB)을 적용하여 강력한 임베딩 공간을 확보했습니다.
+
+<br>
+
+**Extending from DeepID2, DeepID2+ increased the dimension of hidden representations and added supervision to early convolutional layers.**  
+DeepID2에서 확장된 DeepID2+는 숨겨진 표현의 차원을 높이고 초기 convolutional 레이어에 감독 기능을 추가했습니다.
+
+<br>
+
+**DeepID3 further introduced VGGNet and GoogleNet to their work.**  
+DeepID3는 VGGNet과 GoogleNet을 작업에 추가로 도입했습니다.
+
+<br>
+
+**However, the main problem with the contrastive loss is that the margin parameters are often difficult to choose.**  
+그러나 대조 손실(contrastive loss )의 주요 문제는 마진 매개변수(margin parameters )를 선택하기 어려운 경우가 많다는 것입니다.
+
+<br>
+
+**Contrary to contrastive loss that considers the absolute distances of the matching pairs and non-matching pairs, triplet loss considers the relative difference of the distances between them.**  
+일치하는 쌍과 일치하지 않는 쌍의 절대 거리를 고려하는 Contrastive loss와 달리 triplet loss는 그들 사이의 거리의 상대적인 차이를 고려합니다.
+
+<br>
+
+**Along with FaceNet proposed by Google, Triplet loss was introduced into FR.**  
+Google에서 제안한 FaceNet과 함께 Triplet loss가 FR에 도입되었습니다.
+
+<br>
+
+**It requires the face triplets, and then it minimizes the distance between an anchor and a positive sample of the same identity and maximizes the distance between the anchor and a negative sample of a different identity.**  
+그것은 얼굴 삼중항(face triplets)을 필요로 하고 앵커와 동일한 신원의 positive sample 사이의 거리를 최소화하고 앵커와 다른 신원의 negative sample 사이의 거리를 최대화합니다.  
+
+<br>
+<br>  
+
+**Inspired by FaceNet, TPE and TSE learned a linear projection W to construct triplet loss.**  
+FaceNet에서 영감을 받은 TPE와 TSE는 triplet loss을 구성하기 위해 선형 프로젝션 W를 학습했습니다.
+
+<br>
+
+**Other methods optimize deep models using both triplet loss and softmax loss.**  
+다른 방법은 triplet loss와 softmax loss를 모두 사용하여 deep Model을 최적화합니다.
+
+<br>
+
+**They first train networks with softmax and then fine-tune them with triplet loss.**  
+그들은 먼저 softmax로 Network를 Train시킨 다음 triplet loss로 미세 조정합니다.
+
+<br>
+<br>
+
+**However, the contrastive loss and triplet loss occasionally encounter training instability due to the selection of effective training samples, some paper begun to explore simple alternatives.**  
+그러나 Contrastive loss와 triplet loss는 때때로 효과적인 Train 샘플의 선택으로 인해 Train 불안정성에 직면하며, 일부 논문에서는 간단한 대안을 탐색하기 시작했습니다.
+
+<br>
+
+**Center loss and its variants are good choices for reducing intra-variance.**  
+중심 손실(Center loss )과 그 variants은 내부 분산(intra-variance)을 줄이기 위한 좋은 선택입니다.
+
+<br>
+
+**The center loss learned a center for each class and penalized the distances between the deep features and their corresponding class centers.**  
+중심 손실은 각 클래스의 중심을 학습하고 deep features과 해당 class centers 사이의 거리에 불이익을 줍니다.
+
+<br>
+
+**This loss can be defined as follows:**  
+이 손실은 다음과 같이 정의할 수 있습니다.  
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_03.png">
+</p>
+<br>
+<br>
+
+**where xi denotes the i-th deep feature belonging to the yi-th class and cyi denotes the yi-th class center of deep features.**  
+여기서 xi는 yi번째 클래스에 속하는 i번째 Deep feature를 나타내고 cyi는 Deep features의 yi번째 클래스 중심을 나타냅니다.
+
+<br>
+
+**To handle the long-tailed data, a range loss, which is a variant of center loss, is used to minimize k greatest range’s harmonic mean values in one class and maximize the shortest interclass distance within one batch.**  
+long-tailed 데이터를 처리하기 위해 하나의 클래스에서 k greatest range’s harmonic mean 값을 최소화하고 한 배치 내에서 shortest interclass distance를 최대화하기 위해 중심 손실의 변형인 범위 손실을 사용합니다.
+
+<br>
+
+**Wu et al. proposed a center-invariant loss that penalizes the difference between each center of classes.**  
+Wuet al.은 클래스의 각 센터 사이의 차이에 페널티를 주는 center-invariant loss을 제안했습니다.
+
+<br>
+
+**Deng et al. selected the farthest intraclass samples and the nearest inter-class samples to compute a margin loss.**  
+Deng et al.은 마진 손실을 계산하기 위해 가장 먼 내부 클래스 샘플과 가장 가까운 클래스 간 샘플을 선택했습니다.
+
+<br>
+
+**However, the center loss and its variants suffer from massive GPU memory consumption on the classification layer, and prefer balanced and sufficient training data for each identity.**  
+그러나 center loss과 그 변형은 분류 계층에서 막대한 GPU 메모리 소비로 인해 어려움을 겪고 있으며 각 신원에 대해 균형 있고 충분한 Train 데이터를 선호합니다.  
+
+<br>
+<br>
+<br>
+<br>
+
+### 2) Angular/cosine-margin-based Loss  
+
+<br>
+<br>
+
+**In 2017, people had a deeper understanding of loss function in deep FR and thought that samples should be separated more strictly to avoid misclassifying the difficult samples.**  
+2017년에 사람들은 Deep FR의 Loss Function에 대해 더 깊이 이해했고 어려운 샘플을 잘못 분류하지 않도록 샘플을 더 엄격하게 분리해야 한다고 생각했습니다.
+
+<br>
+
+**Angular/cosinemargin-based loss is proposed to make learned features potentially separable with a larger angular/cosine distance.**  
+Angular/cosinemargin-based loss은 larger angular/cosine distance로 잠재적으로 분리할 수 있는 학습된 기능을 만들기 위해 제안됩니다.
+
+<br>
+
+**The decision boundary in softmax loss is (W1 − W2) x + b1 − b2 = 0, where x is feature vector, Wi and bi are weights and bias in softmax loss, respectively.**  
+softmax 손실의 결정 경계는 (W1 − W2) x + b1 − b2 = 0입니다. 여기서 x는 특징 벡터이고 Wi와 bi는 각각 softmax 손실의 가중치와 편향입니다.
+
+<br>
+
+**Liu et al. reformulated the original softmax loss into a large-margin softmax (L-Softmax) loss.**  
+Liu et al.은 원래의 softmax loss를 마진이 큰 Softmax(L-Softmax) 손실로 재공식화했습니다.
+
+<br>
+
+**They constrain b1 = b2 = 0, so the decision boundaries for class 1 and class 2 become kxk (kW1k cos (mθ1) − kW2k cos (θ2)) = 0 and kxk (kW1k kW2k cos (θ1) − cos (mθ2)) = 0, respectively, where m is a positive integer introducing an angular margin, and θi is the angle between Wi and x.**  
+b1 = b2 = 0으로 제한하므로 클래스 1과 클래스 2에 대한 결정 경계는 kxk(kW1k cos(mθ1) − kW2k cos(θ2)) = 0 및 kxk(kW1k kW2k cos(θ1) − cos(mθ2))가 됩니다. = 0, 여기서 m은 각도 마진을 도입하는 양의 정수이고 θi는 Wi와 x 사이의 각도입니다.
+
+<br>
+
+**Due to the nonmonotonicity of the cosine function, a piece-wise function is applied in L-softmax to guarantee the monotonicity.**  
+cosine function의 비단조성(nonmonotonicity )으로 인해 단조성을 보장하기 위해 L-softmax에서 구간 함수를 적용합니다.
+
+<br>
+
+**The loss function is defined as follows:**  
+Loss Function는 다음과 같이 정의됩니다.  
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_04.png">
+</p>
+<br>
+<br>
+
+where  
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_05.png">
+</p>
+<br>
+<br>
+
+**Based on L-Softmax, A-Softmax loss further normalized the weight W by L2 norm (kWk = 1) such that the normalized vector will lie on a hypersphere, and then the discriminative face features can be learned on a hypersphere manifold with an angular margin (Fig. 6).**  
+L-Softmax를 기반으로 A-Softmax 손실은 가중치 W를 L2 표준(kWk = 1)으로 더 정규화하여 정규화된 벡터가 하이퍼스피어에 놓이게 한 다음 각이 있는 하이퍼스피어 매니폴드에서 식별 가능한 얼굴 특징을 학습할 수 있습니다. (그림 6).
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_06.png">
+</p>
+<br>
+<br>
+
+**Liu et al. [108] introduced a deep hyperspherical convolution network (SphereNet) that adopts hyperspherical convolution as its basic convolution operator and is supervised by angular-margin-based loss.**  
+Liu et al. [108]은 기본 convolutional 연산자로 hyperspherical convolutional 을 채택하고 각도-마진 기반 손실에 의해 감독되는 심층 하이퍼스페리컬 convolutional  Network(SphereNet)를 도입했습니다.
+
+<br>
+
+**To overcome the optimization difficulty of L-Softmax and A-Softmax, which incorporate the angular margin in a multiplicative manner, ArcFace and CosFace, AMS loss respectively introduced an additive angular/cosine margin cos(θ + m) and cosθ − m.**  
+각도 마진을 곱셈 방식으로 통합하는 L-Softmax 및 A-Softmax, ArcFace 및 CosFace의 최적화 어려움을 극복하기 위해 AMS 손실은 각각 additive angular/cosine margin cos(θ + m) 및 cosθ − m을 도입했습니다.
+
+<br>
+
+**They are extremely easy to implement without tricky hyperparameters λ, and are more clear and able to converge without the softmax supervision.**  
+까다로운 hyperparameters λ 없이 구현하기가 매우 쉽고 softmax 감독 없이 더 명확하고 수렴할 수 있습니다.
+
+<br>
+
+**The decision boundaries under the binary classification case are given in Table V.**  
+이진 분류 사례 아래의 decision boundaries는 표 V에 나와 있습니다.
+
+<br>
+<br>
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_05.png">
+</p>
+<br>
+<br>
+
+**Based on large margin, FairLoss and AdaptiveFace further proposed to adjust the margins for different classes adaptively to address the problem of unbalanced data.**  
+큰 마진을 기반으로 FairLoss 및 AdaptiveFace는 불균형 데이터 문제를 해결하기 위해 서로 다른 클래스의 마진을 적응적으로 조정할 것을 추가로 제안했습니다.
+
+<br>
+
+**Compared to Euclidean-distance-based loss, angular/cosinemargin-based loss explicitly adds discriminative constraints on a hypershpere manifold, which intrinsically matches the prior that human face lies on a manifold.**  
+Euclidean-distance-based loss과 비교할 때, angular/cosinemargin-based loss은 인간의 얼굴이 다양체에 놓이는 이전과 본질적으로 일치하는 초광각 다양체에 차별적 제약을 명시적으로 추가합니다.
+
+<br>
+
+**However, Wang et al. showed that angular/cosine-margin-based loss can achieve better results on a clean dataset, but is vulnerable to noise and becomes worse than center loss and softmax in the high-noise region as shown in Fig. 7.**  
+그러나 Wang et al.은 angular/cosine-margin-based loss은 깨끗한 Dataset에서 더 나은 결과를 얻을 수 있지만 노이즈에 취약하고 그림 7과 같이 노이즈가 많은 영역에서 center loss 및 softmax보다 나빠집니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_07.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### 3) Softmax Loss and its Variations
+
+<br>
+<br>
+
+**In 2017, in addition to reformulating softmax loss into an angular/cosine-marginbased loss as mentioned above, some works tries to normalize the features and weights in loss functions to improve the model performance, which can be written as follows:**  
+2017년에는 위에서 언급한 대로 softmax 손실을 angular/cosine-marginbased loss로 재공식화하는 것 외에도 일부 작업에서는 Model 성능을 개선하기 위해 Loss Function의 기능과 가중치를 정규화하려고 시도했습니다. 이는 다음과 같이 작성할 수 있습니다.    
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_06.png">
+<p align="center">
+</p>
+<br>
+<br>
