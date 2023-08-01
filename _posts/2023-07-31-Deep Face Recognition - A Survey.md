@@ -343,3 +343,145 @@ Fig. 3에 보여지는 것처럼 FR 시스템에는 세 가지 Module이 필요�
 <br>
 <br>
 
+**First, a face detector is used to localize faces in images or videos.**  
+첫째, face detector는 이미지나 비디오에서 얼굴을 찾아냅니다.
+
+<br>
+
+**Second, with the facial landmark detector, the faces are aligned to normalized canonical coordinates.**  
+둘째, facial landmark detector를 통해 normalized canonical coordinates로 정렬됩니다.
+
+<br>
+
+**Third, the FR module is implemented with these aligned face images.**  
+셋째, 이 aligned 얼굴 이미지들로 FR Module이 구현됩니다.
+
+<br>
+
+**We only focus on the FR module throughout the remainder of this paper.**  
+이 논문의 나머지 부분에서는 FR Module에만 집중합니다.
+
+<br>
+
+**Before a face image is fed to an FR module, face antispoofing, which recognizes whether the face is live or spoofed, is applied to avoid different types of attacks.**  
+얼굴 이미지가 FR Module로 전달되기 전에, 얼굴이 실제인지 가짜인지를 인식하는 face antispoofing이 적용되어 다양한 유형의 공격을 방지합니다.
+
+<br>
+
+**Then, recognition can be performed.**  
+그런 다음, 인식이 수행될 수 있습니다.
+
+<br>
+
+**As shown in Fig. 3(c), an FR module consists of face processing, deep feature extraction and face matching, and it can be described as follows:**  
+Fig. 3(c)에서 보여지는 것처럼, FR Module은 얼굴 처리, Deep feature extraction, face matching으로 구성되며, 다음과 같이 설명될 수 있습니다:  
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_01.png">
+</p>
+<br>
+<br>
+
+**where Ii and Ij are two face images, respectively.**  
+Ii와 Ij는 각각 두 얼굴 이미지를 나타냅니다.
+
+<br>
+
+**P stands for face processing to handle intra-personal variations before training and testing, such as poses, illuminations, expressions and occlusions.**  
+P는 학습과 테스트 전에 자세, 조명, 표정 및 가림 현상과 같은 개인 내 변동을 처리하기 위한 얼굴 처리를 의미합니다.
+
+<br>
+
+**F denotes feature extraction, which encodes the identity information.**  
+F는 신원 정보를 Encoding하는 feature extraction을 나타냅니다.
+
+<br>
+
+**The feature extractor is learned by loss functions when training, and is utilized to extract features of faces when testing.**  
+feature extractor는 학습 시 Loss Function를 통해 학습되며, 테스트 시 features of faces를 추출하는데 사용됩니다.
+
+<br>
+
+**M means a face matching algorithm used to compute similarity scores of features to determine the specific identity of faces.**  
+M은 얼굴의 특정 신원을 결정하기 위해 피처의 similarity scores를 계산하는데 사용되는 face matching algorithm을 의미합니다.
+
+<br>
+
+**Different from object classification, the testing identities are usually disjoint from the training data in FR, which makes the learned classifier cannot be used to recognize testing faces.**  
+object classification와 달리, 얼굴 인식(FR)에서 테스트 신원은 대개 학습 데이터와 분리되어 있어, 학습된 classifier는 테스트 얼굴을 인식하는데 사용될 수 없습니다.
+
+<br>
+
+**Therefore, face matching algorithm is an essential part in FR.**  
+따라서, face matching algorithm은 FR에서 필수적인 부분입니다.  
+
+<br>
+<br>
+<br>
+
+## 1) Face Processing  
+
+<br>
+<br>
+
+**Although deep-learning-based approaches have been widely used, Mehdipour et al. [46] proved that various conditions, such as poses, illuminations, expressions and occlusions, still affect the performance of deep FR.**  
+Deep Learning 기반의 접근법들이 널리 사용되고 있지만, Mehdipour 등[46]은 포즈, 조명, 표정, 가림 등 다양한 조건들이 여전히 Deep FR의 성능에 영향을 미친다는 것을 증명했습니다.
+
+<br>
+
+**Accordingly, face processing is introduced to address this problem.**  
+따라서, 이 문제를 해결하기 위해 face processing이 도입되었습니다.
+
+<br>
+
+**The face processing methods are categorized as “one-to-many augmentation” and “many-to-one normalization”, as shown in Table I.**  
+face processing method들은 Table I에 보여진 것과 같이 "one-to-many augmentation"과 "many-to-one normalization"로 분류됩니다.
+
+<br>
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_01.png">
+</p>
+<br>
+<br>
+
+**• “One-to-many augmentation”. These methods generate many patches or images of the pose variability from a single image to enable deep networks to learn poseinvariant representations.**  
+• "One-to-many augmentation". 이 방법들은 single image에서 포즈의 변동성에 대한 많은 패치나 이미지를 생성하여 Deep Network가 포즈에 불변한 표현을 학습하도록 합니다.
+
+<br>
+
+**• “Many-to-one normalization”. These methods recover the canonical view of face images from one or many images of a nonfrontal view; then, FR can be performed as if it were under controlled conditions.**  
+• "Many-to-one normalization". 이 방법들은 하나 또는 많은 수의 비정면 이미지(nonfrontal view)들로부터 얼굴 이미지의 정규화된 뷰(canonical view of face images)를 복구하고, 그런 다음에 FR을 제어된 조건하에서 수행된 것처럼 실행할 수 있습니다.
+
+<br>
+
+**Note that we mainly focus on deep face processing method designed for pose variations in this paper, since pose is widely regarded as a major challenge in automatic FR applications and other variations can be solved by the similar methods.**  
+주의할 점은 우리가 본 논문에서 주로 포즈 변동성에 대해 설계된 Deep face processing 방법에 집중한다는 것인데, 이는 포즈가 자동 FR 응용 프로그램에서 주요 도전 과제로 널리 인식되고 있으며, 다른 변동성들은 비슷한 방법들로 해결될 수 있기 때문입니다.      
+
+<br>
+<br>
+<br>
+
+
+## 2) Deep Feature Extraction: Network Architecture. 
+
+<br>
+<br>
+
+**The architectures can be categorized as backbone and assembled networks, as shown in Table II.**  
+Architecture들은 표 II에 표시된 대로 backbone 및 assembled Network로 분류할 수 있습니다.
+
+<br>
+
+<br>
+<br>
+<p align="center">
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_02.png">
+</p>
+<br>
+<br>
+
