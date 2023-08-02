@@ -1414,3 +1414,356 @@ JB Model에서 얼굴 특징 x는 x = µ+ε로 Modeling되며, 여기서 µ와 �
 
 where P(x1, x2|HI ) is the probability that two faces belong to the same identity and P(x1, x2|HE) is the probability that two faces belong to different identities.  
 
+<br>
+<br>
+<br>
+
+### 2) Face identification
+
+<br>
+<br>
+<br>
+
+**After cosine distance was computed,Cheng et al. proposed a heuristic voting strategy at the similarity score level to combine the results of multiple CNN models and won first place in Challenge 2 of MSceleb-1M 2017.**  
+cosine distance를 계산한 후 Cheng et al.은 여러 CNN Model의 결과를 결합하기 위해 유사성 점수 수준에서 heuristic voting strategy을 제안하고 MSceleb-1M 2017의 Challenge 2에서 1위를 차지했습니다.
+
+<br>
+
+**Yang et al. extracted the local adaptive convolution features from the local regions of the face image and used the extended SRC for FR with a single sample per person.**  
+Yang et al.은 얼굴 이미지의 로컬 영역에서 local adaptive convolution features을 추출하고 1인당 단일 샘플로 FR용 extended SRC를 사용했습니다.
+
+<br>
+
+**Guo et al. combined deep features and the SVM classifier to perform recognition.**  
+Guoet al.은 deep features과 SVM 분류기를 결합하여 인식을 수행합니다.
+
+<br>
+
+**Wang et al. first used product quantization (PQ) to directly retrieve the topk most similar faces and re-ranked these faces by combining similarities from deep features and the COTS matcher.**  
+Wang et al.은 먼저 product quantization(PQ)를 사용하여 가장 유사한 얼굴을 직접 검색하고 Deep Features과 COTS 매처의 유사성을 결합하여 이러한 얼굴의 순위를 다시 매겼습니다.
+
+<br>
+
+**In addition, Softmax can be also used in face matching when the identities of training set and test set overlap.**  
+또한 Softmax는 Train 세트와 test 세트의 ID가 중복되는 경우 얼굴 매칭에도 사용할 수 있습니다.
+
+<br>
+
+**For example, in Challenge 2 of MS-celeb-1M, Ding et al. [142] trained a 21,000-class softmax classifier to directly recognize faces of one-shot classes and normal classes after augmenting feature by a conditional GAN; Guo et al. trained the softmax classifier combined with underrepresented-classes promotion (UP) loss term to enhance the performance on one-shot classes.**  
+예를 들어 MS-celeb-1M의 Challenge 2에서 Ding et al. [142]은 conditional GAN으로 Features을 보강한 후 원샷 클래스와 일반 클래스의 얼굴을 직접 인식하도록 21,000 클래스의 Softmax 분류기를 Train했습니다. Guoet al.은 원샷 클래스의 성능을 향상시키기 위해 underrepresented-classes promotion (UP) loss term과 결합된 Softmax classifier를 Train했습니다.
+
+<br>
+
+**When the distributions of training data and testing data are the same, the face matching methods mentioned above are effective.**  
+training data와 testing data 의 분포가 같을 때 위에서 언급한 얼굴 매칭 방법이 효과적입니다.
+
+<br>
+
+**However, there is always a distribution change or domain shift between two data domains that can degrade the performance on test data.**  
+그러나 Test Data의 성능을 저하시킬 수 있는 두 데이터 도메인 사이에는 항상 distribution change 또는 domain shift이 있습니다.
+
+<br>
+
+**Transfer learning has recently been introduced into deep FR to address the problem of domain shift.**  
+domain shift 문제를 해결하기 위해 Transfer learning이 최근 심층 FR에 도입되었습니다.
+
+<br>
+
+**It learns transferable features using a labeled source domain (training data) and an unlabeled target domain (testing data) such that domain discrepancy is reduced and models trained on source domain will also perform well on target domain.**  
+레이블이 지정된 소스 도메인(training data)과 레이블이 지정되지 않은 대상 도메인(testing data)을 사용하여 이전 transferable features을 학습하므로 domain discrepancy가 줄어들고 소스 도메인에서 Train된 Model이 대상 도메인에서도 잘 수행됩니다.
+
+<br>
+
+**Sometimes, this technology is applied to face matching. For example, Crosswhite et al. and Xiong et al. adopted template adaptation to the set of media in a template by combining CNN features with template-specific linear SVMs.**  
+때때로 이 기술은 얼굴 매칭에 적용됩니다. 예를 들어 Crosswhite et al. 및 Xiong et al.은 CNN features과 template-specific linear SVMs을 결합하여 template의 미디어 집합에 대한 template 적응을 채택했습니다.
+
+<br>
+
+**But most of the time, it is not enough to do transfer learning only at face matching stage.**  
+그러나 대부분의 경우 얼굴 매칭 단계에서만 transfer learning을 하는 것으로는 충분하지 않습니다.
+
+<br>
+
+**Transfer learning should be embedded in deep models to learn more transferable representations. Kan et al. proposed a bi-shifting autoencoder network (BAE) for domain adaptation across view angle, ethnicity, and imaging sensor; while Luo et al. utilized the multi-kernels maximum mean discrepancy (MMD) to reduce domain discrepancies.**  
+transfer learning은 더 많은 전이 가능한 표현을 학습하기 위해 Deep Model에 포함되어야 합니다. Kanet al.은 시야각, 인종 및 이미징 센서에 걸친 도메인 적응을 위한 BAE(bi-shifting autoencoder network)를 제안했습니다. 반면 Luo et al.은 domain discrepancies를 줄이기 위해 multi-kernels maximum mean discrepancy(MMD)를 활용했습니다.
+
+<br>
+
+**Sohn et al. used adversarial learning [150] to transfer knowledge from still image FR to video FR.**  
+Sohn et al.은 정지 이미지 FR에서 비디오 FR로 지식을 전달하기 위해 적대적 학습(adversarial learning )[150]을 사용했습니다.
+
+<br>
+
+**Moreover, finetuning the CNN parameters from a prelearned model using a target training dataset is a particular type of transfer learning, and is commonly employed by numerous methods.**  
+또한 대상 target training dataset를 사용하여 prelearned Model에서 CNN 매개변수를 미세 조정하는 것은 특정 유형의 Transfer Learning이며 일반적으로 다양한 방법에서 사용됩니다.    
+
+<br>
+<br>
+<br>
+<br>
+
+# IV. FACE PROCESSING FOR TRAINING AND RECOGNITION
+
+<br>
+<br>
+<br>
+
+**We present the development of face processing methods in chronological order in Fig. 12.**  
+우리는 그림 12에서 얼굴 처리 방법의 개발을 연대순으로 제시합니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_12.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**As we can see from the figure, most papers attempted to perform face processing by autoencoder model in 2014 and 2015**  
+그림에서 볼 수 있듯이 대부분의 논문은 2014년과 2015년에 Autoencoder Model로 얼굴 처리를 시도했습니다. 
+
+<br>
+
+**while 3D model played an important role in 2016.**  
+3D Model은 2016년에 중요한 역할을 했습니다. 
+
+<br>
+
+**GAN [40] has drawn substantial attention from the deep learning and computer vision community since it was first proposed by Goodfellow et al.**  
+GAN[40]은 Goodfellow 등이 처음 제안한 이후 Deep Learning 및 computer vision community에서 상당한 관심을 끌었습니다.
+
+<br>
+
+**It can be used in different fields and was also introduced into face processing in 2017.**  
+다양한 분야에서 활용이 가능하며 2017년에는 face processing에도 도입되었습니다.
+
+<br>
+
+**GAN can be used to perform “one-tomany augmentation” and “many-to-one normalization”, and it broke the limit that face synthesis should be done under supervised way.**  
+GAN은 "one-to-many augmentation" 및 "many-to-one normalization"를 수행하는 데 사용할 수 있으며 감독 방식으로 얼굴 합성을 수행해야 하는 한계를 깨뜨렸습니다.
+
+<br>
+
+**Although GAN has not been widely used in face processing for training and recognition, it has great latent capacity for preprocessing, for example, Dual-Agent GANs (DA-GAN) won the 1st places on verification and identification tracks in the NIST IJB-A 2017 FR competitions.**  
+GAN은 Train 및 recognition을 위한 얼굴 처리에 널리 사용되지는 않았지만 preprocessing를 위한 잠재 능력이 큽니다. 예를 들어 DA-GAN(Dual-Agent GAN)은 NIST IJB-A의 2017년 프랑스 대회에서 verification and identification 부문에서 1위를 차지했습니다.      
+
+<br>
+<br>
+<br>
+
+### A. One-to-Many Augmentation
+
+<br>
+<br>
+<br>
+
+**Collecting a large database is extremely expensive and time consuming.**  
+대규모 Database 수집은 비용과 시간이 많이 소요됩니다.
+
+<br>
+
+**The methods of “one-to-many augmentation” can mitigate the challenges of data collection, and they can be used to augment not only training data but also the gallery of test data.**  
+"one-to-many augmentation" 방법은 데이터 수집 문제를 완화할 수 있으며 Train 데이터뿐만 아니라 Test Data Gallery도 확대하는 데 사용할 수 있습니다.
+
+<br>
+
+**we categorized them into four classes: data augmentation, 3D model, autoencoder model and GAN model.**  
+One-to-Many Augmentation은 data augmentation, 3D Model, autoencoder model 및 GAN Model의 네 가지 클래스로 분류할 수 있습니다.    
+
+<br>
+<br>
+<br>
+
+#### Data augmentation
+
+<br>
+<br>
+<br>
+
+**Common data augmentation methods consist of photometric transformations and geometric transformations, such as oversampling (multiple patches obtained by cropping at different scales), mirroring, and rotating the images.**  
+일반적인 data augmentation 방법은 oversampling(서로 다른 축척으로 잘라서 얻은 여러 패치), 미러링 및 이미지 회전과 같은 광도 변환 및 기하학적 변환으로 구성됩니다.
+
+<br>
+
+**Recently, data augmentation has been widely used in deep FR algorithms.**  
+최근 데이터 증가는 심층 FR 알고리즘에서 널리 사용되었습니다.
+
+<br>
+
+**for example, Sun et al. cropped 400 face patches varying in positions, scales, and color channels and mirrored the images.**  
+예를 들어 Sun et al.은 위치, 크기 및 색상 채널이 다른 400개의 얼굴 패치를 자르고 이미지를 미러링했습니다.
+
+<br>
+
+**Liu et al. generated seven overlapped image patches centered at different landmarks on the face region and trained them with seven CNNs with the same structure.**  
+Liu et al.은 얼굴 영역의 서로 다른 랜드마크를 중심으로 7개의 중첩된 이미지 패치를 생성하고 동일한 구조를 가진 7개의 CNN으로 Train했습니다.
+
+<br>
+<br>
+<br>
+
+#### 3D model
+
+<br>
+<br>
+<br> 
+
+**3D face reconstruction is also a way to enrich the diversity of training data.**  
+3D 얼굴 재구성은 Train 데이터의 다양성을 풍부하게 하는 방법이기도 합니다.
+
+<br>
+
+**They utilize 3D structure information to model the transformation between poses.**  
+3D 구조 정보를 활용하여 포즈 간의 변형을 Model링합니다.
+
+<br>
+
+**3D models first use 3D face data to obtain morphable displacement fields and then apply them to obtain 2D face data in different pose angles.**  
+3D Model은 먼저 3D 얼굴 데이터를 사용하여 변형 가능한 변위 필드를 얻은 다음 이를 적용하여 다양한 포즈 각도에서 2D 얼굴 데이터를 얻습니다.
+
+<br>
+
+**There is a large number of papers about this domain, but we only focus on the 3D face reconstruction using deep methods or used for deep FR.**  
+이 영역에 대한 많은 논문이 있지만 우리는 deep method를 사용하거나 deep FR에 사용되는 3D 얼굴 재구성에만 집중합니다.
+
+<br>
+
+**Masi et al. generated face images with new intra-class facial appearance variations, including pose, shape and expression, and then trained a 19-layer VGGNet with both real and augmented data.**  
+Masi et al.은 포즈, 모양 및 표정을 포함한 새로운 클래스 내 얼굴 모양 변형으로 얼굴 이미지를 생성한 다음 실제 데이터와 증강 데이터를 모두 사용하여 19계층 VGGNet을 Train했습니다.
+
+<br>
+
+**Masi et al. used generic 3D faces and rendered fixed views to reduce much of the computational effort.**  
+Masi et al.은 일반 3D faces를 사용하고 고정된 뷰를 렌더링하여 많은 계산 작업을 줄였습니다.
+
+<br>
+
+**Richardson et al. employed an iterative 3D CNN by using a secondary input channel to represent the previous network’s output as an image for reconstructing a 3D face as shown in Fig. 13.**  
+Richardson et al.은 그림 13과 같이 3D 얼굴을 재구성하기 위한 이미지로 이전 Network의 출력을 표현하기 위해 보조 입력 채널을 사용하여 반복 3D CNN을 사용했습니다.
+
+<br>
+
+**Dou et al. used a multi-task CNN to divide 3D face reconstruction into neutral 3D reconstruction and expressive 3D reconstruction.**  
+Dou et al.은 multi-task CNN을 사용하여 3D 얼굴 재구성을 neutral 3D reconstruction과 expressive 3D reconstruction으로 나누었습니다.
+
+<br>
+
+**Tran et al. directly regressed 3D morphable face model (3DMM) [155] parameters from an input photo by a very deep CNN architecture.**  
+Tran et al.은 3DMM(3D morphable face model)[155] 매개변수를 very deep CNN Architecture에 의해 입력 사진에서 직접 회귀(regress)했습니다.
+
+<br>
+
+**An et al. synthesized face images with various poses and expressions using the 3DMM method, then reduced the gap between synthesized data and real data with the help of MMD.**  
+An et al.은 다양한 포즈와 표정의 얼굴 이미지를 3DMM 방식으로 합성한 후 MMD를 통해 synthesized data 와 real data 의 격차를 줄였습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_13.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### Autoencoder model
+
+<br>
+<br>
+<br>
+
+**Rather than reconstructing 3D models from a 2D image and projecting it back into 2D images of different poses, autoencoder models can generate 2D target images directly.**  
+2D 이미지에서 3D Model을 재구성하고 다른 포즈의 2D 이미지로 다시 투영하는 대신 Autoencoder Model은 2D 대상 이미지를 직접 생성할 수 있습니다.
+
+<br>
+
+**Taken a face image and a pose code encoding a target pose as input, an encoder first learns pose-invariant face representation, and then a decoder generates a face image with the same identity viewed at the target pose by using the pose-invariant representation and the pose code.**  
+얼굴 이미지와 목표 포즈를 Encoding한 포즈 코드를 입력받아 Encoder는 먼저 포즈 불변 얼굴 표현(pose-invariant face representation)을 학습하고, Decoder는 pose-invariant representation과 pose code을 이용하여 목표 포즈에서 본 동일한 정체성을 가진 얼굴 이미지를 생성한다.
+
+<br>
+
+**For example, given the target pose codes, multi-view perceptron (MVP) trained some deterministic hidden neurons to learn pose-invariant face representations, and simultaneously trained some random hidden neurons to capture pose features, then a decoder generated the target images by combining poseinvariant representations with pose features.**  
+예를 들어, 대상 포즈 코드가 주어지면 multi-view perceptron(MVP)은 pose-invariant face representation을 학습하기 위해 일부 결정론적 숨겨진 뉴런을 Train시키고 동시에 포즈 특징을 캡처하기 위해 일부 임의의 숨겨진 뉴런을 Train시킨 다음 Decoder는 다음을 결합하여 대상 이미지를 생성했습니다.
+
+<br>
+
+**As shown in Fig. 14, Yim et al. and Qian et al. introduced an auxiliary CNN to generate better images viewed at the target poses.**  
+그림 14에 도시된 바와 같이, Yim et al. 및 Qian et al.은 target poses에서 더 나은 이미지를 생성하기 위해 보조 CNN을 도입했습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_14.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**First, an autoencoder generated the desired pose image, then the auxiliary CNN reconstructed the original input image back from the generated target image, which guarantees that the generated image is identity-preserving.**  
+먼저 Autoencoder가 원하는 포즈 이미지를 생성한 다음 보조 CNN이 생성된 대상 이미지에서 원본 입력 이미지를 다시 재구성하여 생성된 이미지가 ID를 보존하도록 보장합니다.
+
+<br>
+
+**Two groups of units are embedded between encoder and decoder.**  
+두 그룹의 units가 Encoder와 Decoder 사이에 내장되어 있습니다.
+
+<br>
+
+**The identity units remain unchanged and the rotation of images is achieved by taking actions to pose units at each time step.**  
+identity units은 변경되지 않고 이미지 회전은 각 시간 단계에서 포즈 단위에 대한 조치를 취함으로써 달성됩니다.      
+
+<br>
+<br>
+<br>
+
+### GAN model
+
+<br>
+<br>
+<br>
+
+**In GAN models, a generator aims to fool a discriminator through generating images that resemble the real images, while the discriminator aims to discriminate the generated samples from the real ones.**  
+GAN Model에서 Generator는 실제 이미지와 유사한 이미지를 생성하여 판별자를 속이는 것을 목표로 하고, Discriminator는 생성된 샘플과 실제 샘플을 구별하는 것을 목표로 합니다.
+
+<br>
+
+**By this minimax game between generator and discriminator, GAN can successfully generate photo-realistic images with different poses.**  
+GAN은 generator와 discriminator 사이의 이 미니맥스 게임을 통해 다양한 포즈로 사진과 같은 이미지를 성공적으로 생성할 수 있습니다.
+
+<br>
+
+**After using a 3D model to generate profile face images, DA-GAN[56] refined the images by a GAN, which combines prior knowledge of the data distribution and knowledge of faces (pose and identity perception loss).**  
+3D Model을 사용하여 프로필 얼굴 이미지를 생성한 후 DA-GAN[56]은 데이터 분포에 대한 data distribution와 knowledge of faces (pose and identity perception loss)을 결합하는 GAN으로 이미지를 정제했습니다.
+
+<br>
+
+**CVAE-GAN [159] combined a variational auto-encoder with a GAN for augmenting data, and took advantages of both statistic and pairwise feature matching to make the training process converge faster and more stably.**  
+CVAE-GAN[159]은 variational auto-encoder를 GAN과 결합하여 데이터를 보강하고 통계 및 쌍별 특징 매칭을 모두 활용하여 학습 프로세스가 더 빠르고 안정적으로 수렴되도록 했습니다.
+
+<br>
+
+**In addition to synthesizing diverse faces from noise, some papers also explore to disentangle the identity and variation, and synthesize new faces by exchanging identity and variation from different people.**  
+노이즈에서 다양한 얼굴을 합성하는 것 외에도 일부 논문에서는 정체성과 변이를 풀고 다른 사람의 정체성과 변이를 교환하여 새로운 얼굴을 합성하는 방법을 모색합니다.
+
+<br>
+
+**In CG-GAN, a generator directly resolves each representation of input image into a variation code and an identity code and regroups these codes for cross-generating, simultaneously, a discriminator ensures the reality of generated images.**  
+CG-GAN에서 generator는 입력 이미지의 각 표현을 변형 코드와 식별 코드로 직접 해결하고 이러한 코드를 다시 그룹화하여 교차 생성하는 동시에 discriminator는 생성된 이미지의 사실성을 보장합니다.
+
+<br>
+
+**Bao et al. extracted identity representation of one input image and attribute representation of any other input face image, then synthesized new faces by recombining these representations.**  
+Bao et al.은 하나의 입력 이미지의 신원 표현과 다른 입력 얼굴 이미지의 속성 표현을 추출한 다음 이러한 표현을 재결합하여 새로운 얼굴을 합성합니다.
+
+<br>
+
+**This work shows superior performance in generating realistic and identity preserving face images, even for identities outside the training dataset.**  
+이 작업은 training dataset 외부의 ID에 대해서도 사실적이고 ID를 보존하는 얼굴 이미지를 생성하는 데 탁월한 성능을 보여줍니다.
+
+<br>
+
+**Unlike previous methods that treat classifier as a spectator, FaceID-GAN [162] proposed a three-player GAN where the classifier cooperates together with the discriminator to compete with the generator from two different aspects, i.e. facial identity and image quality respectively.**  
+classifier를 관중으로 취급하는 이전 방법과 달리 FaceID-GAN[162]은 classifier가 discriminator와 협력하여 두 가지 다른 측면, 즉 각각 얼굴 정체성과 이미지 품질에서 생성자와 경쟁하는 three-player GAN을 제안했습니다.
+
+<br>
+
