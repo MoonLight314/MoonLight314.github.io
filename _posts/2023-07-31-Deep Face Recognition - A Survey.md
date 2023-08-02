@@ -2204,3 +2204,217 @@ VGGFace Model은 LFW[23]에서 98.95%, YTF[169]에서 97.30%를 달성했지만 
 <br>
 <br>
 
+**Some researches showed that the female, Black, and younger cohorts are usually more difficult to recognize in FR systems trained with commonly-used datasets.**  
+일부 연구에 따르면 여성, 흑인 및 젊은 코호트는 일반적으로 일반적으로 사용되는 Dataset로 Train된 FR 시스템에서 인식하기 더 어렵습니다.
+
+<br>
+
+**For example, Wang et al. proposed a Racial Faces in-the-Wild (RFW) database and proved that existing commercial APIs and the SOTA algorithms indeed work unequally for different races and the maximum difference in error rate between the best and worst groups is 12%, as shown in Table VIII.**  
+예를 들어, Wang et al. RFW(Racial Faces in-the-Wild)은 Database를 제안하고 기존 상용 API와 SOTA 알고리즘이 실제로 서로 다른 인종에 대해 불평등하게 작동하고 최고 그룹과 최악 그룹 간의 최대 오류율 차이가 12%임을 입증했습니다(표 참조). VIII.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_08.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Hupont et al. showed that SphereFace has a TAR of 0.87 for White males which drops to 0.28 for Asian females, at a FAR of 1e − 4.**  
+Hupont et al.은 SphereFace는 백인 남성의 경우 TAR이 0.87이고 FAR이 1e - 4일 때 아시아 여성의 경우 0.28로 떨어지는 것으로 나타났습니다.
+
+<br>
+
+**Such bias can result in mistreatment of certain demographic groups, by either exposing them to a higher risk of fraud, or by making access to services more difficult.**  
+이러한 편향은 특정 인구 집단을 더 높은 사기 위험에 노출시키거나 서비스에 대한 접근을 더 어렵게 함으로써 이들을 학대하는 결과를 초래할 수 있습니다.
+
+<br>
+
+**Therefore, addressing data bias and enhancing fairness of FR systems in real life are urgent and necessary tasks.**  
+따라서 실생활에서 data bias를 해소하고 FR 시스템의 공정성을 높이는 것이 시급하고 필요한 과제입니다. 
+
+<br>
+
+**Collecting balanced data to train a fair model or designing some debiasing algorithms are effective way.**  
+공정한 Model을 Train하기 위해 균형 잡힌 데이터를 수집하거나 편향성 제거 알고리즘을 설계하는 것이 효과적인 방법입니다.        
+
+<br>
+<br>
+<br>
+
+### B. Training protocols
+
+<br>
+<br>
+<br>
+
+**In terms of training protocol, FR can be categorized into subject-dependent and subject-independent settings, as illustrated in Fig. 20.**  
+Train Protocol의 관점에서 FR은 그림 20과 같이 subject-dependent settings과 subject-dependent settings으로 분류할 수 있습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_20.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### Subject-dependent protocol
+
+<br>
+<br>
+<br>
+
+**For subject-dependent protocol, all testing identities are predefined in training set, it is natural to classify testing face images to the given identities.**  
+subject-dependent protocol의 경우 모든 테스트 ID는 Train 세트에 미리 정의되어 있으므로 테스트 얼굴 이미지를 주어진 ID로 분류하는 것이 자연스럽습니다.
+
+<br>
+
+**Therefore, subject-dependent FR can be well addressed as a classification problem, where features are expected to be separable.**  
+따라서 subject-dependent FR은 features가 분리될 것으로 예상되는 분류 문제로 잘 다룰 수 있습니다.
+
+<br>
+
+**The protocol is mostly adopted by the early-stage (before 2010) FR studies on FERET [177], AR [178], and is suitable only for some small-scale applications.**  
+이 Protocol은 대부분 FERET [177], AR [178]에 대한 초기 단계(2010년 이전) FR 연구에서 채택되었으며 일부 소규모 응용 프로그램에만 적합합니다.
+
+<br>
+
+**The Challenge 2 of MS-Celeb-1M is the only large-scale database using subject-dependent training protocol.**  
+MS-Celeb-1M의 Challenge 2는 subject-dependent Train Protocol을 사용하는 유일한 대규모 Database입니다.
+
+<br>
+<br>
+<br>
+
+### Subject-independent protocol
+
+<br>
+<br>
+<br>
+
+**For subject-independent protocol, the testing identities are usually disjoint from the training set, which makes FR more challenging yet close to practice.**  
+subject-independent protocol의 경우 테스트 ID는 일반적으로 Train 세트와 분리되어 FR을 더 도전적이면서도 현실에 가깝게 만듭니다.
+
+<br>
+
+**Because it is impossible to classify faces to known identities in training set, generalized representation is essential.**  
+Train 세트에서 얼굴을 알려진 신원으로 분류하는 것은 불가능하기 때문에 일반화된 표현이 필수적입니다.
+
+<br>
+
+**Due to the fact that human faces exhibit similar intrasubject variations, deep models can display transcendental generalization ability when training with a sufficiently large set of generic subjects, where the key is to learn discriminative large-margin deep features.**  
+인간의 얼굴이 유사한 개체 내 변형을 나타내기 때문에 심층 Model은 충분히 큰 일반 개체 집합으로 Train할 때 초월적인 일반화 능력을 표시할 수 있습니다. 여기에서 핵심은 차별적이고 마진이 큰 Deep Features을 학습하는 것입니다.
+
+<br>
+
+**This generalization ability makes subject-independent FR possible.**  
+이 일반화 능력은 subject-independent FR을 가능하게 합니다.
+
+<br>
+
+**Almost all major face-recognition benchmarks, such as LFW [23], PaSC [179], IJB-A/B/C and Megaface [44], [164], require the tested models to be trained under subject-independent protocol.**  
+LFW [23], PaSC [179], IJB-A/B/C 및 Megaface [44], [164]와 같은 거의 모든 주요 안면 인식 benchmark는 테스트된 Model이 subject-independent Protocol에 따라 Train되어야 합니다.
+
+<br>
+<br>
+<br>
+
+### C. Evaluation tasks and performance metrics
+
+<br>
+<br>
+<br>
+
+**In order to evaluate whether our deep models can solve the different problems of FR in real life, many testing datasets are designed to evaluate the models in different tasks, i.e. face verification, close-set face identification and open-set face identification.**  
+deep Model이 실생활에서 FR의 다양한 문제를 해결할 수 있는지 여부를 Evaluation하기 위해 많은 Test Data 세트가 다양한 작업, 즉 얼굴 검증, 근접 얼굴 식별 및 열린 얼굴 식별에서 Model을 Evaluation하도록 설계되었습니다.
+
+<br>
+
+**In either task, a set of known subjects is initially enrolled in the system (the gallery), and during testing, a new subject (the probe) is presented.**  
+어느 작업에서든 일련의 알려진 주제가 처음에 system (the gallery)에 등록되고 테스트 중에 새로운 subject (the probe)가 제시됩니다.
+
+<br>
+
+**Face verification computes one-to-one similarity between the gallery and probe to determine whether the two images are of the same subject, whereas face identification computes one-to-many similarity to determine the specific identity of a probe face.**  
+Face verification은 Gallery와 Probe 간의 일대일 유사성을 계산하여 두 이미지가 동일한 대상인지 여부를 결정하는 반면, face identification은 일대다 유사성을 계산하여 Probe 얼굴의 특정 ID를 결정합니다.
+
+<br>
+
+**When the probe appears in the gallery identities, this is referred to as closed-set identification; when the probes include those who are not in the gallery, this is open-set identification.**  
+probe가 gallery identities에 나타나면 이를 폐쇄 세트 식별(closed-set identification)이라고 합니다. Probe에 Gallery에 없는 사람들이 포함되는 경우 이는 개방형 식별(open-set identification)입니다.
+
+<br>
+
+**Face verification is relevant to access control systems, re-identification, and application independent evaluations of FR algorithms.**  
+Face verification은 액세스 제어 시스템, 재식별 및 FR 알고리즘의 애플리케이션 독립적 Evaluation와 관련이 있습니다.
+
+<br>
+
+**It is classically measured using the receiver operating characteristic (ROC) and estimated mean accuracy (Acc).**  
+receiver operating characteristic (ROC) 및 estimated mean accuracy (Acc)를 사용하여 고전적으로 측정됩니다.
+
+<br>
+
+**At a given threshold (the independent variable), ROC analysis measures the true accept rate (TAR), which is the fraction of genuine comparisons that correctly exceed the threshold, and the false accept rate (FAR), which is the fraction of impostor comparisons that incorrectly exceed the threshold.**  
+주어진 임계값(독립 변수)에서 ROC 분석은 임계값을 올바르게 초과하는 실제 비교의 비율인 true accept rate (TAR)과 사기꾼 비교의 비율인 false accept rate (FAR)을 측정합니다. 
+
+<br>
+
+**And Acc is a simplified metric introduced by LFW [23], which represents the percentage of correct classifications.**  
+그리고 Acc는 LFW[23]에 의해 도입된 단순화된 메트릭으로 올바른 분류의 백분율을 나타냅니다.
+
+<br>
+
+**With the development of deep FR, more accurate recognitions are required.**  
+deep FR의 발달로 더 정확한 인식이 필요합니다.
+
+<br>
+
+**Customers concern more about the TAR when FAR is kept in a very low rate in most security certification scenario.**  
+고객은 대부분의 보안 인증 시나리오에서 FAR이 매우 낮은 비율로 유지될 때 TAR에 대해 더 우려합니다.    
+
+<br>
+<br>
+<br>
+
+### Close-set face identification
+
+<br>
+<br>
+<br>
+
+**Close-set face identification is relevant to user driven searches (e.g., forensic identification), rank-N and cumulative match characteristic (CMC) is commonly used metrics in this scenario.**  
+Close-set face identification은 user driven searches (e.g., forensic identification)과 관련이 있으며, rank-N 및 CMC(cumulative match characteristic)는 이 시나리오에서 일반적으로 사용되는 메트릭입니다.
+
+<br>
+
+**Rank-N is based on what percentage of probe searches return the probe’s gallery mate within the top k rank-ordered results.**  
+Rank-N은 상위 k 순위 결과 내에서 Probe의 Gallery mate를 반환하는 Probe 검색의 백분율을 기반으로 합니다.
+
+<br>
+
+**The CMC curve reports the percentage of probes identified within a given rank (the independent variable).**  
+CMC 곡선은 주어진 순위(독립 변수) 내에서 식별된 Probe의 백분율을 보고합니다.
+
+<br>
+
+**IJB-A/B/C concern on the rank-1 and rank-5 recognition rate.**  
+IJB-A/B/C는 1등급 및 5등급 인식률에 대한 관심입니다. 
+
+<br>
+
+**The MegaFace challenge systematically evaluates rank-1 recognition rate function of increasing number of gallery distractors (going from 10 to 1 Million), the results of the SOTA evaluated on MegaFace challenge are listed in Table IX.**  
+MegaFace 챌린지는 Gallery 선택 항목의 증가(10에서 100만)에 따른 랭크-1 인식률 함수를 체계적으로 Evaluation하며, MegaFace 챌린지에서 Evaluation된 SOTA의 결과는 표 IX에 나열되어 있습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_09.png">
+<p align="center">
+</p>
+<br>
+<br>
+
