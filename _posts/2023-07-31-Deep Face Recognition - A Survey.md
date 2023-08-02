@@ -1287,3 +1287,79 @@ Han et al.은 트렁크 CNN과 kernel generator로 구성된 novel contrastive c
 </p>
 <br>
 <br>
+
+## 2) Assembled Networks 
+
+<br>
+<br>
+<br>
+
+### Multi-input networks
+
+<br>
+<br>
+<br>
+
+**In “one-to-many augmentation”, multiple images with variety are generated from one image in order to augment training data.**  
+일대다 증강(one-to-many Augmentation)은 Train 데이터를 증강시키기 위해 하나의 이미지에서 다양한 이미지를 여러 개 생성하는 것입니다.
+
+<br>
+
+**Taken these multiple images as input, multiple networks are also assembled together to extract and combine features of different type of inputs, which can outperform an individual network.**  
+이러한 여러 이미지를 입력으로 사용하면 여러 Network도 함께 조립되어 개별 Network를 능가할 수 있는 다양한 입력 유형의 기능을 추출하고 결합합니다.
+
+<br>
+
+**Assembled networks are built after different face patches are cropped, and then different types of patches are fed into different sub-networks for representation extraction.**  
+조립된 Network는 서로 다른 얼굴 패치가 잘린 후 구축된 다음 representation extraction을 위해 서로 다른 유형의 패치가 서로 다른 하위 Network에 공급됩니다.
+
+<br>
+
+**By combining the results of subnetworks, the performance can be improved. Other papers used assembled networks to recognize images with different poses.**  
+서브 Network의 결과를 결합하여 성능을 향상시킬 수 있습니다. 다른 논문에서는 assembled Network를 사용하여 포즈가 다른 이미지를 인식했습니다.      
+
+<br>
+<br>
+<br>
+
+**A multi-view deep network (MvDN) [95] consists of view-specific subnetworks and common subnetworks; the former removes view-specific variations, and the latter obtains common representations.**  
+MvDN(multi-view deep network)[95]은 view-specific subnetworks와 common subnetworks로 구성됩니다. 전자는 view-specific variations을 제거하고 후자는 common representations을 얻습니다.
+
+<br>
+
+**Multi-task networks. FR is intertwined with various factors, such as pose, illumination, and age. To solve this problem, multitask learning is introduced to transfer knowledge fromother relevant tasks and to disentangle nuisance factors.**  
+Multi-task Network. FR은 포즈, 조명, 연령 등 다양한 요소와 얽혀 있습니다. 이 문제를 해결하기 위해 multitask learning을 도입하여 다른 관련 작업에서 지식을 이전하고 방해 요소를 분리합니다.
+
+<br>
+
+**In multi-task networks, identity classification is the main task and the side tasks are pose, illumination, and expression estimations, among others.**  
+multi-task Network에서 identity classification가 주요 작업이고 부수 작업은 무엇보다도 포즈, 조명 및 표정 추정입니다.
+
+<br>
+
+**The lower layers are shared among all the tasks, and the higher layers are disentangled into different sub-networks to generate the task-specific outputs.**  
+하위 계층은 모든 작업 간에 공유되며 상위 계층은 서로 다른 하위 Network로 분리되어 작업별 출력을 생성합니다.
+
+<br>
+
+**The task-specific sub-networks are branched out to learn face detection, face alignment, pose estimation, gender recognition, smile detection, age estimation and FR.**  
+작업별 하위 Network는 얼굴 감지, 얼굴 정렬, 자세 추정, 성별 인식, 미소 감지, 연령 추정 및 FR을 학습하기 위해 분기됩니다.
+
+<br>
+
+**Yin et al. proposed to automatically assign the dynamic loss weights for each side task.**  
+Yin et al.은 각 부업에 대한 동적 손실 가중치를 자동으로 할당하도록 제안되었습니다.
+
+<br>
+
+**Peng et al. used a feature reconstruction metric learning to disentangle a CNN into subnetworks for jointly learning the identity and non-identity features as shown in Fig. 11.**  
+Peng et al.은 그림 11과 같이 신원 및 비신원 특징을 함께 학습하기 위해 CNN을 하위 Network로 분리하기 위해 특징 재구성 메트릭 학습을 사용했습니다. 
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_11.png">
+<p align="center">
+</p>
+<br>
+<br>
