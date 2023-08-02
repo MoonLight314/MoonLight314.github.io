@@ -1363,3 +1363,54 @@ Peng et al.은 그림 11과 같이 신원 및 비신원 특징을 함께 학습�
 </p>
 <br>
 <br>
+
+### C. Face Matching by deep features
+
+<br>
+<br>
+<br>
+
+**During testing, the cosine distance and L2 distance are generally employed to measure the similarity between the deep features x1 and x2; then, threshold comparison and the nearest neighbor (NN) classifier are used to make decision for verification and identification.**  
+테스트 중에 cosine distance와 L2 distance는 일반적으로 Deep features x1과 x2 사이의 유사성을 측정하는 데 사용됩니다. 그런 다음 임계값 비교 및 가장 가까운 이웃(NN) 분류기를 사용하여 확인 및 식별을 위한 결정을 내립니다.
+
+<br>
+
+**In addition to these common methods, there are some other explorations.**  
+이러한 일반적인 방법 외에도 몇 가지 다른 탐색이 있습니다.
+
+<br>
+<br>
+
+### 1) Face verification
+
+<br>
+<br>
+
+**Metric learning, which aims to find a new metric to make two classes more separable, can also be used for face matching based on extracted deep features.**  
+두 클래스를 더 분리할 수 있도록 새로운 메트릭을 찾는 것을 목표로 하는 메트릭 학습은 추출된 deep features을 기반으로 얼굴 매칭에도 사용할 수 있습니다.
+
+<br>
+
+**The JB model is a well-known metric learning method, and Hu et al. proved that it can improve the performance greatly.**  
+JB Model은 잘 알려진 메트릭 학습 방법이며 Hu et al.은 성능을 크게 향상시킬 수 있음을 입증했습니다.
+
+<br>
+
+**In the JB model, a face feature x is modeled as x = µ+ε, where µ and ε are identity and intra-personal variations, respectively.**  
+JB Model에서 얼굴 특징 x는 x = µ+ε로 Modeling되며, 여기서 µ와 ε는 각각 identity과 intra-personal variations입니다.
+
+<br>
+
+**The similarity score r(x1, x2) can be represented as follows:**  
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Formula_07.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+where P(x1, x2|HI ) is the probability that two faces belong to the same identity and P(x1, x2|HE) is the probability that two faces belong to different identities.  
+
