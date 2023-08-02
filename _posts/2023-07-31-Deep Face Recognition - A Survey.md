@@ -963,3 +963,327 @@ Euclidean-distance-based loss과 비교할 때, angular/cosinemargin-based loss�
 </p>
 <br>
 <br>
+
+**where α is a scaling parameter, x is the learned feature vector, W is weight of last fully connected layer.**  
+여기서 α는 스케일링 파라미터, x는 학습된 feature vector, W는 마지막 완전 연결 레이어의 가중치입니다.
+
+<br>
+
+**Scaling x to a fixed radius α is important, as Wang et al. proved that normalizing both features and weights to 1 will make the softmax loss become trapped at a very high value on the training set.**  
+Wang et al.처럼 x를 고정 반경 α로 스케일링하는 것이 중요합니다. 특징과 가중치를 모두 1로 정규화하면 Softmax 손실이 Train 세트에서 매우 높은 값에 갇히게 된다는 것을 증명했습니다.
+
+<br>
+
+**After that, the loss function, e.g. softmax, can be performed using the normalized features and weights.**  
+그 후 Loss Function, 예를 들면 다음과 같습니다. softmax는 정규화된 특징과 가중치를 사용하여 수행할 수 있습니다.
+
+<br>
+
+**Some papers first normalized the weights only and then added angular/cosine margin into loss functions to make the learned features be discriminative.**  
+일부 논문에서는 먼저 가중치만 정규화한 다음 Loss Function에 angular/cosine margin을 추가하여 학습된 features을 구별하도록 했습니다.
+
+<br>
+
+**In contrast, some works, such as, adopted feature normalization only to overcome the bias to the sample distribution of the softmax.**  
+대조적으로, 일부 작업은 softmax의 샘플 분포에 대한 편향을 극복하기 위해서만 기능 정규화를 채택했습니다.
+
+<br>
+
+**Based on the observation of [125] that the L2-norm of features learned using the softmax loss is informative of the quality of the face, L2-softmax enforced all the features to have the same L2-norm by feature normalization such that similar attention is given to good quality frontal faces and blurry faces with extreme pose.**  
+softmax 손실을 사용하여 학습한 특징의 L2-norm이 얼굴의 품질에 대한 정보를 제공한다는 [125]의 관찰을 기반으로 L2-softmax는 특징 정규화를 통해 모든 특징이 동일한 L2-norm을 갖도록 강제했습니다. 좋은 품질의 정면 얼굴과 극단적인 포즈의 흐릿한 얼굴에 부여됩니다.  
+
+<br>
+<br>
+
+**Ring loss encouraged the norm of samples being value R (a learned parameter) rather than explicit enforcing through a hard normalization operation.**  
+Ring loss은 hard normalization operation을 통해 명시적으로 적용하기보다는 값 R(학습된 매개변수)이 되는 샘플의 표준을 장려했습니다.
+
+<br>
+
+**Moreover, normalizing both features and weights has become a common strategy.**  
+또한 features와 weights를 모두 정규화하는 것이 일반적인 전략이 되었습니다.
+
+<br>
+
+**Wang et al. [110] explained the necessity of this normalization operation from both analytic and geometric perspectives.**  
+Wang et al. [110]은 분석적 관점과 기하학적 관점 모두에서 이 정규화 작업의 필요성을 설명했습니다.
+
+<br>
+
+**After normalizing features and weights, CoCo loss [112] optimized the cosine distance among data features, and Hasnat et al. used the von MisesFisher (vMF) mixture model as the theoretical basis to develop a novel vMF mixture loss and its corresponding vMF deep features.**  
+features 와 weights를 정규화한 후 CoCo loss[112]는 data features간의 cosine distance를 최적화했으며 Hasnat et al. von MisesFisher(vMF)은 혼합 Model을 이론적 기반으로 사용하여 새로운 vMF 혼합 손실 및 해당 vMF Deep Features을 개발했습니다.  
+
+<br>
+<br>
+<br>
+
+### B. Evolution of Network Architecture
+
+<br>
+<br>
+
+### 1) Backbone Network
+
+<br>
+<br>
+
+#### Mainstream architectures. 
+
+<br>
+<br>
+
+**The commonly used network architectures of deep FR have always followed those of deep object classification and evolved from AlexNet to SENet rapidly.**  
+Deep FR의 일반적으로 사용되는 Network Architecture는 항상 Deep Object Classification을 따랐으며 AlexNet에서 SENet으로 빠르게 발전했습니다.
+
+<br>
+
+**We present the most influential architectures of deep object classification and deep face recognition in chronological order 1 in Fig. 8.**  
+deep object classification 및 deep face recognition 의 가장 영향력 있는 Architecture를 그림 8의 연대순 1로 제시합니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_08.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**In 2012, AlexNet was reported to achieve the SOTA recognition accuracy in the ImageNet large-scale visual recognition competition (ILSVRC) 2012, exceeding the previous best results by a large margin.**  
+2012년 AlexNet은 ImageNet 대규모 시각 인식 대회(ILSVRC) 2012에서 SOTA 인식 정확도를 달성하여 이전 최고 결과를 크게 뛰어넘는 것으로 보고되었습니다.
+
+<br>
+
+**AlexNet consists of five convolutional layers and three fully connected layers, and it also integrates various techniques, such as rectified linear unit (ReLU), dropout, data augmentation, and so forth.**  
+AlexNet은 5개의 Convolutional Layer와 3개의 Fully Connected Layer로 구성되어 있으며 ReLU(Rectified Linear Unit), Dropout, Data Augmentation 등의 다양한 기술을 통합하고 있습니다.
+
+<br>
+
+**ReLU was widely regarded as the most essential component for making deep learning possible.**  
+ReLU는 Deep Learning을 가능하게 하는 데 가장 필수적인 구성 요소로 널리 간주되었습니다.
+
+<br>
+
+**Then, in 2014, VGGNet proposed a standard network architecture that used very small 3 × 3 convolutional filters throughout and doubled the number of feature maps after the 2×2 pooling.**  
+그리고 2014년에 VGGNet은 매우 작은 3×3 컨벌루션 필터를 전체적으로 사용하고 2×2 풀링 후 특징 맵의 수를 두 배로 늘린 표준 Network Architecture를 제안했습니다.
+
+<br>
+
+**It increased the depth of the network to 16-19 weight layers, which further enhanced the flexibility to learn progressive nonlinear mappings by deep architectures.**  
+그것은 Network의 깊이를 16-19개의 가중치 레이어로 증가시켰고, 이는 심층 Architecture에 의한 점진적 비선형 매핑을 학습할 수 있는 유연성을 더욱 향상시켰습니다.
+
+<br>
+
+**In 2015, the 22-layer GoogleNet introduced an “inception module” with the concatenation of hybrid feature maps, as well as two additional intermediate softmax supervised signals.**  
+2015년에 22계층 GoogleNet은 hybrid feature maps을 연결하는 "inception Module"과 2개의 추가 중간 softmax supervised signals를 도입했습니다.
+
+<br>
+
+**It performs several convolutions with different receptive fields (1 × 1, 3 × 3 and 5 × 5) in parallel, and concatenates all feature maps to merge the multi-resolution information.**  
+서로 다른 수용 필드(1 × 1, 3 × 3 및 5 × 5)로 여러 convolutional 을 병렬로 수행하고 모든 feature maps을 연결하여 다중 해상도 정보를 병합합니다.        
+
+<br>
+<br>
+
+**In 2016, ResNet proposed to make layers learn a residual mapping with reference to the layer inputs F(x) := H(x) − x rather than directly learning a desired underlying mapping H(x) to ease the training of very deep networks (up to 152 layers).**  
+2016년에 ResNet은 계층이 원하는 기본 매핑 H(x)를 직접 학습하는 대신 계층 입력 F(x) := H(x) − x를 참조하여 residual 매핑을 학습하도록 제안하여 매우 깊은 Network의 Train을 용이하게 했습니다. (최대 152개 레이어).
+
+<br>
+
+**The original mapping is recast into F(x) + x and can be realized by “shortcut connections”.**  
+원래 매핑은 F(x) + x로 재구성되며 "shortcut connections"로 실현될 수 있습니다.
+
+<br>
+
+**As the champion of ILSVRC 2017, SENet introduced a “Squeeze-and-Excitation” (SE) block, that adaptively recalibrates channel-wise feature responses by explicitly modelling interdependencies between channels.**  
+ILSVRC 2017의 챔피언인 SENet은 채널 간의 상호 의존성을 명시적으로 modelling하여 채널별 기능 응답을 적응적으로 재보정하는 "Squeeze-and-Excitation"(SE) 블록을 도입했습니다.
+
+<br>
+
+**These blocks can be integrated with modern architectures, such as ResNet, and improves their representational power.**  
+이러한 블록은 ResNet과 같은 최신 Architecture와 통합될 수 있으며 표현력을 향상시킵니다.
+
+<br>
+
+**With the evolved architectures and advanced training techniques, such as batch normalization (BN), the network becomes deeper and the training becomes more controllable.**  
+batch normalization (BN)과 같은 진화된 Architecture와 고급 Train 기술을 통해 Network가 더 깊어지고 Train을 더 잘 제어할 수 있습니다.
+
+<br>
+
+**Following these architectures in object classification, the networks in deep FR are also developed step by step, and the performance of deep FR is continually improving.**  
+객체 분류에서 이러한 Architecture에 따라 deep FR의 Network도 단계적으로 개발되며 deep FR의 성능은 지속적으로 향상되고 있습니다.
+
+<br>
+
+**We present these mainstream architectures of deep FR in Fig. 9.**  
+그림 9에서 이러한 심층 FR의 주류 Architecture를 제시합니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_09.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**In 2014, DeepFace was the first to use a nine-layer CNN with several locally connected layers.**  
+2014년에 DeepFace는 로컬로 연결된 여러 계층이 있는 9계층 CNN을 처음으로 사용했습니다.
+
+<br>
+
+**With 3D alignment for face processing, it reaches an accuracy of 97.35% on LFW. In 2015, FaceNet used a large private dataset to train a GoogleNet.**  
+얼굴 처리를 위한 3D 정렬로 LFW에서 97.35%의 정확도에 도달합니다. 2015년에 FaceNet은 대규모 개인 Dataset를 사용하여 GoogleNet을 교육했습니다.
+
+<br>
+
+**It adopted a triplet loss function based on triplets of roughly aligned matching/nonmatching face patches generated by a novel online triplet mining method and achieved good performance of 99.63%.**  
+새로운 온라인 triplet mining 방법으로 생성된 대략적으로 정렬된 일치/비일치 안면 패치의 삼중항을 기반으로 triplet loss Function를 채택했으며 99.63%의 좋은 성능을 달성했습니다.
+
+<br>
+
+**In the same year, VGGface designed a procedure to collect a large-scale dataset from the Internet.**  
+같은 해에 VGGface는 인터넷에서 대규모 Dataset를 수집하는 절차를 설계했습니다.
+
+<br>
+
+**It trained the VGGNet on this dataset and then fine-tuned the networks via a triplet loss function similar to FaceNet.**  
+이 Dataset에서 VGGNet을 교육한 다음 FaceNet과 유사한 triplet Loss Function를 통해 Network를 미세 조정했습니다.
+
+<br>
+
+**VGGface obtains an accuracy of 98.95%.**  
+VGGface는 98.95%의 정확도를 얻습니다.
+
+<br>
+
+**In 2017, SphereFace [84] used a 64-layer ResNet architecture and proposed the angular softmax (A-Softmax) loss to learn discriminative face features with angular margin.**  
+2017년에 SphereFace[84]는 64계층 ResNet Architecture를 사용하고 각도 마진을 가진 차별적인 얼굴 특징을 학습하기 위해 angular softmax (A-Softmax) 손실을 제안했습니다.
+
+<br>
+
+**It boosts the achieves to 99.42% on LFW. In the end of 2017, a new largescale face dataset, namely VGGface2, was introduced, which consists of large variations in pose, age, illumination, ethnicity and profession.**  
+LFW에서 달성률을 99.42%로 높입니다. 2017년 말에 새로운 대규모 얼굴 Dataset인 VGGface2가 도입되었습니다. 이 Dataset는 포즈, 연령, 조명, 민족 및 직업의 큰 변화로 구성됩니다.
+
+<br>
+
+**Cao et al. first trained a SENet with MS-celeb-1M dataset and then fine-tuned the model with VGGface2, and achieved the SOTA performance on the IJB-A and IJB-B.**  
+Caoet al.은 먼저 MS-celeb-1M Dataset로 SENet을 교육한 다음 VGGface2로 Model을 미세 조정하고 IJB-A 및 IJB-B에서 SOTA 성능을 달성했습니다.   
+
+<br>
+<br>
+<br>
+
+### Light-weight networks. 
+
+<br>
+<br>
+<br>
+
+**Using deeper neural network with hundreds of layers and millions of parameters to achieve higher accuracy comes at cost.**  
+더 높은 정확도를 달성하기 위해 수백 개의 레이어와 수백만 개의 매개변수가 있는 심층 neural network을 사용하면 비용이 발생합니다.
+
+<br>
+
+**Powerful GPUs with larger memory size are needed, which makes the applications on many mobiles and embedded devices impractical.**  
+더 큰 메모리 크기의 강력한 GPU가 필요하므로 많은 모바일 및 임베디드 장치의 응용 프로그램이 비실용적입니다.
+
+<br>
+
+**To address this problem, light-weight networks are proposed.**  
+이 문제를 해결하기 위해 경량 Network가 제안됩니다.
+
+<br>
+
+**Light CNN proposed a max-feature-map (MFM) activation function that introduces the concept of maxout in the fully connected layer to CNN.**  
+Light CNN은 Fully Connected Layer의 maxout 개념을 CNN에 도입한 MFM(max-feature-map) 활성화 함수를 제안했습니다.
+
+<br>
+
+**The MFM obtains a compact representation and reduces the computational cost. Sun et al. proposed to sparsify deep networks iteratively from the previously learned denser models based on a weight selection criterion.**  
+MFM은 간결한 표현을 얻고 계산 비용을 줄입니다. Sun et al. 가중치 선택 기준을 기반으로 이전에 학습된 밀도가 높은 Model에서 Deep Network를 반복적으로 희소화하도록 제안되었습니다.
+
+<br>
+
+**MobiFace adopted fast downsampling and bottleneck residual block with the expansion layers and achieved high performance with 99.7% on LFW database.**  
+MobiFace는 확장 레이어와 함께 fast downsampling 및 bottleneck residual block을 채택했으며 LFW Database에서 99.7%의 높은 성능을 달성했습니다.
+
+<br>
+
+**Although some other light-weight CNNs, such as SqueezeNet, MobileNet, ShuffleNet and Xception, are still not widely used in FR, they deserve more attention.**  
+SqueezeNet, MobileNet, ShuffleNet 및 Xception과 같은 일부 다른 light-weight CNN은 아직 FR에서 널리 사용되지 않지만 더 많은 관심을 받을 가치가 있습니다.    
+
+<br>
+<br>
+<br>
+
+### Adaptive-architecture networks
+
+<br>
+<br>
+<br>
+
+**Considering that designing architectures manually by human experts are timeconsuming and error-prone processes, there is growing interest in adaptive-architecture networks which can find well-performing architectures, e.g. the type of operation every layer executes (pooling, convolution, etc) and hyper-parameters associated with the operation (number of filters, kernel size and strides for a convolutional layer, etc), according to the specific requirements of training and testing data.**  
+인간 전문가가 수동으로 Architecture를 설계하는 것은 시간이 많이 걸리고 오류가 발생하기 쉬운 프로세스라는 점을 고려할 때 성능이 좋은 Architecture를 찾을 수 있는 적응형 Architecture Network에 대한 관심이 높아지고 있습니다. Train 및 Test Data의 특정 요구 사항에 따라 모든 레이어가 실행하는 작업 유형(풀링, convolutional  등) 및 작업과 관련된 hyper-parameters(number of filters, kernel size and strides for a convolutional layer, etc).
+
+<br>
+
+**Currently, neural architecture search (NAS) is one of the promising methodologies, which has outperformed manually designed architectures on some tasks such as image classification or semantic segmentation.**  
+현재 NAS(Neural Architecture Search)는 유망한 방법론 중 하나로 이미지 분류 또는 의미 분할과 같은 일부 작업에서 수동으로 설계된 Architecture를 능가합니다.
+
+<br>
+
+**Zhu et al. integrated NAS technology into face recognition.**  
+Zhuet al. NAS 기술을 얼굴 인식에 통합했습니다.
+
+<br>
+
+**They used reinforcement learning algorithm (policy gradient) to guide the controller network to train the optimal child architecture.**  
+그들은 컨트롤러 Network가 최적의 child architecture를 Train하도록 안내하기 위해 reinforcement learning algorithm(policy gradient)을 사용했습니다.
+
+<br>
+
+**Besides NAS, there are some other explorations to learn optimal architectures adaptively.**  
+NAS 외에도 최적의 Architecture를 적응적으로 학습하기 위한 몇 가지 다른 탐구가 있습니다.
+
+<br>
+
+**For example, conditional convolutional neural network (c-CNN) dynamically activated sets of kernels according to modalities of samples;**  
+예를 들어, c-CNN(Conditional Convolutional Neural Network)은 샘플 양식에 따라 커널 세트를 동적으로 활성화했습니다.
+
+<br>
+
+**Han et al. proposed a novel contrastive convolution consisted of a trunk CNN and a kernel generator, which is beneficial owing to its dynamistic generation of contrastive kernels based on the pair of faces being compared.**  
+Han et al.은 트렁크 CNN과 kernel generator로 구성된 novel contrastive convolution을 제안했습니다.    
+
+<br>
+<br>
+<br>
+
+### Joint alignment-recognition networks
+
+<br>
+<br>
+<br>
+
+**Recently, an endto-end system was proposed to jointly train FR with several modules (face detection, alignment, and so forth) together.**
+최근에는 FR을 여러 Module(얼굴 감지, 정렬 등)과 함께 공동으로 Train하기 위한 end-to-end 시스템이 제안되었습니다.
+
+<br>
+
+**Compared to the existing methods in which each module is generally optimized separately according to different objectives, this end-to-end system optimizes each module according to the recognition objective, leading to more adequate and robust inputs for the recognition model.**  
+일반적으로 각 Module이 서로 다른 목표에 따라 개별적으로 최적화되는 기존 방법과 비교하여 이 end-to-end 시스템은 인식 목표에 따라 각 Module을 최적화하여 인식 Model에 대한 더 적절하고 강력한 입력을 유도합니다.
+
+<br>
+
+**For example, inspired by spatial transformer, Hayat et al. proposed a CNN-based data-driven approach that learns to simultaneously register and represent faces (Fig.10), while Wu et al. designed a novel recursive spatial transformer (ReST) module for CNN allowing face alignment and recognition to be jointly optimized.**  
+예를 들어, 공간 변환기에서 영감을 얻은 Hayat et al. Wu et al.은 얼굴을 동시에 등록하고 표현하는 방법을 배우는 CNN 기반 데이터 기반 접근 방식을 제안했습니다(그림 10). 얼굴 정렬 및 인식을 함께 최적화할 수 있도록 CNN을 위한 새로운 재귀 공간 변환기(ReST) Module을 설계했습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_10.png">
+<p align="center">
+</p>
+<br>
+<br>
