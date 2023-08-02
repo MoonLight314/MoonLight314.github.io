@@ -2418,3 +2418,348 @@ MegaFace 챌린지는 Gallery 선택 항목의 증가(10에서 100만)에 따른
 <br>
 <br>
 
+**Rather than rank-N and CMC, MS-Celeb-1M [45] further applies a precision-coverage curve to measure identification performance under a variable threshold t.**  
+rank-N 및 CMC 대신 MS-Celeb-1M [45]은 가변 임계값 t에서 식별 성능을 측정하기 위해 precision-coverage curve을 추가로 적용합니다.
+
+<br>
+
+**The probe is rejected when its confidence score is lower than t.**  
+신뢰도 점수가 t보다 낮으면 Probe가 거부됩니다.
+
+<br>
+
+**The algorithms are compared in term of what fraction of passed probes, i.e. coverage, with a high recognition precision, e.g. 95% or 99%, the results of the SOTA evaluated on MS-Celeb-1M challenge are listed in Table X.**  
+알고리즘은 통과된 Probe의 비율, 즉 커버리지, 높은 인식 정밀도(예: 95% 또는 99%, MS-Celeb-1M 챌린지에서 Evaluation된 SOTA의 결과는 표 X에 나열되어 있습니다.      
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_10.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### Open-set face identification
+
+<br>
+<br>
+<br>
+
+**Open-set face identification is relevant to high throughput face search systems (e.g., de-duplication, watch list identification), where the recognition system should reject unknown/unseen subjects (probes who do not present in gallery) at test time.**  
+Open-set face identification은 인식 시스템이 테스트 시간에 알 수 없거나 보이지 않는 주제(Gallery에 없는 Probe)를 거부해야 하는 고처리량 얼굴 검색 시스템(예: 중복 제거, 감시 목록 식별)과 관련이 있습니다.
+
+<br>
+
+**At present, there are very few databases covering the task of open-set FR.**  
+현재 개방형 세트 FR 작업을 다루는 Database가 거의 없습니다. 
+
+<br>
+
+**IJB-A/B/C benchmarks introduce a decision error tradeoff (DET) curve to characterize the the false negative identification rate (FNIR) as function of the false positive identification rate (FPIR).**  
+IJB-A/B/C benchmark는 FPIR(False Positive Identification Rate)의 함수로 FNIR(False Negative Identification Rate)을 특성화하기 위해 DET(Decision Error Tradeoff) 곡선을 도입합니다.
+
+<br>
+
+**FPIR measures what fraction of comparisons between probe templates and non-mate gallery templates result in a match score exceeding T.**  
+FPIR은 Probe template과 non-mate gallery template 간의 비교에서 일치 점수가 T를 초과하는 비율을 측정합니다.
+
+<br>
+
+**At the same time, FNIR measures what fraction of probe searches will fail to match a mated gallery template above a score of T.**  
+동시에 FNIR은 T점수 이상으로 결합된 Gallery template과 일치하지 않는 Probe 검색의 비율을 측정합니다.
+
+<br>
+
+**The algorithms are compared in term of the FNIR at a low FPIR, e.g. 1% or 10%, the results of the SOTA evaluated on IJB-A dataset as listed in Table XI.**  
+알고리즘은 낮은 FPIR(Ex. 1% 또는 10%)에서 FNIR 측면에서 비교됩니다. 표 XI에 나열된 IJB-A Dataset에서 Evaluation된 SOTA의 결과입니다.    
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_11.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### D. Evaluation Scenes and Data
+
+<br>
+<br>
+<br>
+
+**Public available training databases are mostly collected from the photos of celebrities due to privacy issue, it is far from images captured in the daily life with diverse scenes.**  
+공개된 트레이닝 Database는 사생활 보호 문제로 유명인 사진을 주로 수집하며, 일상에서 다양한 장면을 포착한 이미지와는 거리가 멀다.
+
+<br>
+
+**In order to study different specific scenarios, more difficult and realistic datasets are constructed accordingly, as shown in Table XII.**  
+서로 다른 특정 시나리오를 연구하기 위해 표 XII와 같이 더 어렵고 현실적인 Dataset가 그에 따라 구성됩니다.
+
+<br>
+
+**According to their characteristics, we divide these scenes into four categories: cross-factor FR, heterogenous FR, multiple (or single) media FR and FR in industry (Fig. 21).**  
+그 특성에 따라 이러한 장면을 cross-factor FR, heterogenous FR, multiple (or single) media FR 및 industry FR의 네 가지 범주로 나눕니다(그림 21).
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_12.png">
+<p align="center">
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_21.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+<br>
+<br>
+
+### Cross-factor FR
+
+<br>
+<br>
+<br>
+
+**Due to the complex nonlinear facial appearance, some variations will be caused by people themselves, such as cross-pose, cross-age, make-up, and disguise.**  
+복잡한 비선형 얼굴 모양으로 인해 cross-pose, cross-age, make-up 및 disguise과 같은 일부 변형이 사람 자체에 의해 발생합니다.
+
+<br>
+
+**For example, CALFW, MORPH, CACD and FG-NET are commonly useddatasets with different age range;**  
+예를 들어 CALFW, MORPH, CACD 및 FG-NET은 연령대가 다른 일반적으로 사용되는 Dataset입니다. 
+
+<br>
+
+**CFP [182] only focuses on frontal and profile face, CPLFW [181] is extended from LFW and contains different poses.**  
+CFP[182]는 정면과 옆얼굴에만 초점을 맞추고, CPLFW[181]는 LFW에서 확장되어 다양한 포즈를 포함합니다.
+
+<br>
+
+**Disguised faces in the wild (DFW) [214] evaluates face recognition across disguise.**  
+DFW(Disguised Faces in the Wild)[214]는 변장을 통해 얼굴 인식을 Evaluation합니다.
+
+<br>
+<br>
+<br>
+
+### Heterogenous FR
+
+<br>
+<br>
+<br>
+
+**It refers to the problem of matching faces across different visual domains.**  
+서로 다른 시각적 영역에서 일치하는 얼굴의 문제를 나타냅니다.
+
+<br>
+
+**The domain gap is mainly caused by sensory devices and cameras settings, e.g. visual light vs. near-infrared and photo vs. sketch.**  
+domain gap는 주로 감각 장치 및 카메라 설정으로 인해 발생합니다. 예를 들면, 가시광 대 근적외선 및 사진 대 스케치 등이 있습니다.
+
+<br>
+
+**For example, CUFSF [201] and CUFS [199] are commonly used photo-sketch datasets and CUFSF dataset is harder due to lighting variation and shape exaggeration.**  
+예를 들어 CUFSF [201] 및 CUFS [199]는 일반적으로 사용되는 사진 스케치 Dataset이며 CUFSF Dataset는 조명 변화 및 모양 과장으로 인해 더 어렵습니다.
+
+<br>
+<br>
+<br>
+
+### Multiple (or single) media FR
+
+<br>
+<br>
+<br>
+
+**Ideally, in FR, many images of each subject are provided in training datasets and image-to-image recognitions are performed when testing.**  
+이상적으로 FR에서는 Train Dataset에 각 주제의 많은 이미지가 제공되고 테스트 시 이미지 대 이미지 인식이 수행됩니다.
+
+<br>
+
+**But the situation will be different in reality.**  
+그러나 현실에서는 상황이 다를 것이다.
+
+<br>
+
+**Sometimes, the number of images per person in training set could be very small, such as MS-Celeb-1M challenge 2.**  
+경우에 따라 MS-Celeb-1M 챌린지 2와 같이 training set의 1인당 이미지 수가 매우 적을 수 있습니다.
+
+<br>
+
+**This challenge is often called low- shot or fewshot FR.**  
+이 챌린지는 종종 low-shot 또는 fewshot FR이라고 합니다.
+
+<br>
+
+**Moreover, each subject face in test set may be enrolled with a set of images and videos and set-to-set recognition should be performed, such as IJB-A and PaSC.**  
+또한 test set의 각 피사체 얼굴은 일련의 이미지 및 비디오로 등록될 수 있으며 IJB-A 및 PaSC와 같은 세트 간 인식이 수행되어야 합니다.        
+
+<br>
+<br>
+<br>
+
+### FR in industry
+
+<br>
+<br>
+<br>
+
+**Although deep FR has achieved beyond human performance on some standard benchmarks, but some other factors should be given more attention rather than accuracy when deep FR is adopted in industry, e.g. anti-attack (CASIA-FASD) and 3D FR (Bosphorus, BU-3DFE and FRGCv2).**  
+deep FR은 일부 표준 benchmark에서 인간의 성능을 넘어섰지만 deep FR이 업계에서 채택될 때 정확성보다는 공격 방지(CASIA-FASD) 및 3D FR(Bosphorus, BU-3DFE 및 FRGCv2)와 같은 다른 요인에 더 주의를 기울여야 합니다.
+
+<br>
+
+**Compared to publicly available 2D face databases, 3D scans are hard to acquire, and the number of scans and subjects in public 3D face databases is still limited, which hinders the development of 3D deep FR.**  
+공개적으로 사용 가능한 2D 얼굴 Database와 비교할 때 3D 스캔은 획득하기 어렵고 공개 3D 얼굴 Database의 스캔 및 대상 수는 여전히 제한되어 3D deep FR 개발을 방해합니다.    
+
+<br>
+<br>
+<br>
+
+## VI. DIVERSE RECOGNITION SCENES OF DEEP LEARNING
+
+<br>
+<br>
+<br>
+
+**Despite the high accuracy in the LFW and Megaface, benchmarks, the performance of FR models still hardly meets the requirements in real-world application.**  
+LFW 및 Megaface, benchmark의 높은 정확도에도 불구하고 FR Model의 성능은 여전히 실제 응용 프로그램의 요구 사항을 거의 충족하지 못합니다.
+
+<br>
+
+**A conjecture in industry is made that results of generic deep models can be improved simply by collecting big datasets of the target scene.**  
+대상 장면의 큰 Dataset를 수집하는 것만으로 일반 심층 Model의 결과를 개선할 수 있다는 업계의 추측이 있습니다.
+
+<br>
+
+**However, this holds only to a certain degree.**  
+그러나 이것은 어느 정도만 적용됩니다.
+
+<br>
+
+**More and more concerns on privacy may make the collection and human-annotation of face data become illegal in the future.**  
+프라이버시에 대한 우려가 점점 더 커짐에 따라 얼굴 데이터의 수집 및 인간 주석이 향후 불법이 될 수 있습니다.
+
+<br>
+
+**Therefore, significant efforts have been paid to design excellent algorithms to address the specific problems with limited data in these realistic scenes.**  
+따라서 이러한 현실적인 장면에서 제한된 데이터로 특정 문제를 해결하기 위해 우수한 알고리즘을 설계하기 위해 많은 노력을 기울였습니다.
+
+<br>
+
+**In this section, we present several special algorithms of FR.**  
+이 섹션에서는 FR의 몇 가지 특수 알고리즘을 제시합니다.
+
+<br>
+<br>
+<br>
+
+### A. Cross-Factor Face Recognition
+
+<br>
+<br>
+<br>
+
+### 1) Cross-Pose Face Recognition
+
+<br>
+<br>
+<br>
+
+**As [182] shows that many existing algorithms suffer a decrease of over 10% from frontalfrontal to frontal-profile verification, cross-pose FR is still an extremely challenging scene.**  
+[182]에서 많은 기존 알고리즘이 frontalfrontal에서 frontal-profile 검증까지 10% 이상의 감소를 겪고 있음을 보여주듯이 교차 포즈 FR은 여전히 매우 어려운 장면입니다.
+
+<br>
+
+**In addition to the aforementioned methods, including “one-to-many augmentation”, “many-to-one normalization” and assembled networks (Section IV and III-B.2), there are some other algorithms designed for crosspose FR.**  
+"one-to-many augmentation", "many-to-one normalization" 및 assembled Network(섹션 IV 및 III-B.2)를 포함하여 앞서 언급한 방법 외에도 교차 FR을 위해 설계된 몇 가지 다른 알고리즘이 있습니다.
+
+<br>
+
+**Considering the extra burden of above methods, Cao et al. [215] attempted to perform frontalization in the deep feature space rather than the image space.**  
+위의 방법의 추가 부담을 고려하여 Cao et al. [215]는 이미지 공간이 아닌 깊은 특징 공간에서 정면화를 시도했다.
+
+<br>
+
+**A deep residual equivariant mapping (DREAM) block dynamically added residuals to an input representation to transform a profile face to a frontal image.**  
+DREAM(Deep Residual Equivariant Mapping) 블록은 프로필 얼굴을 정면 이미지로 변환하기 위해 입력 표현에 잔차를 동적으로 추가했습니다.
+
+<br>
+
+**Chen et al. proposed to combine feature extraction with multi-view subspace learning to simultaneously make features be more pose-robust and discriminative.**  
+Chenet al.은 feature extraction과 multi-view subspace 학습을 결합하여 features을 보다 견고하고 차별적으로 만드는 것을 제안했습니다.
+
+<br>
+
+**Pose Invariant Model (PIM) jointly performed face frontalization and learned pose invariant representations end-to-end to allow them to mutually boost each other, and further introduced unsupervised cross-domain adversarial training and a learning to learn strategy to provide high-fidelity frontal reference face images.**  
+PIM(Pose Invariant Model)은 얼굴 정면화를 공동으로 수행하고 포즈 불변 표현을 end-to-end로 학습하여 서로를 부스트할 수 있게 했으며, 추가로 감독되지 않은 도메인 간 adversarial Train 및 high-fidelity frontal reference face images를 제공하기 위한 학습 전략을 도입했습니다.      
+
+<br>
+<br>
+<br>
+
+### 2) Cross-Age Face Recognition
+
+<br>
+<br>
+<br>
+
+**Cross-age FR is extremely challenging due to the changes in facial appearance by the aging process over time.**  
+Cross-age FR은 시간이 지남에 따라 노화 과정에 따른 얼굴 모양의 변화로 인해 매우 어렵습니다.
+
+<br>
+
+**One direct approach is to synthesize the desired image with target age such that the recognition can be performed in the same age group.**  
+직접적인 접근 방법 중 하나는 원하는 이미지를 대상 연령과 합성하여 동일한 연령대에서 인식이 가능하도록 하는 것입니다.
+
+<br>
+
+**A generative probabilistic model was used by to model the facial aging process at each short-term stage.**  
+각 단기 단계에서 얼굴 노화 과정을 Modeling하기 위해 generative probabilistic model이 사용되었습니다.
+
+<br>
+
+**The identity-preserved conditional generative adversarial networks (IPCGANs) framework utilized a conditional-GAN to generate a face in which an identity-preserved module preserved the identity information and an age classifier forced the generated face with the target age.**  
+identity-preserved conditional generative adversarial networks (IPCGANs) 프레임워크는 conditional-GAN을 활용하여 ID 보존 Module이 ID 정보를 보존하고 연령 분류기가 생성된 얼굴에 목표 연령을 강제하는 얼굴을 생성했습니다.
+
+<br>
+
+**Antipov et al. proposed to age faces by GAN, but the synthetic faces cannot be directly used for face verification due to its imperfect preservation of identities.**  
+Antipovet al.은 GAN이 얼굴을 노화시키기 위해 제안했지만 합성 얼굴은 신원 보존이 불완전하기 때문에 얼굴 확인에 직접 사용할 수 없습니다.
+
+<br>
+
+**Then, they used a local manifold adaptation (LMA) approach to solve the problem of [220].**  
+그런 다음 [220]의 문제를 해결하기 위해 local manifold adaptation(LMA) 접근 방식을 사용했습니다.
+
+<br>
+
+**In [222], high-level age-specific features conveyed by the synthesized face are estimated by a pyramidal adversarial discriminator at multiple scales to generate more lifelike facial details.**  
+[222]에서, 합성된 얼굴에 의해 전달되는 높은 수준의 연령별 특징은 더 생생한 얼굴 세부 사항을 생성하기 위해 여러 척도에서 피라미드형 적대적 판별기에 의해 추정됩니다.
+
+<br>
+
+**An alternative to address the crossage problem is to decompose aging and identity components separately and extract age-invariant representations.**  
+교차 문제를 해결하기 위한 대안은 노화 및 정체성 구성 요소를 별도로 분해하고 연령 불변 표현(age-invariant representations)을 추출하는 것입니다.
+
+<br>
+
+**Wen et al. [192] developed a latent identity analysis (LIA) layer to separate these two components, as shown in Fig. 22.**  
+Wen et al. [192]는 그림 22와 같이 이 두 구성 요소를 분리하기 위해 LIA(Latent Identity Analysis) 레이어를 개발했습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_22.png">
+<p align="center">
+</p>
+<br>
+<br>
