@@ -1766,4 +1766,441 @@ Bao et al.은 하나의 입력 이미지의 신원 표현과 다른 입력 얼�
 classifier를 관중으로 취급하는 이전 방법과 달리 FaceID-GAN[162]은 classifier가 discriminator와 협력하여 두 가지 다른 측면, 즉 각각 얼굴 정체성과 이미지 품질에서 생성자와 경쟁하는 three-player GAN을 제안했습니다.
 
 <br>
+<br>
+<br>
+
+## B. Many-to-One Normalization
+
+<br>
+<br>
+<br>
+
+**In contrast to “one-to-many augmentation”, the methods of “many-to-one normalization” produce frontal faces and reduce appearance variability of test data to make faces align and compare easily. It can be categorized as autoencoder model, CNN model and GAN model.**  
+"one-to-many augmentation"와 달리 "many-to-one normalization" 방법은 정면 얼굴을 생성하고 Test Data의 모양 변동성을 줄여 얼굴을 쉽게 정렬하고 비교할 수 있도록 합니다. Autoencoder Model, CNN Model 및 GAN Model로 분류할 수 있습니다.    
+
+<br>
+<br>
+<br>
+
+### Autoencoder model
+
+<br>
+<br>
+<br>
+
+
+**Autoencoder can also be applied to “many-to-one normalization”.**  
+Autoencoder는 "many-to-one normalization"에도 적용될 수 있습니다.
+
+<br>
+
+**Different from the autoencoder model in “one-to-many augmentation” which generates the desired pose images with the help of pose codes, autoencoder model here learns pose-invariant face representation by an encoder and directly normalizes faces by a decoder without pose codes.**  
+포즈 코드의 도움으로 원하는 포즈 이미지를 생성하는 "one-to-many augmentation"의 Autoencoder Model과 달리, 여기서 Autoencoder Model은 포즈 코드 없이 포즈 불변 얼굴 표현을 학습하고 Decoder로 얼굴을 직접 정규화합니다. 
+
+<br>
+
+**Zhu et al. selected canonicalview images according to the face images’ symmetry and sharpness and then adopted an autoencoder to recover the frontal view images by minimizing the reconstruction loss error.**  
+Zhuet al.은 얼굴 영상의 대칭성과 선명도에 따라 canonicalview 영상을 선택하고 autoencoder를 채택하여 재구성 손실 오류를 최소화하여 정면 영상을 복구합니다.
+
+<br>
+
+**The proposed stacked progressive autoencoders (SPAE) progressively map the nonfrontal face to the frontal face through a stack of several autoencoders.**  
+제안된 SPAE(Stacked Progressive Autoencoders)는 여러 자동 Encoder 스택을 통해 nonfrontal face를 frontal face로 점진적으로 매핑합니다.
+
+<br>
+
+**Each shallow autoencoders of SPAE is designed to convert the input face images at large poses to a virtual view at a smaller pose, so the pose variations are narrowed down gradually layer by layer along the pose manifold.**  
+SPAE의 각각의 shallow Autoencoder는 큰 포즈의 입력 얼굴 이미지를 더 작은 포즈의 virtual view로 변환하도록 설계되어 포즈 변형이 포즈 매니폴드를 따라 레이어별로 점진적으로 좁혀집니다. 
+
+<br>
+
+**Zhang et al. built a sparse many-to-one encoder to enhance the discriminant of the pose free feature by using multiple random faces as the target values for multiple encoders.**  
+Zhang et al.은 여러 Encoder의 대상 값으로 여러 임의의 얼굴을 사용하여 포즈 없는 기능의 판별을 향상시키기 위해 희소한 many-to-one encoder를 구축했습니다.    
+
+<br>
+<br>
+<br>
+
+### CNN model
+
+<br>
+<br>
+<br>
+
+**CNN models usually directly learn the 2D mappings between non-frontal face images and frontal images, and utilize these mapping to normalize images in pixel space.**  
+CNN Model은 일반적으로 non-frontal face images와 frontal images간의 2D 매핑을 직접 학습하고 이러한 매핑을 활용하여 이미지를 픽셀 공간에서 정규화합니다.
+
+<br>
+
+**The pixels in normalized images are either directly the pixels or the combinations of the pixels in non-frontal images.**  
+정규화된 이미지의 픽셀은 바로 픽셀이거나 non-frontal images의 픽셀 조합입니다.
+
+<br>
+
+**In LDF-Net, the displacement field network learns the shifting relationship of two pixels, and the translation layer transforms the input non-frontal face image into a frontal one with this displacement field.**  
+LDF-Net에서 displacement field Network는 두 픽셀의 이동 관계를 학습하고 변환 레이어는 이 변위 필드를 사용하여 입력된 non-frontal face image를 frontal 이미지로 변환합니다.
+
+<br>
+
+**In GridFace shown in Fig. 15, first, the rectification network normalizes the images by warping pixels from the original image to the canonical one according to the computed homography matrix,**  
+그림 15의 GridFace에서 먼저 보정 Network는 계산된 호모그래피 행렬에 따라 원본 이미지에서 표준 이미지로 픽셀을 워핑하여 이미지를 정규화한 다음 정규화된 출력을 암시적 표준 뷰 페이스에 의해 정규화합니다. 
+
+<br>
+
+**then the normalized output is regularized by an implicit canonical view face prior, finally, with the normalized faces as input, the recognition network learns discriminative face representation via metric learning.**  
+그런 다음,정규화된 얼굴을 입력으로 사용하여 인식 Network는 메트릭 학습을 통해 차별적인 얼굴 표현을 학습합니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_15.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### GAN model
+
+<br>
+<br>
+<br>
+
+**Huang et al. proposed a two-pathway generative adversarial network (TP-GAN) that contains four landmark-located patch networks and a global encoderdecoder network.**  
+Huang et al.은 4개의 랜드마크에 위치한 패치 Network와 글로벌 Encoder/Decoder Network를 포함하는 two-pathway generative adversarial network(TP-GAN)를 제안했습니다.
+
+<br>
+
+**Through combining adversarial loss, symmetry loss and identity-preserving loss, TP-GAN generates a frontal view and simultaneously preserves global structures and local details as shown in Fig. 16.**  
+adversarial loss, symmetry loss 및 identity-preserving loss을 결합하여 TP-GAN은 정면 뷰를 생성하고 동시에 그림 16과 같이 전역 구조 및 로컬 세부 정보를 보존합니다.
+
+<br>
+
+**In a disentangled representation learning generative adversarial network (DR-GAN), the generator serves as a face rotator, in which an encoder produces an identity representation, and a decoder synthesizes a face at the specified pose using this representation and a pose code.**  
+DR-GAN(disentangled representation learning generative adversarial network)에서 generator는 Encoder가 ID 표현을 생성하고 Decoder가 이 표현과 포즈 코드를 사용하여 지정된 포즈에서 얼굴을 합성하는 얼굴 회전기 역할을 합니다.
+
+<br>
+
+**And the discriminator is trained to not only distinguish real vs. synthetic images, but also predict the identity and pose of a face.**  
+그리고 discriminator는 실제 이미지와 합성 이미지를 구별할 뿐만 아니라 얼굴의 정체성과 포즈를 예측하도록 Train됩니다.
+
+<br>
+
+**Yin et al. incorporated 3DMM into the GAN structure to provide shape and appearance priors to guide the generator to frontalization.**  
+Yin et al.은 3DMM을 GAN 구조에 통합하여 generator를 전면화(frontalization)로 안내하기 전에 모양과 모양을 제공합니다.    
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_16.png">
+<p align="center">
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## V. FACE DATABASES AND EVALUATION PROTOCOLS
+
+<br>
+<br>
+<br>
+
+**In the past three decades, many face databases have been constructed with a clear tendency from small-scale to largescale, from single-source to diverse-sources, and from labcontrolled to real-world unconstrained condition, as shown in Fig. 17.**  
+지난 30년 동안 그림 17과 같이 소규모에서 대규모로, 단일 소스에서 다양한 소스로, 실험실 제어(labcontrolled)에서 실제 비제약 조건(real-world unconstrained condition)으로 많은 얼굴 Database가 명확한 경향으로 구축되었습니다.
+
+<br>
+
+**As the performance of some simple databases become saturated, e.g. LFW, more and more complex databases were continually developed to facilitate the FR research.**
+일부 단순 Database의 성능이 포화됨에 따라, 예를 들어. LFW, 점점 더 복잡한 Database가 FR 연구를 용이하게 하기 위해 지속적으로 개발되었습니다.
+
+<br>
+
+**It can be said without exaggeration that the development process of the face databases largely leads the direction of FR research.**  
+얼굴 Database의 개발 과정은 FR 연구의 방향성을 크게 이끌어간다고 해도 과언이 아니다.
+
+<br>
+
+**In this section, we review the development of major training and testing academic databases for the deep FR.**  
+이 섹션에서는 Deep FR을 위한 주요 training and testing academic databases의 개발을 검토합니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_17.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### A. Large-scale training data sets
+
+<br>
+<br>
+<br>
+
+**The prerequisite of effective deep FR is a sufficiently large training dataset.**  
+효과적인 Deep FR의 전제 조건은 충분히 큰 Train Dataset입니다
+
+<br>
+
+**Zhou et al. [59] suggested that large amounts of data with deep learning improve the performance of FR.**  
+Zhou et al.은 [59]는 Deep Learning을 통해 많은 양의 데이터가 FR의 성능을 향상시킨다고 제안했습니다.
+
+<br>
+
+**The results of Megaface Challenge also revealed that premier deep FR methods were typically trained on data larger than 0.5M images and 20K people.**  
+Megaface Challenge의 결과는 또한 최고의 deep FR 방법이 일반적으로 0.5M 이미지와 20,000명보다 큰 데이터에 대해 Train되었음을 밝혔습니다.
+
+<br>
+
+**The early works of deep FR were usually trained on private training datasets.**  
+Deep FR의 초기 작업은 일반적으로 개인 Train Dataset에서 Train되었습니다.
+
+<br>
+
+**Facebook’s Deepface model was trained on 4M images of 4K people; Google’s FaceNet was trained on 200M images of 3M people; DeepID serial models were trained on 0.2M images of 10K people.**  
+Facebook의 Deepface Model은 4,000명에 대한 4백만 개의 이미지로 Train되었습니다. Google의 FaceNet은 3백만 명의 이미지 2억 개로 Train되었습니다. DeepID serial Model은 10,000명에 대한 0.2M 이미지로 Train되었습니다.
+
+<br>
+
+**Although they reported ground-breaking performance at this stage, researchers cannot accurately reproduce or compare their models without public training datasets.**  
+이 단계에서 획기적인 성능을 보고했지만 연구원은 public training datasets 없이는 Model을 정확하게 재현하거나 비교할 수 없습니다.
+
+<br>
+
+**To address this issue, CASIA-Webface [120] provided the first widely-used public training dataset for the deep model training purpose, which consists of 0.5M images of 10K celebrities collected from the web.**  
+이 문제를 해결하기 위해 CASIA-Webface[120]는 웹에서 수집한 10,000명의 유명인사 이미지 0.5M로 구성된 Deep Model 교육 목적으로 널리 사용되는 최초의 widely-used public training dataset를 제공했습니다.
+
+<br>
+
+**Given its moderate size and easy usage, it has become a great resource for fair comparisons for academic deep models.**  
+적당한 크기와 쉬운 사용법을 감안할 때 학문적 심층 Model에 대한 공정한 비교를 위한 훌륭한 리소스가 되었습니다.
+
+<br>
+
+**However, its relatively small data and ID size may not be sufficient to reflect the power of many advanced deep learning methods.**  
+그러나 상대적으로 작은 데이터와 ID 크기는 많은 고급 Deep Learning 방법의 성능을 반영하기에 충분하지 않을 수 있습니다.
+
+<br>
+
+**Currently, there have been more databases providing public available large-scale training dataset (Table VI), especially three databases with over 1M images, namely MS-Celeb-1M, VGGface2, and Megaface, and we summary some interesting findings about these training sets, as shown in Fig. 18.**  
+현재 공개된 대규모 교육 Dataset(표 VI)를 제공하는 더 많은 Database, 특히 MS-Celeb-1M, VGGface2 및 Megaface와 같은 1M 이상의 이미지가 포함된 3개의 Database가 있으며 이러한 교육 세트에 대한 몇 가지 흥미로운 결과를 그림 18에 도시된 바와 같이 요약합니다.    
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_06.png">
+<p align="center">
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_18.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+### Depth v.s. breadth
+
+<br>
+<br>
+<br>
+
+**These large training sets are expanded from depth or breadth. VGGface2 provides a large-scale training dataset of depth, which have limited number of subjects but many images for each subjects.**  
+이러한 대규모 Train 세트는 깊이 또는 폭에서 확장됩니다. VGGface2는 피험자의 수는 제한되어 있지만 각 피험자에 대한 이미지가 많은 대규모 학습 Dataset를 제공합니다.
+
+<br>
+
+**The depth of dataset enforces the trained model to address a wide range intraclass variations, such as lighting, age, and pose.**  
+Dataset의 깊이는 Train된 Model이 조명, 연령 및 포즈와 같은 광범위한 클래스 내 변형을 처리하도록 합니다.
+
+<br>
+
+**In contrast, MS-Celeb-1M and Mageface (Challenge 2) offers large-scale training datasets of breadth, which contains many subject but limited images for each subjects.**  
+대조적으로 MS-Celeb-1M 및 Mageface(Challenge 2)는 많은 주제를 포함하지만 각 주제에 대해 제한된 이미지를 포함하는 폭넓은 대규모 Train Dataset를 제공합니다.
+
+<br>
+
+**The breadth of dataset ensures the trained model to cover the sufficiently variable appearance of various people.**  
+Dataset의 폭이 넓기 때문에 Train된 Model이 다양한 사람들의 충분히 다양한 모습을 다룰 수 있습니다. 
+
+<br>
+
+**Cao et al. [39] conducted a systematic studies on model training using VGGface2 and MSCeleb-1M, and found an optimal model by first training on MS-Celeb-1M (breadth) and then fine-tuning on VGGface2 (depth).**  
+Caoet al. [39]는 VGGface2와 MSCeleb-1M을 사용한 Model Train에 대한 체계적인 연구를 수행했으며, MS-Celeb-1M(breadth)에서 먼저 Train한 다음 VGGface2(depth)에서 미세 조정하여 최적의 Model을 찾았습니다.    
+
+<br>
+<br>
+<br>
+
+### Long tail distribution
+
+<br>
+<br>
+<br>
+
+**The utilization of long tail distribution is different among datasets.**  
+롱테일 분포의 활용은 Dataset마다 다릅니다. 
+
+<br>
+
+**For example, in Challenge 2 of MS-Celeb-1M, the novel set specially uses the tailed data to study low-shot learning**  
+예를 들어, MS-Celeb-1M의 챌린지 2에서 새로운 세트는 특히 꼬리 데이터를 사용하여 로우 샷 학습을 연구합니다. 
+
+<br>
+
+**central part of the long tail distribution is used by the Challenge 1 of MS-Celeb1M and images’ number is approximately limited to 100 for each celebrity;**  
+롱테일 분포의 중앙 부분은 MS-Celeb1M의 Challenge 1에서 사용되며 이미지 수는 유명인당 약 100개로 제한됩니다. 
+
+<br>
+
+**VGGface and VGGface2 only use the head part to construct deep databases;**  
+VGGface 및 VGGface2는 헤드 부분만 사용하여 심층 Database를 구성합니다. 
+
+<br>
+
+**Megaface utilizes the whole distribution to contain as many images as possible, the minimal number of images is 3 per person and the maximum is 2469.**  
+Megaface는 가능한 한 많은 이미지를 포함하기 위해 전체 분포를 활용하며 최소 이미지 수는 1인당 3개, 최대 2469개입니다.    
+
+<br>
+<br>
+<br>
+
+### Data engineering
+
+<br>
+<br>
+<br>
+
+**Several popular benchmarks, such as LFW unrestricted protocol, Megaface Challenge 1, MS-Celeb1M Challenge 1&2, explicitly encourage researchers to collect and clean a large-scale data set for enhancing the capability of deep neural network.**
+LFW 무제한 Protocol, Megaface Challenge 1, MS-Celeb1M Challenge 1&2와 같은 몇 가지 인기 있는 benchmark는 연구원이 심층 neural network의 기능을 향상시키기 위해 대규모 Dataset를 수집하고 정리하도록 명시적으로 권장합니다.
+
+<br>
+
+**Although data engineering is a valuable problem to computer vision researchers, this protocol is more incline to the industry participants.**  
+데이터 엔지니어링은 컴퓨터 비전 연구자에게 중요한 문제이지만 이 Protocol은 업계 참여자에게 더 적합합니다.
+
+<br>
+
+**As evidence, the leaderboards of these experiments are mostly occupied by the companies holding invincible hardwares and data scales.**  
+증거로, 이러한 실험의 순위표는 대부분 무적의 하드웨어와 데이터 규모를 보유한 회사가 차지하고 있습니다.
+
+<br>
+
+**This phenomenon may not be beneficial for developments of new models in academic community.**  
+이러한 현상은 학계에서 새로운 Model을 개발하는 데 도움이 되지 않을 수 있습니다.
+
+<br>
+<br>
+<br>
+
+### Data noise
+
+<br>
+<br>
+<br>
+
+**Owing to data source and collecting strategies, existing large-scale datasets invariably contain label noises.**  
+데이터 소스 및 수집 전략으로 인해 기존 대규모 Dataset에는 항상 레이블 노이즈가 포함됩니다.
+
+**Wang et al. [124] profiled the noise distribution in existing datasets in Fig. 19 and showed that the noise percentage increases dramatically along the scale of data.**  
+Wang et al. [124]는 그림 19의 기존 Dataset에서 노이즈 분포를 프로파일링했으며 노이즈 비율이 데이터 규모에 따라 극적으로 증가함을 보여주었습니다.
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_19.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Moreover, they found that noise is more lethal on a 10,000-class problem of FR than on a 10-class problem of object classification and that label flip noise severely deteriorates the performance of a model, especially the model using A-softmax [84].**  
+또한 객체 분류의 10개 클래스 문제보다 FR의 10,000개 클래스 문제에서 노이즈가 더 치명적이며 레이블 플립 노이즈가 Model, 특히 A-softmax를 사용하는 Model의 성능을 심각하게 저하시킨다는 것을 발견했습니다[84].
+
+<br>
+
+**Therefore, building a sufficiently large and clean dataset for academic research is very meaningful.**  
+따라서 학술 연구를 위해 충분히 크고 깨끗한 Dataset를 구축하는 것은 매우 의미가 있습니다.
+
+<br>
+
+**Deng et al. [106] found there are serious label noise in MS-Celeb-1M [45], and they cleaned the noise of MS-Celeb-1M, and made the refined dataset public available.**  
+Deng et al. [106]은 MS-Celeb-1M[45]에서 심각한 레이블 노이즈가 있음을 발견했으며 MS-Celeb-1M의 노이즈를 정리하고 정제된 Dataset를 공개했습니다.
+
+<br>
+
+**Microsoft and Deepglint jointly released the largest public data set [163] with cleaned labels, which includes 4M images cleaned from MS-Celeb-1M dataset and 2.8M aligned images of 100K Asian celebrities.**  
+Microsoft와 Deepglint는 MS-Celeb-1M 데이터세트에서 정리된 4백만 개의 이미지와 100,000명의 아시아 유명인사의 정렬된 이미지 280만 개를 포함하는 정리된 레이블이 포함된 가장 큰 공개 Dataset[163]를 공동으로 발표했습니다.
+
+<br>
+
+**Moreover, Zhan et al. [167] shifted the focus from cleaning the datasets to leveraging more unlabeled data.**  
+또한, Zhan et al. [167]은 Dataset 정리에서 레이블이 지정되지 않은 더 많은 데이터 활용으로 초점을 이동했습니다. 
+
+<br>
+
+**Through automatically assigning pseudo labels to unlabeled data with the help of relational graphs, they obtained competitive or even better results over the fullysupervised counterpart.**  
+관계형 그래프의 도움으로 레이블이 지정되지 않은 데이터에 의사 레이블을 자동으로 할당함으로써 fullysupervised counterpart보다 경쟁력 있거나 더 나은 결과를 얻었습니다.      
+
+<br>
+<br>
+<br>
+
+### Data bias
+
+<br>
+<br>
+<br>
+
+**Large-scale training datasets, such as CASIAWebFace [120], VGGFace2 [39] and MS-Celeb-1M [45], are typically constructed by scraping websites like Google Images, and consist of celebrities on formal occasions: smiling, makeup, young, and beautiful.**  
+CASIAWebFace [120], VGGFace2 [39] 및 MS-Celeb-1M [45]과 같은 대규모 교육 Dataset는 일반적으로 Google 이미지와 같은 웹 사이트를 스크랩하여 구성되며 공식 행사에서 웃고, 화장하고 젊고 아름다운 유명인사의 이미지로 구성됩니다.
+
+<br>
+
+**They are largely different from databases captured in the daily life (e.g. Megaface).**  
+일상 생활에서 캡처한 Database(예: 메가페이스)와는 크게 다릅니다.
+
+<br>
+
+**The biases can be attributed to many exogenous factors in data collection, such as cameras, lightings, preferences over certain types of backgrounds, or annotator tendencies.**  
+편향은 카메라, 조명, 특정 유형의 배경에 대한 선호도 또는 주석 작성자 경향과 같은 데이터 수집의 많은 외생적 요인에 기인할 수 있습니다.
+
+<br>
+
+**Dataset biases adversely affect cross-dataset generalization; that is, the performance of the model trained on one dataset drops significantly when applied to another one.**  
+Dataset biases는 cross-dataset generalization에 악영향을 미칩니다. 즉, 한 Dataset에서 Train된 Model의 성능은 다른 Dataset에 적용될 때 크게 떨어집니다.
+
+<br>
+
+**One persuasive evidence is presented by P.J. Phillips’ study [168] which conducted a cross benchmark assessment of VGGFace model [37] for face recognition.**  
+P.J. Phillips의 연구[168]는 얼굴 인식을 위한 VGGFace Model[37]의 교차 benchmark Evaluation를 수행한 설득력 있는 증거 중 하나입니다.
+
+<br>
+
+**The VGGFace model achieves 98.95% on LFW [23] and 97.30% on YTF [169], but only obtains 26%, 52% and 85% on Ugly, Bad and Good partition of GBU database [170].**  
+VGGFace Model은 LFW[23]에서 98.95%, YTF[169]에서 97.30%를 달성했지만 GBU Database[170]의 Ugly, Bad 및 Good 파티션에서는 26%, 52% 및 85%만 얻었습니다.
+
+<br>
+
+**Demographic bias (e.g., race/ethnicity, gender, age) in datasets is a universal but urgent issue to be solved in data bias field.**  
+데이터셋의 인구학적 편향(예: 인종/민족, 성별, 연령)은 보편적이지만 데이터 편향 분야에서 해결해야 할 시급한 문제입니다.
+
+<br>
+
+**In existing training and testing datasets, the male, White, and middle-aged cohorts always appear more frequently, as shown in Table VII, which inevitably causes deep learning models to replicate and even amplify these biases resulting in significantly different accuracies when deep models are applied to different demographic groups.**  
+기존 Train 및 Test Dataset에서 남성, 백인 및 중년 코호트는 표 VII에 표시된 것처럼 항상 더 자주 나타납니다. 이는 필연적으로 Deep Learning Model이 다양한 인구 통계 그룹에 적용될 때 상당히 다른 정확도를 초래합니다. 
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Table_07.png">
+<p align="center">
+</p>
+<br>
+<br>
 
