@@ -2763,3 +2763,941 @@ Wen et al. [192]는 그림 22와 같이 이 두 구성 요소를 분리하기 �
 </p>
 <br>
 <br>
+
+**In [193], age-invariant features were obtained by subtracting agespecific factors from the representations with the help of the age estimation task.**  
+[193]에서 연령 추정 작업의 도움으로 표현에서 연령별 요인을 빼서 연령 불변 특징을 얻었습니다.
+
+<br>
+
+**In [124], face features are decomposed in the spherical coordinate system, in which the identity-related components are represented with angular coordinates and the age-related information is encoded with radial coordinate.**  
+[124]에서는 얼굴 특징을 구형 좌표계로 분해하여 신원 관련 요소는 각도 좌표로, 나이 관련 정보는 방사 좌표로 부호화하였다.
+
+<br>
+
+**Additionally, there are other methods designed for cross-age FR.**  
+또한 교차 연령 FR을 위해 설계된 다른 방법이 있습니다.
+
+<br>
+
+**For example, Bianco ett al. [223] and El et al. [224] finetuned the CNN to transfer knowledge across age.**  
+예를 들어, Bianco et al. [223] 및 El et al. 나이에 걸쳐 지식을 전달하기 위해 CNN을 미세 조정했습니다. 
+
+<br>
+
+**Wang et al. [225] proposed a siamese deep network to perform multi-task learning of FR and age estimation.**  
+Wang et al. [225]는 FR 및 나이 추정의 멀티태스크 학습을 수행하기 위해 siamese Deep Network를 제안했습니다.
+
+<br>
+
+**Li et al. [226] integrated feature extraction and metric learning via a deep CNN.**  
+Li et al.은 deep CNN을 통한 feature extraction 및 metric learning을 통합하였습니다.
+
+<br>
+<br>
+<br>
+
+### 3) Makeup Face Recognition
+
+<br>
+<br>
+<br>
+
+**Makeup is widely used by the public today, but it also brings challenges for FR due to significant facial appearance changes.**  
+메이크업은 오늘날 대중에 의해 널리 사용되지만 상당한 얼굴 모양 변화로 인해 FR에 문제를 야기하기도 합니다.
+
+<br>
+
+**The research on matching makeup and nonmakeup face images is receiving increasing attention.**  
+메이크업과 노메이크업 얼굴 이미지의 매칭에 대한 연구가 주목을 받고 있다.
+
+<br>
+
+**Li et al. [208] generated nonmakeup images from makeup ones by a bi-level adversarial network (BLAN) and then used the synthesized nonmakeup images for verification as shown in Fig. 23.**  
+Li et al.은 BLAN(bi-level adversarial network)에 의해 nonmakeup 이미지에서 메이크업 이미지를 생성한 다음 합성된 메이크업 이미지를 검증에 사용했습니다(그림 23 참조).
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_23.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Sun et al. [227] pretrained a triplet network on videos and fine-tuned it on a small makeup datasets.**  
+Sun et al. [227]은 비디오에서 triplet Network를 사전 Train하고 작은 메이크업 Dataset에서 미세 조정했습니다.
+
+<br>
+
+**Specially, facial disguise [214], [228], [229] is a challenging research topic in makeup face recognition.**  
+특히 얼굴 변장[214], [228], [229]은 메이크업 얼굴 인식에서 도전적인 연구 주제이다.
+
+<br>
+
+**By using disguise accessories such as wigs, beard, hats, mustache, and heavy makeup, disguise introduces two variations:**  
+가발, 턱수염, 모자, 콧수염, 짙은 화장과 같은 disguise 액세서리를 사용하여 disguise는 두 가지 변형을 선보입니다.
+
+<br>
+
+**(i) when a person wants to obfuscate his/her own identity, and (ii) another individual impersonates someone else’s identity.**  
+(i) 자신의 신원을 난독화하려는 경우 및 (ii) 다른 사람이 다른 사람의 신원을 사칭하는 경우.
+
+<br>
+
+**Obfuscation increases intra-class variations whereas impersonation reduces the inter-class dissimilarity, thereby affecting face recognition/verification task.**  
+난독화(Obfuscation)는 클래스 내 변형을 증가시키는 반면 가장(impersonation)은 클래스 간 비 유사성을 줄여 얼굴 인식/검증 작업에 영향을 미칩니다.
+
+<br>
+
+**To address this issue, a variety of methods are proposed.**  
+이 문제를 해결하기 위해 다양한 방법이 제안됩니다.
+
+<br>
+
+**Zhang et al. [230] first trained two DCNNs for generic face recognition and then used Principal Components Analysis (PCA) to find the transformation matrix for disguised face recognition adaptation.**  
+장 외. [230]은 먼저 일반 얼굴 인식을 위해 두 개의 DCNN을 교육한 다음 위장된 얼굴 인식 적응을 위한 변환 매트릭스를 찾기 위해 PCA(Principal Components Analysis)를 사용했습니다.
+
+<br>
+
+**Kohli et al. [231] finetuned models using disguised faces.**  
+Kohliet al.은 위장된 얼굴을 사용한 Model을 미세 조정하였습니다.
+
+<br>
+
+**Smirnov et al. [232] proposed a hard example mining method benefitted from class-wise (Doppelganger Mining [233]) and example-wise mining to learn useful deep embeddings for disguised face recognition.**  
+Smirnov et al. [232]는 위장된 얼굴 인식을 위한 유용한 Deep 임베딩을 학습하기 위해 클래스별(Doppelganger Mining [233]) 및 예제별 마이닝의 혜택을 받는 하드 예제 마이닝 방법을 제안했습니다.
+
+<br>
+
+**Suri et al. [234] learned the representations of images in terms of colors, shapes, and textures (COST) using an unsupervised dictionary learning method, and utilized the combination of COST features and CNN features to perform recognition.**  
+Suriet al.은 무감독 사전 학습 방법을 사용하여 색상, 모양 및 질감(COST) 측면에서 이미지 표현을 학습하고 COST 기능과 CNN 기능의 조합을 활용하여 인식을 수행했습니다.      
+
+<br>
+<br>
+<br>
+
+### B. Heterogenous Face Recognition
+
+<br>
+<br>
+<br>
+
+### 1) NIR-VIS Face Recognition
+
+<br>
+<br>
+<br>
+
+**Due to the excellent performance of the near-infrared spectrum (NIS) images under lowlight scenarios, NIS images are widely applied in surveillance systems.**  
+저조도 시나리오에서 NIS(근적외선 스펙트럼,near-infrared spectrum) 이미지의 뛰어난 성능으로 인해 NIS 이미지는 감시 시스템에 널리 적용됩니다.
+
+<br>
+
+**Because most enrolled databases consist of visible light (VIS) spectrum images, how to recognize a NIR face from a gallery of VIS images has been a hot topic.**  
+대부분의 등록된 Database는 가시광선(VIS) 스펙트럼 이미지로 구성되어 있기 때문에 VIS 이미지 Gallery에서 NIR 얼굴을 인식하는 방법이 뜨거운 주제였습니다.
+
+<br>
+
+**Saxena et al. [235] and Liu et al. [236] transferred the VIS deep networks to the NIR domain by fine-tuning.**  
+Saxenaet al. [235] 및 Liu et al. [236]은 미세 조정을 통해 VIS Deep Network를 NIR 도메인으로 이전했습니다.
+
+<br>
+
+**Lezama et al. [237] used a VIS CNN to recognize NIR faces by transforming NIR images to VIS faces through cross-spectral hallucination and restoring a low-rank structure for features through low-rank embedding.**  
+Lezama et al. [237]은 교차 스펙트럼 환각(cross-spectral hallucination )을 통해 근적외선 이미지를 VIS 얼굴로 변환하고 하위 임베딩을 통해 기능의 하위 구조를 복원하여 근적외선 얼굴을 인식하기 위해 VIS CNN을 사용했습니다.
+
+<br>
+
+**Reale et al. [198] trained a VISNet (for visible images) and a NIRNet (for near-infrared images), and coupled their output features by creating a siamese network.**  
+Realeet al. [198]은 VISNet(가시 이미지용)과 NIRNet(근적외선 이미지용)을 교육하고 siamese Network를 생성하여 출력 기능을 결합했습니다.
+
+<br>
+
+**He et al. [238], [239] divided the high layer of the network into a NIR layer, a VIS layer and a NIR-VIS shared layer, then, a modality-invariant feature can be learned by the NIR-VIS shared layer.**  
+He et al.은 Network의 상위 계층을 NIR 계층, VIS 계층 및 NIR-VIS 공유 계층으로 나눈 다음 NIR-VIS 공유 계층에서 모달리티 불변 특징을 학습할 수 있습니다.
+
+<br>
+
+**Song et al. [240] embedded cross-spectral face hallucination and discriminative feature learning into an end-to-end adversarial network.**  
+Song et al.은 cross-spectral face hallucination 및 discriminative feature learning을 end-to-end adversarial network에 임베디드 시켰습니다.
+
+<br>
+
+**In [196], the low-rank relevance and cross-modal ranking were used to alleviate the semantic gap.**  
+[196]에서는 의미론적 격차를 완화하기 위해 낮은 순위 관련성과 교차 모달 순위를 사용했습니다.
+
+<br>
+<br>
+<br>
+
+### 2) Low-Resolution Face Recognition
+
+<br>
+<br>
+<br>
+
+**Although deep networks are robust to low resolution to a great extent, there are still a few studies focused on promoting the performance of low-resolution FR.**  
+Deep Network는 저해상도에 대해 상당히 견고하지만 저해상도 FR의 성능을 촉진하는 데 초점을 맞춘 연구는 여전히 몇 가지 있습니다.
+
+<br>
+
+**For example, Zangeneh et al. [241] proposed a CNN with a two-branch architecture (a superresolution network and a feature extraction network) to map the high- and low-resolution face images into a common space where the intra-person distance is smaller than the interperson distance.**  
+예를 들어, Zangeneh 외. [241]은 고해상도 및 저해상도 얼굴 이미지를 사람 간 거리보다 사람 간 거리가 더 작은 공통 공간에 매핑하기 위해 2개 분기 Architecture(초해상도 Network 및 특징 추출 Network)가 있는 CNN을 제안했습니다.
+
+<br>
+
+**Shen et al. [242] exploited the face semantic information and local structural constraints to better restore the shape and detail of face images.**  
+Shenet al. [242]는 얼굴 이미지의 모양과 세부 사항을 더 잘 복원하기 위해 얼굴 의미론적 정보와 로컬 구조 제약 조건을 활용했습니다.
+
+<br>
+
+**In addition, they optimized the network with perceptual and adversarial losses to produce photo-realistic results.**  
+또한 그들은 사진과 같은 결과를 생성하기 위해 perceptual 및 적대적 손실(adversarial losses)로 Network를 최적화했습니다.    
+
+<br>
+<br>
+<br>
+
+### 3) Photo-Sketch Face Recognition
+
+<br>
+<br>
+<br>
+
+**The photo-sketch FR may help law enforcement to quickly identify suspects.**  
+photo-sketch FR은 법 집행 기관이 용의자를 신속하게 식별하는 데 도움이 될 수 있습니다.
+
+<br>
+
+**The commonly used methods can be categorized as two classes.**  
+일반적으로 사용되는 방법은 두 가지 클래스로 분류할 수 있습니다.
+
+<br>
+
+**One is to utilize transfer learning to directly match photos to sketches.**  
+하나는 Transfer Learning을 활용하여 사진과 스케치를 직접 일치시키는 것입니다.
+
+<br>
+
+**Deep networks are first trained using a large face database of photos and are then fine-tuned using small sketch database [243], [244].**  
+Deep Network는 먼저 사진의 큰 얼굴 Database를 사용하여 Train된 다음 작은 스케치 Database를 사용하여 미세 조정됩니다[243], [244].
+
+<br>
+
+**The other is to use the image-to-image translation, where the photo can be transformed to a sketch or the sketch to a photo; then, FR can be performed in one domain.**  
+다른 하나는 사진을 스케치로 변환하거나 스케치를 사진으로 변환할 수 있는 이미지 대 이미지 변환을 사용하는 것입니다. 그런 다음 FR은 하나의 도메인에서 수행할 수 있습니다.
+
+<br>
+
+**Zhang et al. [200] developed a fully convolutional network with generative loss and a discriminative regularizer to transform photos to sketches.**  
+장 외. [200]은 사진을 스케치로 변환하기 위해 Generative Loss와 discriminative regularizer를 사용하여 완전히 합성곱 Network를 개발했습니다.
+
+<br>
+
+**Zhang et al. [245] utilized a branched fully convolutional neural network (BFCN) to generate a structure-preserved sketch and a texture-preserved sketch, and then they fused them together via a probabilistic method.**  
+장 외. [245]는 BFCN(branched fully convolutional neural network)을 활용하여 구조 보존 스케치와 텍스처 보존 스케치를 생성한 다음 확률론적 방법을 통해 융합했습니다.
+
+<br>
+
+**Recently, GANs have achieved impressive results in image generation.**  
+최근 GAN은 이미지 생성에서 인상적인 결과를 얻었습니다.
+
+<br>
+
+**Yi et al. [246], Kim et al. [247] and Zhu et al. [248] used two generators, GA and GB, to generate sketches from photos and photos from sketches, respectively (Fig. 24).**  
+Yiet al. [246], Kim et al. [247] 및 Zhu et al. [248]은 사진에서 스케치를 생성하고 스케치에서 사진을 생성하기 위해 각각 GA와 GB라는 두 개의 생성기를 사용했습니다(그림 24).
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_24.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Based on [248], Wang et al. [202] proposed a multi-adversarial network to avoid artifacts by leveraging the implicit presence of feature maps of different resolutions in the generator subnetwork.**  
+[248], Wang et al. [202]는 generator subnetwork에서 서로 다른 해상도의 피쳐 맵의 암시적 존재를 활용하여 아티팩트를 피하기 위해 multi-adversarial network를 제안했습니다.
+
+<br>
+
+**Similar to photo-sketch FR, photocaricature FR is one kind of heterogenous FR scenes which is challenging and important to understanding of face perception.**  
+포토 스케치 FR과 유사하게 포토캐리커처 FR은 이질적인 FR 장면의 한 종류로 얼굴 인식을 이해하는 데 도전적이고 중요합니다.
+
+<br>
+
+**Huo et al. [213] built a large dataset of caricatures and photos, and provided several evaluation protocols and their baseline performances for comparison.**  
+Huo et al. [213] 캐리커처와 사진의 대규모 Dataset를 구축하고 비교를 위해 여러 Evaluation Protocol과 기본 성능을 제공했습니다.
+
+<br>
+<br>
+<br>
+
+### C. Multiple (or single) media Face Recognition
+
+<br>
+<br>
+<br>
+
+### 1) Low-Shot Face Recognition
+
+<br>
+<br>
+<br>
+
+**For many practical applications, such as surveillance and security, the FR system should recognize persons with a very limited number of training samples or even with only one sample.**  
+감시 및 보안과 같은 많은 실제 응용 분야에서 FR 시스템은 매우 제한된 수의 Train 샘플 또는 심지어 단 하나의 샘플로도 사람을 인식해야 합니다. 
+
+<br>
+
+**The methods of lowshot learning can be categorized as 1) synthesizing training data and 2) learning more powerful features.**  
+로우샷 학습 방법은 1) synthesizing training data 2) learning more powerful features로 분류할 수 있다.
+
+<br>
+
+**Hong et al. [249] generated images in various poses using a 3D face model and adopted deep domain adaptation to handle other variations, such as blur, occlusion, and expression (Fig. 25).**  
+Hong et al. [249] 3D 얼굴 Model을 사용하여 다양한 포즈의 이미지를 생성하고 흐림, 폐색 및 표현과 같은 다른 변형을 처리하기 위해 심층 도메인 적응을 채택했습니다(그림 25).
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_25.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Choe et al. [250] used data augmentation methods and a GAN for pose transition and attribute boosting to increase the size of the training dataset.**  
+Choe et al. [250]은 Train Dataset의 크기를 늘리기 위해 포즈 전환 및 속성 부스팅을 위해 data augmentation 방법과 GAN을 사용했습니다.
+
+<br>
+
+**Wu et al. [176] proposed a framework with hybrid classifiers using a CNN and a nearest neighbor (NN) model.**
+Wuet al. [176]은 CNN과 최근접 이웃(NN) Model을 사용하는 하이브리드 분류기가 있는 프레임워크를 제안했습니다.
+
+<br>
+
+**Guo et al. [143] made the norms of the weight vectors of the one-shot classes and the normal classes aligned to address the data imbalance problem.**  
+Guoet al. [143]은 데이터 불균형 문제를 해결하기 위해 원샷 클래스와 일반 클래스의 가중치 벡터의 규범을 정렬했습니다.
+
+<br>
+
+**Cheng et al. [137] proposed an enforced softmax that contains optimal dropout, selective attenuation, L2 normalization and modellevel optimization.**  
+Cheng et al. [137]은 최적의 드롭아웃, 선택적 감쇠, L2 정규화 및 Model 수준 최적화를 포함하는 강제 Softmax를 제안했습니다.
+
+<br>
+
+**Yin et al. [251] augmented feature space of low-shot classes by transferring the principal components from regular to low-shot classes to encourage the variance of low-shot classes to mimic that of regular classes.**  
+Yin et al. 로우샷 클래스의 분산이 정규 클래스의 분산을 모방하도록 장려하기 위해 주성분을 정규 클래스에서 로우샷 클래스로 이전함으로써 로우샷 클래스의 feature space을 확장합니다.        
+
+<br>
+<br>
+<br>
+
+### 2) Set/Template-Based Face Recognition
+
+<br>
+<br>
+<br>
+
+**Different from traditional image-to-image recognition, set-to-set recognition takes a set (heterogeneous contents containing both images and videos) as the smallest unit of representation.**  
+기존의 이미지간 인식과 달리 세트간 인식은 세트(이미지와 동영상이 모두 포함된 이종 콘텐츠)를 최소 표현 단위로 삼는다.
+
+<br>
+
+**This kind of setting does reflect the real-world biometric scenarios, thereby attracting a lot of attention.**  
+이러한 종류의 설정은 실제 생체 인식 시나리오를 반영하므로 많은 관심을 끌고 있습니다.
+
+<br>
+
+**After learning face representations of media in each set, two strategies are generally adopted to perform set-to-set matching.**  
+각 세트에서 미디어의 얼굴 표현을 학습한 후 세트 간 매칭을 수행하기 위해 일반적으로 두 가지 전략이 채택됩니다.
+
+<br>
+
+**One is to use these representations to perform pair-wise similarity comparison of two sets and aggregate the results into a single and final score by max score pooling [96], average score pooling [252] and its variations [253], [254].**  
+하나는 이러한 표현을 사용하여 두 세트의 쌍별 유사성 비교를 수행하고 최대 점수 풀링[96], 평균 점수 풀링[252] 및 그 변형[253], [254]에 의해 결과를 단일 및 최종 점수로 집계하는 것입니다.
+
+<br>
+
+**The other strategy is feature pooling [96], [103], [81] which first aggregates face representations into a single representation for each set and then performs a comparison between two sets.**  
+다른 전략은 feature pooling[96], [103], [81]으로 먼저 얼굴 표현을 각 세트에 대한 단일 표현으로 집계한 다음 두 세트 간의 비교를 수행합니다.
+
+<br>
+
+**In addition to the commonly used strategies, there are also some novel methods proposed for set/template-based FR.**  
+일반적으로 사용되는 전략 외에도 세트/template 기반 FR에 대해 제안된 몇 가지 새로운 방법이 있습니다.
+
+<br>
+
+**For example, Hayat et al. [255] proposed a deep heterogeneous feature fusion network to exploit the features’ complementary information generated by different CNNs.**  
+예를 들어, 하야트 외. [255]는 서로 다른 CNN에서 생성된 기능의 보완 정보를 활용하기 위해 deep heterogeneous feature fusion network를 제안했습니다. 
+
+<br>
+
+**Liu et al. [256] introduced the actorcritic reinforcement learning for set-based FR.**  
+Liu et al. [256]는 set-based FR에 대한 배우 비판적 강화 학습을 도입했습니다.
+
+<br>
+
+**They casted the inner-set dependency modeling to a Markov decision process in the latent space, and trained a dependency-aware attention control agent to make attention control for each image in each step.**  
+그들은 내부 집합 종속성 Modeling(inner-set dependency modeling)을 잠재 공간의 Markov decision process에 캐스팅하고 각 단계에서 각 이미지에 대한 주의 제어를 수행하도록 종속성 인식 주의 제어 에이전트를 Train했습니다.    
+
+<br>
+<br>
+<br>
+
+### 3) Video Face Recognition
+
+<br>
+<br>
+<br>
+
+**There are two key issues in video FR: one is to integrate the information across different frames together to build a representation of the video face, and the other is to handle video frames with severe blur, pose variations, and occlusions.**  
+비디오 FR에는 두 가지 주요 문제가 있습니다. 하나는 서로 다른 프레임의 정보를 통합하여 비디오 얼굴의 표현을 구축하는 것이고 다른 하나는 심각한 블러, 포즈 변형 및 폐색이 있는 비디오 프레임을 처리하는 것입니다.
+
+<br>
+
+**For frame aggregation, Yang et al. [83] proposed a neural aggregation network (NAN) in which the aggregation module, consisting of two attention blocks driven by a memory, produces a 128-dimensional vector representation (Fig. 26).**  
+프레임 집계(frame aggregation)의 경우 Yang et al. [83]은 메모리에 의해 구동되는 두 개의 어텐션 블록으로 구성된 aggregation Module이 128차원 벡터 표현을 생성하는 신경 집계 Network(NAN)를 제안했습니다(그림 26).
+
+<br>
+<br>
+<br>
+  <img src="/assets/DeepFaceRecognitionSurvey/Fig_26.png">
+<p align="center">
+</p>
+<br>
+<br>
+
+**Rao et al. [187] aggregated raw video frames directly by combining the idea of metric learning and adversarial learning.**  
+Raoet al.은 metric learning과 adversarial learning의 아이디어를 결합하여 직접 원시 비디오 프레임을 집계했습니다.
+
+<br>
+
+**For dealing with bad frames, Rao et al. [185] discarded the bad frames by treating this operation as a Markov decision process and trained the attention model through a deep reinforcement learning framework.**  
+불량 프레임을 처리하기 위해 Rao et al.은 이 작업을 Markov decision process로 처리하여 불량 프레임을 폐기하고 deep reinforcement learning framework를 통해 주의 Model을 Train했습니다.
+
+<br>
+
+**Ding et al. [257] artificially blurred clear images for training to learn blurrobust face representations.**  
+딩 외.은 흐릿한 얼굴 표현을 학습하기 위한 Train을 위한 인위적으로 선명한 이미지를 흐려지게 만들었습니다.
+
+<br>
+
+**Parchami et al. [258] used a CNN to reconstruct a lower-quality video into a high-quality face.**  
+Parchamiet al. [258]은 CNN을 사용하여 저품질 비디오를 고품질 얼굴로 재구성했습니다.
+
+<br>
+<br>
+<br>
+
+## D. Face Recognition in Industry
+
+<br>
+<br>
+<br>
+
+### 1) 3D Face Recognition
+
+<br>
+<br>
+<br>
+
+**3D FR has inherent advantages over 2D methods, but 3D deep FR is not well developed due to the lack of large annotated 3D data.**  
+3D FR은 2D 방법에 비해 고유한 장점이 있지만 3D deep FR은 주석이 달린 큰 3D data가 부족하여 잘 개발되지 않았습니다.
+
+<br>
+
+**To enlarge 3D training datasets, most works use the methods of “one-to-many augmentation” to synthesize 3D faces.**  
+3D Train Dataset를 확대하기 위해 대부분의 작업은 3D 얼굴을 합성하기 위해 "one-to-many augmentation" 방법을 사용합니다.
+
+<br>
+
+**However, the effective methods for extracting deep features of 3D faces remain to be explored.**  
+그러나 3D 얼굴의 깊은 특징을 추출하는 효과적인 방법은 아직 연구되지 않았습니다.
+
+<br>
+
+**Kim et al. [204] fine-tuned a 2D CNN with a small amount of 3D scans for 3D FR. average prediction log-loss.**  
+Kim et al. [204]은 3D FR에 대한 소량의 3D 스캔으로 2D CNN을 미세 조정했습니다. 
+
+<br>
+
+**Zulqarnain et al. [259] used a three-channel (corresponding to depth, azimuth and elevation angles of the normal vector) image as input and minimized the**  
+Zulqarnain et al. [259]는 3채널(법선 벡터의 깊이, 방위각 및 앙각에 해당) 영상을 입력으로 사용하고 평균 예측 로그 손실을 최소화했습니다.
+
+<br>
+
+**Zhang et al. [260] first selected 30 feature points from the Candide-3 face model to characterize faces, then conducted the unsupervised pretraining of face depth data, and finally performed the supervised fine-tuning.**  
+장 외. [260]은 먼저 Candide-3 얼굴 Model에서 30개의 특징점을 선택하여 얼굴을 특성화한 다음 얼굴 깊이 데이터의 무감독 사전 Train을 수행하고 마지막으로 지도 미세 조정을 수행했습니다.      
+
+<br>
+<br>
+<br>
+
+### 2) Partial Face Recognition
+
+<br>
+<br>
+<br>
+
+**Partial FR, in which only arbitrary-size face patches are presented, has become an emerging problem with increasing requirements of identification from CCTV cameras and embedded vision systems in mobile devices, robots and smart home facilities.**  
+임의의 크기의 안면 패치만 제시되는 부분 FR은 모바일 장치, 로봇 및 스마트 홈 시설에서 CCTV 카메라 및 임베디드 비전 시스템의 식별 요구 사항이 증가함에 따라 새로운 문제가 되었습니다.
+
+<br>
+
+**He et al. [261] divided the aligned face image into several multiscale patches, and the dissimilarity between two partial face images is calculated as the weighted L2 distance between corresponding patches.**  
+He et al. [261]은 정렬된 얼굴 영상을 여러 개의 멀티스케일 패치로 나누고 두 부분 얼굴 영상 간의 상이도를 해당 패치 간의 가중치 L2 거리로 계산한다.
+
+<br>
+
+**Dynamic feature matching (DFM) [262] utilized a sliding window of the same size as the probe feature maps to decompose the gallery feature maps into several gallery sub-feature maps, and the similarity-guided constraint imposed on sparse representation classification (SRC) provides an alignment-free matching.**  
+DFM(Dynamic Feature Matching)[262]은 Probe feature maps과 동일한 크기의 슬라이딩 윈도우를 활용하여 Gallery 특징 맵을 여러 Gallery sub-feature maps으로 분해하고 SRC(Sparse Representation Classification)에 부과된 유사성 기반 제약 조건을 사용했습니다. 얼라인먼트 없는 매칭을 제공합니다.  
+
+<br>
+<br>
+<br>
+
+### 3) Face Recognition for Mobile Devices
+
+<br>
+<br>
+<br>
+
+**With the emergence of mobile phones, tablets and augmented reality, FR has been applied in mobile devices.**  
+휴대폰, 태블릿, 증강현실의 등장으로 FR은 모바일 기기에 적용되고 있습니다.
+
+<br>
+
+**Due to computational limitations, the recognition tasks in these devices need to be carried out in a light but timely fashion.**  
+계산상의 한계로 인해 이러한 장치의 인식 작업은 가볍지만 시기 적절한 방식으로 수행되어야 합니다.
+
+<br>
+
+**MobiFace [87] required efficient memory and low cost operators by adopting fast downsampling and bottleneck residual block, and achieves 99.7% on LFW database and 91.3% on Megaface database.**  
+MobiFace[87]는 fast downsampling과 bottleneck residual block을 채택하여 효율적인 메모리와 저비용 연산자가 필요했으며 LFW Database에서 99.7%, Megaface Database에서 91.3%를 달성했습니다.
+
+<br>
+
+**Tadmor et al. [263] proposed a multibatch method that first generates signatures for a minibatch of k face images and then constructs an unbiased estimate of the full gradient by relying on all k 2 − k pairs from the minibatch.**  
+Tadmoret al. [263]은 먼저 k 얼굴 이미지의 미니배치에 대한 서명을 생성한 다음 미니배치의 모든 k 2 - k 쌍에 의존하여 전체 기울기의 편향되지 않은 추정치를 구성하는 다중배치 방법을 제안했습니다.
+
+<br>
+
+**As mentioned in Section III-B.1, light-weight deep networks perform excellently in the fundamental tasks of image classification and deserve further attention in FR tasks.**  
+섹션 III-B.1에서 언급했듯이 light-weight deep networks는 이미지 분류의 기본 작업에서 탁월하게 수행되며 FR 작업에서 더 많은 관심을 받을 만합니다.
+
+<br>
+
+**Moreover, some well-known compressed networks such as Pruning, BinaryNets, Mimic Networks [271], [272], also have potential to be introduced into FR.**  
+또한 Pruning, BinaryNets, Mimic Networks[271], [272]와 같은 일부 잘 알려진 압축 Network도 FR에 도입될 가능성이 있습니다.
+
+<br>
+<br>
+<br>
+
+### 4) Face Anti-attack
+
+<br>
+<br>
+<br>
+
+**With the success of FR techniques, various types of attacks, such as face spoofing and adversarial perturbations, are becoming large threats.**  
+FR 기술의 성공으로 face spoofing , adversarial perturbations 등 다양한 유형의 공격이 큰 위협이 되고 있습니다.
+
+<br>
+
+**Face spoofing involves presenting a fake face to the biometric sensor using a printed photograph, worn mask, or even an image displayed on another electronic device.**  
+Face spoofing은 인쇄된 사진, 착용한 마스크 또는 다른 전자 장치에 표시된 이미지를 사용하여 생체 인식 센서에 가짜 얼굴을 제시하는 것입니다.
+
+<br>
+
+**In order to defense this type of attack, several methods are proposed.**  
+이러한 유형의 공격을 방어하기 위해 몇 가지 방법이 제안됩니다.
+
+<br>
+
+**Atoum et al. [211] proposed a novel two-stream CNN in which the local features discriminate the spoof patches that are independent of the spatial face areas, and holistic depth maps ensure that the input live sample has a face-like depth.**  
+Atoum et al. [211]은 local features가 공간 얼굴 영역과 독립적인 스푸핑 패치를 구별하고 전체적인 depth maps이 입력 라이브 샘플이 얼굴과 같은 깊이를 갖도록 보장하는 새로운 two-stream CNN을 제안했습니다.
+
+<br>
+
+**Yang et al. [273] trained a CNN using both a single frame and multiple frames with five scales as input, and using the live/spoof label as the output.**  
+Yang et al. [273]는 입력으로 5개의 스케일이 있는 단일 프레임과 다중 프레임을 모두 사용하고 출력으로 live/spoof label을 사용하여 CNN을 교육했습니다.
+
+<br>
+
+**Taken the sequence of video frames as input, Xu et al. [274] applied LSTM units on top of CNN to obtain end-to-end features to recognize spoofing faces which leveraged the local and dense property from convolution operation and learned the temporal structure using LSTM units.**  
+Xu et al.은 일련의 비디오 프레임을 입력으로 사용했으며, [274] CNN 위에 LSTM 유닛을 적용하여 convolutional 연산에서 local and dense property을 활용하고 LSTM 유닛을 사용하여 시간 구조를 학습한 스푸핑 얼굴을 인식하기 위한 종단간 특징을 얻었습니다.
+
+<br>
+
+**Li et al. [275] and Patel et al. [276] finetuned their networks from a pretrained model by training sets of real and fake images.**  
+Li et al. [275] 및 Patel et al. [276]은 실제 이미지와 가짜 이미지의 Train 세트를 통해 사전 Train된 Model에서 Network를 미세 조정했습니다.
+
+<br>
+
+**Jourabloo et al. [277] proposed to inversely decompose a spoof face into the live face and the spoof noise pattern.**  
+Jourablooet al. [277] spoof face를 live face와 spoof noise pattern으로 역분해하는 것을 제안했습니다.
+
+<br>
+
+**Adversarial perturbation is the other type of attack which can be defined as the addition of a minimal vector r such that with addition of this vector into the input image x, i.e. (x + r), the deep learning models misclassifies the input while people will not.**  
+적대적 섭동(Adversarial perturbation)은 최소 벡터 r을 입력 이미지 x에 추가하는 것으로 정의할 수 있는 다른 유형의 공격입니다. 즉, (x + r), Deep Learning Model은 입력을 잘못 분류하지만 사람들은 아니다.
+
+<br>
+
+**Recently, more and more work has begun to focus on solving this perturbation of FR.**  
+최근 점점 더 많은 작업이 FR의 이러한 섭동(perturbation,(특성·행동·움직임의) 작은 변화)을 해결하는 데 집중하기 시작했습니다.
+
+<br>
+
+**Goswami et al. [280] proposed to detect adversarial samples by characterizing abnormal filter response behavior in the hidden layers and increase the network’s robustness by removing the most problematic filters.**  
+Goswamiet al.은 숨겨진 레이어에서 비정상적인 필터 응답 동작을 특성화하여 적대적 샘플을 탐지하고 가장 문제가 되는 필터를 제거하여 Network의 견고성을 높일 것을 제안했습니다.
+
+<br>
+
+**Goel et al. [281] provided an open source implementation of adversarial detection and mitigation algorithms.**  
+Goel et al.은 적대적 탐지 및 완화 알고리즘의 오픈 소스 구현을 제공했습니다.
+
+<br>
+
+**Despite of progresses of anti-attack algorithms, attack methods are updated as well and remind us the need to further increase security and robustness in FR systems,**  
+공격 방지 알고리즘의 발전에도 불구하고 공격 방법도 업데이트되어 FR 시스템의 보안 및 견고성을 더욱 향상시킬 필요성을 상기시킵니다. 
+
+<br>
+
+**for example, Mai et al. [282] proposed a neighborly deconvolutional neural network (NbNet) to reconstruct a fake face using the stolen deep templates.**  
+예를 들어 Mai et al. [282]는 훔친 Deep template을 사용하여 가짜 얼굴을 재구성하기 위해 NbNet(neighborly deconvolutional neural network)을 제안했습니다.
+
+<br>
+<br>
+<br>
+
+### 5) Debiasing face recognition
+
+<br>
+<br>
+<br>
+
+**As described in Section V-A, existing datasets are highly biased in terms of the distribution of demographic cohorts, which may dramatically impact the fairness of deep models.**  
+섹션 V-A에서 설명한 바와 같이, 기존 Dataset는 인구통계학적 코호트 분포 측면에서 매우 편향되어 심층 Model의 공정성에 큰 영향을 미칠 수 있습니다.
+
+<br>
+
+**To address this issue, there are some works that seek to introduce fairness into face recognition and mitigate demographic bias, e,g. unbalancedtraining [283], attribute removal [284], [285], [286] and domain adaptation.**  
+이 문제를 해결하기 위해 얼굴 인식에 공정성을 도입하고 인구통계학적 편향을 완화하려는 일부 작업이 있습니다. ( e.g. unbalancedtraining[283], 속성 제거[284], [285], [286] 및 도메인 적응 )
+
+<br>
+<br>
+
+**1) Unbalanced-training methods mitigate the bias via model regularization, taking into consideration of the fairness goal in the overall model objective function.**  
+1) Unbalanced-training methods은 전체 Model 목적 함수의 공정성 목표를 고려하여 Model regularization를 통해 편향을 완화합니다.
+
+<br>
+
+**For example, RL-RBN [283] formulated the process of finding the optimal margins for non-Caucasians as a Markov decision process and employed deep Q-learning to learn policies based on large margin loss.**  
+예를 들어, RL-RBN[283]은 백인이 아닌 사람들을 위한 최적의 마진을 찾는 프로세스를 Markov decision process로 공식화하고 큰 마진 손실을 기반으로 정책을 학습하기 위해 deep Q-learning을 사용했습니다.
+
+<br>
+<br>
+
+**2) Attribute removal methods confound or remove demographic information of faces to learn attribute-invariant representations.**  
+2) 속성 제거 방법은 속성 불변 표현을 학습하기 위해 얼굴의 인구 통계학적 정보를 혼동하거나 제거합니다.
+
+<br>
+
+**For example, Alvi et al. [284] applied a confusion loss to make a classifier fail to distinguish attributes of examples so that multiple spurious variations are removed from the feature representation.**  
+예를 들어 Alvi et al.은 classifier가 attributes of examples을 구별하지 못하도록 혼동 손실을 적용하여 여러 개의 스퓨리어스 변형이 feature representation에서 제거되었습니다.
+
+<br>
+
+**SensitiveNets [288] proposed to introduce sensitive information into triplet loss.**  
+SensitiveNets [288]는 triplet loss에 민감한 정보를 도입할 것을 제안했습니다.
+
+<br>
+
+**They minimized the sensitive information, while maintaining distances between positive and negative embeddings.**  
+포지티브 임베딩과 네거티브 임베딩 사이의 거리를 유지하면서 민감한 정보를 최소화했습니다.
+
+<br>
+<br>
+
+**3) Domain adaptation methods propose to investigate data bias problem from a domain adaptation point of view and attempt to design domain-invariant feature representations to mitigate bias across domains.**  
+3) 도메인 적응 방법은 도메인 적응 관점에서 데이터 바이어스 문제를 조사하고 도메인 간 바이어스를 완화하기 위해 도메인 불변 기능 표현을 설계하려고 제안합니다.
+
+<br>
+
+**IMAN [173] simultaneously aligned global distribution to decrease race gap at domain-level, and learned the discriminative target representations at cluster level.**  
+IMAN [173]은 도메인 수준에서 인종 격차를 줄이기 위해 글로벌 분포를 동시에 정렬하고 클러스터 수준에서 차별적인 대상 표현을 학습했습니다.
+
+<br>
+
+**Kan [147] directly converted the Caucasian data to non-Caucasian domain in the image space with the help of sparse reconstruction coefficients learnt in the common subspace.**  
+Kan [147]은 common subspace에서 학습된 희소 재구성 계수의 도움을 받아 이미지 공간에서 백인 데이터를 비백인 도메인으로 직접 변환했습니다.   
+
+<br>
+<br>
+<br>
+
+## VII. TECHNICAL CHALLENGES
+
+<br>
+<br>
+<br>
+
+**In this paper, we provide a comprehensive survey of deep FR from both data and algorithm aspects.**  
+이 백서에서는 데이터 및 알고리즘 측면 모두에서 심층 FR에 대한 포괄적인 조사를 제공합니다.
+
+<br>
+
+**For algorithms, mainstream and special network architectures are presented.**  
+알고리즘의 경우 mainstream 및 special Network Architecture가 제시됩니다.
+
+<br>
+
+**Meanwhile, we categorize loss functions into Euclideandistance-based loss, angular/cosine-margin-based loss and variable softmax loss.**  
+한편 Loss Function는 Euclidean distance-based loss, angular/cosine-margin-based loss 및 variable Softmax loss로 분류됩니다.
+
+<br>
+
+**For data, we summarize some commonly used datasets.**  
+데이터의 경우 일반적으로 사용되는 일부 Dataset를 요약합니다.
+
+<br>
+
+**Moreover, the methods of face processing are introduced and categorized as “one-to-many augmentation” and “many-to-one normalization”.**  
+또한 얼굴 처리 방법을 도입하여 “one-to-many augmentation” and “many-to-one normalization”로 분류합니다.
+
+<br>
+
+**Finally, the special scenes of deep FR, including video FR, 3D FR and cross-age FR, are briefly introduced.**  
+마지막으로 영상 FR, 3D FR, 크로스 에이지 FR 등 Deep FR의 특별한 장면을 간략하게 소개한다.
+
+<br>
+
+**Taking advantage of big annotated data and revolutionary deep learning techniques, deep FR has dramatically improved the SOTA performance and fostered successful real-world applications.**  
+주석이 달린 큰 데이터와 혁신적인 Deep Learning 기술을 활용하는 Deep FR은 SOTA 성능을 극적으로 개선하고 성공적인 실제 응용 프로그램을 육성했습니다.
+
+<br>
+
+**With the practical and commercial use of this technology, many ideal assumptions of academic research were broken, and more and more real-world issues are emerging.**  
+이 기술의 실용적이고 상업적인 사용으로 학술 연구의 많은 이상적인 가정이 깨졌고 점점 더 많은 실제 문제가 등장하고 있습니다.
+
+<br>
+
+**To the best our knowledge, major technical challenges include the following aspects.**  
+우리가 아는 한, 주요 기술 과제에는 다음과 같은 측면이 포함됩니다.
+
+<br>
+<br>
+<br>
+
+### • Security issues
+
+<br>
+<br>
+<br>
+
+**Presentation attack [289], adversarial attack [280], [281], [290], template attack [291] and digital manipulation attack [292], [293] are developing to threaten the security of deep face recognition systems.**  
+보안 문제들. Presentation attack [289], adversarial attack [280], [281], [290], template attack [291] 및 digital manipulation attack [292], [293]은 심층 얼굴 인식 시스템의 보안을 위협하기 위해 개발되고 있습니다.
+
+<br>
+
+**1) Presentation attack with 3D silicone mask, which exhibits skin-like appearance and facial motion, challenges current anti-sproofing methods [294].**  
+1) 피부와 같은 모양과 안면 움직임을 나타내는 3D 실리콘 마스크를 사용한 프리젠테이션 공격은 현재의 anti-sproofing methods에 도전합니다[294].
+
+<br>
+
+**2) Although adversarial perturbation detection and mitigation methods are recently proposed [280][281], the root cause of adversarial vulnerability is unclear and thus new types of adversarial attacks are still upgraded continuously [295], [296].**  
+2) 최근 adversarial perturbation detection 및 완화 방법이 제안되었지만[280][281], 적대적 취약성의 근본 원인이 불분명하여 새로운 유형의 적대적 공격이 계속 업그레이드되고 있다[295,296].
+
+<br>
+
+**3) The stolen deep feature template can be used to recover its facial appearance, and how to generate cancelable template without loss of accuracy is another important issue.**  
+3) stolen deep feature template을 사용하여 얼굴 모습을 복구할 수 있으며 정확도 손실 없이 취소 가능한 template을 생성하는 방법은 또 다른 중요한 문제입니다.
+
+<br>
+
+**4) Digital manipulation attack, made feasible by GANs, can generate entirely or partially modified photorealistic faces by expression swap, identity swap, attribute manipulation and entire face synthesis, which remains a main challenge for the security of deep FR.**  
+4) GAN에 의해 실현 가능한 디지털 조작 공격은 표정 교환, 신원 교환, 속성 조작 및 전체 얼굴 합성을 통해 전체 또는 부분적으로 수정된 사실적인 얼굴을 생성할 수 있으며 이는 deep FR의 보안에 대한 주요 과제로 남아 있습니다.
+
+<br>
+<br>
+<br>
+
+### Privacy-preserving face recognition
+
+<br>
+<br>
+<br>
+
+**With the leakage of biological data, privacy concerns are raising nowadays.**  
+최근 생체 데이터 유출로 개인정보 보호에 대한 우려가 높아지고 있습니다.
+
+<br>
+
+**Facial images can predict not only demographic information such as gender, age, or race, but even the genetic information [297].**  
+얼굴 이미지는 성별, 연령, 인종과 같은 인구학적 정보뿐만 아니라 유전 정보까지 예측할 수 있다[297].
+
+<br>
+
+**Recently, the pioneer works such as Semi-Adversarial Networks [298], [299], [285] have explored to generate a recognizable biometric templates that can hidden some of the private information presented in the facial images.**  
+최근에 Semi-Adversarial Networks[298], [299], [285]와 같은 선구적인 작업은 얼굴 이미지에 표시된 일부 개인 정보를 숨길 수 있는 인식 가능한 생체 인식 template을 생성하는 방법을 모색했습니다.
+
+<br>
+
+**Further research on the principles of visual cryptography, signal mixing and image perturbation to protect users’ privacy on stored face templates are essential for addressing public concern on privacy.**  
+저장된 얼굴 template에서 사용자의 개인 정보를 보호하기 위한 시각적 암호화, 신호 혼합 및 이미지 교란의 원칙에 대한 추가 연구는 개인 정보 보호에 대한 대중의 우려를 해결하는 데 필수적입니다.    
+
+<br>
+<br>
+<br>
+
+### Understanding deep face recognition
+
+<br>
+<br>
+<br>
+
+**Deep face recognition systems are now believed to surpass human performance in most scenarios [300].**  
+Deep face recognition systems은 이제 대부분의 시나리오에서 인간의 성능을 능가하는 것으로 여겨집니다[300].
+
+<br>
+
+**There are also some interesting attempts to apply deep models to assist human operators for face verification [183][300].**  
+얼굴 확인을 위해 인간 조작자를 돕기 위해 deep Model을 적용하려는 몇 가지 흥미로운 시도도 있습니다[183][300].
+
+<br>
+
+**Despite this progress, many fundamental questions are still open, such as what is the “identity capacity” of a deep representation [301]?**  
+이러한 진전에도 불구하고 deep representation[301]의 "identity capacity"은 무엇인가와 같은 많은 근본적인 질문이 여전히 열려 있습니다.
+
+<br>
+
+**Why deep neural networks, rather than humans, are easily fooled by adversarial samples?**  
+인간이 아닌 deep neural network이 적대적 샘플에 쉽게 속는 이유는 무엇입니까?
+
+<br>
+
+**While bigger and bigger training dataset by itself cannot solve this problem, deeper understanding on these questions may help us to build robust applications in real world.**  
+더 크고 더 큰 Train Dataset만으로는 이 문제를 해결할 수 없지만 이러한 질문에 대한 더 깊은 이해는 실제 세계에서 강력한 응용 프로그램을 구축하는 데 도움이 될 수 있습니다.
+
+<br>
+
+**Recently, a new benchmark called TALFW has been proposed to explore this issue [93].**  
+최근에 이 문제를 탐구하기 위해 TALFW라는 새로운 benchmark가 제안되었습니다[93].
+
+<br>
+<br>
+<br>
+
+### Remaining challenges defined by non-saturated benchmark datasets
+
+<br>
+<br>
+<br>
+
+**Three current major datasets, namely, MegaFace [44], [164] , MS-Celeb-1M [45] and IJB-A/B/C [41], [42], [43], are corresponding to largescale FR with a very large number of candidates, low/oneshot FR and large pose-variance FR which will be the focus of research in the future.**  
+MegaFace [44], [164], MS-Celeb-1M [45] 및 IJB-A/B/C [41], [42], [43]의 세 가지 현재 주요 Dataset는 다음과 같은 매우 많은 수의 후보, 낮은/원샷 FR 및 향후 연구의 초점이 될 큰 포즈 분산 FR등의 대규모 FR에 해당합니다. 
+
+<br>
+
+**Although the SOTA algorithms can be over 99.9 percent accurate on LFW [23] and Megaface [44], [164] databases, fundamental challenges such as matching faces cross ages [181], poses [188], sensors, or styles still remain.**  
+SOTA 알고리즘은 LFW [23] 및 Megaface [44], [164] Database에서 99.9% 이상 정확할 수 있지만, 연령에 따른 얼굴 일치[181], 포즈[188], 센서 또는 스타일과 같은 근본적인 문제는 여전히 남아 있습니다.
+
+<br>
+
+**For both datasets and algorithms, it is necessary to measure and address the racial/gender/age biases of deep FR in future research.**  
+Dataset와 알고리즘 모두에 대해 향후 연구에서 deep FR의 인종/성별/연령 편향을 측정하고 해결하는 것이 필요합니다.
+
+<br>
+<br>
+<br>
+
+### Ubiquitous face recognition across applications and scenes
+
+<br>
+<br>
+<br>
+
+**Deep face recognition has been successfully applied on many user-cooperated applications, but the ubiquitous recognition applications in everywhere are still an ambitious goal.**  
+Deep face recognition은 많은 사용자 협력 응용 프로그램에 성공적으로 적용되었지만 모든 곳에서 유비쿼터스 인식 응용 프로그램은 여전히 야심 찬 목표입니다.
+
+<br>
+
+**In practice, it is difficult to collect and label sufficient samples for innumerable scenes in real world.**  
+실제로 현실 세계의 수많은 장면에 대해 충분한 샘플을 수집하고 레이블을 지정하는 것은 어렵습니다.
+
+<br>
+
+**One promising solution is to first learn a general model and then transfer it to an application-specific scene.**  
+유망한 솔루션 중 하나는 먼저 일반 Model을 학습한 다음 이를 애플리케이션별 장면으로 전송하는 것입니다.
+
+<br>
+
+**While deep domain adaptation [145] has recently been applied to reduce the algorithm bias on different scenes [148], different races [173], general solution to transfer face recognition is largely open.**  
+최근에 서로 다른 장면[148], 서로 다른 인종[173]에서 알고리즘 편향을 줄이기 위해 심층 도메인 적응[145]이 적용되었지만 얼굴 인식을 전송하는 일반적인 솔루션은 크게 열려 있습니다.
+
+<br>
+<br>
+<br>
+
+### Pursuit of extreme accuracy and efficiency
+
+<br>
+<br>
+<br>
+
+**Many killer-applications, such as watch-list surveillance or financial identity verification, require high matching accuracy at very low alarm rate, e.g. 10−9**  
+감시 목록 감시 또는 금융 신원 확인과 같은 많은 킬러 애플리케이션은 매우 낮은 경보율(예: 10-9)이 요구됩니다.
+
+<br>
+
+**It is still a big challenge even with deep learning on massive training data.**  
+방대한 Train 데이터에 대한 Deep Learning으로도 여전히 큰 과제입니다.
+
+<br>
+
+**Meanwhile, deploying deep face recognition on mobile devices pursues the minimum size of feature representation and compressed deep network.**  
+한편, 모바일 디바이스에 심층 얼굴 인식을 배치하는 것은 minimum size of feature representation와 compressed deep network를 추구합니다.
+
+<br>
+
+**It is of great significance for both industry and academic to explore this extreme face-recognition performance beyond human imagination.**  
+인간의 상상을 뛰어넘는 이 극한의 얼굴 인식 성능을 탐구하는 것은 산업계와 학계 모두에게 큰 의미가 있습니다.
+
+<br>
+
+**It is also exciting to constantly push the performance limits of the algorithm after it has already surpassed human.**  
+이미 인간을 능가한 알고리즘의 성능 한계를 지속적으로 밀어붙이는 것도 흥미진진합니다.
+
+<br>
+<br>
+<br>
+
+### Fusion issues
+
+<br>
+<br>
+<br>
+
+**Face recognition by itself is far from sufficient to solve all biometric and forensic tasks, such as distinguishing identical twins and matching faces before and after surgery [302].**  
+안면 인식만으로는 일란성 쌍둥이를 구별하고 수술 전후의 얼굴을 일치시키는 것과 같은 모든 생체 인식 및 법의학 작업을 해결하기에 충분하지 않습니다[302].
+
+<br>
+
+**A reliable solution is to consolidate multiple sources of biometric evidence [303].**  
+신뢰할 수 있는 솔루션은 생체 증거의 여러 소스를 통합하는 것입니다[303].
+
+<br>
+
+**These sources of information may correspond to different biometric traits (e.g., face + hand [304]), sensors (e.g., 2D + 3D face cameras), feature extraction and matching techniques, or instances (e.g., a face sequence of various poses).**  
+이러한 정보 소스는 서로 다른 생체 특성(예: 얼굴 + 손[304]), 센서(예: 2D + 3D 얼굴 카메라), 특징 추출 및 일치 기술 또는 인스턴스(예: 다양한 포즈의 얼굴 시퀀스)에 해당할 수 있습니다.
+
+<br>
+
+**It is beneficial for face biometric and forensic applications to perform information fusion at the data level, feature level, score level, rank level, and decision level [305].**  
+데이터 수준, 특징 수준, 점수 수준, 순위 수준, 결정 수준에서 정보 융합을 수행하는 것이 얼굴 생체 인식 및 법의학 응용에 유리합니다[305].
+
