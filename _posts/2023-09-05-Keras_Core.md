@@ -10,7 +10,7 @@ categories: Deep Learning
 <br>
 <br>
 
-## 0. Keras랑 무엇인가?   
+## 0. Keras란 무엇인가?   
 
 <br>
 <br>
