@@ -300,4 +300,3 @@ print(len(history.history['loss']))
 * 각 Epoch마다 Train Loss를 잘 보시면, 4번째 Epoch에서 Loss가 0.3369를 기록하고 그 다음 2번의 Epoch에서 더 이상 Loss가 줄어들지 않았습니다.
 * 이 조건이 Early Stopping 조건을 만족했기 때문에 Train이 자동으로 멈추었습니다.
 
-<br>
