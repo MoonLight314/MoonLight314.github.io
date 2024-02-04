@@ -397,3 +397,245 @@ sudo docker run --gpus all nvidia/cuda:11.8.0-base-ubuntu20.04 nvidia-smi
 ```
 
 ​
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/11.png">
+
+
+## 6. Tensorflow GPU Container 설치
+
+이제 Ubuntu에 Tensorflow GPU Version Docker Container를 설치하도록 하겠습니다.
+
+​
+
+일반적으로 Docker Container를 실행하는 순서는 다음과 같습니다.
+
+### 원하는 Docker Image를 Download(docker pull)
+### 받은 Image로 Conatiner 생성(docker create)
+### 생성된 Conatiner 실행(docker start)
+### 실행된 Conatiner 접속을 하여야 한다.(docker attach)
+
+​
+
+하지만, docker run 명령어는 위의 순서를 모두 한 번에 처리합니다.  nVidia Toolkit Container 설치할 때 한 번 사용했었죠.
+
+​
+
+다양한 종류의 Tensorflow Docker Image가 있고, 어떤 것들이 있는 확인해보고 선택할 수 있습니다.
+
+현재 전체 List는 다음 Link에서 확인해 보실 수 있습니다.
+
+
+https://hub.docker.com/r/tensorflow/tensorflow/tags/
+
+저는 안정적인 Tensorflow GPU Docker중에 최신 Version으로 받아서 사용할 예정입니다. 2.15.0이 현 시점에 최종같네요. 
+
+​
+
+​Tensorflow GPU Container를 실행하기 전에 몇가지 고려해야 할 사항이 있습니다.
+
+​
+
+### 1. GPU 사용량
+
+실행할 Container가 GPU를 어느 정도 사용할 지 결정합니다. 보통 전체를 다 사용하기 때문에 다음과 같은 Option으로 씁니다.
+
+--gpus all
+
+​
+
+​
+
+### 2. Ubuntu Directory Mapping
+
+실제 물리적인 GPU가 실행되는 Container는 별도의 환경으로 운영되기 때문에, GPU에 Storage에 있는 Train Data를 보내기 위해서는 WSL에서 실행되는 Ubuntu에 Mount된 Drive를 Tensorflow GPU Container에 Mapping 시켜주어야 합니다.
+
+​
+
+하지만, 실제로 WSL의 Ubuntu에 Mapping된 Drive는 실제로는 Windows에 있는 물리 Stroage입니다.
+
+좀 복잡하지만, 2중으로 Mapping되는 상황입니다.
+
+이 작업을 위해서 docker는 -v Option을 지원해 줍니다. 사용법은 아래와 같습니다.
+
+   -v [WSL Ubuntu의 Directory Path]:[Container의 Directory Path]
+
+   Ex) -v $(pwd):/moonlight
+
+ 
+
+위와 같이 입력하면, WSL의 사용자 계정 Directory를 Container에 /moonlight Directory로 Mapping합니다.
+
+-v Option은 여러개 사용가능합니다. 즉, Directory Mapping을 여러개 할 수 있으니, 필요한 만큼 사용하면 됩니다.
+
+​
+
+​
+
+### 3. 종료시 Container 삭제 여부
+
+Container를 종료시키고 나올 때 보통 exit 명령어로 빠져나오는데, 이렇게 빠져나와도 docker images 명령어로 보면 Container는 그대로 남아 있습니다.
+
+​
+
+하지만, --rm Option을 사용하면 종료와 동시에 Container도 삭제합니다. 저는 이 Option을 사용하지 않을 예정인데, 그 이유는 Tensorflow Container는 Deep Learning Model Train이 필수적인 여러 Package들, 예를 들면, Pandas, sci-kit learn등과 같은 Package가 설치되어 있지 않습니다.
+
+​
+
+그래서 Container를 실행하고 필요한 Package들을 설치해 주어야 하는데, --rm Option을 사용하고 종료를 한 후에 다시 Container를 실행하면 이전에 열심히 설치한 Package들이 전부 다 없어져 있습니다. 참 허무한 일이죠.
+
+​
+
+이런 일을 막기 위해서 Package 설치 후 종료 한 후에, 현재의 Container를 Image로 저장하는 작업을 해야 합니다. 이를 Commit이라고 하는데, 뒤쪽에 다시 다루도록 하겠습니다.
+
+​
+
+​
+
+앞서 언급한 내용들을 모두 적용한 docker run command line은 다음과 같습니다.
+
+```bash
+sudo docker run --gpus all -it -v $(pwd):/moonlight tensorflow/tensorflow:2.15.0-gpu
+```
+
+
+
+## 7. Visual Studo Code 준비
+
+WSL , CUDA Toolkit , Tensorflow GPU까지 모두 성공적으로 설치를 마무리했습니다.
+
+이제 Code Editor를 설치하고 이를 Tensorflow Container와 연결해 보도록 하겠습니다.
+
+저는 주로 Visual Studo Code를 사용하고 있어서 이를 설치하겠습니다.
+
+이 부분은 특별한 내용이 없으니 넘어가도록 하겠습니다.
+
+​
+
+​
+​
+
+## 8. Visual Studo Code와 Tensorflow Container 연결
+
+아래 그림을 잘 보면, 우리는 Visual Studo Code를 이용해서 WSL안에서 돌고 있는 Tensorflow Container에 연결해야 하는 상황입니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/00.png">
+
+
+2중으로 타고 들어가서 작업을 해야 하는 상황인데, 저는 처음에 '이게 가능할까...?'라고 생각했는데, 이런 상황을 고려한 Visual Studo Code Extension이 있습니다 !!
+
+​
+
+### 8.1. Remote Development Extension 설치
+
+Visual Studo Code의 'Extensions'을 클릭해서 'remote'를 검색하면 **Remote Development**가 나오는데, 이것을 설치해 줍니다.
+
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/12.png">
+
+
+### 8.2. Container 연결
+
+이제 Visual Studo Code와 Tensorflow Container를 연결해 보도록 하겠습니다.
+
+​
+
+WSL을 실행하고 Tensorflow Container도 run 시킵니다.
+
+그 후에 Visual Studo Code로 와서 왼쪽 아이콘 중에 아래 그림과 같은 아이콘을 클릭하면 'Remote Explorer'가 열립니다.
+
+여기에서 'WSL Targets'를 선택합니다.
+
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/13.png">
+
+아래와 같이 실행중인 WSL Ubuntu 20.04가 보이고, 왼쪽 아래에 조그맣게 파란색으로 'WSL: Ubuntu 20.04'가 있습니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/14.png">
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/15.png">
+
+
+이것을 클릭하면 아래와 같은 메뉴가 쭉~ 나오는데, 그 중에서 **'Attach to Running Containers...'**를 클릭합니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/16.png">
+
+
+그러면, 아래와 같이 현재 실행중인 Tensorflow Container가 보입니다. 클릭해서 연결합니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/17.png">
+
+
+연결이 되면 아래 그림과 같이, Visual Studo Code 왼쪽 아래에 연결된 Tensorflow Container 정보가 나옵니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/18.png">
+
+이제 모든 준비가 끝났습니다. 아래와 같이 간단한 예제 Code를 실행해 보면 정상적으로 실행되는 것을 확인할 수 있습니다.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/20.png">
+
+
+
+## 9. Image Commit
+
+실제로 Model Train을 시키기 위해서는 Tensorflow뿐만 아니라, 다른 Package들도 필연적으로 필요합니다.
+
+앞에서 설명했듯이, Container 종료 후에 Commit을 해주지 않으면 설치한 Package들이 다음 Container 실행시에 제대로 보이지 않습니다.
+
+이를 미연에 방지하고자, 수정된 Container를 Image로 저장(Commit)하는 방법을 알려드리겠습니다.
+
+​
+
+### 9.1. docker commit 사용법
+
+docker commit은 아래와 같이 사용합니다.
+
+#### docker commit [원래 Container ID] [새로 저장할 Container Name]
+
+​
+
+Container ID는 docker ps -a 를 입력하면 현재 Container들의 정보가 나오는데, 여기에서 확인할 수 있습니다.
+
+​
+
+우리가 여러 Package들을 설치한 Container의 ID가 6164b18a5d78이고, 새로운 tensorflow/tensorflow:2.15.0-gpu-with-package라는 Image로 저장하려면 아래와 같이 사용하면 됩니다.
+
+```bash
+docker commit 6164b18a5d78 tensorflow/tensorflow:2.15.0-gpu-with-package
+```​
+
+다음부터는 tensorflow/tensorflow:2.15.0-gpu-with-package Image로 Container를 실행하면 이전에 설치된 Package가 모두 들어가 있는 Container가 실행이 됩니다.
+
+​
+
+​
+
+​
+
+​
+
+## 10. 최종 Test
+
+이제 실제로 Train시켜 보도록 하겠습니다.
+
+간단하게 이전에 만들어 놓은 Dog & Cat Classification 예제를 실행해 보도록 하겠습니다.
+
+아래와 같이 실행이 잘 되네요.
+
+<br>
+<img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/19.png">
+
+
+Linux에 Docker를 설치하고 사용하면 좀 더 편하게 Setting이 가능하겠지만, Windows가 편한 분들에게 이 Post들이 도움이 되셨으면 좋겠습니다.
+
+​
+
+긴 글 읽어주셔서 감사합니다 !!
