@@ -599,7 +599,7 @@ WSL을 실행하고 Tensorflow Container도 run 시킵니다.
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/15.png">
 
 
-이것을 클릭하면 아래와 같은 메뉴가 쭉~ 나오는데, 그 중에서 **'Attach to Running Containers...'**를 클릭합니다.
+이것을 클릭하면 아래와 같은 메뉴가 쭉~ 나오는데, 그 중에서 'Attach to Running Containers...'를 클릭합니다.
 
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/16.png">
@@ -653,6 +653,8 @@ Container ID는 docker ps -a 를 입력하면 현재 Container들의 정보가 �
 ```bash
 docker commit 6164b18a5d78 tensorflow/tensorflow:2.15.0-gpu-with-package
 ```​
+
+​<br>
 
 다음부터는 tensorflow/tensorflow:2.15.0-gpu-with-package Image로 Container를 실행하면 이전에 설치된 Package가 모두 들어가 있는 Container가 실행이 됩니다.
 
