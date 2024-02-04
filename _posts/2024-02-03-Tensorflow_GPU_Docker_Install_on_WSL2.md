@@ -47,7 +47,9 @@ categories: Deep Learning
 
 자, 그럼 하나씩 진행해 보도록 하겠습니다.
 
-
+<br>
+<br>
+<br>
 
 ## 1. WSL2 설치
 
@@ -61,7 +63,8 @@ WSL은 가상 머신이나 듀얼 부팅 없이도 Linux 환경을 Windows 내�
 
 하지만, WSL2가 나오고 GPU를 지원할 수 있게 되면서 이제는 상당히 쓸만해 졌습니다.
 
-
+<br>
+<br>
 
 ### 1.1. WSL2 설치 가능 조건
 
@@ -76,6 +79,8 @@ https://learn.microsoft.com/ko-kr/windows/wsl/install
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/01.png">
 
+<br>
+<br>
 
 ### 1.2. Windows Subsystem for Linux 기능 활성화
 
@@ -92,6 +97,8 @@ https://learn.microsoft.com/ko-kr/windows/wsl/install
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
+<br>
+<br>
 
 ### 1.3 Virtual Machine feature 활성화
 
@@ -101,15 +108,15 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
-​
+<br>
+<br>
 
 ### 1.4. 재부팅
 
 반드시 재부팅해주셔야 변경사항이 적용됩니다. 꼭 재부팅 해주세요.
 
-​
-
-​
+<br>
+<br>
 
 ### 1.5. WSL 설치
 
@@ -118,8 +125,9 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 ```bash
 wsl --install
 ```
-​
 
+<br>
+<br>
 
 ### 1.6 Linux Update Kernel Package 설치
 
@@ -127,7 +135,8 @@ wsl --install
 
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
-​​
+<br>
+<br>
 
 ### 1.7 WSL2를 기본으로 설정
 
@@ -141,18 +150,16 @@ powersehll 관리자 모드에서 아래 명령어 입력해 줍니다.
 wsl --set-default-version 2
 ```
 
-
-
-​
-
-​
+<br>
+<br>
+<br>
 
 ## 2. Ubuntu 설치
 
 이제 WSL2를 설치했으니, WSL2에서 실행할 Linux를 설치하도록 하겠습니다. 가장 많이 사용하는 Linux 배포판인 Ubuntu 20.04 LTS를 설치해 보겠습니다.
 
-​
-
+<br>
+<br>
 
 ### 2.1 Microsoft Store에서 Ubuntu 설치
 
@@ -161,6 +168,8 @@ Microsoft Store에서 Ubuntu 20.04.4 LTS를 설치합니다.
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/03.png">
 
+<br>
+<br>
 
 #### Ubuntu 20.04.4 LTS
 https://apps.microsoft.com/detail/9MTTCL66CPXJ?hl=en-us&gl=US
@@ -170,9 +179,9 @@ https://apps.microsoft.com/detail/9MTTCL66CPXJ?hl=en-us&gl=US
 아래 Link는 Ubuntu 22.04.4 LTS입니다. 좀 더 최신 배포판을 설치하고자 하시는 분은 사용해 주세요.
 
 https://apps.microsoft.com/detail/9PN20MSR04DW?hl=en-us&gl=US
-​
 
-
+<br>
+<br>
 
 ### 2.2. 계정 생성
 
@@ -181,10 +190,9 @@ Ubuntu 설치가 완료되면 계정을 생성하고 나면, Ubuntu 설치는 �
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/04.png">
 
-
-
-
-
+<br>
+<br>
+<br>
 
 ## 3. nVidia GPU Driver for WSL 설치
 
@@ -209,8 +217,9 @@ https://developer.nvidia.com/cuda/wsl
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/08.png">
 
-
-
+<br>
+<br>
+<br>
 
 ## 4. Docker 설치
 
@@ -218,17 +227,15 @@ https://developer.nvidia.com/cuda/wsl
 
 그래서, 먼저 WSL2에 Ububtu에 Docker 설치를 진행하도록 하겠습니다.
 
-​
-
-​
+<br>
+<br>
 
 ### 4.1. Service 명령 권한 설정
 
 먼저 visudo를 사용하여 docker command 앞에 일일이 'sudo'를 붙이지 않고 docker command를 실행할 수 있도록 하겠습니다. docker command를 사용할 일이 많은데, sudo를 항상 붙이려면 은근히 번거롭습니다.
 
-​
-
-​
+<br>
+<br>
 
 #### 4.1.1. visudo 실행
 
@@ -252,6 +259,8 @@ sudo visudo
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/09.png">
 
+<br>
+<br>
 
 #### 4.1.2. 다른 방법
 
@@ -261,19 +270,24 @@ sudo visudo
 
 https://docs.docker.com/engine/install/linux-postinstall/
 
+<br>
+<br>
 
 ### 4.2. Docker 설치
 
 이제 Ubuntu에 Docker를 설치하도록 하겠습니다. 아래 Command들을 순서대로 입력하면 됩니다.
 
-​
+<br>
+<br>
 
 #### 4.2.1. 패키지 업데이트
 
 ```bash
 sudo apt-get update
 ```
-​
+
+<br>
+<br>
 
 #### 4.2.2. https로 데이터를 받아서 설치하는 패키지들을 위한 준비
 
@@ -285,7 +299,9 @@ curl \
 gnupg-agent \
 software-properties-common
 ```
-​
+
+<br>
+<br>
 
 #### 4.2.3. Docker의 GPG key 추가
 
@@ -294,7 +310,9 @@ GPG란 툴이나 소스 등을 배포 할 때 원본이 수정되었나를 확�
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-​
+
+<br>
+<br>
 
 #### 4.2.4. Stable Docker Repository 설정
 
@@ -304,7 +322,9 @@ sudo add-apt-repository \
 $(lsb_release -cs) \
 stable"
 ```
-​
+
+<br>
+<br>
 
 #### 4.2.5. Docker Engine 설치
 
@@ -329,15 +349,16 @@ sudo docker run hello-world
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/10.png">
 
-
-
-
+<br>
+<br>
+<br>
 
 ## 5. nVidia CUDA Toolkit Container 설치
 
 WSL에서 CUDA Toolkit을 사용할 수 있도록 해주는 특별한 Docker Container를 먼저 설치해 줍니다.
 
-​
+<br>
+<br>
 
 ### 5.1. Package Repository 추가
 
@@ -346,7 +367,9 @@ Ubuntu에 아래 명령어 입력합니다.
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 ```
-​
+
+​<br>
+<br>
 
 ### 5.2. nVidia-Docker GPGKey 추가
 
@@ -355,7 +378,9 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 ```bash
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 ```
-​
+
+<br>
+<br>
 
 ### 5.3.  Package Repository 추가
 
@@ -364,13 +389,18 @@ Ubuntu에 아래 명령어 입력
 ```bash
 curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 ```
-​
+
+<br>
+<br>​
 
 ### 5.4.  Package Update
 
 ```bash
 sudo apt-get update
 ```
+
+<br>
+<br>
 
 ### 5.5.  CUDA Toolkit 설치
 
@@ -379,7 +409,9 @@ Ubuntu에 아래 명령어 입력
 ```bash
 sudo apt-get install -y nvidia-container-toolkit
 ```
-​
+
+<br>
+<br>​
 
 ### 5.6.  확인
 
@@ -400,6 +432,9 @@ sudo docker run --gpus all nvidia/cuda:11.8.0-base-ubuntu20.04 nvidia-smi
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/11.png">
 
+<br>
+<br>
+<br>
 
 ## 6. Tensorflow GPU Container 설치
 
@@ -433,7 +468,9 @@ https://hub.docker.com/r/tensorflow/tensorflow/tags/
 
 ​Tensorflow GPU Container를 실행하기 전에 몇가지 고려해야 할 사항이 있습니다.
 
-​
+​<br>
+<br>
+
 
 ### 1. GPU 사용량
 
@@ -441,9 +478,8 @@ https://hub.docker.com/r/tensorflow/tensorflow/tags/
 
 --gpus all
 
-​
-
-​
+<br>
+<br>
 
 ### 2. Ubuntu Directory Mapping
 
@@ -467,9 +503,8 @@ https://hub.docker.com/r/tensorflow/tensorflow/tags/
 
 -v Option은 여러개 사용가능합니다. 즉, Directory Mapping을 여러개 할 수 있으니, 필요한 만큼 사용하면 됩니다.
 
-​
-
-​
+<br>
+<br>
 
 ### 3. 종료시 Container 삭제 여부
 
@@ -497,7 +532,9 @@ Container를 종료시키고 나올 때 보통 exit 명령어로 빠져나오는
 sudo docker run --gpus all -it -v $(pwd):/moonlight tensorflow/tensorflow:2.15.0-gpu
 ```
 
-
+<br>
+<br>
+<br>
 
 ## 7. Visual Studo Code 준비
 
@@ -509,10 +546,9 @@ WSL , CUDA Toolkit , Tensorflow GPU까지 모두 성공적으로 설치를 마�
 
 이 부분은 특별한 내용이 없으니 넘어가도록 하겠습니다.
 
-​
-
-​
-​
+<br>
+<br>
+<br>
 
 ## 8. Visual Studo Code와 Tensorflow Container 연결
 
@@ -524,7 +560,8 @@ WSL , CUDA Toolkit , Tensorflow GPU까지 모두 성공적으로 설치를 마�
 
 2중으로 타고 들어가서 작업을 해야 하는 상황인데, 저는 처음에 '이게 가능할까...?'라고 생각했는데, 이런 상황을 고려한 Visual Studo Code Extension이 있습니다 !!
 
-​
+​<br>
+<br>
 
 ### 8.1. Remote Development Extension 설치
 
@@ -534,6 +571,8 @@ Visual Studo Code의 'Extensions'을 클릭해서 'remote'를 검색하면 **Rem
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/12.png">
 
+<br>
+<br>
 
 ### 8.2. Container 연결
 
@@ -582,7 +621,9 @@ WSL을 실행하고 Tensorflow Container도 run 시킵니다.
 <br>
 <img src="https://moonlight314.github.io/assets/TensorflowGPUDockerInstallonWSL2/20.png">
 
-
+<br>
+<br>
+<br>
 
 ## 9. Image Commit
 
@@ -592,7 +633,8 @@ WSL을 실행하고 Tensorflow Container도 run 시킵니다.
 
 이를 미연에 방지하고자, 수정된 Container를 Image로 저장(Commit)하는 방법을 알려드리겠습니다.
 
-​
+<br>
+<br>
 
 ### 9.1. docker commit 사용법
 
@@ -614,13 +656,9 @@ docker commit 6164b18a5d78 tensorflow/tensorflow:2.15.0-gpu-with-package
 
 다음부터는 tensorflow/tensorflow:2.15.0-gpu-with-package Image로 Container를 실행하면 이전에 설치된 Package가 모두 들어가 있는 Container가 실행이 됩니다.
 
-​
-
-​
-
-​
-
-​
+​<br>
+<br>
+<br>
 
 ## 10. 최종 Test
 
@@ -639,3 +677,5 @@ Linux에 Docker를 설치하고 사용하면 좀 더 편하게 Setting이 가능
 ​
 
 긴 글 읽어주셔서 감사합니다 !!
+
+<br>
