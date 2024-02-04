@@ -652,9 +652,8 @@ Container ID는 docker ps -a 를 입력하면 현재 Container들의 정보가 �
 
 ```bash
 docker commit 6164b18a5d78 tensorflow/tensorflow:2.15.0-gpu-with-package
-```​
+```
 
-​<br>
 
 다음부터는 tensorflow/tensorflow:2.15.0-gpu-with-package Image로 Container를 실행하면 이전에 설치된 Package가 모두 들어가 있는 Container가 실행이 됩니다.
 
