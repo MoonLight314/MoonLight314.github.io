@@ -1,6 +1,6 @@
 ---
 title: "쉽고 빠르게 익히는 실전 LLM"
-date: 2024-02-19 08:26:28 -0400
+date: 2024-02-18 08:26:28 -0400
 categories: Deep Learning
 ---
 
