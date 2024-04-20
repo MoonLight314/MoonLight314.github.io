@@ -28,18 +28,13 @@ Transformer의 전체 구조의 위와 같습니다. 왼쪽이 Encoder의 구조
 
 # 0. Encoder
 
-<br>
-<br>
-
 먼저 Encoder의 구조에 대해서 간략하게 살펴보겠습니다.
 
 ## 0.0. Tokenizer
 
 가장 아래쪽에 Inputs이 있습니다. Transformer에서 Input은 단어들로 이루어진 문장이 되겠죠.
 
-이 그림에서는 생략되어 있는데, Input Embedding Layer에 문장 전체가 들어갈 수는 없기 때문에
-
-그전에 tokenizer를 이용하여, 문장들을 Token 단위로 나눕니다.
+이 그림에서는 생략되어 있는데, Input Embedding Layer에 문장 전체가 들어갈 수는 없기 때문에 그전에 tokenizer를 이용하여, 문장들을 Token 단위로 나눕니다.
 
 Transformer에서는 주로 WordPiece Tokenizer를 사용하여 문장을 Token으로 나눕니다.
 
@@ -63,18 +58,18 @@ Seq2Seq 구조(Link 주소)에서는 구조적인 영향으로 입력 단어의 
 
 하지만, Transformer 구조에서는 한 번에 모든 단어를 처리하기 때문에 입력 시퀀스의 순서 정보를 고려하지 않는다는 한계가 있습니다.
 
-따라서 같은 단어들이라도 문장 내에서의 위치에 따라 다른 의미를 가질 수 있는 자연어 처리 작업에서는 순서 정보를
+따라서 같은 단어들이라도 문장 내에서의 위치에 따라 다른 의미를 가질 수 있는 자연어 처리 작업에서는 순서 정보를 Model에 제공하는 것이 중요합니다. 
 
-모델에 제공하는 것이 중요합니다. 이러한 이유로 Positional Encoding이 필요합니다.
+이러한 이유로 Positional Encoding이 필요합니다.
 
 <br>
 <br>
 
 ## 0.3. Multi Head Attention
 
-앞서 알아본 Self Attention에서는 Q, K, V Vector를 만들 때 단어의 Embedding에 Wk, Wq, Wv를 곱해서 값을 만들어 냈습니다.
+앞서 알아본 Self Attention에서는 Q, K, V Vector를 만들 때 단어의 Embedding에 W<sub>k</sub>, W<sub>q</sub>, W<sub>v</sub>를 곱해서 값을 만들어 냈습니다.
 
-이때, Wk, Wq, Wv를 여러 개 만들어서 하나의 단어에 대해서 여러 개의 Q, K, V Vector를 만들겠다는 것이 Multi-Head Attention의 핵심 아이디어입니다.
+이때, W<sub>k</sub>, W<sub>q</sub>, W<sub>v</sub>를 여러 개 만들어서 하나의 단어에 대해서 여러 개의 Q, K, V Vector를 만들겠다는 것이 Multi-Head Attention의 핵심 아이디어입니다.
 
 이렇게 하면 주목해야 하는 단어가 무엇인지를 더 잘 파악할 수 있고, 더불어 각 단어가 갖고 있는 문맥적 특성을 더 잘 표현할 수 있다는 장점도 있습니다.
 
