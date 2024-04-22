@@ -48,7 +48,7 @@ Decoder에서 이런 자기 회귀적인 특징이 가장 많이 반영되어 �
 
 Decoder 입력은 최초 <SOS> Token으로 시작하게 됩니다. Decoder는 자기 회귀적 특성상 이전 단어가 있어야 현재 단어를 예측할 수 있으므로
 
-최초 시작을 뜻하는 <SOS> Token으로 시작하게 되고 실제 의미 있는 예측 값은 한 단계 Shifted 됩니다.
+최초 시작을 뜻하는 'SOS' Token으로 시작하게 되고 실제 의미 있는 예측 값은 한 단계 Shifted 됩니다.
 
 이를 Shifted Right라고 합니다.
 
@@ -107,7 +107,7 @@ Transformer에서는 Attention Score가 Model 예측해야 할 답과 같은 값
 
 예를 들어서 'am'까지의 정보를 이용해서 다음에 올 단어를 예측해야 하는 경우에는 'am'까지의 Attention Score만을 이용해서 Train 해야 합니다.
 
-즉, <SOS> , <I> , <am>까지의 단어를 가지고 Attention Scroe를 구하고, 그 정보를 이용해서 계산된 가중치를 Value Vector에 곱해서 Attention Score를 얻어야 합니다.
+즉, 'SOS' , 'I' , 'am'까지의 단어를 가지고 Attention Scroe를 구하고, 그 정보를 이용해서 계산된 가중치를 Value Vector에 곱해서 Attention Score를 얻어야 합니다.
 
 이렇게 하기 위해서 다음 단어의 Attention Score에 -∞를 곱해서 Softmax 값이 0이 되게 하는 방법을 사용합니다.
 
