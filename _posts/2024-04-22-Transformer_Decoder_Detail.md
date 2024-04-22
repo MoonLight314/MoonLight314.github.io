@@ -7,7 +7,7 @@ categories: Deep Learning
 <br>
 <br>
 
-0. Introduction
+# 0. Introduction
 
 안녕하세요, 이번 Post에서는 Transformer의 Decoder에 대해서 자세히 알아보도록 하겠습니다.
 
@@ -32,7 +32,7 @@ Decoder에서 이런 자기 회귀적인 특징이 가장 많이 반영되어 �
 <br>
 <br>
 
-1. Masked Multi-Head Attention
+# 1. Masked Multi-Head Attention
 
 <br>
 <br>
@@ -44,7 +44,7 @@ Decoder에서 이런 자기 회귀적인 특징이 가장 많이 반영되어 �
 <br>
 <br>
 
-1.0. Shifted Right
+## 1.0. Shifted Right
 
 Decoder 입력은 최초 <SOS> Token으로 시작하게 됩니다. Decoder는 자기 회귀적 특성상 이전 단어가 있어야 현재 단어를 예측할 수 있으므로
 
@@ -55,17 +55,17 @@ Decoder 입력은 최초 <SOS> Token으로 시작하게 됩니다. Decoder는 �
 <br>
 <br>
 
-1.1. Embedding & Positional Encoding
+## 1.1. Embedding & Positional Encoding
 
 Embedding & Positional Encoding은 Encoder와 유사합니다.
 
 <br>
 
-1.2. Teacher Forcing
+## 1.2. Teacher Forcing
 
 <br>
 
-1.2.0. Introduction
+### 1.2.0. Introduction
 
 Decoder를 Train 시키는 상황을 생각해 보면, 이전의 정보를 바탕으로 다음의 정보를 예측한다고 생각할 수 있습니다.
 
@@ -83,7 +83,7 @@ Decoder를 Train 시키는 상황을 생각해 보면, 이전의 정보를 바�
 
 <br>
 
-1.2.1. Attention Score Masking
+### 1.2.1. Attention Score Masking
 
 Transformer Model에 Teacher Forcing 기법을 적용하기 위해서, 논문에서는 Attention Socre를 Masking 하는 방법을 이용합니다.
 
@@ -121,14 +121,14 @@ Transformer에서는 Attention Score가 Model 예측해야 할 답과 같은 값
 <br>
 <br>
 
-2. Add & Norm
+# 2. Add & Norm
 
 Add & Norm Layer는 Encoder의 그것과 동일합니다.
 
 <br>
 <br>
 
-3. Multi-Head Attention
+# 3. Multi-Head Attention
 
 <br>
 <br>
@@ -155,7 +155,7 @@ Q 값만 Decoder의 값을 사용하고, K, V 값은 Encoder의 값을 사용하
 <br>
 <br>
 
-4. Feed Forward & Add & Norm
+# 4. Feed Forward & Add & Norm
 
 Encoder-Decoder Attention을 거친 값들은 Feed Forward & Add & Norm을 차례로 거칩니다.
 
