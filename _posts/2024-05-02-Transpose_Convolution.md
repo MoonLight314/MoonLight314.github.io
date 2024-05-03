@@ -9,7 +9,12 @@ categories: Deep Learning
 
 이번 Post에서는 Transpose Convolution에 대해서 알아보도록 하겠습니다.
 
+<br>
+<br>
+
 # 0. Introduction
+
+<br>
 
 Transpose Convolution은 우리가 흔히 알고 있는 CNN Model에서 주로 사용되는 Convolution과 반대되는 연산을 수행합니다.
 
@@ -20,6 +25,9 @@ Convolution 연산은 특정 크기의 Kernel이라는 Filter를 이용해서 Im
 반면, Transpose Convolution은 Feature Map의 차원을 증가(Up-Sampling) 시키면서 원래 값을 복원하는 용도로 주로 사용됩니다.(Upscaler)
 
 이러한 Transpose Convolution의 속성 때문에 다음과 같은 용도로 많이 사용됩니다.
+
+<br>
+<br>
 
 ### 1. Image Up-Sampling
 
@@ -56,6 +64,7 @@ Image의 해상도를 높이기 위해 사용됩니다. Transpose Convolution의
 
 그럼 실제로 어떻게 Transpose Convolution 연산을 하는지 몇 가지 예제를 통해 알아보도록 하겠습니다.
 
+<br>
 
 ## 1.0. 기본 연산 방법
 
@@ -65,7 +74,8 @@ Convolution과 마찬가지로 Input Image의 각 원소에 Kernel의 각 원소
 
 아래 Example을 살펴보도록 하겠습니다.
 
-
+<br>
+<br>
 
 ## 1.1. Example 1
 
@@ -75,7 +85,7 @@ Convolution과 마찬가지로 Input Image의 각 원소에 Kernel의 각 원소
 <br>
 
 <p align="center">
-  <img src="/assets/Transpose_Convolution/00.png">
+  <img src="/assets/Transpose_Convolution/0.png">
 </p>
 
 <br>
@@ -103,7 +113,7 @@ Convolution과 마찬가지로 Input Image의 각 원소에 Kernel의 각 원소
 <br>
 
 <p align="center">
-  <img src="/assets/Transpose_Convolution/01.png">
+  <img src="/assets/Transpose_Convolution/1.png">
 </p>
 
 <br>
