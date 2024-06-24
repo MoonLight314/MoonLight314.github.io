@@ -72,19 +72,32 @@ Loss Function은 MSE(Mean Squared Error)라고 가정하겠습니다. MSE를 구
 
 <br>
 
-입력값 $x_1,x_2$ 가 신경망을 거쳐서 출력값 $\hat{𝑦_1}, 𝑦_2$ 가 계산되어 나왔습니다.
-이 $𝑦_1, 𝑦_2$ 가 실제 Target Value인 $𝑦_1, 𝑦_2$ 와 얼마나 차이가 나느냐 계산해서 이 차이만큼 신경망의 parameter(w,b)들을 update 시켜야 합니다.
+입력값 $x_1,x_2$ 가 신경망을 거쳐서 출력값 $\hat{𝑦_1}, \hat{𝑦_2}$가 계산되어 나왔습니다.
+
+이 $\hat{𝑦_1}, \hat{𝑦_2}$가 실제 Target Value인 $𝑦_1, 𝑦_2$와 얼마나 차이가 나느냐 계산해서 이 차이만큼 신경망의 parameter(w,b)들을 update 시켜야 합니다.
+
 이 동작의 반복을 ‘학습’이라고 합니다.
 
-2.1. Loss Function
+<br>
+
+## 2.1. Loss Function
+
+<br>
+
 다양한 Loss Function이 존재하고 상황에 맞는 Loss Function을 선택해야 합니다.
+
 이 Post에서는 가장 심플하다고 할 수 있는 MSE를 선택하기로 했습니다.
+
 MSE는 신경망 출력값과 실제 Target 값의 차이를 구해서 제곱한 후 평균을 구하는 방식을 취합니다.
 
+<br>
 
-2.2. 편미분
+## 2.2. 편미분
+
+<br>
+
 Loss Function을 통해 실제값과 신경망이 구한 값의 차이, 즉, 에러 신호를 구했으면 이 에러신호가 신경망의 어떤 Parameter에 의해서 얼마나 영향을 받는지를 확인해서 신경망의 Parameter를 Update해 주어야 합니다.
 
 구체적으로, 에러 신호를 Feedforward의 반대 방향으로 넘어가면서(Backpropagation) 편미분을 통해서 특정 Parameter가 에러 신호에 어느 정도 영향을 주는지 계산(미분)해서 개별적으로 Parameter를 에러 신호가 줄어드는 방향으로 Update해 나가는 동작을 반복하게 됩니다.
 
-
+<br>
