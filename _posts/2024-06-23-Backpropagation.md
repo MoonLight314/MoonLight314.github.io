@@ -101,3 +101,66 @@ Loss Function을 통해 실제값과 신경망이 구한 값의 차이, 즉, 에
 구체적으로, 에러 신호를 Feedforward의 반대 방향으로 넘어가면서(Backpropagation) 편미분을 통해서 특정 Parameter가 에러 신호에 어느 정도 영향을 주는지 계산(미분)해서 개별적으로 Parameter를 에러 신호가 줄어드는 방향으로 Update해 나가는 동작을 반복하게 됩니다.
 
 <br>
+
+# 3. Example of Backpropagation
+
+<br>
+
+실제 편미분을 이용해 Parameter를 Update하는 방법을 알아보겠습니다.
+
+먼저 Backpropagation은 Feedforward를 구성하는 각 Function들의 미분을 해야 하기 때문에, 
+
+Activation Function와 Loss Function의 도함수부터 먼저 알아보도록 하겠습니다.
+
+<br>
+
+## 3.1. Activation Function의 도함수
+
+<br>
+
+앞서 살펴봤듯이, Sigmoid의 형태는 아래와 같습니다.
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/0e6958f2-8d9b-4a6b-b616-f7686505b093)
+
+<br>
+
+Sigmoid의 도함수는 다음과 같습니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/3a54687e-88f3-41cf-b506-6895c76aea56)
+
+<br>
+
+## 3.2. Loss Function의 도함수
+
+<br>
+
+우리는 Loss Function으로 MSE를 사용하기로 했으며, 수식은 아래와 같습니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/edabf4b0-73d1-4850-9fa1-e4066700228f)
+
+<br>
+
+MSE의 도함수의 형태는 아래와 같습니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/6dd4f2ca-7fdd-4271-ae5a-b533fe71214f)
+
+<br>
+
+도함수를 구하는 구체적인 순서는 생략하기로 하겠습니다.
+
+<br>
+
+## 3.3. Overall Process
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/105c8c4c-30ef-4fe9-87f0-f2aa58992bdc)
+
+<br>
+
