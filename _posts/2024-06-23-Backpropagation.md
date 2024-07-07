@@ -164,3 +164,169 @@ MSE의 도함수의 형태는 아래와 같습니다.
 
 <br>
 
+Backpropagation의 전체적인 순서는 Feedforward에서 구한 Loss를 뒤로 넘기면서 각 Parameters(w,b)를 Loss가 줄어드는 방향으로 Update해 나가는 것입니다.
+
+이제부터는 각 단계별로 Backpropagation이 실제로 적용되어 계산되는 방식을 알아보도록 하겠습니다.
+
+<br>
+
+## 3.4. Loss Function 단계
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/07a2d0e8-fbb3-4874-9af0-5436bbba9771)
+
+<br>
+
+Loss Function은 MSE 방식을 사용했으니, MSE의 도함수를 이용해서 L을 Backpropagation합니다.
+
+앞에서 알아본 MSE의 도함수를 이용해서 결과를 구하면
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/c8ddfd7b-5c3e-4eb0-855e-643dad08a3ae)
+
+<br>
+
+가 됩니다.
+
+<br>
+
+## 3.5. Activation Function 단계
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/9f9afd53-ca16-4a74-8c4b-e1fcf653b218)
+
+<br>
+
+Activation Function은 Sigmoid로 선택하였고, 앞서 Sigmoid의 도함수의 형태는
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/2feb85a7-7d08-4569-97f8-5f047b238ca3)
+
+<br>
+
+라는 것도 알아보았습니다.
+
+<br>
+
+여기서 $x=a_{\hat{𝑦_i}}$가 되고, $𝜎(a_{\hat{𝑦_i}})$는 곧 $\hat{y_i}$ 가 됩니다. 
+
+<br>
+
+정리하면,
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/2992d715-ad4a-40f5-9b95-d71305a3a7be)
+
+<br>
+
+가 됩니다.
+
+여기까지 결과를 Chain-Rule로 정리하면, 두번째 Hidden Layer의 출력값이 Loss에 미치는 영향을 에러 신호 $𝛿_{\hat{𝑦_i}}$ 라고 정의하면,
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/1038a1cd-9608-4f5a-8f84-06be5b4d6d5c)
+
+<br>
+
+가 됩니다.
+
+<br>
+
+## 3.6. Parameter Update
+
+<br>
+
+에러 신호 $𝛿_{\hat{𝑦_i}}$를 구했으니, 이 값을 바탕으로 w,b를 Update합니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/c437e119-4282-4cd2-b55d-2fbb9361342f)
+
+<br>
+
+실제 w,b 계산 방법은 아래와 같습니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/292146d0-8dd9-4977-92b8-371d35326028)
+
+<br>
+
+여기서 "η"는 Learning Rate값을 나타냅니다.
+
+이 단계에서 Optimizer가 적용이 되는데, 선택한 Optimizer의 알고리즘에 따라서 "η"(Learning Rate)값에 따라서 Weight/Bias 값을 조절하게 됩니다.
+
+<br>
+<br>
+
+$𝑤_6,𝑤_8, 𝑏_4$도 에러 신호 $𝛿_{\hat{𝑦_i}}$를 이용해서 동일한 방식으로 구할 수 있습니다.
+
+<br>
+
+## 3.7. Hidden Layer의 에러 신호
+
+<br>
+
+이 부분부터는 이전의 계산하는 방식과는 다른 방법을 이용해서 진행합니다. 
+
+앞의 단계에서는 전체 신경망의 최종결과 값인 Loss를 알고 있기때문에 오차, 즉 에러 신호를 계산할 수 있었습니다.
+
+하지만, Hidden Layer에서는 실제 값을 모르고 알 수 있는 것은 단지 Backpropagation으로 전달된 에러 신호 $𝛿_{\hat{𝑦_i}}$뿐입니다.
+
+우리는 첫번째 Hidden Layer의 출력 $ℎ_𝑖$의 에러 신호 $𝛿_{h_i}$ 를 구하려고 합니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/f1cf9325-1243-4c01-9574-cda387b7f0e7)
+
+<br>
+
+에러 신호 $𝜹_{𝒉_𝒊}$는 생각해 보면 신경망을 거쳐 결국 $𝛿_{𝑦_𝑖}$에 영향을 끼치기 때문입니다.
+
+<br>
+
+그래서, $𝛿_{𝑦_𝑖}$를 Target으로 생각하고 이전과 유사하게 계산하면 됩니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/babf52a4-345f-46c4-9812-29fc34791bb7)
+
+<br>
+
+동일한 방식으로 $𝛿_{ℎ_2}$도 구할 수 있습니다. 
+
+<br>
+
+이제 에러 신호를 구했으니, 이 값을 바탕으로  $𝑤_1$ ~ $𝑤_4$ , $𝑏_1$ ~ $𝑏_2$도 Update할 수 있습니다.
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/e707053c-98f4-464e-802d-f0ca46d5e6db)
+
+<br>
+
+![image](https://github.com/MoonLight314/MoonLight314.github.io/assets/41887456/bcfbf54f-5302-4733-a1ae-1d675ba512ea)
+
+<br>
+
+# 4. Summary
+
+<br>
+
+앞서 살펴본 Feedforward & Backpropagation 과정을 전체 Dataset에 대해서 반복해서 적용하면서 Loss가 작아지는 방향으로 Parameters(W,B)를 Update하는 과정을 ‘학습(Training)’이라고 합니다.
+
+<br>
+
+Backpropagation은 Loss값을 뒤로 넘기면서 개별 Parameters(W,B)가 Loss에 얼마나 많은 영향을 미치는가를 편미분을 통해서 파악하고, 이 값을 Loss가 작아지는 방향으로 Update하는 과정입니다.
+
+<br>
+
+Deep Learning 학습에 Backpropagation이 사용된다고 알고는 있지만 실제 어떻게 동작하는지 정리해 볼 필요가 있을 것 같아서 나름대로 정리를 해 보았으니, 도움이 되셨다면 좋겠습니다.
+
+<br>
