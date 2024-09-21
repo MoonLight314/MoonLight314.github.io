@@ -10,6 +10,10 @@ categories: Deep Learning
 
 <br>
 
+![image](https://github.com/user-attachments/assets/6c4e4dac-68ec-4a17-b234-50c50e7fe010)
+
+<br>
+
 최근 ChatGPT와 같은 생성 모델의 급격한 발전과 함께 매우 다양한 분야에서 활용되고 있습니다.
 
 이 책은 그중에서도 특히 프롬프트 엔지니어링(Prompt Engineering)이라는 개념을 깊이 있게 다루며, 생성 AI를 효과적으로 활용하는 방법, 특히 템플릿을 활용하여 구체적으로 설명합니다.
