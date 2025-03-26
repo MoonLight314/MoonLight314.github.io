@@ -267,105 +267,29 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 
 아래 표는 Flash Attention과 기존 Attention 메커니즘의 성능 벤치마크 결과를 비교한 것입니다.
 
+| 모델           | 측정 항목                      | 기존 Attention | Flash Attention | 개선율      |
+|----------------|-------------------------------|:--------------:|:----------------:|:-----------:|
+| BERT-large     | 엔드-투-엔드 속도 향상         | 1x             | 1.15x            | 15%         |
+| GPT-2          | HuggingFace 대비 속도 향상     | 1x             | 3x               | 300%        |
+| GPT-2 (4K ctx) | Megatron (1K ctx) 대비 속도 향상 | -              | 1.3x             | 30%         |
+| Stable Diff.   | 추론 속도 향상                 | 1x             | 2x               | 200%        |
+| Uni-Fold       | AlphaFold 대비 속도 향상       | 1x             | 2.6x             | 260%        |
+| OpenFold       | AlphaFold2 대비 속도 향상      | 1x             | 3x               | 300%        |
+| PubMedGPT      | 학습 시간 감소율               | -              | ~50% 감소        | ~2x 속도    |
+| Stable Diff.   | 미세 조정 비용 절감률          | -              | 7x 감소          | 700% 절감   |
 
-모델 
 
-측정 항목
 
-기존 Attention
 
-Flash Attention
-
-개선율
-
-BERT-large
-
-엔드-투-엔드 속도 향상
-
-1x
-
-1.15x
-
-15%
-
-GPT-2
-
-HuggingFace 대비 속도 향상
-
-1x
-
-3x
-
-300%
-
-GPT-2 (4K ctx)
-
-Megatron (1K ctx) 대비 속도 향상
-
--
-
-1.3x
-
-30%
-
-Stable Diff.
-
-추론 속도 향상
-
-1x
-
-2x
-
-200%
-
-Uni-Fold
-
-AlphaFold 대비 속도 향상
-
-1x
-
-2.6x
-
-260%
-
-OpenFold
-
-AlphaFold2 대비 속도 향상
-
-1x
-
-3x
-
-300%
-
-PubMedGPT
-
-학습 시간 감소율
-
--
-
-~50% 감소
-
-~2x 속도
-
-Stable Diff.
-
-미세 조정 비용 절감률
-
--
-
-7x 감소
-
-700% 절감
-
+<br>
 <br>
 <br>
 
 ## 6. 정리
 <br>
-Flash Attention 기술은 기존 Attention 메커니즘의 메모리 및 계산 병목 현상을 해결함으로써 Transformer 모델의 효율성을 크게 향상시키는 혁신적인 기술입니다. 
+Flash Attention 기술은 기존 Attention 메커니즘의 메모리 및 계산 병목 현상을 해결함으로써 Transformer 모델의 효율성을 크게 향상시키는 혁신적인 기술입니다.
 
-IO-Awareness, Tiling, Kernel Fusion, Recomputation과 같은 핵심 아이디어는 상당한 속도 향상과 메모리 사용량 감소를 가져와 더 큰 모델의 학습과 더 긴 시퀀스의 처리를 가능하게 합니다. 
+IO-Awareness, Tiling, Kernel Fusion, Recomputation과 같은 핵심 아이디어는 상당한 속도 향상과 메모리 사용량 감소를 가져와 더 큰 모델의 학습과 더 긴 시퀀스의 처리를 가능하게 합니다.
 
 Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같은 분야에서 대규모 트랜스포머 모델을 더욱 실용적이고 효율적으로 만들어 AI 분야 발전에 중요한 기여를 했습니다.
 
@@ -373,7 +297,6 @@ Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같�
 <br>
 
 ### 참조
-<br>​
 
 · [What is Flash Attention? - Hopsworks](https://www.hopsworks.ai/dictionary/flash-attention)
 
