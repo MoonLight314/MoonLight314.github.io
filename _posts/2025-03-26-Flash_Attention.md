@@ -7,6 +7,10 @@ categories: Deep Learning
 <br>
 <br>
 
+<span style="color:tomato; font-size:18px;">이 텍스트는 토마토색이고, Font Size : 18</span>
+
+<span style="font-size:16px;">이 텍스트는 색깔 미지정, Font Size : 16</span>
+
 기존 Attention 메커니즘을 Flash Attention에 대해서 알아보도록 하겠습니다.
 
 Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Transformer 모델의 핵심 구성 요소인 Attention 메커니즘을 개선한 기술입니다.
