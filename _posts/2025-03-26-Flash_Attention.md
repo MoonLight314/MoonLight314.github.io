@@ -6,7 +6,6 @@ categories: Deep Learning
 
 <br>
 <br>
-<span style="color:tomato; font-size:18px;">이 텍스트는 토마토색이고, 글씨가 좀 큽니다!</span>
 
 기존 Attention 메커니즘을 Flash Attention에 대해서 알아보도록 하겠습니다.
 
