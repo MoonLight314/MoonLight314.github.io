@@ -40,15 +40,13 @@ Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Trans
 
 Flash Attention은 이전 버전보다 더 빠른 연산 속도를 제공하는데, 이는 GPU 메모리 계층 구조를 더 효율적으로 활용하고, 불필요한 메모리 액세스를 줄이는 방식으로 달성됩니다. 
 
-​
+​구체적으로, 다음과 같은 기술을 사용합니다.
 
-구체적으로, 다음과 같은 기술을 사용합니다.
+1) **Tiling** : 입력 데이터를 더 작은 타일로 나누어 처리하여, GPU의 공유 메모리를 최대한 활용합니다.
 
-1) Tiling : 입력 데이터를 더 작은 타일로 나누어 처리하여, GPU의 공유 메모리를 최대한 활용합니다.
+2) **Kernel Fusion** : 여러 연산을 하나의 커널로 융합하여 커널 실행 오버헤드를 줄입니다.
 
-2) Kernel Fusion : 여러 연산을 하나의 커널로 융합하여 커널 실행 오버헤드를 줄입니다.
-
-3) Parallel Reduction : 병렬 연산을 통해 Attention 가중치를 계산하고 정규화하는 과정을 가속화합니다.
+3) **Parallel Reduction** : 병렬 연산을 통해 Attention 가중치를 계산하고 정규화하는 과정을 가속화합니다.
 
 ​
 <br>
@@ -76,31 +74,26 @@ Flash Attention은 다양한 GPU 환경에서 잘 작동하도록 설계되었�
 Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling 기법과 계산시에 Global Memory(HBM, High Bandwidth Memory)를 사용하는 대신 Shared Memory를 사용하는 것, 이 2가지입니다.
 
 ​
-
-​
-
 ### 2.1. Tiling
 
 <br>
 
 #### 2.1.1. 기존 Attention 메커니즘의 문제점
 
-​
-
 기존의 표준 Attention 메커니즘은 다음과 같은 단계를 거칩니다.
 ​
 
-1) Query, Key, Value 생성 : 입력 시퀀스로부터 Query(Q), Key(K), Value(V) 행렬을 생성합니다.
+1) **Query, Key, Value 생성** : 입력 시퀀스로부터 Query(Q), Key(K), Value(V) 행렬을 생성합니다.
 
-2) Attention Score 계산 : Q와 K의 내적(dot product)을 계산하여 Attention Score 행렬을 얻습니다.
+2) **Attention Score 계산** : Q와 K의 내적(dot product)을 계산하여 Attention Score 행렬을 얻습니다.
 
-3) Softmax 적용 : Attention Score 행렬에 Softmax 함수를 적용하여 Attention Weight 행렬을 얻습니다.
+3) **Softmax 적용** : Attention Score 행렬에 Softmax 함수를 적용하여 Attention Weight 행렬을 얻습니다.
 
-4) 가중합 계산 : Attention Weight 행렬과 V 행렬을 곱하여 최종 Attention 출력값을 얻습니다.
+4) **가중합 계산** : Attention Weight 행렬과 V 행렬을 곱하여 최종 Attention 출력값을 얻습니다.
 
 ​
 
-이 과정에서 가장 큰 문제는 2단계와 3단계에서 발생하는 큰 중간 결과물(Attention Score 및 Weight 행렬)을 GPU의 고대역폭 메모리(HBM)에 저장해야 한다는 것입니다. 시퀀스 길이가 길어질수록 이 행렬들의 크기는 제곱으로 증가하여, 메모리 병목 현상이 발생하고 속도가 느려집니다.
+**이 과정에서 가장 큰 문제는 2단계와 3단계에서 발생하는 큰 중간 결과물(Attention Score 및 Weight 행렬)을 GPU의 고대역폭 메모리(HBM)에 저장해야 한다는 것입니다. 시퀀스 길이가 길어질수록 이 행렬들의 크기는 제곱으로 증가하여, 메모리 병목 현상이 발생하고 속도가 느려집니다.**
 
 
 좀 더 자세한 Transformer의 Attention 알고리즘에 대한 내용은 아래 글을 참고해 주시기 바랍니다.
@@ -119,16 +112,17 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 
 #### 2.1.2. Tiling 기법
 
-​FlashAttention-2의 핵심은 Tiling이라는 방법인데, Tiling은 아래 그림과 같이 Q, K, V 행렬을 각각 N/B개의 블록(타일)으로 나누어서 계산하는 것입니다. 각 블록의 크기는 B x d가 되고, B는 하이퍼파라미터로 조절 가능합니다.
+​FlashAttention-2의 핵심은 Tiling이라는 방법인데, Tiling은 아래 그림과 같이 Q, K, V 행렬을 각각 N/B개의 블록(타일)으로 나누어서 계산하는 것입니다. 각 블록의 크기는 B x d가 되고, **B는 하이퍼파라미터로 조절 가능합니다.**
 
 ![image](https://github.com/user-attachments/assets/461c6160-0f1f-4a88-af25-9950b402af83)
 
+<br>
 
-2.1.3. Tiling 기법 적용한 Attention 계산 순서
+#### 2.1.3. Tiling 기법 적용한 Attention 계산 순서
 
-​
+<br>​
 
-1) 블록 단위 로드
+**1) 블록 단위 로드**
 
 Q, K, V의 각 블록 쌍 (Q[i], K[j], V[j])을 GPU의 빠른 공유 메모리(Shared Memory) 또는 레지스터로 로드합니다. 
 
@@ -140,45 +134,39 @@ Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multipro
 
 ​
 
-2) 블록 단위 Attention Score 계산
+**2) 블록 단위 Attention Score 계산**
 
 공유 메모리 내에서 Q[i]와 K[j]의 내적을 계산하여 작은 Attention Score 블록을 얻습니다.
 
 ​
 
-3) Online Softmax
+**3) Online Softmax**
 
 이전 단계에서 얻은 Attention Score 블록에 대해 부분적으로 Softmax를 계산합니다. 즉, 각 블록에 대한 Softmax 통계량(최댓값, 지수 합)을 계산하고 누적합니다.
 
 이 누적된 통계량을 사용하여 전체 Softmax를 근사합니다. 
 
 Online Softmax
-
-     Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
-
-     즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 
-
-     방식입니다. 
-
-     이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다. 
-
-     단순한 "타일별 Softmax"가 아니라, 메모리 효율성과 수치 안정성을 위한 정교한 알고리즘이라고 할 수 있습니다.
+- Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
+- 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
+- 이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다.
+- 단순한 "타일별 Softmax"가 아니라, 메모리 효율성과 수치 안정성을 위한 정교한 알고리즘이라고 할 수 있습니다.
 
 ​
 
-4) 블록 단위 가중합
+**4) 블록 단위 가중합**
 
 부분 Softmax 결과와 V[j] 블록을 곱하여 부분적인 Attention 출력값을 얻습니다.
 
 ​
 
-5) 출력 누적
+**5) 출력 누적**
 
 이전 단계에서 얻은 부분 출력값을 HBM의 최종 출력 위치에 누적합니다.
 
 ​
 
-6) 반복
+**6) 반복***
 
 모든 블록 쌍 (i, j)에 대해 1~5단계를 반복합니다.
 
@@ -214,11 +202,11 @@ FlashAttention 1의 한계를 보완하기 위해 워크 분할(work partitionin
 특히, GPU의 스레드 블록과 워프(warp) 간의 작업 분배를 최적화하여 연산 효율을 높였습니다.
 
 이를 통해 이전 버전에 비해 최대 2배의 속도 향상을 달성하였습니다.
-​
-​​<br>
+
+​​<br>​
 
 ### 3.3. FlashAttention 3 (2024)
-
+​​<br>
 · 논문: [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08608)
 
 · 이 논문에서는 NVIDIA Hopper GPU의 새로운 기능을 활용하여 Attention 연산의 속도와 정확도를 향상시키는 세 가지 주요 기술을 소개합니다.
@@ -240,7 +228,7 @@ FlashAttention 1의 한계를 보완하기 위해 워크 분할(work partitionin
 ​​<br>
 Flash Attention은 nVidia GPU 뿐만 아니라, AMD GPU를 사용하는 경우에도 적용이 가능합니다.
 
-Flash Attention이 nVidia의 CUDA나 cuDNN에 종속적인 것이 아니라, 알고리즘 수준의 최적화와 Triton 프로그래밍 언어의 이식성 덕분에 다양한 GPU 환경에서 동작할 수 있습니다. 
+**Flash Attention이 nVidia의 CUDA나 cuDNN에 종속적인 것이 아니라, 알고리즘 수준의 최적화와 Triton 프로그래밍 언어의 이식성 덕분에 다양한 GPU 환경에서 동작할 수 있습니다.**
 
 Triton은 하드웨어별 최적화를 자동으로 수행하고, Flash Attention 코드가 NVIDIA GPU와 AMD GPU 모두에서 효율적으로 실행될 수 있도록 돕습니다
 
