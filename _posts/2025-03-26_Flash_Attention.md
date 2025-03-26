@@ -390,3 +390,44 @@ Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같�
 · [What is Flash Attention? - Hopsworks](https://www.hopsworks.ai/dictionary/flash-attention)
 
 · [Flash Attention - Hugging Face](https://huggingface.co/docs/text-generation-inference/conceptual/flash_attention)
+
+· [Understanding Flash Attention: Writing Triton Kernel Code](https://alexdremov.me/understanding-flash-attention-writing-the-algorithm-from-scratch-in-triton/)
+
+· [Understanding Flash Attention: Writing the Algorithm from Scratch in Triton](https://towardsdatascience.com/understanding-flash-attention-writing-the-algorithm-from-scratch-in-triton-5609f0b143ea/)
+
+· [Introduction to Flash Attention: A Breakthrough in Efficient Attention ...](https://medium.com/@sthanikamsanthosh1994/introduction-to-flash-attention-a-breakthrough-in-efficient-attention-mechanism-3eb47e8962c3)
+
+· [Flash attention(Fast and Memory-Efficient Exact Attention with IO ...](https://towardsdatascience.com/flash-attention-fast-and-memory-efficient-exact-attention-with-io-awareness-a-deep-dive-724af489997b/)
+
+· [ELI5: FlashAttention. Step by step explanation of how one of… | by ...](https://gordicaleksa.medium.com/eli5-flash-attention-5c44017022ad)
+
+· [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness - Ahmed Taha](https://ahmdtaha.medium.com/flashattention-fast-and-memory-efficient-exact-attention-with-io-awareness-2a0aec52ed3d)
+
+· [Flash Attention Unveiled: The Future of Faster, Smarter AI Models - Let's Data Science](https://letsdatascience.com/flash-attention-unveiled-the-future-of-faster-smarter-ai-models/)
+
+· [Flash Attention: Revolutionizing Transformer Efficiency - Unite.AI](https://www.unite.ai/flash-attention-revolutionizing-transformer-efficiency/)
+
+· [Attention Optimizations ? NVIDIA NeMo Framework User Guide](https://docs.nvidia.com/nemo-framework/user-guide/24.09/nemotoolkit/features/optimizations/attention_optimizations.html)
+
+· [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://www.together.ai/blog/flashattention-3)
+
+· [Model acceleration libraries - ROCm Documentation - AMD](https://rocm.docs.amd.com/en/latest/how-to/rocm-for-ai/inference-optimization/model-acceleration-libraries.html)
+
+· [GPU MODE Lecture 12: Flash Attention - Christian Mills](https://christianjmills.com/posts/cuda-mode-notes/lecture-012/)
+
+· [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision | PyTorch](https://pytorch.org/blog/flashattention-3/)
+
+· [What is Flash Attention? | Modal Blog](https://modal.com/blog/flash-attention-article)
+
+· [Kernel Case Study: Flash Attention | by Arun Jith A | Mar, 2025 - Medium](https://arunjitha.medium.com/kernel-case-study-flash-attention-5d63a3875c2d)
+
+· [flash-attention/usage.md at main - GitHub](https://github.com/Dao-AILab/flash-attention/blob/main/usage.md)
+
+· [Is Flash Attention Stable?](https://arxiv.org/pdf/2405.02803)
+
+· [Efficiently Dispatching Flash Attention For Partially Filled Attention Masks](https://arxiv.org/html/2409.15097v1)
+
+· [Implementing PyTorch Flash Attention for Scalable Deep Learning Models - Medium](https://medium.com/we-talk-data/implementing-pytorch-flash-attention-for-scalable-deep-learning-models-ed14c1fdd9d3)
+
+· [Kvax: Fast and easy-to-use Flash Attention implementation for JAX - Nebius](https://nebius.com/blog/posts/kvax-open-source-flash-attention-for-jax)
+
