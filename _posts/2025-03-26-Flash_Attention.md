@@ -166,7 +166,7 @@ Online Softmax
 
 ​
 
-**6) 반복***
+**6) 반복**
 
 모든 블록 쌍 (i, j)에 대해 1~5단계를 반복합니다.
 
@@ -310,7 +310,7 @@ Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같�
 
 · [Flash attention(Fast and Memory-Efficient Exact Attention with IO ...](https://towardsdatascience.com/flash-attention-fast-and-memory-efficient-exact-attention-with-io-awareness-a-deep-dive-724af489997b/)
 
-· [ELI5: FlashAttention. Step by step explanation of how one of… | by ...](https://gordicaleksa.medium.com/eli5-flash-attention-5c44017022ad)
+· [ELI5: FlashAttention. Step by step explanation](https://gordicaleksa.medium.com/eli5-flash-attention-5c44017022ad)
 
 · [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness - Ahmed Taha](https://ahmdtaha.medium.com/flashattention-fast-and-memory-efficient-exact-attention-with-io-awareness-2a0aec52ed3d)
 
