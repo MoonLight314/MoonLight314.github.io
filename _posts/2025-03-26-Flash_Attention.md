@@ -7,9 +7,9 @@ categories: Deep Learning
 <br>
 <br>
 
-기존 Attention 메커니즘을 Flash Attention에 대해서 알아보도록 하겠습니다.
+###### 기존 Attention 메커니즘을 Flash Attention에 대해서 알아보도록 하겠습니다.
 
-Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Transformer 모델의 핵심 구성 요소인 Attention 메커니즘을 개선한 기술입니다.
+#### Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Transformer 모델의 핵심 구성 요소인 Attention 메커니즘을 개선한 기술입니다.
 
 <br>
 
