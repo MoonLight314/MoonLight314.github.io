@@ -326,11 +326,11 @@ Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같�
 
 · [GPU MODE Lecture 12: Flash Attention - Christian Mills](https://christianjmills.com/posts/cuda-mode-notes/lecture-012/)
 
-· [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision | PyTorch](https://pytorch.org/blog/flashattention-3/)
+· [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://pytorch.org/blog/flashattention-3/)
 
-· [What is Flash Attention? | Modal Blog](https://modal.com/blog/flash-attention-article)
+· [What is Flash Attention?](https://modal.com/blog/flash-attention-article)
 
-· [Kernel Case Study: Flash Attention | by Arun Jith A | Mar, 2025 - Medium](https://arunjitha.medium.com/kernel-case-study-flash-attention-5d63a3875c2d)
+· [Kernel Case Study: Flash Attention](https://arunjitha.medium.com/kernel-case-study-flash-attention-5d63a3875c2d)
 
 · [flash-attention/usage.md at main - GitHub](https://github.com/Dao-AILab/flash-attention/blob/main/usage.md)
 
