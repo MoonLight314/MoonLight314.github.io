@@ -11,7 +11,7 @@ categories: Deep Learning
 
 <span style="font-size:16px;">이 텍스트는 색깔 미지정, Font Size : 16</span>
 
-<span style="font-size:16px;">이 텍스트는 색깔 미지정, Font Size : 16</span>
+<span style="font-size:15px;">이 텍스트는 색깔 미지정, Font Size : 15</span>
 
 <span style="font-size:14px; font-weight: bold;">이 텍스트는 색깔 미지정, Font Size : 14 , 진하게</span>
 
