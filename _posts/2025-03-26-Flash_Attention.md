@@ -7,14 +7,6 @@ categories: Deep Learning
 <br>
 <br>
 
-<span style="color:tomato; font-size:18px;">이 텍스트는 토마토색이고, Font Size : 18</span>
-
-<span style="font-size:16px;">이 텍스트는 색깔 미지정, Font Size : 16</span>
-
-<span style="font-size:15px;">이 텍스트는 색깔 미지정, Font Size : 15</span>
-
-<span style="font-size:14px; font-weight: bold;">이 텍스트는 색깔 미지정, Font Size : 14 , 진하게</span>
-
 <span style="font-size:15px;">
 기존 Attention 메커니즘을 Flash Attention에 대해서 알아보도록 하겠습니다.
 <br>
@@ -48,16 +40,21 @@ Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Trans
 
 ### 1.1. 속도 향상
 
+<span style="font-size:15px; line-height: 2.2">
 Flash Attention은 이전 버전보다 더 빠른 연산 속도를 제공하는데, 이는 GPU 메모리 계층 구조를 더 효율적으로 활용하고, 불필요한 메모리 액세스를 줄이는 방식으로 달성됩니다. 
-
+<br>
+<br>
 ​구체적으로, 다음과 같은 기술을 사용합니다.
-
+<br>
+<br>
 1) **Tiling** : 입력 데이터를 더 작은 타일로 나누어 처리하여, GPU의 공유 메모리를 최대한 활용합니다.
-
+<br>
+<br>
 2) **Kernel Fusion** : 여러 연산을 하나의 커널로 융합하여 커널 실행 오버헤드를 줄입니다.
-
+<br>
+<br>
 3) **Parallel Reduction** : 병렬 연산을 통해 Attention 가중치를 계산하고 정규화하는 과정을 가속화합니다.
-
+​</span>
 ​
 <br>
 ​
