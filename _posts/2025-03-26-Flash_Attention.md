@@ -213,19 +213,20 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 </span>
 ​<br>
 
-### 3.1. FlashAttention 1 (2022)
+### 3.1. Flash Attention 1 (2022)
 ​<br>
 <span style="font-size:15px; line-height: 2.2">
 · Paper : [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+</span>
 ​<br>
+<span style="font-size:15px; line-height: 2.2">
 · 주요 내용
   - Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.
-  - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.
-​<br>
+  - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.~
 </span>
 ​​<br>​
 
-### 3.2. FlashAttention 2 (2023)
+### 3.2. Flash Attention 2 (2023)
 ​<br>
 <span style="font-size:15px; line-height: 2.2">
 · 논문: [FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
@@ -237,7 +238,7 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 </span>
 ​​<br>​
 
-### 3.3. FlashAttention 3 (2024)
+### 3.3. Flash Attention 3 (2024)
 ​​<br>
 <span style="font-size:15px; line-height: 2.2">
 · 논문: [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08608)
