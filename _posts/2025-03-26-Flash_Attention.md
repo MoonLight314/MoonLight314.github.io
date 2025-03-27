@@ -297,8 +297,9 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 ​<br>
 <br>
 아래 표는 Flash Attention과 기존 Attention 메커니즘의 성능 벤치마크 결과를 비교한 것입니다.
+</span>
 
-
+<span style="font-size:18px; line-height: 2.2">
 | 모델           | 측정 항목                      | 기존 Attention | Flash Attention | 개선율      |
 |----------------|-------------------------------|:--------------:|:----------------:|:-----------:|
 | BERT-large     | 엔드-투-엔드 속도 향상         | 1x             | 1.15x            | 15%         |
@@ -309,8 +310,8 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 | OpenFold       | AlphaFold2 대비 속도 향상      | 1x             | 3x               | 300%        |
 | PubMedGPT      | 학습 시간 감소율               | -              | ~50% 감소        | ~2x 속도    |
 | Stable Diff.   | 미세 조정 비용 절감률          | -              | 7x 감소          | 700% 절감   |
-
 </span>
+
 
 
 
