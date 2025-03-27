@@ -146,13 +146,13 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 <span style="font-size:15px; line-height: 2.2">
 **1) 블록 단위 로드**
 <br>
-Q, K, V의 각 블록 쌍 (Q[i], K[j], V[j])을 GPU의 빠른 공유 메모리(Shared Memory) 또는 레지스터로 로드합니다. 
+· Q, K, V의 각 블록 쌍 (Q[i], K[j], V[j])을 GPU의 빠른 공유 메모리(Shared Memory) 또는 레지스터로 로드합니다. 
 ​<br>
-HBM (High Bandwidth Memory): GPU에 장착된 고대역폭 메모리로, Global Memory라고도 불립니다. 용량이 크고 (일반적으로 수십 GB) GPU의 모든 계산 유닛(Compute Unit)이 접근할 수 있습니다. 하지만 상대적으로 속도는 느립니다.
+· HBM (High Bandwidth Memory): GPU에 장착된 고대역폭 메모리로, Global Memory라고도 불립니다. 용량이 크고 (일반적으로 수십 GB) GPU의 모든 계산 유닛(Compute Unit)이 접근할 수 있습니다. 하지만 상대적으로 속도는 느립니다.
 ​<br>
-Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multiprocessor) 내부에 있는 작은 용량의 메모리입니다. (일반적으로 수십 KB ~ 수백 KB). 
+· Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multiprocessor) 내부에 있는 작은 용량의 메모리입니다. (일반적으로 수십 KB ~ 수백 KB). 
 ​<br>
-같은 SM 내의 스레드들이 빠르게 공유하고 접근할 수 있습니다. HBM (Global Memory)보다 훨씬 빠르지만 용량이 매우 작습니다.
+· 같은 SM 내의 스레드들이 빠르게 공유하고 접근할 수 있습니다. HBM (Global Memory)보다 훨씬 빠르지만 용량이 매우 작습니다.
 </span>
 ​<br>
 ​​<br>
@@ -160,12 +160,9 @@ Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multipro
 
 <span style="font-size:15px; line-height: 2.2">
 **2) 블록 단위 Attention Score 계산**
-​<br>
 <br>
-공유 메모리 내에서 Q[i]와 K[j]의 내적을 계산하여 작은 Attention Score 블록을 얻습니다.
+· 공유 메모리 내에서 Q[i]와 K[j]의 내적을 계산하여 작은 Attention Score 블록을 얻습니다.
 </span>
-​<br>
-<br>
 ​​<br>
 <br>
 
@@ -173,50 +170,43 @@ Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multipro
 **3) Online Softmax**
 ​<br>
 <br>
-이전 단계에서 얻은 Attention Score 블록에 대해 부분적으로 Softmax를 계산합니다. 즉, 각 블록에 대한 Softmax 통계량(최댓값, 지수 합)을 계산하고 누적합니다.
+· 이전 단계에서 얻은 Attention Score 블록에 대해 부분적으로 Softmax를 계산합니다. 즉, 각 블록에 대한 Softmax 통계량(최댓값, 지수 합)을 계산하고 누적합니다.
 ​<br>
 <br>
-이 누적된 통계량을 사용하여 전체 Softmax를 근사합니다. 
+· 이 누적된 통계량을 사용하여 전체 Softmax를 근사합니다. 
 ​<br>
 <br>
-Online Softmax
-- Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
-- 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
-- 이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다.
-- 단순한 "타일별 Softmax"가 아니라, 메모리 효율성과 수치 안정성을 위한 정교한 알고리즘이라고 할 수 있습니다.
+· Online Softmax
+  - Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
+  - 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
+  - 이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다.
+  - 단순한 "타일별 Softmax"가 아니라, 메모리 효율성과 수치 안정성을 위한 정교한 알고리즘이라고 할 수 있습니다.
 </span>
 ​<br>
-<br>
-​​<br>
 <br>
 
 <span style="font-size:15px; line-height: 2.2">
 **4) 블록 단위 가중합**
-​<br>
 <br>
-부분 Softmax 결과와 V[j] 블록을 곱하여 부분적인 Attention 출력값을 얻습니다.
+· 부분 Softmax 결과와 V[j] 블록을 곱하여 부분적인 Attention 출력값을 얻습니다.
 ​​<br>
 </span>
-<br>
 ​<br>
 <br>
 
 <span style="font-size:15px; line-height: 2.2">
 **5) 출력 누적**
 ​<br>
-<br>
-이전 단계에서 얻은 부분 출력값을 HBM의 최종 출력 위치에 누적합니다.
+· 이전 단계에서 얻은 부분 출력값을 HBM의 최종 출력 위치에 누적합니다.
 ​<br>
 </span>
-<br>
 ​​<br>
 <br>
 
 <span style="font-size:15px; line-height: 2.2">
 **6) 반복**
-​<br>
 <br>
-모든 블록 쌍 (i, j)에 대해 1~5단계를 반복합니다.
+· 모든 블록 쌍 (i, j)에 대해 1~5단계를 반복합니다.
 </span>
 
 ​<br>
