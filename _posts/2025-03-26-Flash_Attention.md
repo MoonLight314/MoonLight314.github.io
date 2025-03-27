@@ -140,7 +140,6 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 <br>
 
 #### 2.1.3. Tiling 기법 적용한 Attention 계산 순서
-
 <br>​
 
 <span style="font-size:15px; line-height: 2.2">
@@ -168,14 +167,11 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 
 <span style="font-size:15px; line-height: 2.2">
 **3) Online Softmax**
-​<br>
 <br>
 · 이전 단계에서 얻은 Attention Score 블록에 대해 부분적으로 Softmax를 계산합니다. 즉, 각 블록에 대한 Softmax 통계량(최댓값, 지수 합)을 계산하고 누적합니다.
-​<br>
 <br>
 · 이 누적된 통계량을 사용하여 전체 Softmax를 근사합니다. 
 ​<br>
-<br>
 · Online Softmax
   - Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
   - 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
@@ -191,7 +187,6 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 · 부분 Softmax 결과와 V[j] 블록을 곱하여 부분적인 Attention 출력값을 얻습니다.
 ​​<br>
 </span>
-​<br>
 <br>
 
 <span style="font-size:15px; line-height: 2.2">
@@ -201,15 +196,12 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 ​<br>
 </span>
 ​​<br>
-<br>
 
 <span style="font-size:15px; line-height: 2.2">
 **6) 반복**
 <br>
 · 모든 블록 쌍 (i, j)에 대해 1~5단계를 반복합니다.
 </span>
-
-​<br>
 <br>
 
 ## 3. Flash Attention-1 & 2 & 3 ?
