@@ -221,8 +221,14 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 ​<br>
 <span style="font-size:15px; line-height: 2.2">
 · 주요 내용
-  <span style="font-size:15px; line-height: 2.2">- Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.</span>
-  <span style="font-size:15px; line-height: 2.2">- 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.~</span>
+  <span style="font-size:15px; line-height: 2.2">
+  - Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.
+  </span>
+  ​<br>
+  <span style="font-size:15px; line-height: 2.2">
+  - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.  
+  </span>
+  ​<br>
 ​​<br>​
 
 ### 3.2. Flash Attention 2 (2023)
