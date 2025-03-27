@@ -172,7 +172,7 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 <br>
 · 이 누적된 통계량을 사용하여 전체 Softmax를 근사합니다. 
 ​<br>
-· Online Softmax
+**· Online Softmax**
   - Online Softmax는 이 블록들을 순차적으로 처리하면서, 전체 Softmax를 근사하는 데 필요한 통계량을 점진적으로 계산하고 업데이트합니다.
   - 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
   - 이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다.
@@ -221,6 +221,7 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 · 주요 내용
   - Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.
   - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.
+​<br>
 </span>
 ​​<br>​
 
@@ -232,6 +233,7 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 · 주요 내용
   - FlashAttention 1의 한계를 보완하기 위해 워크 분할(work partitioning)과 병렬 처리(parallelism)을 개선하였습니다.
   - 특히, GPU의 스레드 블록과 워프(warp) 간의 작업 분배를 최적화하여 연산 효율을 높였습니다. 이를 통해 이전 버전에 비해 최대 2배의 속도 향상을 달성하였습니다.
+​<br>
 </span>
 ​​<br>​
 
@@ -246,6 +248,7 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
   - 저정밀도 처리: FP8과 같은 저정밀도 연산을 활용하여 성능을 향상시키며, 이를 통해 FP16 대비 최대 2배의 속도 향상을 달성합니다.
 ​​<br>
 이러한 기술들을 통해 FlashAttention 3는 이전 버전에 비해 H100 GPU에서 최대 2배의 속도 향상을 이루었으며, FP8 연산 시 최대 1.2 PFLOPs/s의 성능을 달성하였습니다
+​<br>
 </span>
 ​​<br>
 ​​<br>
@@ -253,6 +256,7 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 
 ## 4. AMD GPU Support
 ​​<br>
+
 <span style="font-size:15px; line-height: 2.2">
 Flash Attention은 nVidia GPU 뿐만 아니라, AMD GPU를 사용하는 경우에도 적용이 가능합니다.
 ​​<br>
@@ -293,7 +297,6 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 ​<br>
 <br>
 아래 표는 Flash Attention과 기존 Attention 메커니즘의 성능 벤치마크 결과를 비교한 것입니다.
-</span>
 
 
 | 모델           | 측정 항목                      | 기존 Attention | Flash Attention | 개선율      |
@@ -307,6 +310,7 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 | PubMedGPT      | 학습 시간 감소율               | -              | ~50% 감소        | ~2x 속도    |
 | Stable Diff.   | 미세 조정 비용 절감률          | -              | 7x 감소          | 700% 절감   |
 
+</span>
 
 
 
@@ -316,12 +320,14 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 
 ## 6. 정리
 <br>
+
+<span style="font-size:15px; line-height: 2.2">
 Flash Attention 기술은 기존 Attention 메커니즘의 메모리 및 계산 병목 현상을 해결함으로써 Transformer 모델의 효율성을 크게 향상시키는 혁신적인 기술입니다.
-
+​<br>
 IO-Awareness, Tiling, Kernel Fusion, Recomputation과 같은 핵심 아이디어는 상당한 속도 향상과 메모리 사용량 감소를 가져와 더 큰 모델의 학습과 더 긴 시퀀스의 처리를 가능하게 합니다.
-
+​<br>
 Flash Attention은 자연어 처리, 컴퓨터 비전, 계산 생물학과 같은 분야에서 대규모 트랜스포머 모델을 더욱 실용적이고 효율적으로 만들어 AI 분야 발전에 중요한 기여를 했습니다.
-
+</span>
 ​<br>
 <br>
 
