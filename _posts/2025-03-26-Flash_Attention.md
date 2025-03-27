@@ -105,24 +105,22 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 
 **이 과정에서 가장 큰 문제는 2단계와 3단계에서 발생하는 큰 중간 결과물(Attention Score 및 Weight 행렬)을 GPU의 고대역폭 메모리(HBM)에 저장해야 한다는 것입니다. 시퀀스 길이가 길어질수록 이 행렬들의 크기는 제곱으로 증가하여, 메모리 병목 현상이 발생하고 속도가 느려집니다.**
 ​<br>
+​<br>
 
 <span style="font-size:15px; line-height: 2.2">
 좀 더 자세한 Transformer의 Attention 알고리즘에 대한 내용은 아래 글을 참고해 주시기 바랍니다.
 ​<br>
 [Transformer #1 - Attention Mechanism](https://moonlight314.github.io/deep/learning/Transformer_Attention_Mechanism/)
 ​<br>
-<br>
 [Transformer #2 - Self Attention](https://moonlight314.github.io/deep/learning/Transformer_Self_Attention/)
 ​<br>
-<br>
 [Transformer #3 - Overall](https://moonlight314.github.io/deep/learning/Transformer_Overall/)
 ​<br>
-<br>
 [Transformer #4 - Encoder Detail](https://moonlight314.github.io/deep/learning/Transformer_Encoder_Detail/)
 ​<br>
-<br>
 [Transformer #5 - Decoder Detail](https://moonlight314.github.io/deep/learning/Transformer_Decoder_Detail/)
 </span>
+<br>
 <br>
 
 #### 2.1.2. Tiling 기법
