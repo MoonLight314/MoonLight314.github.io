@@ -219,13 +219,9 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 · Paper : [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
 </span>
 ​<br>
-<span style="font-size:15px; line-height: 2.2">
 · 주요 내용
-  ​<br>
-  <span style="font-size:15px; line-height: 2.2">  - Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.</span>
-  ​<br>
-  <span style="font-size:15px; line-height: 2.2">  - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.</span>
-  ​<br>
+  - Transformer 모델의 self-attention 연산 시 발생하는 메모리 병목 현상을 해결하기 위해 타일링(tiling) 기법을 활용하여 GPU의 고대역폭 메모리(HBM)와 온칩 SRAM 간의 데이터 이동을 최소화합니다.</span>
+  - 이를 통해 정확도를 유지하면서도 메모리 효율성과 연산 속도를 향상시킵니다.
 ​​<br>​
 
 ### 3.2. Flash Attention 2 (2023)
@@ -299,19 +295,7 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 아래 표는 Flash Attention과 기존 Attention 메커니즘의 성능 벤치마크 결과를 비교한 것입니다.
 </span>
 
-| 모델           | 측정 항목                      | 기존 Attention | Flash Attention | 개선율      |
-|----------------|-------------------------------|:--------------:|:----------------:|:-----------:|
-| BERT-large     | 엔드-투-엔드 속도 향상         | 1x             | 1.15x            | 15%         |
-| GPT-2          | HuggingFace 대비 속도 향상     | 1x             | 3x               | 300%        |
-| GPT-2 (4K ctx) | Megatron (1K ctx) 대비 속도 향상 | -              | 1.3x             | 30%         |
-| Stable Diff.   | 추론 속도 향상                 | 1x             | 2x               | 200%        |
-| Uni-Fold       | AlphaFold 대비 속도 향상       | 1x             | 2.6x             | 260%        |
-| OpenFold       | AlphaFold2 대비 속도 향상      | 1x             | 3x               | 300%        |
-| PubMedGPT      | 학습 시간 감소율               | -              | ~50% 감소        | ~2x 속도    |
-| Stable Diff.   | 미세 조정 비용 절감률          | -              | 7x 감소          | 700% 절감   |
-
-
-<table style="font-size:16px; border-collapse: collapse;">
+<table style="font-size:17px; border-collapse: collapse;">
   <thead>
     <tr>
       <th>모델</th>
