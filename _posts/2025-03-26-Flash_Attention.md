@@ -62,9 +62,7 @@ Flash Attention은 이전 버전보다 더 빠른 연산 속도를 제공하는�
 <span style="font-size:15px; line-height: 2.2">
 Flash Attention은 기존 Attention 연산에 필요한 메모리 사용량을 크게 줄입니다. 이를 통해 더 긴 시퀀스를 처리하거나, 더 큰 모델을 훈련하는 것이 가능해집니다.  메모리 사용량 감소를 시키는 기법은 다음과 같은 방법이 있습니다.
 <br>
-<br>
 Attention 가중치 저장 최소화 : Attention 가중치를 완전히 저장하는 대신, 필요할 때마다 즉석에서 계산하여 메모리 공간을 절약합니다.
-<br>
 <br>
 backward pass 최적화 : 역전파 과정에서 필요한 중간 결과를 효율적으로 계산하고 저장하여 메모리 사용량을 줄입니다.
 ​</span>
@@ -72,16 +70,20 @@ backward pass 최적화 : 역전파 과정에서 필요한 중간 결과를 효�
 
 ### 1.3. 다양한 하드웨어 지원
 <br>
+<span style="font-size:15px; line-height: 2.2">
 Flash Attention은 다양한 GPU 환경에서 잘 작동하도록 설계되었습니다. NVIDIA GPU 뿐만 아니라 AMD GPU에서도 최적의 성능을 낼 수 있도록 지원합니다.
-
+​</span>
 ​<br>
 <br>
 
 ## 2. Flash Attention의 동작 원리
 <br>
+<span style="font-size:15px; line-height: 2.2">
 Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling 기법과 계산시에 Global Memory(HBM, High Bandwidth Memory)를 사용하는 대신 Shared Memory를 사용하는 것, 이 2가지입니다.
+​</span>
+​<br>
+<br>
 
-​
 ### 2.1. Tiling
 
 <br>
@@ -103,7 +105,10 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 ​
 ​<br>
 
+<span style="font-size:16px; line-height: 2.2">
 **이 과정에서 가장 큰 문제는 2단계와 3단계에서 발생하는 큰 중간 결과물(Attention Score 및 Weight 행렬)을 GPU의 고대역폭 메모리(HBM)에 저장해야 한다는 것입니다. 시퀀스 길이가 길어질수록 이 행렬들의 크기는 제곱으로 증가하여, 메모리 병목 현상이 발생하고 속도가 느려집니다.**
+</span>
+
 ​<br>
 ​<br>
 
@@ -125,7 +130,9 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 
 #### 2.1.2. Tiling 기법
 <br>
+<span style="font-size:15px; line-height: 2.2">
 ​FlashAttention-2의 핵심은 Tiling이라는 방법인데, Tiling은 아래 그림과 같이 Q, K, V 행렬을 각각 N/B개의 블록(타일)으로 나누어서 계산하는 것입니다. 각 블록의 크기는 B x d가 되고, **B는 하이퍼파라미터로 조절 가능합니다.**
+</span>
 <br>
 <br>
 ![image](https://github.com/user-attachments/assets/461c6160-0f1f-4a88-af25-9950b402af83)
@@ -138,32 +145,31 @@ Flash Attention의 성능 향상의 가장 큰 역할을 하는 것은 Tiling �
 
 <span style="font-size:15px; line-height: 2.2">
 **1) 블록 단위 로드**
-​<br>
 <br>
 Q, K, V의 각 블록 쌍 (Q[i], K[j], V[j])을 GPU의 빠른 공유 메모리(Shared Memory) 또는 레지스터로 로드합니다. 
 ​<br>
-<br>
 HBM (High Bandwidth Memory): GPU에 장착된 고대역폭 메모리로, Global Memory라고도 불립니다. 용량이 크고 (일반적으로 수십 GB) GPU의 모든 계산 유닛(Compute Unit)이 접근할 수 있습니다. 하지만 상대적으로 속도는 느립니다.
 ​<br>
-<br>
 Shared Memory: GPU의 각 스트리밍 멀티프로세서(SM, Streaming Multiprocessor) 내부에 있는 작은 용량의 메모리입니다. (일반적으로 수십 KB ~ 수백 KB). 
 ​<br>
-<br>
 같은 SM 내의 스레드들이 빠르게 공유하고 접근할 수 있습니다. HBM (Global Memory)보다 훨씬 빠르지만 용량이 매우 작습니다.
+</span>
 ​<br>
-<br>
 ​​<br>
 <br>
 
+<span style="font-size:15px; line-height: 2.2">
 **2) 블록 단위 Attention Score 계산**
 ​<br>
 <br>
 공유 메모리 내에서 Q[i]와 K[j]의 내적을 계산하여 작은 Attention Score 블록을 얻습니다.
+</span>
 ​<br>
 <br>
 ​​<br>
 <br>
 
+<span style="font-size:15px; line-height: 2.2">
 **3) Online Softmax**
 ​<br>
 <br>
@@ -178,30 +184,35 @@ Online Softmax
 - 즉, 타일 단위로 Softmax 연산을 수행하는 동시에, 전체 Softmax를 근사하기 위한 통계량(최댓값, 지수 합)을 점진적으로 계산하고 누적하는 방식입니다.
 - 이를 통해 메모리 사용량을 크게 줄이면서도, 수치적으로 안정적인 Softmax 계산을 수행할 수 있습니다.
 - 단순한 "타일별 Softmax"가 아니라, 메모리 효율성과 수치 안정성을 위한 정교한 알고리즘이라고 할 수 있습니다.
+</span>
 ​<br>
 <br>
 ​​<br>
 <br>
 
+<span style="font-size:15px; line-height: 2.2">
 **4) 블록 단위 가중합**
 ​<br>
 <br>
 부분 Softmax 결과와 V[j] 블록을 곱하여 부분적인 Attention 출력값을 얻습니다.
-
 ​​<br>
+</span>
 <br>
 ​<br>
 <br>
 
+<span style="font-size:15px; line-height: 2.2">
 **5) 출력 누적**
 ​<br>
 <br>
 이전 단계에서 얻은 부분 출력값을 HBM의 최종 출력 위치에 누적합니다.
 ​<br>
+</span>
 <br>
 ​​<br>
 <br>
 
+<span style="font-size:15px; line-height: 2.2">
 **6) 반복**
 ​<br>
 <br>
@@ -213,8 +224,9 @@ Online Softmax
 
 ## 3. Flash Attention-1 & 2 & 3 ?
 <br>
+<span style="font-size:15px; line-height: 2.2">
 Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
-
+</span>
 ​<br>
 
 ### 3.1. FlashAttention 1 (2022)
