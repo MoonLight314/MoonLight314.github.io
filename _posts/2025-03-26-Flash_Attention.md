@@ -27,7 +27,7 @@ Flash Attention은 Stanford 연구진에 의해 제안되었으며, 기존 Trans
 
 ## 0. 기존 Attention 메커니즘의 문제점​
 <br>
-<span style="font-size:15px; line-height: 3.2">
+<span style="font-size:15px; line-height: 2.2">
 기존의 Attention 메커니즘인 Scaled Dot-Product Attention은 Transformer 모델의 핵심 요소로서, 입력 텍스트의 관련 부분에 집중하여 예측을 수행하는 데 효과가 있습니다.
 ​<br>
 ​<br>
