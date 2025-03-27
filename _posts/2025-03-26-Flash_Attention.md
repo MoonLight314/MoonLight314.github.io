@@ -234,14 +234,13 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
   - FlashAttention 1의 한계를 보완하기 위해 워크 분할(work partitioning)과 병렬 처리(parallelism)을 개선하였습니다.
   - 특히, GPU의 스레드 블록과 워프(warp) 간의 작업 분배를 최적화하여 연산 효율을 높였습니다. 이를 통해 이전 버전에 비해 최대 2배의 속도 향상을 달성하였습니다.
 ​<br>
-</span>
-​​<br>​
 
 ### 3.3. Flash Attention 3 (2024)
 ​​<br>
 <span style="font-size:15px; line-height: 2.2">
 · 논문: [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08608)
 ​​<br>
+<span style="font-size:15px; line-height: 2.2">
 · 이 논문에서는 NVIDIA Hopper GPU의 새로운 기능을 활용하여 Attention 연산의 속도와 정확도를 향상시키는 세 가지 주요 기술을 소개합니다.
   - 비동기성 활용: Tensor 코어와 Tensor Memory Accelerator (TMA)의 비동기성을 이용하여 계산과 데이터 이동을 겹쳐 수행합니다.
   - 연산 중첩: 블록 단위의 행렬 곱셈과 소프트맥스 연산을 교차하여 실행하여 처리 속도를 높입니다.
@@ -249,8 +248,6 @@ Flash Attention은 현재까지 Flash Attention-3까지 발표되었습니다.
 ​​<br>
 이러한 기술들을 통해 FlashAttention 3는 이전 버전에 비해 H100 GPU에서 최대 2배의 속도 향상을 이루었으며, FP8 연산 시 최대 1.2 PFLOPs/s의 성능을 달성하였습니다
 ​<br>
-</span>
-​​<br>
 ​​<br>
 ​​<br>
 
@@ -299,7 +296,6 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 아래 표는 Flash Attention과 기존 Attention 메커니즘의 성능 벤치마크 결과를 비교한 것입니다.
 </span>
 
-<span style="font-size:18px; line-height: 2.2">
 | 모델           | 측정 항목                      | 기존 Attention | Flash Attention | 개선율      |
 |----------------|-------------------------------|:--------------:|:----------------:|:-----------:|
 | BERT-large     | 엔드-투-엔드 속도 향상         | 1x             | 1.15x            | 15%         |
@@ -310,7 +306,78 @@ Colossal-AI의 Stable Diffusion 구현에서는 Flash Attention을 통해 미세
 | OpenFold       | AlphaFold2 대비 속도 향상      | 1x             | 3x               | 300%        |
 | PubMedGPT      | 학습 시간 감소율               | -              | ~50% 감소        | ~2x 속도    |
 | Stable Diff.   | 미세 조정 비용 절감률          | -              | 7x 감소          | 700% 절감   |
-</span>
+
+
+<table style="font-size:16px; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>모델</th>
+      <th>측정 항목</th>
+      <th>기존 Attention</th>
+      <th>Flash Attention</th>
+      <th>개선율</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BERT-large</td>
+      <td>엔드-투-엔드 속도 향상</td>
+      <td style="text-align:center;">1x</td>
+      <td style="text-align:center;">1.15x</td>
+      <td style="text-align:center;">15%</td>
+    </tr>
+    <tr>
+      <td>GPT-2</td>
+      <td>HuggingFace 대비 속도 향상</td>
+      <td style="text-align:center;">1x</td>
+      <td style="text-align:center;">3x</td>
+      <td style="text-align:center;">300%</td>
+    </tr>
+    <tr>
+      <td>GPT-2 (4K ctx)</td>
+      <td>Megatron (1K ctx) 대비 속도 향상</td>
+      <td style="text-align:center;">-</td>
+      <td style="text-align:center;">1.3x</td>
+      <td style="text-align:center;">30%</td>
+    </tr>
+    <tr>
+      <td>Stable Diff.</td>
+      <td>추론 속도 향상</td>
+      <td style="text-align:center;">1x</td>
+      <td style="text-align:center;">2x</td>
+      <td style="text-align:center;">200%</td>
+    </tr>
+    <tr>
+      <td>Uni-Fold</td>
+      <td>AlphaFold 대비 속도 향상</td>
+      <td style="text-align:center;">1x</td>
+      <td style="text-align:center;">2.6x</td>
+      <td style="text-align:center;">260%</td>
+    </tr>
+    <tr>
+      <td>OpenFold</td>
+      <td>AlphaFold2 대비 속도 향상</td>
+      <td style="text-align:center;">1x</td>
+      <td style="text-align:center;">3x</td>
+      <td style="text-align:center;">300%</td>
+    </tr>
+    <tr>
+      <td>PubMedGPT</td>
+      <td>학습 시간 감소율</td>
+      <td style="text-align:center;">-</td>
+      <td style="text-align:center;">~50% 감소</td>
+      <td style="text-align:center;">~2x 속도</td>
+    </tr>
+    <tr>
+      <td>Stable Diff.</td>
+      <td>미세 조정 비용 절감률</td>
+      <td style="text-align:center;">-</td>
+      <td style="text-align:center;">7x 감소</td>
+      <td style="text-align:center;">700% 절감</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 
